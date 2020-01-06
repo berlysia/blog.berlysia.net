@@ -1,0 +1,18 @@
+{
+  "extends": "@berlysia/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "isolatedModules": true,
+    "declaration": false,
+    "noEmitOnError": false
+  },
+  "exclude": ["**/*.test.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+}
