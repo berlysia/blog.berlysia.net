@@ -136,9 +136,6 @@ function Root() {
           </Flex>
         </Flex>
       </Flex>
-      <Box>
-        <Text>content</Text>
-      </Box>
     </Flex>
   );
 }
