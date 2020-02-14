@@ -21,8 +21,9 @@ function Root() {
             variant="avatar"
             width="128px"
             height="128px"
+            sx={{ flexShrink: 0 }}
           />
-          <Flex ml={4} flexDirection="column" justifyContent="center">
+          <Flex ml={3} flexDirection="column" justifyContent="center">
             <Heading mb={2}>@berlysia</Heading>
             <Box as="ul" my={1}>
               <Text as="li" my={1}>
