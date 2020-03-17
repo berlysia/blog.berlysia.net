@@ -1,4 +1,4 @@
-import { Flex, Image, Link, Box, Text, Heading } from "rebass";
+import { Flex, Link, Box, Text, Heading } from "rebass";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTwitter,
@@ -36,13 +36,26 @@ function Root() {
 const Profile = () => (
   <Flex flexWrap="wrap" justifyContent="center">
     <Box sx={{ flexShrink: 0 }}>
-      <Image
-        src="/avatar-128.png"
-        srcSet="/avatar-256.png 2x, /avatar-192.png 1.5x, /avatar-128.png 1x"
-        variant="avatar"
-        width="128px"
-        height="auto"
-      />
+      <Box as="picture">
+        <Box
+          as="source"
+          type="image/webp"
+          srcSet="/avatar-256.webp 2x, /avatar-192.webp 1.5x, /avatar-128.webp 1x"
+          display="block"
+          width="128px"
+          height="auto"
+          sx={{ borderRadius: 9999 }}
+        />
+        <Box
+          as="img"
+          src="/avatar-128.png"
+          srcSet="/avatar-256.png 2x, /avatar-192.png 1.5x, /avatar-128.png 1x"
+          display="block"
+          width="128px"
+          height="auto"
+          sx={{ borderRadius: 9999 }}
+        />
+      </Box>
     </Box>
     <Flex ml={3} flexDirection="column" justifyContent="center">
       <Heading mb={2}>@berlysia</Heading>
