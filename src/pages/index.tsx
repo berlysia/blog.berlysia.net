@@ -5,10 +5,12 @@ import {
   faGithub,
   faMastodon,
 } from "@fortawesome/free-brands-svg-icons";
+import { Head } from "../components/head";
 
 function Root() {
   return (
     <Flex flexDirection="column">
+      <Head title="berlysia.net" />
       <Flex
         justifyContent="center"
         alignItems="center"
@@ -34,7 +36,13 @@ function Root() {
 const Profile = () => (
   <Flex flexWrap="wrap" justifyContent="center">
     <Box sx={{ flexShrink: 0 }}>
-      <Image src="/avatar.png" variant="avatar" width="128px" height="auto" />
+      <Image
+        src="/avatar-128.png"
+        srcSet="/avatar-256.png 2x, /avatar-384.png 1.5x, /avatar-128.png 1x"
+        variant="avatar"
+        width="128px"
+        height="auto"
+      />
     </Box>
     <Flex ml={3} flexDirection="column" justifyContent="center">
       <Heading mb={2}>@berlysia</Heading>
