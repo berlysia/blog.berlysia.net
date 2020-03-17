@@ -55,45 +55,41 @@ const Profile = () => (
     </Box>
     <Flex ml={3} flexDirection="column" justifyContent="center">
       <Heading mb={2}>@berlysia</Heading>
-      <Box as="ul" my={1}>
-        <Text as="li" my={1}>
+      <Box as="dl" my={1}>
+        <Text as="dt" my={1}>
           Web Engineer (mainly frontend)
         </Text>
-        <Box as="ul">
-          <Text as="li" my={1}>
-            -&gt; I&apos;m especially familiar with React, RxJS, and ESLint.
-          </Text>
-        </Box>
+        <Text as="dd" my={1}>
+          -&gt; I&apos;m especially familiar with React, RxJS, and ESLint.
+        </Text>
       </Box>
-      <Box as="ul" my={1}>
-        <Text as="li" my={1}>
+      <Box as="dl" my={1}>
+        <Text as="dt" my={1}>
           Idol Producer (a fan of THE IDOLM@STER)
         </Text>
-        <Box as="ul">
-          <Text as="li" my={1}>
-            -&gt; PIC of{" "}
-            <Text
-              bg="#fbffb9"
-              px={1}
-              sx={{
-                display: "inline",
-              }}
-            >
-              Hinako Kita
-            </Text>
-            ,{" "}
-            <Text
-              bg="#7f6575"
-              px={1}
-              color="#fee"
-              sx={{
-                display: "inline",
-              }}
-            >
-              Sayoko Takayama
-            </Text>
+        <Text as="dd" my={1}>
+          -&gt; PIC of{" "}
+          <Text
+            bg="#fbffb9"
+            px={1}
+            sx={{
+              display: "inline",
+            }}
+          >
+            Hinako Kita
           </Text>
-        </Box>
+          ,{" "}
+          <Text
+            bg="#7f6575"
+            px={1}
+            color="#fee"
+            sx={{
+              display: "inline",
+            }}
+          >
+            Sayoko Takayama
+          </Text>
+        </Text>
       </Box>
       <Box my={1}>
         <Text my={1}>I love Web, browsers, and JavaScript.</Text>
@@ -104,6 +100,7 @@ const Profile = () => (
           rel="me"
           target="_blank"
           href="https://twitter.com/berlysia"
+          aria-label="Twitter / berlysia"
         >
           <Flex
             justifyContent="center"
@@ -125,6 +122,7 @@ const Profile = () => (
           rel="me"
           target="_blank"
           href="https://github.com/berlysia"
+          aria-label="GitHub / berlysia"
         >
           <Flex
             justifyContent="center"
@@ -146,6 +144,7 @@ const Profile = () => (
           rel="me"
           target="_blank"
           href="https://imastodon.net/@berlysia"
+          aria-label="Imastodon / berlysia"
         >
           <Flex
             justifyContent="center"

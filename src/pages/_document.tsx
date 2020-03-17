@@ -9,7 +9,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="ja">
         <Head />
         <Global
           styles={{
