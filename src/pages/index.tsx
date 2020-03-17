@@ -38,7 +38,7 @@ const Profile = () => (
     <Box sx={{ flexShrink: 0 }}>
       <Image
         src="/avatar-128.png"
-        srcSet="/avatar-256.png 2x, /avatar-384.png 1.5x, /avatar-128.png 1x"
+        srcSet="/avatar-256.png 2x, /avatar-192.png 1.5x, /avatar-128.png 1x"
         variant="avatar"
         width="128px"
         height="auto"
