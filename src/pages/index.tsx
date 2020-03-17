@@ -97,7 +97,7 @@ const Profile = () => (
       <Flex mt={2}>
         <Link
           mr={1}
-          rel="me"
+          rel="me noopener noreferrer"
           target="_blank"
           href="https://twitter.com/berlysia"
           aria-label="Twitter / berlysia"
@@ -119,7 +119,7 @@ const Profile = () => (
         </Link>
         <Link
           mx={1}
-          rel="me"
+          rel="me noopener noreferrer"
           target="_blank"
           href="https://github.com/berlysia"
           aria-label="GitHub / berlysia"
@@ -141,7 +141,7 @@ const Profile = () => (
         </Link>
         <Link
           mx={1}
-          rel="me"
+          rel="me noopener noreferrer"
           target="_blank"
           href="https://imastodon.net/@berlysia"
           aria-label="Imastodon / berlysia"
