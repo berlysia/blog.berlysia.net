@@ -36,26 +36,22 @@ function Root() {
 const Profile = () => (
   <Flex flexWrap="wrap" justifyContent="center">
     <Box sx={{ flexShrink: 0 }}>
-      <Box as="picture">
-        <Box
-          as="source"
+      <picture>
+        <source
           type="image/webp"
-          srcSet="/avatar-256.webp 2x, /avatar-192.webp 1.5x, /avatar-128.webp 1x"
-          display="block"
-          width="128px"
-          height="auto"
-          sx={{ borderRadius: 9999 }}
+          srcSet="/avatar-2x.webp 2x, /avatar-1.5x.webp 1.5x, /avatar-1x.webp 1x"
         />
         <Box
           as="img"
-          src="/avatar-128.png"
-          srcSet="/avatar-256.png 2x, /avatar-192.png 1.5x, /avatar-128.png 1x"
+          src="/avatar-1x.png"
+          srcSet="/avatar-2x.png 2x, /avatar-1.5x.png 1.5x, /avatar-1x.png 1x"
           display="block"
           width="128px"
           height="auto"
           sx={{ borderRadius: 9999 }}
+          alt="avatar"
         />
-      </Box>
+      </picture>
     </Box>
     <Flex ml={3} flexDirection="column" justifyContent="center">
       <Heading mb={2}>@berlysia</Heading>
