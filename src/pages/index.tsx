@@ -16,7 +16,7 @@ function Root() {
       <Flex
         justifyContent="center"
         alignItems="center"
-        height="100vh"
+        minHeight="100vh"
         p="24px"
         bg="backgrounds.1"
       >
@@ -25,8 +25,8 @@ function Root() {
       <Flex
         justifyContent="center"
         alignItems="center"
-        height="100vh"
-        p="24px"
+        minHeight="100vh"
+        py="24px"
         bg="backgrounds.2"
       >
         <Articles />
@@ -162,15 +162,18 @@ const Profile = () => (
 );
 
 const ArticleArea = styled(Box)`
-  flex-basis: 360px;
+  flex-basis: 300px;
   flex-shrink: 0;
   flex-grow: 1;
   padding: 24px;
 `;
 
-const ArticleList = styled(Box).attrs({ as: "ul" })``;
+const ArticleList = styled(Box).attrs({ as: "ul" })`
+  padding: 0;
+`;
 
 const ArticleListItem = styled(Box).attrs({ as: "li" })`
+  list-style: none;
   line-height: 1.6em;
   margin-top: 4px;
   margin-bottom: 4px;
