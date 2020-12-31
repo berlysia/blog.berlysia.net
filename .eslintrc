@@ -16,6 +16,7 @@
     "no-duplicate-imports": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/comma-dangle": "off",
-    "@typescript-eslint/no-use-before-define": "off"
+    "@typescript-eslint/no-use-before-define": "off",
+    "consistent-return": "off"
   }
 }

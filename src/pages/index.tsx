@@ -7,9 +7,28 @@ import {
   faMastodon,
 } from "@fortawesome/free-brands-svg-icons";
 import styled from "styled-components";
+import type { InferGetStaticPropsType } from "next";
 import { Head } from "../components/head";
+import { fetchLinkedArticles } from "../lib/api";
+import type { LinkedArticle } from "../lib/api";
 
-function Root() {
+export const getStaticProps = async ({ preview = false }) => {
+  const entries = await fetchLinkedArticles(preview);
+
+  return {
+    props: {
+      preview,
+      imasArticles: entries.filter((art) =>
+        art.categories.find((cat) => cat.name === "IM@S")
+      ),
+      techArticles: entries.filter((art) =>
+        art.categories.find((cat) => cat.name === "Tech")
+      ),
+    },
+  };
+};
+
+function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Flex flexDirection="column">
       <Head title="berlysia.net" />
@@ -29,7 +48,10 @@ function Root() {
         py="24px"
         bg="backgrounds.2"
       >
-        <Articles />
+        <Articles
+          imasArticles={props.imasArticles}
+          techArticles={props.techArticles}
+        />
       </Flex>
     </Flex>
   );
@@ -190,75 +212,27 @@ const ArticleLink = styled(Link)`
   }
 `;
 
-const TECH_ARTICLES = [
-  {
-    url: "https://blog.nnn.dev/entry/2020/12/11/021008",
-    name:
-      "TypeScript Compiler APIを使って型を中心に実装を自動生成する - ドワンゴ教育サービス開発者ブログ",
-  },
-  {
-    url: "https://qiita.com/berlysia/items/402009bb27d3793117eb",
-    name: "先取りRxJS v7 - Qiita",
-  },
-  {
-    url: "https://blog.nnn.dev/entry/2019/12/03/022824",
-    name:
-      "ESLintを活用した漸進的リファクタリングのすすめ - ドワンゴ教育サービス開発者ブログ",
-  },
-  {
-    url: "https://qiita.com/berlysia/items/dad98488c4bdde938ef3",
-    name: "RxJS v6 の進化した TestScheduler を使う - Qiita",
-  },
-  {
-    url: "https://qiita.com/berlysia/items/f77fb6ed703589770be8",
-    name: "イベントを聞くPromiseのメモリリークとその対策 - Qiita",
-  },
-  {
-    url: "https://qiita.com/berlysia/items/ce14f023f10100e35d35",
-    name: "Async Functions - Qiita",
-  },
-  {
-    url: "https://qiita.com/berlysia/items/3aeb1f0ab2494de9e24e",
-    name: "Promiseを返す関数の直列実行におけるreduceの利用と注意点 - Qiita",
-  },
-];
-
-const IMAS_ARTICLES = [
-  {
-    url: "https://berlysia.hatenablog.com/entry/2020/12/22/110000",
-    name: "今が知りどき！ 今日から始める喜多日菜子2020 - Glacial Radiance",
-  },
-  {
-    url: "https://berlysia.hatenablog.com/entry/2020/12/09/110000",
-    name:
-      "ドリームアウェイを繋ぐ強い想いと、佐久間まゆが喜多日菜子にもたらしたもの - Glacial Radiance",
-  },
-  {
-    url: "https://berlysia.hatenablog.com/entry/2020/08/30/125106",
-    name:
-      "ある喜多日菜子Pが見た『世界滅亡 or KISS』ファーストインプレッション - Glacial Radiance",
-  },
-  {
-    url: "https://berlysia.hatenablog.com/entry/2019/12/05/173000",
-    name: "［トゥルー・ドリーム］喜多日菜子を振り返る - Glacial Radiance",
-  },
-];
-
-const Articles = () => (
+const Articles = ({
+  imasArticles,
+  techArticles,
+}: {
+  imasArticles: LinkedArticle[];
+  techArticles: LinkedArticle[];
+}) => (
   <Flex justifyContent="center">
     <Box>
       <Flex flexWrap="wrap">
         <ArticleArea>
           <Heading mb={2}>Tech Articles</Heading>
           <ArticleList>
-            {TECH_ARTICLES.map(({ url, name }) => (
+            {techArticles.map(({ url, title }) => (
               <ArticleListItem key={url}>
                 <ArticleLink
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {name}
+                  {title}
                 </ArticleLink>
               </ArticleListItem>
             ))}
@@ -267,14 +241,14 @@ const Articles = () => (
         <ArticleArea>
           <Heading mb={2}>IM@S Articles</Heading>
           <ArticleList>
-            {IMAS_ARTICLES.map(({ url, name }) => (
+            {imasArticles.map(({ url, title }) => (
               <ArticleListItem key={url}>
                 <ArticleLink
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {name}
+                  {title}
                 </ArticleLink>
               </ArticleListItem>
             ))}
@@ -317,4 +291,4 @@ const Articles = () => (
   </Flex>
 );
 
-export default Root;
+export default Index;
