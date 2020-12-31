@@ -1,21 +1,22 @@
-import { Global, css } from "@emotion/core";
+import { createGlobalStyle } from "styled-components";
+import { normalize } from "styled-normalize";
 
-export function GlobalStyle() {
-  return (
-    <Global
-      styles={css`
-        * {
-          margin: 0;
-          padding: 0;
-          font-family: "Helvetica Neue", "Helvetica",
-            "Hiragino Kaku Gothic ProN", YuGothic, "Yu Gothic Medium", Meiryo,
-            sans-serif;
-          color: #233;
-        }
-        li {
-          list-style: none;
-        }
-      `}
-    />
-  );
-}
+export const GlobalStyle = createGlobalStyle`
+  ${normalize}
+
+  * {
+    font-family: "Helvetica Neue", "Helvetica",
+      "Hiragino Kaku Gothic ProN", YuGothic, "Yu Gothic Medium", Meiryo,
+      sans-serif;
+    color: #233;
+  }
+  html {
+    height: 100%;
+  }
+  body {
+    height: 100%;
+  }
+  #__next {
+    height: 100%;
+  }
+`;

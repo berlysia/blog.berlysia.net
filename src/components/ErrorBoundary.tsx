@@ -4,18 +4,20 @@ type State = {
   hasError: boolean;
 };
 
-export class ErrorBoundary extends React.Component<{}, State> {
-  static getDerivedStateFromError(_error?: Error) {
+type Props = any;
+
+export class ErrorBoundary extends React.Component<Props, State> {
+  static getDerivedStateFromError(_error?: Error): State {
     // Update state so the next render will show the fallback UI.
     return { hasError: true };
   }
 
-  constructor(props: {}) {
+  constructor(props: Props) {
     super(props);
     this.state = { hasError: false };
   }
 
-  componentDidCatch(error: Error, errorInfo: any) {
+  componentDidCatch(error: Error, errorInfo: any): void {
     console.error(error, errorInfo);
   }
 

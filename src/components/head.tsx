@@ -1,13 +1,10 @@
 import React from "react";
 import BaseHead from "next/head";
 
-export const Head = ({
-  title,
-  description,
-}: {
+export const Head: React.VFC<{
   title: string;
   description?: string;
-}) => (
+}> = ({ title, description }) => (
   <BaseHead>
     <title>{title}</title>
     <meta property="og:title" content={title} />

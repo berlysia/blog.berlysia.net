@@ -1,5 +1,6 @@
+import type React from "react";
 import theme from "@rebass/preset";
-import { ThemeProvider } from "emotion-theming";
+import { ThemeProvider } from "styled-components";
 import { merge } from "lodash";
 
 const dayTheme = merge(theme, {
@@ -11,7 +12,7 @@ const dayTheme = merge(theme, {
 
 const nightTheme = merge(theme);
 
-export const MyThemeProvider: React.FC<{ daylight: boolean }> = props => (
+export const MyThemeProvider: React.FC<{ daylight: boolean }> = (props) => (
   <ThemeProvider theme={props.daylight ? dayTheme : nightTheme}>
     {props.children}
   </ThemeProvider>
