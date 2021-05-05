@@ -157,15 +157,18 @@ const ArticleArea = ({
             className="text-base border-0 border-b border-solid border-gray-100"
           >
             <a
-              className="block rounded-md py-2 text-blue-600 visited:text-purple-800 hover:bg-gray-50 focus:bg-gray-50"
+              className="block rounded-md py-2 text-blue-600 visited:text-purple-800 hover:bg-gray-200 focus:bg-gray-200"
               href={link}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div className="text-current underline">{title}</div>
-              <div className="text-current text-right text-xs">
-                <time dateTime={pubDateString}>{pubDateString}</time>
-              </div>
+              {title}
+              <time
+                className="block text-right text-xs no-underline"
+                dateTime={pubDateString}
+              >
+                {pubDateString}
+              </time>
             </a>
           </li>
         ))}
@@ -182,11 +185,11 @@ const Articles = ({
   techArticles: Article[];
 }) => (
   <div className="flex flex-col justify-center">
-    <div className="flex flex-wrap">
-      <div className="w-1/2 flex-shrink-0 flex-grow p-6">
+    <div className="flex flex-wrap md:flex-row flex-col">
+      <div className="w-full md:w-1/2 flex-shrink-0 flex-grow p-6">
         <ArticleArea genreTitle="Tech Articles" articles={techArticles} />
       </div>
-      <div className="w-1/2 flex-shrink-0 flex-grow p-6">
+      <div className="w-full md:w-1/2 flex-shrink-0 flex-grow p-6">
         <ArticleArea genreTitle="IM@S Articles" articles={imasArticles} />
       </div>
     </div>
