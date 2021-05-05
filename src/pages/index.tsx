@@ -1,4 +1,3 @@
-import { Flex, Link, Box, Text, Heading } from "rebass";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,7 +5,7 @@ import {
   faGithub,
   faMastodon,
 } from "@fortawesome/free-brands-svg-icons";
-import styled from "styled-components";
+import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 import type { InferGetStaticPropsType } from "next";
 import { Head } from "../components/head";
 import { fetchLinkedArticles } from "../lib/api";
@@ -30,187 +29,122 @@ export const getStaticProps = async ({ preview = false }) => {
 
 function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <Flex flexDirection="column">
+    <div className="flex flex-col">
       <Head title="berlysia.net" />
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
-        p="24px"
-        bg="backgrounds.1"
-      >
+      <div className="flex justify-center items-center min-h-screen p-6 bg-pink-50">
         <Profile />
-      </Flex>
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
-        py="24px"
-        bg="backgrounds.2"
-      >
+        <div className="absolute bottom-0 mb-4 text-3xl ">
+          <FontAwesomeIcon icon={faAngleDoubleDown} />
+        </div>
+      </div>
+      <div className="flex justify-center items-center min-h-screen p-6 bg-white">
         <Articles
           imasArticles={props.imasArticles}
           techArticles={props.techArticles}
         />
-      </Flex>
-    </Flex>
+      </div>
+    </div>
   );
 }
 
-const StyledAvatar = styled(Image)`
-  border-radius: 9999px;
-  display: block;
-`;
-
 const LinkMarbles = () => (
-  <Flex mt={2}>
-    <Link
-      mr={1}
+  <div className="flex flex-row mt-2">
+    <a
+      className="m-1"
       rel="me noopener noreferrer"
       target="_blank"
       href="https://twitter.com/berlysia"
       aria-label="Twitter / berlysia"
     >
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        color="text"
-        fontSize="16px"
-        width="32px"
-        height="32px"
-        sx={{
-          borderRadius: "9999px",
-          border: "1px solid rgba(0,0,0,0.2)",
-        }}
-      >
-        <FontAwesomeIcon icon={faTwitter} />
-      </Flex>
-    </Link>
-    <Link
-      mx={1}
+      <div className="relative text-base w-8 h-8 rounded-full border border-gray-400">
+        <FontAwesomeIcon
+          className="absolute m-auto top-0 left-0 right-0 bottom-0"
+          icon={faTwitter}
+        />
+      </div>
+    </a>
+    <a
+      className="m-1"
       rel="me noopener noreferrer"
       target="_blank"
       href="https://github.com/berlysia"
       aria-label="GitHub / berlysia"
     >
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        color="text"
-        fontSize="16px"
-        width="32px"
-        height="32px"
-        sx={{
-          borderRadius: "9999px",
-          border: "1px solid rgba(0,0,0,0.2)",
-        }}
-      >
-        <FontAwesomeIcon icon={faGithub} />
-      </Flex>
-    </Link>
-    <Link
-      mx={1}
+      <div className="relative text-base w-8 h-8 rounded-full border border-gray-400">
+        <FontAwesomeIcon
+          className="absolute m-auto top-0 left-0 right-0 bottom-0"
+          icon={faGithub}
+        />
+      </div>
+    </a>
+    <a
+      className="m-1"
       rel="me noopener noreferrer"
       target="_blank"
       href="https://imastodon.net/@berlysia"
       aria-label="Imastodon / berlysia"
     >
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        color="text"
-        fontSize="16px"
-        width="32px"
-        height="32px"
-        sx={{
-          borderRadius: "9999px",
-          border: "1px solid rgba(0,0,0,0.2)",
-        }}
-      >
-        <FontAwesomeIcon icon={faMastodon} />
-      </Flex>
-    </Link>
-  </Flex>
+      <div className="relative text-base w-8 h-8 rounded-full border border-gray-400">
+        <FontAwesomeIcon
+          className="absolute m-auto top-0 left-0 right-0 bottom-0"
+          icon={faMastodon}
+        />
+      </div>
+    </a>
+  </div>
 );
 
 const Profile = () => (
-  <Flex flexWrap="wrap" justifyContent="center">
-    <Box sx={{ flexShrink: 0 }}>
-      <StyledAvatar src="/avatar.png" alt="avatar" width={128} height={128} />
-    </Box>
-    <Flex ml={3} flexDirection="column" justifyContent="center">
-      <Heading mb={2}>@berlysia</Heading>
-      <Box my={1}>
-        <Heading as="h3" fontSize={2} my={1}>
+  <div className="flex flex-wrap justify-center">
+    <div className="flex-shrink-0 flex justify-center items-center">
+      <Image
+        priority
+        quality={100}
+        src="/avatar.jpg"
+        alt="avatar"
+        width={192}
+        height={192}
+        className="rounded-full border-4 border-pink-100"
+      />
+    </div>
+    <div className="ml-3 flex-col justify-center">
+      <h2 className="mb-2 text-2xl font-bold">@berlysia</h2>
+      <div className="my-1">
+        <h3 className="my-1 text-lg font-bold">
           Web Developer (mainly frontend)
-        </Heading>
-        <Box as="ul" my={1}>
-          <Box as="li">I love Web, browsers, and JavaScript.</Box>
-        </Box>
-      </Box>
-      <Box my={1}>
-        <Heading as="h3" fontSize={2} my={1}>
+        </h3>
+        <ul className="my-1">
+          <li>I love Web, browsers, and JavaScript.</li>
+        </ul>
+      </div>
+      <div className="my-1">
+        <h3 className="my-1 text-lg font-bold">
           Idol Producer (a fan of THE IDOLM@STER)
-        </Heading>
-        <Box as="ul" my={1}>
-          <Box as="li">
+        </h3>
+        <ul className="my-1">
+          <li>
             PIC of{" "}
-            <Text
-              bg="#fbffb9"
-              px={1}
-              sx={{
-                display: "inline",
-              }}
+            <span
+              className="px-1 inline"
+              style={{ backgroundColor: "#fbffb9" }}
             >
               Hinako Kita
-            </Text>
+            </span>
             ,{" "}
-            <Text
-              bg="#7f6575"
-              px={1}
-              color="#fee"
-              sx={{
-                display: "inline",
-              }}
+            <span
+              className="px-1 inline"
+              style={{ backgroundColor: "#7f6575", color: "white" }}
             >
               Sayoko Takayama
-            </Text>
-          </Box>
-        </Box>
-      </Box>
+            </span>
+            .
+          </li>
+        </ul>
+      </div>
       <LinkMarbles />
-    </Flex>
-  </Flex>
+    </div>
+  </div>
 );
-
-const ArticleArea = styled(Box)`
-  flex-basis: 300px;
-  flex-shrink: 0;
-  flex-grow: 1;
-  padding: 24px;
-`;
-
-const ArticleList = styled(Box).attrs({ as: "ul" })`
-  padding: 0;
-`;
-
-const ArticleListItem = styled(Box).attrs({ as: "li" })`
-  list-style: none;
-  line-height: 1.6em;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #eee;
-`;
-
-const ArticleLink = styled(Link)`
-  border-radius: 4px;
-  display: block;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-`;
 
 const Articles = ({
   imasArticles,
@@ -219,76 +153,78 @@ const Articles = ({
   imasArticles: LinkedArticle[];
   techArticles: LinkedArticle[];
 }) => (
-  <Flex justifyContent="center">
-    <Box>
-      <Flex flexWrap="wrap">
-        <ArticleArea>
-          <Heading mb={2}>Tech Articles</Heading>
-          <ArticleList>
-            {techArticles.map(({ url, title }) => (
-              <ArticleListItem key={url}>
-                <ArticleLink
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {title}
-                </ArticleLink>
-              </ArticleListItem>
-            ))}
-          </ArticleList>
-        </ArticleArea>
-        <ArticleArea>
-          <Heading mb={2}>IM@S Articles</Heading>
-          <ArticleList>
-            {imasArticles.map(({ url, title }) => (
-              <ArticleListItem key={url}>
-                <ArticleLink
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {title}
-                </ArticleLink>
-              </ArticleListItem>
-            ))}
-          </ArticleList>
-        </ArticleArea>
-      </Flex>
-      <Flex justifyContent="center">
-        <Box mt="24px">
-          <Link
-            href="https://berlysia.hatenablog.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            mx="4px"
-            p="4px"
-            sx={{
-              border: "2px solid",
-              borderColor: "primary",
-              borderRadius: "4px",
-            }}
-          >
-            Hatena Blog
-          </Link>
-          <Link
-            href="https://qiita.com/berlysia"
-            target="_blank"
-            rel="noopener noreferrer"
-            mx="4px"
-            p="4px"
-            sx={{
-              border: "2px solid",
-              borderColor: "primary",
-              borderRadius: "4px",
-            }}
-          >
-            Qiita
-          </Link>
-        </Box>
-      </Flex>
-    </Box>
-  </Flex>
+  <div className="flex flex-col justify-center">
+    <div className="flex flex-wrap">
+      <div className="w-1/2 flex-shrink-0 flex-grow p-6">
+        <h2 className="text-2xl font-bold mb-2">Tech Articles</h2>
+        <ul className="p-0">
+          {techArticles.map(({ url, title }) => (
+            <li
+              key={url}
+              className="text-base border-0 border-b border-solid border-gray-100"
+            >
+              <a
+                className="block rounded-md py-2 text-blue-600 visited:text-purple-800 hover:bg-gray-50 focus:bg-gray-50 underline"
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="w-1/2 flex-shrink-0 flex-grow p-6">
+        <h2 className="text-2xl font-bold mb-2">IM@S Articles</h2>
+        <ul className="p-0">
+          {imasArticles.map(({ url, title }) => (
+            <li
+              key={url}
+              className="text-base border-0 border-b border-solid border-gray-100"
+            >
+              <a
+                className="block rounded-md py-2 text-blue-600 visited:text-purple-800 hover:bg-gray-50 focus:bg-gray-50 underline"
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <div className="flex justify-center">
+      <div className="mt-6">
+        <a
+          className="mx-1 p-1 border-2 border-solid border-gray-400 rounded-md"
+          href="https://berlysia.hatenablog.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Hatena Blog
+        </a>
+        <a
+          href="https://zenn.dev/berlysia"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mx-1 p-1 border-2 border-solid border-gray-400 rounded-md"
+        >
+          Zenn
+        </a>
+        <a
+          href="https://qiita.com/berlysia"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mx-1 p-1 border-2 border-solid border-gray-400 rounded-md"
+        >
+          Qiita
+        </a>
+      </div>
+    </div>
+  </div>
 );
 
 export default Index;

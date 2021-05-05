@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { ErrorBoundary } from "../components/ErrorBoundary";
-import { MyThemeProvider } from "../components/MyThemeProvider";
-import { GlobalStyle } from "../components/GlobalStyle";
 import { gaEnabled, sendPageView } from "../lib/gtag";
+// eslint-disable-next-line import/no-unassigned-import -- CSS import
+import "../globalStyle.css";
 
 function App({ Component, pageProps }: { Component: any; pageProps: any }) {
   const router = useRouter();
@@ -25,10 +25,7 @@ function App({ Component, pageProps }: { Component: any; pageProps: any }) {
 
   return (
     <ErrorBoundary>
-      <GlobalStyle />
-      <MyThemeProvider daylight>
-        <Component {...pageProps} />
-      </MyThemeProvider>
+      <Component {...pageProps} />
     </ErrorBoundary>
   );
 }
