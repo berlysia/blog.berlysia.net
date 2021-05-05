@@ -6,7 +6,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "module": "esnext",
+    "module": "commonjs",
     "resolveJsonModule": true,
     "jsx": "preserve",
     "isolatedModules": true,
