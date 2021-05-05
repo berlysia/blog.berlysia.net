@@ -1,0 +1,13 @@
+name: weekly episode deployment
+
+on:
+  schedule:
+    - cron: "0 20 * * SUN"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: joelwmale/webhook-action@2.1.0
+        with:
+          url: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
