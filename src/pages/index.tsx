@@ -33,7 +33,7 @@ function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
       <Head title="berlysia.net" />
       <div className="flex justify-center items-center min-h-screen p-6 bg-pink-50">
         <Profile />
-        <div className="absolute bottom-0 mb-4 text-3xl ">
+        <div className="absolute bottom-0 mb-4 text-3xl animate-fade-blink">
           <FontAwesomeIcon icon={faAngleDoubleDown} />
         </div>
       </div>
