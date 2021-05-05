@@ -8,21 +8,15 @@ import {
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 import type { InferGetStaticPropsType } from "next";
 import { Head } from "../components/head";
-import { fetchLinkedArticles } from "../lib/api";
-import type { LinkedArticle } from "../lib/api";
+import type { Article } from "../seeds";
+import { getByGenre } from "../seeds";
 
 export const getStaticProps = async ({ preview = false }) => {
-  const entries = await fetchLinkedArticles(preview);
-
   return {
     props: {
       preview,
-      imasArticles: entries.filter((art) =>
-        art.categories.find((cat) => cat.name === "IM@S")
-      ),
-      techArticles: entries.filter((art) =>
-        art.categories.find((cat) => cat.name === "Tech")
-      ),
+      imasArticles: getByGenre("imas"),
+      techArticles: getByGenre("tech"),
     },
   };
 };
@@ -146,54 +140,54 @@ const Profile = () => (
   </div>
 );
 
+const ArticleArea = ({
+  genreTitle,
+  articles,
+}: {
+  genreTitle: string;
+  articles: Article[];
+}) => {
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-2">{genreTitle}</h2>
+      <ul className="p-0">
+        {articles.map(({ link, title, pubDateString }) => (
+          <li
+            key={link}
+            className="text-base border-0 border-b border-solid border-gray-100"
+          >
+            <a
+              className="block rounded-md py-2 text-blue-600 visited:text-purple-800 hover:bg-gray-50 focus:bg-gray-50"
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="text-current underline">{title}</div>
+              <div className="text-current text-right text-xs">
+                <time dateTime={pubDateString}>{pubDateString}</time>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
 const Articles = ({
   imasArticles,
   techArticles,
 }: {
-  imasArticles: LinkedArticle[];
-  techArticles: LinkedArticle[];
+  imasArticles: Article[];
+  techArticles: Article[];
 }) => (
   <div className="flex flex-col justify-center">
     <div className="flex flex-wrap">
       <div className="w-1/2 flex-shrink-0 flex-grow p-6">
-        <h2 className="text-2xl font-bold mb-2">Tech Articles</h2>
-        <ul className="p-0">
-          {techArticles.map(({ url, title }) => (
-            <li
-              key={url}
-              className="text-base border-0 border-b border-solid border-gray-100"
-            >
-              <a
-                className="block rounded-md py-2 text-blue-600 visited:text-purple-800 hover:bg-gray-50 focus:bg-gray-50 underline"
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {title}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <ArticleArea genreTitle="Tech Articles" articles={techArticles} />
       </div>
       <div className="w-1/2 flex-shrink-0 flex-grow p-6">
-        <h2 className="text-2xl font-bold mb-2">IM@S Articles</h2>
-        <ul className="p-0">
-          {imasArticles.map(({ url, title }) => (
-            <li
-              key={url}
-              className="text-base border-0 border-b border-solid border-gray-100"
-            >
-              <a
-                className="block rounded-md py-2 text-blue-600 visited:text-purple-800 hover:bg-gray-50 focus:bg-gray-50 underline"
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {title}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <ArticleArea genreTitle="IM@S Articles" articles={imasArticles} />
       </div>
     </div>
     <div className="flex justify-center">
