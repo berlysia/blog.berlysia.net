@@ -76,7 +76,7 @@
     "@fortawesome/react-fontawesome": "^0.1.8",
     "@rebass/preset": "^4.0.5",
     "fs-extra": "^10.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "next": "^10.0.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
