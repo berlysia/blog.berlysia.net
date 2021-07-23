@@ -1,3 +1,12 @@
 {
-  "extends": ["next", "next/core-web-vitals"]
+  "extends": ["@berlysia/eslint-config/auto", "next", "next/core-web-vitals"],
+  "overrides": [
+    {
+      "files": ["*.config.js", "*rc.js"],
+      "rules": {
+        "@typescript-eslint/no-require-imports": "off",
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ]
 }
