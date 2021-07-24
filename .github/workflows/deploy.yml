@@ -1,14 +1,11 @@
-name: Node CI
+name: Deploy github pages
 
 on:
   push:
     branches:
       - master
       - main
-  pull_request:
-    branches:
-      - master
-      - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -28,7 +25,10 @@ jobs:
           cache: "yarn"
 
       - run: yarn install --frozen-lockfile
-
-      - run: yarn lint
-        env:
-          CI: true
+      - run: yarn build
+      - run: yarn export
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: out
