@@ -1,0 +1,85 @@
+.container {
+  padding: 16px 24px;
+}
+
+.title {
+  font-size: 2.4em;
+}
+
+.wrapper {
+  & h1 {
+    font-size: 2em;
+
+    & a::before {
+      content: "# ";
+    }
+  }
+  & h2 {
+    font-size: 1.7em;
+
+    & a::before {
+      content: "## ";
+    }
+  }
+  & h3 {
+    font-size: 1.5em;
+
+    & a::before {
+      content: "### ";
+    }
+  }
+  & h4 {
+    font-size: 1.4em;
+    color: var(--secondary-text-color);
+
+    & a::before {
+      content: "#### ";
+    }
+  }
+  & h5 {
+    margin: 0;
+    font-size: 1.2em;
+    color: var(--secondary-text-color);
+
+    & a::before {
+      content: "##### ";
+    }
+  }
+  & h6 {
+    margin: 0;
+    font-size: 1em;
+    color: var(--secondary-text-color);
+
+    & a::before {
+      content: "###### ";
+    }
+  }
+  & {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      & > a {
+        color: currentColor;
+        text-decoration: none;
+      }
+    }
+  }
+  & blockquote {
+    background-color: var(--quoted-background-color);
+    border-left: 8px solid var(--fourth-color);
+    padding-left: 16px;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+  }
+  & strong {
+    background: linear-gradient(transparent 50%, var(--mark-strong-color) 0%);
+  }
+  & em {
+    background: linear-gradient(transparent 50%, var(--mark-em-color) 0%);
+  }
+}

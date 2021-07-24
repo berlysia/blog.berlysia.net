@@ -2,11 +2,9 @@ import path from "path";
 import { promises as fs } from "fs";
 import type { GetStaticProps } from "next";
 import Link from "next/link";
-import { dropExt } from "../../utils/ext";
-import { Links } from "../../components/links";
 
 type Props = {
-  data: string[];
+  years: string[];
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (_context) => {
@@ -14,24 +12,21 @@ export const getStaticProps: GetStaticProps<Props> = async (_context) => {
   const articles = await fs.readdir(articlesDir);
   return {
     props: {
-      data: articles.map(dropExt),
+      years: articles,
     },
   };
 };
 
-export default function Article({ data }: Props) {
+export default function Article({ years }: Props) {
   return (
     <div>
-      <Links />
-      <main>
-        <ul>
-          {data.map((name) => (
-            <Link key={name} href={`/articles/${name}`}>
-              {name}
-            </Link>
-          ))}
-        </ul>
-      </main>
+      <ul>
+        {years.map((year) => (
+          <li key={year}>
+            <Link href={`/articles/${year}`}>{year}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

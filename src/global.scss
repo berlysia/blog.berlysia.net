@@ -1,0 +1,23 @@
+:root {
+  --first-color: #f38181;
+  --second-color: #fce38a;
+  --third-color: #eaffd0;
+  --fourth-color: #95e1d3;
+  --mark-strong-color: #fec1fe;
+  --mark-em-color: #a1e1fe;
+  --primary-text-color: #252525;
+  --secondary-text-color: #757575;
+  --divider-color: #bdbdbd;
+  --icon-color: #000000;
+  --main-background-color: #fefefe;
+  --header-background-color: rgb(253, 242, 248);
+  --header-text-color: var(--primary-text-color);
+  --footer-background-color: var(--primary-text-color);
+  --footer-text-color: rgb(248, 242, 253);
+  --quoted-background-color: rgba(0, 0, 0, 0.03125);
+}
+
+body {
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", Meiryo, sans-serif;
+}

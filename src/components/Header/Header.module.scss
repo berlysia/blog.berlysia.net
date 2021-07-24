@@ -1,0 +1,32 @@
+.container {
+  position: relative;
+  background-color: var(--header-background-color);
+  height: 48px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  color: var(--header-text-color);
+
+  & h1 {
+    font-weight: normal;
+    height: 100%;
+  }
+
+  & .home {
+    padding: 4px;
+
+    & .avatar {
+      border-radius: 4px;
+    }
+  }
+
+  & a {
+    vertical-align: middle;
+    line-height: 48px;
+    margin-left: 16px;
+    color: currentColor;
+    text-decoration: none;
+  }
+}

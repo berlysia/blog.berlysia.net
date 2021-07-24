@@ -1,15 +1,23 @@
 import path from "path";
 import { promises as fs } from "fs";
-import type { GetStaticProps } from "next";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
-import { dropExt } from "../utils/ext";
-import type { ArticleRouteShape } from "../types";
+import { dropExt } from "../../../../../utils/ext";
 
 type Props = {
-  articles: ArticleRouteShape[];
+  year: string;
+  month: string;
+  date: string;
+  slugs: string[];
 };
 
-export const getStaticProps: GetStaticProps<Props> = async (_context) => {
+type Params = {
+  year: string;
+  month: string;
+  date: string;
+};
+
+export const getStaticPaths: GetStaticPaths<Params> = async (_context) => {
   const articlesDir = path.join(process.cwd(), "data/articles");
   const years = (await fs.readdir(articlesDir)).map((year) => ({ year }));
   const months = (
@@ -30,26 +38,47 @@ export const getStaticProps: GetStaticProps<Props> = async (_context) => {
       )
     )
   ).flat();
-  const slugs = (
-    await Promise.all(
-      dates.flatMap(async ({ year, month, date }) =>
-        (
-          await fs.readdir(path.join(articlesDir, year, month, date))
-        ).flatMap((slug) => ({ year, month, date, slug: dropExt(slug) }))
-      )
-    )
-  ).flat();
   return {
-    props: { articles: slugs },
+    paths: dates.map((params) => ({
+      params,
+    })),
+    fallback: false,
   };
 };
 
-export default function Home({ articles }: Props) {
+export const getStaticProps: GetStaticProps<Props, Params> = async (
+  context
+) => {
+  const year = context.params?.year;
+  const month = context.params?.month;
+  const date = context.params?.date;
+  if (!year) throw new Error("invalid year");
+  if (!month) throw new Error("invalid month");
+  if (!date) throw new Error("invalid date");
+  const articlesDir = path.join(
+    process.cwd(),
+    "data/articles",
+    year,
+    month,
+    date
+  );
+  const slugs = (await fs.readdir(articlesDir)).map(dropExt);
+  return {
+    props: {
+      year,
+      month,
+      date,
+      slugs,
+    },
+  };
+};
+
+export default function Article({ year, month, date, slugs }: Props) {
   return (
     <div>
       <ul>
-        {articles.map(({ year, month, date, slug }, index) => (
-          <li key={index}>
+        {slugs.map((slug) => (
+          <li key={slug}>
             <Link
               href={{
                 pathname: "/articles/[year]/[month]/[date]/[slug]",
