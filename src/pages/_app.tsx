@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { ErrorBoundary } from "../components/ErrorBoundary";
 import { gaEnabled, sendPageView } from "../lib/gtag";
-// eslint-disable-next-line import/no-unassigned-import -- CSS import
 import "../globalStyle.css";
 
 function App({ Component, pageProps }: { Component: any; pageProps: any }) {
