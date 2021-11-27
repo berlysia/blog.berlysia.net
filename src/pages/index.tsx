@@ -32,10 +32,26 @@ function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
         </div>
       </div>
       <div className="tw-flex tw-justify-center tw-items-center tw-min-h-screen tw-p-6 tw-bg-white">
-        <Articles
-          imasArticles={props.imasArticles}
-          techArticles={props.techArticles}
-        />
+        <div className="tw-flex tw-flex-col tw-justify-center">
+          <div className="tw-flex tw-flex-wrap md:tw-flex-row tw-flex-col">
+            <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink-0 tw-flex-grow tw-p-6">
+              <ArticleArea
+                genreTitle="Tech Articles"
+                articles={props.techArticles}
+              />
+              <Talks />
+            </div>
+            <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink-0 tw-flex-grow tw-p-6">
+              <ArticleArea
+                genreTitle="IM@S Articles"
+                articles={props.imasArticles}
+              />
+            </div>
+          </div>
+          <div className="tw-flex tw-justify-center">
+            <ArticleLinks />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -183,50 +199,116 @@ const ArticleArea = ({
   );
 };
 
-const Articles = ({
-  imasArticles,
-  techArticles,
-}: {
-  imasArticles: Article[];
-  techArticles: Article[];
-}) => (
-  <div className="tw-flex tw-flex-col tw-justify-center">
-    <div className="tw-flex tw-flex-wrap md:tw-flex-row tw-flex-col">
-      <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink-0 tw-flex-grow tw-p-6">
-        <ArticleArea genreTitle="Tech Articles" articles={techArticles} />
-      </div>
-      <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink-0 tw-flex-grow tw-p-6">
-        <ArticleArea genreTitle="IM@S Articles" articles={imasArticles} />
-      </div>
-    </div>
-    <div className="tw-flex tw-justify-center">
-      <div className="tw-mt-6">
-        <a
-          className="tw-mx-1 tw-p-1 tw-border-2 tw-border-solid tw-border-gray-400 tw-rounded-md"
-          href="https://berlysia.hatenablog.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Hatena Blog
-        </a>
-        <a
-          href="https://zenn.dev/berlysia"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="tw-mx-1 tw-p-1 tw-border-2 tw-border-solid tw-border-gray-400 tw-rounded-md"
-        >
-          Zenn
-        </a>
-        <a
-          href="https://qiita.com/berlysia"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="tw-mx-1 tw-p-1 tw-border-2 tw-border-solid tw-border-gray-400 tw-rounded-md"
-        >
-          Qiita
-        </a>
-      </div>
-    </div>
+const ArticleLinks = () => (
+  <div className="tw-mt-6">
+    <a
+      className="tw-mx-1 tw-p-1 tw-border-2 tw-border-solid tw-border-gray-400 tw-rounded-md"
+      href="https://berlysia.hatenablog.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Hatena Blog
+    </a>
+    <a
+      href="https://zenn.dev/berlysia"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="tw-mx-1 tw-p-1 tw-border-2 tw-border-solid tw-border-gray-400 tw-rounded-md"
+    >
+      Zenn
+    </a>
+    <a
+      href="https://qiita.com/berlysia"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="tw-mx-1 tw-p-1 tw-border-2 tw-border-solid tw-border-gray-400 tw-rounded-md"
+    >
+      Qiita
+    </a>
+  </div>
+);
+
+const talks = [
+  {
+    eventTitle: "JSConf JP 2021",
+    talkTitle: "Webフロントエンドのリプレースを支えるテストの考え方",
+    talkLink:
+      "https://jsconf.jp/2021/talk/testing-approach-to-support-web-front-end-replacement",
+    slideLink: "https://speakerdeck.com/berlysia/jsconf-jp-2021",
+    pubDateString: "2021/11/27",
+    talkArchiveLink: "https://www.youtube.com/watch?v=5H3Sswp5qYg&t=1155s",
+  },
+  {
+    eventTitle: "東京Node学園 29時限目",
+    talkTitle: "rxjs v6 について",
+    talkLink: "https://nodejs.connpass.com/event/78902/",
+    slideLink: null,
+    pubDateString: "2018/02/22",
+    talkArchiveLink: null,
+  },
+] as const;
+
+const Talks = () => (
+  <div className="tw-mt-8">
+    <h2 className="tw-text-2xl tw-font-bold tw-mb-2">Talks</h2>
+    <ul className="tw-p-0">
+      {talks.map(
+        ({
+          eventTitle,
+          talkTitle,
+          talkLink,
+          slideLink,
+          pubDateString,
+          talkArchiveLink,
+        }) => (
+          <li
+            key={talkLink}
+            className="tw-text-base tw-border-0 tw-border-b tw-border-solid tw-border-gray-100"
+          >
+            <a
+              className="tw-block tw-rounded-md tw-py-2 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
+              href={talkLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {talkTitle} at {eventTitle}
+              <time
+                className="tw-block tw-text-right tw-text-xs tw-no-underline"
+                dateTime={pubDateString}
+              >
+                {pubDateString}
+              </time>
+            </a>
+            <div className="tw-text-right tw-flex tw-flex-row-reverse">
+              {talkArchiveLink && (
+                <div className="tw-mx-1">
+                  <a
+                    href={talkArchiveLink}
+                    className="tw-rounded-md tw-py-1 tw-px-2 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    → talk archive
+                  </a>
+                </div>
+              )}
+              {slideLink && (
+                <div className="tw-mx-1">
+                  <a
+                    href={slideLink}
+                    className="tw-rounded-md tw-py-1 tw-px-2 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    → slide
+                  </a>
+                </div>
+              )}
+            </div>
+          </li>
+        )
+      )}
+    </ul>
   </div>
 );
 

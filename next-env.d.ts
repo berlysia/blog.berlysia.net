@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/triple-slash-reference -- this is next.js */
 /// <reference types="next" />
 /// <reference types="next/types/global" />
 /// <reference types="next/image-types/global" />
