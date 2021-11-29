@@ -1,10 +1,5 @@
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTwitter,
-  faGithub,
-  faMastodon,
-} from "@fortawesome/free-brands-svg-icons";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 import type { InferGetStaticPropsType } from "next";
 import { Head } from "../components/head";
@@ -63,56 +58,41 @@ function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
 }
 
 const LinkMarbles = () => (
-  <div className="tw-flex tw-flex-row mt-2">
-    <a
-      className="tw-m-1"
-      rel="me noopener noreferrer"
-      target="_blank"
-      href="https://twitter.com/berlysia"
-      aria-label="Twitter / berlysia"
-    >
-      <div className="tw-relative tw-text-base tw-w-8 tw-h-8 tw-p-2 tw-rounded-full tw-border tw-border-gray-400">
-        <div className="tw-relative tw-w-full tw-h-full">
-          <FontAwesomeIcon
-            className="tw-absolute tw-m-auto tw-top-0 tw-left-0 tw-right-0 tw-bottom-0"
-            icon={faTwitter}
-          />
-        </div>
-      </div>
-    </a>
-    <a
-      className="tw-m-1"
-      rel="me noopener noreferrer"
-      target="_blank"
-      href="https://github.com/berlysia"
-      aria-label="GitHub / berlysia"
-    >
-      <div className="tw-relative tw-text-base tw-w-8 tw-h-8 tw-p-2 tw-rounded-full tw-border tw-border-gray-400">
-        <div className="tw-relative tw-w-full tw-h-full">
-          <FontAwesomeIcon
-            className="tw-absolute tw-m-auto tw-top-0 tw-left-0 tw-right-0 tw-bottom-0"
-            icon={faGithub}
-          />
-        </div>
-      </div>
-    </a>
-    <a
-      className="tw-m-1"
-      rel="me noopener noreferrer"
-      target="_blank"
-      href="https://imastodon.net/@berlysia"
-      aria-label="Imastodon / berlysia"
-    >
-      <div className="tw-relative tw-text-base tw-w-8 tw-h-8 tw-p-2 tw-rounded-full tw-border tw-border-gray-400">
-        <div className="tw-relative tw-w-full tw-h-full">
-          <FontAwesomeIcon
-            className="tw-absolute tw-m-auto tw-top-0 tw-left-0 tw-right-0 tw-bottom-0"
-            icon={faMastodon}
-          />
-        </div>
-      </div>
-    </a>
-  </div>
+  <ul className="">
+    <li>
+      <a
+        className="tw-underline"
+        rel="me noopener noreferrer"
+        target="_blank"
+        href="https://twitter.com/berlysia"
+        aria-label="Twitter / berlysia"
+      >
+        Twitter
+      </a>
+    </li>
+    <li>
+      <a
+        className="tw-underline"
+        rel="me noopener noreferrer"
+        target="_blank"
+        href="https://github.com/berlysia"
+        aria-label="GitHub / berlysia"
+      >
+        GitHub
+      </a>
+    </li>
+    <li>
+      <a
+        className="tw-underline"
+        rel="me noopener noreferrer"
+        target="_blank"
+        href="https://imastodon.net/@berlysia"
+        aria-label="Imastodon / berlysia"
+      >
+        Im@stodon
+      </a>
+    </li>
+  </ul>
 );
 
 const Profile = () => (

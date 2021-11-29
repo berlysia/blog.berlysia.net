@@ -5,8 +5,9 @@
 @tailwind utilities;
 
 * {
-  font-family: "Helvetica Neue", "Helvetica", "Hiragino Kaku Gothic ProN",
-    YuGothic, "Yu Gothic Medium", Meiryo, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "Helvetica",
+    "Hiragino Kaku Gothic ProN", YuGothic, "Yu Gothic Medium", Meiryo,
+    sans-serif;
   color: #233;
 }
 html {
