@@ -10,6 +10,9 @@ import type { InferGetStaticPropsType } from "next";
 import { Head } from "../components/head";
 import type { Article } from "../seeds";
 import { getByGenre } from "../seeds";
+import { ArticleLink } from "../components/ArticleLink/ArticleLink";
+import { BlogMarble } from "../components/BlogMarble/BlogMarble";
+import { SlideLink } from "../components/SlideLink/SlideLink";
 
 export const getStaticProps = async ({ preview = false }) => {
   return {
@@ -35,11 +38,11 @@ function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
         <div className="tw-flex tw-flex-col tw-justify-center">
           <div className="tw-flex tw-flex-wrap md:tw-flex-row tw-flex-col">
             <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink-0 tw-flex-grow tw-p-6">
+              <Talks />
               <ArticleArea
                 genreTitle="Tech Articles"
                 articles={props.techArticles}
               />
-              <Talks />
             </div>
             <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink-0 tw-flex-grow tw-p-6">
               <ArticleArea
@@ -178,20 +181,11 @@ const ArticleArea = ({
             key={link}
             className="tw-text-base tw-border-0 tw-border-b tw-border-solid tw-border-gray-100"
           >
-            <a
-              className="tw-block tw-rounded-md tw-py-2 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
+            <ArticleLink
               href={link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {title}
-              <time
-                className="tw-block tw-text-right tw-text-xs tw-no-underline"
-                dateTime={pubDateString}
-              >
-                {pubDateString}
-              </time>
-            </a>
+              title={title}
+              pubDateString={pubDateString}
+            />
           </li>
         ))}
       </ul>
@@ -199,32 +193,25 @@ const ArticleArea = ({
   );
 };
 
+const BLOGS = [
+  {
+    title: "Hatena Blog",
+    href: "https://berlysia.hatenablog.com/",
+  },
+  {
+    title: "Zenn",
+    href: "https://zenn.dev/berlysia",
+  },
+  {
+    title: "Qiita",
+    href: "https://qiita.com/berlysia",
+  },
+] as const;
 const ArticleLinks = () => (
   <div className="tw-mt-6">
-    <a
-      className="tw-mx-1 tw-p-1 tw-border-2 tw-border-solid tw-border-gray-400 tw-rounded-md"
-      href="https://berlysia.hatenablog.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Hatena Blog
-    </a>
-    <a
-      href="https://zenn.dev/berlysia"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="tw-mx-1 tw-p-1 tw-border-2 tw-border-solid tw-border-gray-400 tw-rounded-md"
-    >
-      Zenn
-    </a>
-    <a
-      href="https://qiita.com/berlysia"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="tw-mx-1 tw-p-1 tw-border-2 tw-border-solid tw-border-gray-400 tw-rounded-md"
-    >
-      Qiita
-    </a>
+    {BLOGS.map(({ href, title }) => (
+      <BlogMarble key={href} href={href} title={title} />
+    ))}
   </div>
 );
 
@@ -249,8 +236,8 @@ const talks = [
 ] as const;
 
 const Talks = () => (
-  <div className="tw-mt-8">
-    <h2 className="tw-text-2xl tw-font-bold tw-mb-2">Talks</h2>
+  <div>
+    <h2 className="tw-text-2xl tw-font-bold tw-mb-2">Tech Talks</h2>
     <ul className="tw-p-0">
       {talks.map(
         ({
@@ -265,46 +252,14 @@ const Talks = () => (
             key={talkLink}
             className="tw-text-base tw-border-0 tw-border-b tw-border-solid tw-border-gray-100"
           >
-            <a
-              className="tw-block tw-rounded-md tw-py-2 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
-              href={talkLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {talkTitle} at {eventTitle}
-              <time
-                className="tw-block tw-text-right tw-text-xs tw-no-underline"
-                dateTime={pubDateString}
-              >
-                {pubDateString}
-              </time>
-            </a>
-            <div className="tw-text-right tw-flex tw-flex-row-reverse">
-              {talkArchiveLink && (
-                <div className="tw-mx-1">
-                  <a
-                    href={talkArchiveLink}
-                    className="tw-rounded-md tw-py-1 tw-px-2 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    → talk archive
-                  </a>
-                </div>
-              )}
-              {slideLink && (
-                <div className="tw-mx-1">
-                  <a
-                    href={slideLink}
-                    className="tw-rounded-md tw-py-1 tw-px-2 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    → slide
-                  </a>
-                </div>
-              )}
-            </div>
+            <SlideLink
+              eventTitle={eventTitle}
+              talkTitle={talkTitle}
+              talkLink={talkLink}
+              slideLink={slideLink}
+              pubDateString={pubDateString}
+              talkArchiveLink={talkArchiveLink}
+            />
           </li>
         )
       )}
