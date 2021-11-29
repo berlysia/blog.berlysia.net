@@ -18,8 +18,8 @@ export const getStaticProps = async ({ preview = false }) => {
   return {
     props: {
       preview,
-      imasArticles: getByGenre("imas"),
-      techArticles: getByGenre("tech"),
+      imasArticles: getByGenre("imas", 6),
+      techArticles: getByGenre("tech", 6),
     },
   };
 };
@@ -30,7 +30,7 @@ function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
       <Head title="berlysia.net" />
       <div className="tw-flex tw-justify-center tw-items-center tw-min-h-screen tw-p-6 tw-bg-pink-50">
         <Profile />
-        <div className="tw-absolute tw-bottom-0 tw-mb-4 tw-text-3xl tw-animate-fade-blink">
+        <div className="tw-absolute tw-bottom-8 tw-h-8 tw-w-6 tw-text-3xl tw-animate-fade-blink">
           <FontAwesomeIcon icon={faAngleDoubleDown} />
         </div>
       </div>
@@ -39,6 +39,7 @@ function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
           <div className="tw-flex tw-flex-wrap md:tw-flex-row tw-flex-col">
             <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink-0 tw-flex-grow tw-p-6">
               <Talks />
+              <div className="tw-h-8"></div>
               <ArticleArea
                 genreTitle="Tech Articles"
                 articles={props.techArticles}
@@ -134,6 +135,7 @@ const Profile = () => (
         </h3>
         <ul className="tw-my-1">
           <li>I love Web, browsers, and JavaScript.</li>
+          <li></li>
         </ul>
       </div>
       <div className="tw-my-1">
