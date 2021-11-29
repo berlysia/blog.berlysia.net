@@ -11,7 +11,8 @@
     "jsx": "preserve",
     "isolatedModules": true,
     "declaration": false,
-    "noEmitOnError": false
+    "noEmitOnError": false,
+    "incremental": true
   },
   "exclude": ["**/*.test.ts"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
