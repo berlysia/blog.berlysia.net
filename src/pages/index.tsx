@@ -13,6 +13,7 @@ import { getByGenre } from "../seeds";
 import { ArticleLink } from "../components/ArticleLink/ArticleLink";
 import { BlogMarble } from "../components/BlogMarble/BlogMarble";
 import { SlideLink } from "../components/SlideLink/SlideLink";
+import { FullHeightContainer } from "../components/FullHeightContainer/FullHeightContainer";
 
 export const getStaticProps = async ({ preview = false }) => {
   return {
@@ -28,13 +29,13 @@ function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div className="tw-flex tw-flex-col">
       <Head title="berlysia.net" />
-      <div className="tw-flex tw-justify-center tw-items-center tw-min-h-screen tw-p-6 tw-bg-pink-50">
+      <FullHeightContainer className="tw-bg-pink-50">
         <Profile />
         <div className="tw-absolute tw-bottom-8 tw-h-8 tw-w-6 tw-text-3xl tw-animate-fade-blink">
           <FontAwesomeIcon icon={faAngleDoubleDown} />
         </div>
-      </div>
-      <div className="tw-flex tw-justify-center tw-items-center tw-min-h-screen tw-p-6 tw-bg-white">
+      </FullHeightContainer>
+      <FullHeightContainer className="tw-bg-white">
         <div className="tw-flex tw-flex-col tw-justify-center">
           <div className="tw-flex tw-flex-wrap md:tw-flex-row tw-flex-col">
             <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink-0 tw-flex-grow tw-p-6">
@@ -56,7 +57,7 @@ function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
             <ArticleLinks />
           </div>
         </div>
-      </div>
+      </FullHeightContainer>
     </div>
   );
 }
@@ -231,9 +232,9 @@ const talks = [
     eventTitle: "東京Node学園 29時限目",
     talkTitle: "rxjs v6 について",
     talkLink: "https://nodejs.connpass.com/event/78902/",
-    slideLink: null,
+    slideLink: undefined,
     pubDateString: "2018/02/22",
-    talkArchiveLink: null,
+    talkArchiveLink: undefined,
   },
 ] as const;
 
