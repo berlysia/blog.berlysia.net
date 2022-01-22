@@ -200,13 +200,30 @@ const ArticleLinks = () => (
 
 const talks = [
   {
+    eventTitle: "ドワンゴ EdTech Talk",
+    talkTitle: "N予備校のフロントエンド開発の取り組み",
+    talkLink: "https://dwango.connpass.com/event/230731/",
+    slideLink: undefined,
+    pubDateString: "2021/12/08",
+    talkArchiveLink: undefined,
+  },
+  {
+    eventTitle: "Front-End Lounge #2「フロントエンドエンジニアのキャリア」",
+    talkTitle: "後手から始まるフロントエンド（スポンサートーク）",
+    talkLink: "https://forkwell.connpass.com/event/230632/",
+    slideLink: undefined,
+    pubDateString: "2021/12/06",
+    talkArchiveLink: "https://www.youtube.com/watch?v=zw_bt_j2xW0",
+  },
+  {
     eventTitle: "JSConf JP 2021",
     talkTitle: "Webフロントエンドのリプレースを支えるテストの考え方",
     talkLink:
       "https://jsconf.jp/2021/talk/testing-approach-to-support-web-front-end-replacement",
     slideLink: "https://speakerdeck.com/berlysia/jsconf-jp-2021",
     pubDateString: "2021/11/27",
-    talkArchiveLink: "https://www.youtube.com/watch?v=5H3Sswp5qYg&t=1155s",
+    talkArchiveLink:
+      "https://www.youtube.com/watch?v=16ux8nTqJ7k&list=PL42hYWKFRfN7XWswj9wcC0j4191KNJuO3&index=1",
   },
   {
     eventTitle: "東京Node学園 29時限目",
