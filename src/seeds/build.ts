@@ -4,6 +4,7 @@ import { ensureDir } from "fs-extra";
 import Parser from "rss-parser";
 // eslint-disable-next-line import/no-namespace -- for convenience
 import * as feeds from "./feeds";
+import old_tech from "./old_tech.json";
 
 (async function main() {
   const parser = new Parser();
@@ -24,6 +25,7 @@ import * as feeds from "./feeds";
     })
   );
   const genres = Object.fromEntries(genresEntries);
+  genres.tech.push(old_tech);
   await ensureDir(resolve(__dirname, ".tmp"));
   await writeFile(
     resolve(__dirname, ".tmp", "fetched.json"),
