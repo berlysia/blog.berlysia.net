@@ -63,7 +63,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.1.0, @babel/core@npm:^7.12.10, @babel/core@npm:^7.12.3, @babel/core@npm:^7.16.0, @babel/core@npm:^7.7.2, @babel/core@npm:^7.7.5":
+"@babel/core@npm:7.16.0, @babel/core@npm:^7.1.0, @babel/core@npm:^7.12.10, @babel/core@npm:^7.12.3, @babel/core@npm:^7.7.2, @babel/core@npm:^7.7.5":
   version: 7.16.0
   resolution: "@babel/core@npm:7.16.0"
   dependencies:
@@ -1585,7 +1585,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@berlysia/eslint-config@npm:^3.0.0-alpha.2":
+"@berlysia/eslint-config@npm:3.0.0-alpha.2":
   version: 3.0.0-alpha.2
   resolution: "@berlysia/eslint-config@npm:3.0.0-alpha.2"
   dependencies:
@@ -1602,7 +1602,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@berlysia/tsconfig@npm:^0.0.1":
+"@berlysia/tsconfig@npm:0.0.1":
   version: 0.0.1
   resolution: "@berlysia/tsconfig@npm:0.0.1"
   checksum: 6ee15505a9131edcd7f6e71226b952c70cf72e1bc891a3aa3326a8b5ec0a8ad24f6af52a948af7644c0cf3df1315b5eaf9f64aa6370534b6e6ccfe60128e7d74
@@ -2231,7 +2231,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:^12.0.4":
+"@next/eslint-plugin-next@npm:12.0.4":
   version: 12.0.4
   resolution: "@next/eslint-plugin-next@npm:12.0.4"
   dependencies:
@@ -2488,7 +2488,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-actions@npm:6.4.0, @storybook/addon-actions@npm:^6.4.0":
+"@storybook/addon-actions@npm:6.4.0":
   version: 6.4.0
   resolution: "@storybook/addon-actions@npm:6.4.0"
   dependencies:
@@ -2677,7 +2677,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-essentials@npm:^6.4.0":
+"@storybook/addon-essentials@npm:6.4.0":
   version: 6.4.0
   resolution: "@storybook/addon-essentials@npm:6.4.0"
   dependencies:
@@ -2721,7 +2721,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:^6.4.0":
+"@storybook/addon-links@npm:6.4.0":
   version: 6.4.0
   resolution: "@storybook/addon-links@npm:6.4.0"
   dependencies:
@@ -2799,7 +2799,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-postcss@npm:^2.0.0":
+"@storybook/addon-postcss@npm:2.0.0":
   version: 2.0.0
   resolution: "@storybook/addon-postcss@npm:2.0.0"
   dependencies:
@@ -3450,7 +3450,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react@npm:^6.4.0":
+"@storybook/react@npm:6.4.0":
   version: 6.4.0
   resolution: "@storybook/react@npm:6.4.0"
   dependencies:
@@ -5520,7 +5520,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^10.4.0":
+"autoprefixer@npm:10.4.0":
   version: 10.4.0
   resolution: "autoprefixer@npm:10.4.0"
   dependencies:
@@ -5580,7 +5580,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-loader@npm:^8.0.0, babel-loader@npm:^8.2.3":
+"babel-loader@npm:8.2.3, babel-loader@npm:^8.0.0":
   version: 8.2.3
   resolution: "babel-loader@npm:8.2.3"
   dependencies:
@@ -5860,20 +5860,20 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "berlysia-net@workspace:."
   dependencies:
-    "@babel/core": ^7.16.0
-    "@berlysia/eslint-config": ^3.0.0-alpha.2
-    "@berlysia/tsconfig": ^0.0.1
+    "@babel/core": 7.16.0
+    "@berlysia/eslint-config": 3.0.0-alpha.2
+    "@berlysia/tsconfig": 0.0.1
     "@fortawesome/fontawesome-svg-core": ^1.2.36
     "@fortawesome/free-brands-svg-icons": ^5.15.4
     "@fortawesome/free-solid-svg-icons": ^5.15.4
     "@fortawesome/react-fontawesome": ^0.1.16
-    "@next/eslint-plugin-next": ^12.0.4
+    "@next/eslint-plugin-next": 12.0.4
     "@rebass/preset": ^4.0.5
-    "@storybook/addon-actions": ^6.4.0
-    "@storybook/addon-essentials": ^6.4.0
-    "@storybook/addon-links": ^6.4.0
-    "@storybook/addon-postcss": ^2.0.0
-    "@storybook/react": ^6.4.0
+    "@storybook/addon-actions": 6.4.0
+    "@storybook/addon-essentials": 6.4.0
+    "@storybook/addon-links": 6.4.0
+    "@storybook/addon-postcss": 2.0.0
+    "@storybook/react": 6.4.0
     "@types/babel__core": ^7.1.16
     "@types/eslint": ^8.2.0
     "@types/fs-extra": ^9.0.13
@@ -5887,31 +5887,31 @@ __metadata:
     "@types/rebass": ^4.0.10
     "@types/webpack": ^5.28.0
     "@types/webpack-dev-server": ^4.5.0
-    autoprefixer: ^10.4.0
-    babel-loader: ^8.2.3
+    autoprefixer: 10.4.0
+    babel-loader: 8.2.3
     clsx: ^1.1.1
-    del-cli: ^4.0.1
+    del-cli: 4.0.1
     eslint: ^8.3.0
     fs-extra: ^10.0.0
-    html-webpack-plugin: ^5.5.0
-    husky: ^7.0.4
-    jest: ^27.4.0
-    lint-staged: ^12.1.2
+    html-webpack-plugin: 5.5.0
+    husky: 7.0.4
+    jest: 27.4.0
+    lint-staged: 12.1.2
     lodash: ^4.17.21
     next: ^12.0.4
-    npm-run-all: ^4.1.5
-    postcss: ^8.4.4
-    prettier: ^2.5.0
+    npm-run-all: 4.1.5
+    postcss: 8.4.4
+    prettier: 2.5.0
     react: ^17.0.2
     react-dom: ^17.0.2
     rss-parser: ^3.12.0
-    tailwindcss: ^2.2.19
-    ts-jest: ^27.0.7
-    ts-node: ^10.4.0
-    typescript: ^4.5.2
-    webpack: ^5.64.4
-    webpack-cli: ^4.9.1
-    webpack-dev-server: ^4.6.0
+    tailwindcss: 2.2.19
+    ts-jest: 27.0.7
+    ts-node: 10.4.0
+    typescript: 4.5.2
+    webpack: 5.64.4
+    webpack-cli: 4.9.1
+    webpack-dev-server: 4.6.0
   languageName: unknown
   linkType: soft
 
@@ -7610,7 +7610,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"del-cli@npm:^4.0.1":
+"del-cli@npm:4.0.1":
   version: 4.0.1
   resolution: "del-cli@npm:4.0.1"
   dependencies:
@@ -10110,6 +10110,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-webpack-plugin@npm:5.5.0":
+  version: 5.5.0
+  resolution: "html-webpack-plugin@npm:5.5.0"
+  dependencies:
+    "@types/html-minifier-terser": ^6.0.0
+    html-minifier-terser: ^6.0.2
+    lodash: ^4.17.21
+    pretty-error: ^4.0.0
+    tapable: ^2.0.0
+  peerDependencies:
+    webpack: ^5.20.0
+  checksum: f3d84d0df71fe2f5bac533cc74dce41ab058558cdcc6ff767d166a2abf1cf6fb8491d54d60ddbb34e95c00394e379ba52e0468e0284d1d0cc6a42987056e8219
+  languageName: node
+  linkType: hard
+
 "html-webpack-plugin@npm:^4.0.0":
   version: 4.5.2
   resolution: "html-webpack-plugin@npm:4.5.2"
@@ -10126,21 +10141,6 @@ __metadata:
   peerDependencies:
     webpack: ^4.0.0 || ^5.0.0
   checksum: 25ca0b341234501c64754ba8f9bb84f978e50f3f90affc199d18d04511cdc2c0c8ef8a975901a0fbcfe5bae32f80e8fd5ef52f1ce3672d3ff5307057ccb5a063
-  languageName: node
-  linkType: hard
-
-"html-webpack-plugin@npm:^5.5.0":
-  version: 5.5.0
-  resolution: "html-webpack-plugin@npm:5.5.0"
-  dependencies:
-    "@types/html-minifier-terser": ^6.0.0
-    html-minifier-terser: ^6.0.2
-    lodash: ^4.17.21
-    pretty-error: ^4.0.0
-    tapable: ^2.0.0
-  peerDependencies:
-    webpack: ^5.20.0
-  checksum: f3d84d0df71fe2f5bac533cc74dce41ab058558cdcc6ff767d166a2abf1cf6fb8491d54d60ddbb34e95c00394e379ba52e0468e0284d1d0cc6a42987056e8219
   languageName: node
   linkType: hard
 
@@ -10283,7 +10283,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:^7.0.4":
+"husky@npm:7.0.4":
   version: 7.0.4
   resolution: "husky@npm:7.0.4"
   bin:
@@ -11789,7 +11789,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:^27.4.0":
+"jest@npm:27.4.0":
   version: 27.4.0
   resolution: "jest@npm:27.4.0"
   dependencies:
@@ -12113,7 +12113,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^12.1.2":
+"lint-staged@npm:12.1.2":
   version: 12.1.2
   resolution: "lint-staged@npm:12.1.2"
   dependencies:
@@ -13355,7 +13355,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-run-all@npm:^4.1.5":
+"npm-run-all@npm:4.1.5":
   version: 4.1.5
   resolution: "npm-run-all@npm:4.1.5"
   dependencies:
@@ -14335,17 +14335,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^7.0.14, postcss@npm:^7.0.26, postcss@npm:^7.0.32, postcss@npm:^7.0.35, postcss@npm:^7.0.36, postcss@npm:^7.0.5, postcss@npm:^7.0.6":
-  version: 7.0.39
-  resolution: "postcss@npm:7.0.39"
-  dependencies:
-    picocolors: ^0.2.1
-    source-map: ^0.6.1
-  checksum: 4ac793f506c23259189064bdc921260d869a115a82b5e713973c5af8e94fbb5721a5cc3e1e26840500d7e1f1fa42a209747c5b1a151918a9bc11f0d7ed9048e3
-  languageName: node
-  linkType: hard
-
-"postcss@npm:^8.1.6, postcss@npm:^8.3.5, postcss@npm:^8.4.4":
+"postcss@npm:8.4.4, postcss@npm:^8.1.6, postcss@npm:^8.3.5":
   version: 8.4.4
   resolution: "postcss@npm:8.4.4"
   dependencies:
@@ -14353,6 +14343,16 @@ __metadata:
     picocolors: ^1.0.0
     source-map-js: ^1.0.1
   checksum: 6cf3fe0ecdf5a0d2aeb5e8404938c7eab968704e2e29dc5421e90b4014eb1975c1c0ad828425f2428807ef6e3fcfadd71f988ab55cb06c28ac2866f22403255b
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^7.0.14, postcss@npm:^7.0.26, postcss@npm:^7.0.32, postcss@npm:^7.0.35, postcss@npm:^7.0.36, postcss@npm:^7.0.5, postcss@npm:^7.0.6":
+  version: 7.0.39
+  resolution: "postcss@npm:7.0.39"
+  dependencies:
+    picocolors: ^0.2.1
+    source-map: ^0.6.1
+  checksum: 4ac793f506c23259189064bdc921260d869a115a82b5e713973c5af8e94fbb5721a5cc3e1e26840500d7e1f1fa42a209747c5b1a151918a9bc11f0d7ed9048e3
   languageName: node
   linkType: hard
 
@@ -14370,7 +14370,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.2.1, prettier@npm:^2.5.0":
+"prettier@npm:2.5.0, prettier@npm:^2.2.1":
   version: 2.5.0
   resolution: "prettier@npm:2.5.0"
   bin:
@@ -16887,7 +16887,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^2.2.19":
+"tailwindcss@npm:2.2.19":
   version: 2.2.19
   resolution: "tailwindcss@npm:2.2.19"
   dependencies:
@@ -17305,7 +17305,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^27.0.7":
+"ts-jest@npm:27.0.7":
   version: 27.0.7
   resolution: "ts-jest@npm:27.0.7"
   dependencies:
@@ -17336,7 +17336,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.4.0":
+"ts-node@npm:10.4.0":
   version: 10.4.0
   resolution: "ts-node@npm:10.4.0"
   dependencies:
@@ -17533,7 +17533,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.5.2":
+"typescript@npm:4.5.2":
   version: 4.5.2
   resolution: "typescript@npm:4.5.2"
   bin:
@@ -17543,7 +17543,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.5.2#~builtin<compat/typescript>":
+"typescript@patch:typescript@4.5.2#~builtin<compat/typescript>":
   version: 4.5.2
   resolution: "typescript@patch:typescript@npm%3A4.5.2#~builtin<compat/typescript>::version=4.5.2&hash=493e53"
   bin:
@@ -18154,7 +18154,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-cli@npm:^4.9.1":
+"webpack-cli@npm:4.9.1":
   version: 4.9.1
   resolution: "webpack-cli@npm:4.9.1"
   dependencies:
@@ -18217,7 +18217,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-dev-server@npm:^4.6.0":
+"webpack-dev-server@npm:4.6.0":
   version: 4.6.0
   resolution: "webpack-dev-server@npm:4.6.0"
   dependencies:
@@ -18324,7 +18324,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:*, webpack@npm:^5, webpack@npm:^5.38.1, webpack@npm:^5.64.4":
+"webpack@npm:*, webpack@npm:5.64.4, webpack@npm:^5, webpack@npm:^5.38.1":
   version: 5.64.4
   resolution: "webpack@npm:5.64.4"
   dependencies:
