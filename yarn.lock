@@ -3674,7 +3674,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/babel__core@npm:^7.0.0, @types/babel__core@npm:^7.1.14, @types/babel__core@npm:^7.1.16":
+"@types/babel__core@npm:7.1.16, @types/babel__core@npm:^7.0.0, @types/babel__core@npm:^7.1.14":
   version: 7.1.16
   resolution: "@types/babel__core@npm:7.1.16"
   dependencies:
@@ -3829,7 +3829,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/fs-extra@npm:^9.0.13":
+"@types/fs-extra@npm:9.0.13":
   version: 9.0.13
   resolution: "@types/fs-extra@npm:9.0.13"
   dependencies:
@@ -3901,7 +3901,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/html-webpack-plugin@npm:^3.2.6":
+"@types/html-webpack-plugin@npm:3.2.6":
   version: 3.2.6
   resolution: "@types/html-webpack-plugin@npm:3.2.6"
   dependencies:
@@ -3953,7 +3953,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^27.0.3":
+"@types/jest@npm:27.0.3":
   version: 27.0.3
   resolution: "@types/jest@npm:27.0.3"
   dependencies:
@@ -3988,7 +3988,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.177":
+"@types/lodash@npm:4.14.177":
   version: 4.14.177
   resolution: "@types/lodash@npm:4.14.177"
   checksum: 00f9eb300ed5219cfbabb3448d4a71744895edad60dcfda9f028c0808a50eb6ad1ca9f673b56a85f85668a4ea54b9870643625468a747039c435643e52253a75
@@ -4035,7 +4035,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^16.11.10":
+"@types/node@npm:*, @types/node@npm:16.11.10":
   version: 16.11.10
   resolution: "@types/node@npm:16.11.10"
   checksum: 9c79419c5c3d92d5825bffa30f3668533f598d8b63a73ea7fc24e47f162bdbed92b0f8e4f4261cc3314b39cee050e303366d2aa154abc95c63a572a110b8c160
@@ -4091,7 +4091,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prettier@npm:^2.1.5, @types/prettier@npm:^2.4.2":
+"@types/prettier@npm:2.4.2, @types/prettier@npm:^2.1.5":
   version: 2.4.2
   resolution: "@types/prettier@npm:2.4.2"
   checksum: 76e230b2d11028af11fe12e09b2d5b10b03738e9abf819ae6ebb0f78cac13d39f860755ce05ac3855b608222518d956628f5d00322dc206cc6d1f2d8d1519f1e
@@ -4126,7 +4126,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^17.0.11":
+"@types/react-dom@npm:17.0.11":
   version: 17.0.11
   resolution: "@types/react-dom@npm:17.0.11"
   dependencies:
@@ -4144,7 +4144,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^17.0.37":
+"@types/react@npm:*, @types/react@npm:17.0.37":
   version: 17.0.37
   resolution: "@types/react@npm:17.0.37"
   dependencies:
@@ -4155,7 +4155,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/rebass@npm:^4.0.10":
+"@types/rebass@npm:4.0.10":
   version: 4.0.10
   resolution: "@types/rebass@npm:4.0.10"
   dependencies:
@@ -4291,7 +4291,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack-dev-server@npm:^4.5.0":
+"@types/webpack-dev-server@npm:4.5.0":
   version: 4.5.0
   resolution: "@types/webpack-dev-server@npm:4.5.0"
   dependencies:
@@ -4326,6 +4326,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/webpack@npm:5.28.0":
+  version: 5.28.0
+  resolution: "@types/webpack@npm:5.28.0"
+  dependencies:
+    "@types/node": "*"
+    tapable: ^2.2.0
+    webpack: ^5
+  checksum: a038d7e12dd109c6a8d2eb744fd32070ef94f1655e730fb1443b370db98864c3a0e408638b02d12ba08269b9c012b3be8b801117ced2d1102e7676203fd663ed
+  languageName: node
+  linkType: hard
+
 "@types/webpack@npm:^4, @types/webpack@npm:^4.41.26, @types/webpack@npm:^4.41.8":
   version: 4.41.32
   resolution: "@types/webpack@npm:4.41.32"
@@ -4337,17 +4348,6 @@ __metadata:
     anymatch: ^3.0.0
     source-map: ^0.6.0
   checksum: e594a1357cbbc2f7c6ca47785c5a11adb5591a774a69afaeab07cd6f6bff6c6aea2030bd37b32bdd19d0ec2336a346db754e8d8d236ba8effeab542716fb32b7
-  languageName: node
-  linkType: hard
-
-"@types/webpack@npm:^5.28.0":
-  version: 5.28.0
-  resolution: "@types/webpack@npm:5.28.0"
-  dependencies:
-    "@types/node": "*"
-    tapable: ^2.2.0
-    webpack: ^5
-  checksum: a038d7e12dd109c6a8d2eb744fd32070ef94f1655e730fb1443b370db98864c3a0e408638b02d12ba08269b9c012b3be8b801117ced2d1102e7676203fd663ed
   languageName: node
   linkType: hard
 
@@ -5874,19 +5874,19 @@ __metadata:
     "@storybook/addon-links": 6.4.0
     "@storybook/addon-postcss": 2.0.0
     "@storybook/react": 6.4.0
-    "@types/babel__core": ^7.1.16
+    "@types/babel__core": 7.1.16
     "@types/eslint": ^8.2.0
-    "@types/fs-extra": ^9.0.13
-    "@types/html-webpack-plugin": ^3.2.6
-    "@types/jest": ^27.0.3
-    "@types/lodash": ^4.14.177
-    "@types/node": ^16.11.10
-    "@types/prettier": ^2.4.2
-    "@types/react": ^17.0.37
-    "@types/react-dom": ^17.0.11
-    "@types/rebass": ^4.0.10
-    "@types/webpack": ^5.28.0
-    "@types/webpack-dev-server": ^4.5.0
+    "@types/fs-extra": 9.0.13
+    "@types/html-webpack-plugin": 3.2.6
+    "@types/jest": 27.0.3
+    "@types/lodash": 4.14.177
+    "@types/node": 16.11.10
+    "@types/prettier": 2.4.2
+    "@types/react": 17.0.37
+    "@types/react-dom": 17.0.11
+    "@types/rebass": 4.0.10
+    "@types/webpack": 5.28.0
+    "@types/webpack-dev-server": 4.5.0
     autoprefixer: 10.4.0
     babel-loader: 8.2.3
     clsx: ^1.1.1
