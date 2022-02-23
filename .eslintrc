@@ -27,6 +27,7 @@
     "max-nested-callbacks": "off",
     "import/no-unresolved": "off",
     // 消えてる
-    "@typescript-eslint/no-non-null-asserted-nullish-coalescing": "off"
+    "@typescript-eslint/no-non-null-asserted-nullish-coalescing": "off",
+    "prefer-object-has-own": "off"
   }
 }
