@@ -62,7 +62,7 @@ const LinkMarbles = () => (
     <li>
       <a
         className="tw-underline"
-        rel="me noopener noreferrer"
+        rel="noopener noreferrer"
         target="_blank"
         href="https://twitter.com/berlysia"
         aria-label="Twitter / berlysia"
@@ -73,7 +73,7 @@ const LinkMarbles = () => (
     <li>
       <a
         className="tw-underline"
-        rel="me noopener noreferrer"
+        rel="noopener noreferrer"
         target="_blank"
         href="https://github.com/berlysia"
         aria-label="GitHub / berlysia"
@@ -84,7 +84,7 @@ const LinkMarbles = () => (
     <li>
       <a
         className="tw-underline"
-        rel="me noopener noreferrer"
+        rel="noopener noreferrer"
         target="_blank"
         href="https://imastodon.net/@berlysia"
         aria-label="Imastodon / berlysia"
@@ -199,6 +199,14 @@ const ArticleLinks = () => (
 );
 
 const talks = [
+  {
+    eventTitle: "iCARE Dev Meetup #30",
+    talkTitle: "N予備校とWebフロントエンドの新陳代謝",
+    talkLink: "https://icare.connpass.com/event/237019/",
+    slideLink: "https://speakerdeck.com/berlysia/icare-dev-meetup-number-30",
+    pubDateString: "2022/02/16",
+    talkArchiveLink: "https://youtu.be/VlE6hJme1Rc?t=1602",
+  },
   {
     eventTitle: "ドワンゴ EdTech Talk",
     talkTitle: "N予備校のフロントエンド開発の取り組み",
