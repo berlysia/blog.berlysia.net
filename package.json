@@ -36,7 +36,7 @@
     "@babel/core": "7.17.5",
     "@berlysia/eslint-config": "3.0.0",
     "@berlysia/tsconfig": "0.0.1",
-    "@next/eslint-plugin-next": "12.0.10",
+    "@next/eslint-plugin-next": "12.1.0",
     "@storybook/addon-actions": "6.4.19",
     "@storybook/addon-essentials": "6.4.19",
     "@storybook/addon-links": "6.4.19",
