@@ -163,7 +163,7 @@ const ArticleArea = ({
     <div>
       <h2 className="tw-text-2xl tw-font-bold tw-mb-2">{genreTitle}</h2>
       <ul className="tw-p-0">
-        {articles.map(({ link, title, pubDateString }) => (
+        {articles.map(({ link, title, pubDateString, siteTitle, siteUrl }) => (
           <li
             key={link}
             className="tw-text-base tw-border-0 tw-border-b tw-border-solid tw-border-gray-100"
@@ -173,6 +173,11 @@ const ArticleArea = ({
               title={title}
               pubDateString={pubDateString}
               withHatenaBookmark={withHatenaBookmark}
+              site={
+                siteTitle && siteUrl
+                  ? { title: siteTitle, url: siteUrl }
+                  : undefined
+              }
             />
           </li>
         ))}

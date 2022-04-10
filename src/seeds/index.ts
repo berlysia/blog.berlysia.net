@@ -6,6 +6,8 @@ export type Article = {
   pubDate: number;
   pubDateString: string;
   author: string;
+  siteTitle?: string;
+  siteUrl?: string;
 };
 
 function ensureAuthor(item: any): any {

@@ -1,11 +1,16 @@
 export function ArticleLink({
   href,
   title,
+  site,
   pubDateString,
   withHatenaBookmark,
 }: {
   href: string;
   title: string;
+  site?: {
+    url: string;
+    title: string;
+  };
   pubDateString: string;
   withHatenaBookmark?: boolean;
 }) {
@@ -20,7 +25,18 @@ export function ArticleLink({
         {title}
       </a>
 
-      <div className="tw-text-right tw-flex tw-items-center tw-justify-end tw-gap-1">
+      <div className="tw-text-right tw-flex tw-items-center tw-gap-1">
+        {site ? (
+          <a
+            href={site.url}
+            className="tw-flex tw-items-center tw-rounded-md tw-text-sm tw-no-underline tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {site.title}
+          </a>
+        ) : null}
+        <div className="tw-mx-auto" />
         {withHatenaBookmark ? (
           <a
             href={`https://b.hatena.ne.jp/entry/${href}`}
