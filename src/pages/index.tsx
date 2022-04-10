@@ -34,17 +34,19 @@ function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
         <div className="tw-flex tw-flex-col tw-justify-center">
           <div className="tw-flex tw-flex-wrap md:tw-flex-row tw-flex-col">
             <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink-0 tw-flex-grow tw-p-6">
-              <Talks />
+              <Talks withHatenaBookmark />
               <div className="tw-h-8"></div>
               <ArticleArea
                 genreTitle="Tech Articles"
                 articles={props.techArticles}
+                withHatenaBookmark
               />
             </div>
             <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink-0 tw-flex-grow tw-p-6">
               <ArticleArea
                 genreTitle="IM@S Articles"
                 articles={props.imasArticles}
+                withHatenaBookmark
               />
             </div>
           </div>
@@ -151,9 +153,11 @@ const Profile = () => (
 const ArticleArea = ({
   genreTitle,
   articles,
+  withHatenaBookmark,
 }: {
   genreTitle: string;
   articles: Article[];
+  withHatenaBookmark?: boolean;
 }) => {
   return (
     <div>
@@ -168,6 +172,7 @@ const ArticleArea = ({
               href={link}
               title={title}
               pubDateString={pubDateString}
+              withHatenaBookmark={withHatenaBookmark}
             />
           </li>
         ))}
@@ -243,7 +248,7 @@ const talks = [
   },
 ] as const;
 
-const Talks = () => (
+const Talks = ({ withHatenaBookmark }: { withHatenaBookmark?: boolean }) => (
   <div>
     <h2 className="tw-text-2xl tw-font-bold tw-mb-2">Tech Talks</h2>
     <ul className="tw-p-0">
@@ -267,6 +272,7 @@ const Talks = () => (
               slideLink={slideLink}
               pubDateString={pubDateString}
               talkArchiveLink={talkArchiveLink}
+              withHatenaBookmark={withHatenaBookmark}
             />
           </li>
         )

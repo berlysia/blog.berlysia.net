@@ -5,6 +5,7 @@ export function SlideLink({
   slideLink,
   pubDateString,
   talkArchiveLink,
+  withHatenaBookmark,
 }: {
   eventTitle: string;
   talkTitle: string;
@@ -12,6 +13,7 @@ export function SlideLink({
   slideLink?: string;
   pubDateString: string;
   talkArchiveLink?: string;
+  withHatenaBookmark?: boolean;
 }) {
   return (
     <div>
@@ -23,18 +25,32 @@ export function SlideLink({
       >
         {talkTitle} at {eventTitle}
       </a>
-      <div className="tw-text-right tw-flex tw-items-center tw-justify-end">
+      <div className="tw-text-right tw-flex tw-items-center tw-justify-end tw-gap-1">
         {slideLink && (
-          <div className="tw-mx-1">
+          <>
             <a
               href={slideLink}
-              className="tw-rounded-md tw-py-1 tw-px-1 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
+              className="tw-rounded-md tw-px-1 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
               target="_blank"
               rel="noopener noreferrer"
             >
               slide
             </a>
-          </div>
+            {withHatenaBookmark ? (
+              <a
+                href={`https://b.hatena.ne.jp/entry/${slideLink}`}
+                className="tw-flex tw-items-center tw-rounded-md tw-px-1 tw-h-6 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  className="tw-block tw-object-contain"
+                  src={`https://b.hatena.ne.jp/entry/image/${slideLink}`}
+                  alt="はてなブックマーク"
+                />
+              </a>
+            ) : null}
+          </>
         )}
         {talkArchiveLink && (
           <div className="tw-mx-1">

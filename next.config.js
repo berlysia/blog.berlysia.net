@@ -8,4 +8,7 @@ module.exports = {
       "/": { page: "/" },
     };
   },
+  images: {
+    domains: ["b.hatena.ne.jp"],
+  },
 };
