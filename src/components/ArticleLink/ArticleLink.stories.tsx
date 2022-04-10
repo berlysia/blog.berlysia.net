@@ -19,4 +19,21 @@ Default.args = {
   href: "https://example.com",
   title: "Title",
   pubDateString: "2021-01-01",
+  site: {
+    title: "Site Title",
+    url: "https://example.com",
+  },
+};
+
+export const LongSiteName = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+LongSiteName.args = {
+  href: "https://example.com",
+  title: "Title",
+  pubDateString: "2021-01-01",
+  site: {
+    title:
+      "Site Title Site Title Site Title Site Title Site Title Site Title Site Title Site Title Site Title Site Title",
+    url: "https://example.com",
+  },
 };
