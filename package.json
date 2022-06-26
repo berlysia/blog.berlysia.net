@@ -58,7 +58,7 @@
     "autoprefixer": "10.4.5",
     "babel-loader": "8.2.5",
     "del-cli": "4.0.1",
-    "eslint": "8.17.0",
+    "eslint": "8.18.0",
     "html-webpack-plugin": "5.5.0",
     "husky": "7.0.4",
     "jest": "27.5.1",
