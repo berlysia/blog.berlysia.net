@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function ArticleLink({
   href,
   title,
@@ -44,7 +46,7 @@ export function ArticleLink({
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
+              <Image
                 className="tw-block tw-object-contain"
                 src={`https://b.hatena.ne.jp/entry/image/${href}`}
                 alt="はてなブックマーク"
