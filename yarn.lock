@@ -4287,7 +4287,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:4.14.182, @types/lodash@npm:^4.14.167":
+"@types/lodash@npm:4.14.184":
+  version: 4.14.184
+  resolution: "@types/lodash@npm:4.14.184"
+  checksum: 6d9a4d67f7f9d0ec3fd21174f3dd3d00629dc1227eb469450eace53adbc1f7e2330699c28d0fe093e5f0fef0f0e763098be1f779268857213224af082b62be21
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:^4.14.167":
   version: 4.14.182
   resolution: "@types/lodash@npm:4.14.182"
   checksum: 7dd137aa9dbabd632408bd37009d984655164fa1ecc3f2b6eb94afe35bf0a5852cbab6183148d883e9c73a958b7fec9a9bcf7c8e45d41195add6a18c34958209
@@ -4341,10 +4348,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.11.45":
-  version: 16.11.45
-  resolution: "@types/node@npm:16.11.45"
-  checksum: 57d61c951024f66d796e71e4a972faef266007398cd4e93a195822fea2d5deb41d0615f394a99ece89772b145ff057321d138c7e3442455dc7d785ff67cebde3
+"@types/node@npm:16.11.58":
+  version: 16.11.58
+  resolution: "@types/node@npm:16.11.58"
+  checksum: efdf14c62e6c1a8e758416aaa3ae4b81015ffd4e1f31c05680d1242817ba23f0b4b1345886fe5aeb3c05d818bcaed1a7af4d637e7cca5723a5e4ac8b759d3ace
   languageName: node
   linkType: hard
 
@@ -4383,10 +4390,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prettier@npm:2.6.3":
-  version: 2.6.3
-  resolution: "@types/prettier@npm:2.6.3"
-  checksum: e1836699ca189fff6d2a73dc22e028b6a6f693ed1180d5998ac29fa197caf8f85aa92cb38db642e4a370e616b451cb5722ad2395dab11c78e025a1455f37d1f0
+"@types/prettier@npm:2.7.0":
+  version: 2.7.0
+  resolution: "@types/prettier@npm:2.7.0"
+  checksum: bf5d0c7c1270909b39399539ac106d20ddaa85fe92eb1d59922dc99159604b4f8d5e41b0045fb29c8011585cf5bca2350b7441ef3d9816c08bd0e10ebd4b31d4
   languageName: node
   linkType: hard
 
@@ -4454,14 +4461,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.47":
-  version: 17.0.47
-  resolution: "@types/react@npm:17.0.47"
+"@types/react@npm:17.0.49":
+  version: 17.0.49
+  resolution: "@types/react@npm:17.0.49"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 2e7fe0eb630cb77da03b6da308c58728c01b38e878118e9ff5cd8045181c8d4f32dc936e328f46a62cadb56e1fe4c5a911b5113584f93a99e1f35df7f059246b
+  checksum: e2e8001bb16fdf52dc92dbc2f64c8e49b1c6ab5d5da4725c0f27e3d925939e42b835554fecc306ca6b0951801eb784288b63c924bd703834662bbaccf89cb68a
   languageName: node
   linkType: hard
 
@@ -6141,10 +6148,10 @@ __metadata:
     "@types/fs-extra": 9.0.13
     "@types/html-webpack-plugin": 3.2.6
     "@types/jest": 27.5.2
-    "@types/lodash": 4.14.182
-    "@types/node": 16.11.45
-    "@types/prettier": 2.6.3
-    "@types/react": 17.0.47
+    "@types/lodash": 4.14.184
+    "@types/node": 16.11.58
+    "@types/prettier": 2.7.0
+    "@types/react": 17.0.49
     "@types/react-dom": 17.0.17
     "@types/rebass": 4.0.10
     "@types/webpack": 5.28.0
