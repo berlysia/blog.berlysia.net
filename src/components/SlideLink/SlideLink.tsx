@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export function SlideLink({
   eventTitle,
   talkTitle,
@@ -45,7 +43,7 @@ export function SlideLink({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Image
+                <img
                   className="tw-block tw-object-contain"
                   src={`https://b.hatena.ne.jp/entry/image/${slideLink}`}
                   alt="はてなブックマーク"
