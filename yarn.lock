@@ -3898,13 +3898,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:29.0.1":
-  version: 29.0.1
-  resolution: "@types/jest@npm:29.0.1"
+"@types/jest@npm:29.0.3":
+  version: 29.0.3
+  resolution: "@types/jest@npm:29.0.3"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: efd30357c290b5d385382302fae927885f2a9bde0aa45d4c7f970fa6e6d750df83edef73f16d1e9a005e08a5bcd7c6ff56a43f5ac2534a517df9ad1e44dd30c4
+  checksum: 14a8ec1954540ec59f4072c3c4dbc6b5d5ff616556c98671aca26606bdf9d49616a3f269f3e488c80cd481ee19880351575c1f6895827628818e193600c121e0
   languageName: node
   linkType: hard
 
@@ -3983,7 +3983,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.11.58, @types/node@npm:^14.0.10 || ^16.0.0, @types/node@npm:^14.14.20 || ^16.0.0":
+"@types/node@npm:16.11.59":
+  version: 16.11.59
+  resolution: "@types/node@npm:16.11.59"
+  checksum: b3a2986ef8f8216bb7fd1187dcf2e69aca3e6b6b5fdfd6abf4cf11c44e3cdd587fae875a28dc4ef257e2b369e2c5290642aff6a0a9d702f3385a78f561293259
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^14.0.10 || ^16.0.0, @types/node@npm:^14.14.20 || ^16.0.0":
   version: 16.11.58
   resolution: "@types/node@npm:16.11.58"
   checksum: efdf14c62e6c1a8e758416aaa3ae4b81015ffd4e1f31c05680d1242817ba23f0b4b1345886fe5aeb3c05d818bcaed1a7af4d637e7cca5723a5e4ac8b759d3ace
@@ -4071,7 +4078,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:18.0.19":
+"@types/react@npm:*":
   version: 18.0.19
   resolution: "@types/react@npm:18.0.19"
   dependencies:
@@ -4079,6 +4086,17 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 7dc048f9a6a38176c4c64ecf7f4c24c732df118402d7f34a4ff1702984c06f040fae1457b1b98b7f447ca2a3392dea7d027a05782dfe1b350475606f82ce6d63
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:18.0.20":
+  version: 18.0.20
+  resolution: "@types/react@npm:18.0.20"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: f67f5b16efd89e237bf0e40d133218c398cf2a2f81166ce1e9fa32d0df6b869106740983396c51df9708a1b79b2a9d725eda1230cc3064c92d86d9ea6a4b714c
   languageName: node
   linkType: hard
 
@@ -5729,11 +5747,11 @@ __metadata:
     "@types/eslint": 8.4.6
     "@types/fs-extra": 9.0.13
     "@types/html-webpack-plugin": 3.2.6
-    "@types/jest": 29.0.1
+    "@types/jest": 29.0.3
     "@types/lodash": 4.14.185
-    "@types/node": 16.11.58
+    "@types/node": 16.11.59
     "@types/prettier": 2.7.0
-    "@types/react": 18.0.19
+    "@types/react": 18.0.20
     "@types/react-dom": 18.0.6
     "@types/rebass": 4.0.10
     "@types/webpack": 5.28.0
