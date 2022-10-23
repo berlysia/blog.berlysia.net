@@ -1576,9 +1576,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@berlysia/eslint-config@npm:3.3.0":
-  version: 3.3.0
-  resolution: "@berlysia/eslint-config@npm:3.3.0"
+"@berlysia/eslint-config@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@berlysia/eslint-config@npm:3.4.0"
   dependencies:
     "@typescript-eslint/eslint-plugin": ^5.36.2
     "@typescript-eslint/parser": ^5.36.2
@@ -1592,7 +1592,7 @@ __metadata:
     read-pkg-up: ^7.0.1
   peerDependencies:
     eslint: "*"
-  checksum: ef0363714b916456173386916fe20210e35d58d62a7c4c3f711210c62e8d112de27bc14ea1d496f5a36980c46bb858458307a3f6ff81c1df25410a5aec58d039
+  checksum: f305495631873b38de3df54d3d3ed2fc8e64efce836102a8cbfa8f82e33a689baaf2952df58b767eef6a6712dbb0423cd153192fae25e51cb34dc5ae76d33d75
   languageName: node
   linkType: hard
 
@@ -5744,7 +5744,7 @@ __metadata:
   resolution: "berlysia-net@workspace:."
   dependencies:
     "@babel/core": 7.19.3
-    "@berlysia/eslint-config": 3.3.0
+    "@berlysia/eslint-config": 3.4.0
     "@berlysia/tsconfig": 0.0.1
     "@fortawesome/fontawesome-svg-core": ^6.0.0
     "@fortawesome/free-brands-svg-icons": ^6.0.0
