@@ -1823,14 +1823,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@humanwhocodes/config-array@npm:^0.10.5":
-  version: 0.10.7
-  resolution: "@humanwhocodes/config-array@npm:0.10.7"
+"@humanwhocodes/config-array@npm:^0.11.6":
+  version: 0.11.6
+  resolution: "@humanwhocodes/config-array@npm:0.11.6"
   dependencies:
     "@humanwhocodes/object-schema": ^1.2.1
     debug: ^4.1.1
     minimatch: ^3.0.4
-  checksum: 009d64be8d5bd098ff04e10af79e34f5633245250581fca032fac12a8667b2df8e7d169e69c05bff4d83ea3dd3c7d2d0e05ea9b94d89a7d092e26530caf6f8a3
+  checksum: 2fb7288638968dfeec27f06aef52f043726edd126ac47f24b54256902fdb35b3bf9863d4a4caf0423dccca5dd1354ca5899f3ac047b56774641ca0c4cbedb104
   languageName: node
   linkType: hard
 
@@ -2398,7 +2398,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nodelib/fs.walk@npm:^1.2.3":
+"@nodelib/fs.walk@npm:^1.2.3, @nodelib/fs.walk@npm:^1.2.8":
   version: 1.2.8
   resolution: "@nodelib/fs.walk@npm:1.2.8"
   dependencies:
@@ -3804,13 +3804,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:*, @types/eslint@npm:8.4.6":
+"@types/eslint@npm:*":
   version: 8.4.6
   resolution: "@types/eslint@npm:8.4.6"
   dependencies:
     "@types/estree": "*"
     "@types/json-schema": "*"
   checksum: bfaf27b00031b2238139003965475d023306119e467947f7a43a41e380918e365618e2ae6a6ae638697f6421a6bb1571db078695ff5e548f23618000b38acd23
+  languageName: node
+  linkType: hard
+
+"@types/eslint@npm:8.4.7":
+  version: 8.4.7
+  resolution: "@types/eslint@npm:8.4.7"
+  dependencies:
+    "@types/estree": "*"
+    "@types/json-schema": "*"
+  checksum: 5e1b8ed100dcb96c74098030ca00386d1661e83261c0b64a841e570a4dd74740bc15fe04363cb22d7c6e0c56cee61f8b2c1455ec7124e69226d41fb4fed2028e
   languageName: node
   linkType: hard
 
@@ -5873,7 +5883,7 @@ __metadata:
     "@storybook/addon-postcss": 2.0.0
     "@storybook/react": 6.5.12
     "@types/babel__core": 7.1.19
-    "@types/eslint": 8.4.6
+    "@types/eslint": 8.4.7
     "@types/fs-extra": 9.0.13
     "@types/html-webpack-plugin": 3.2.6
     "@types/jest": 29.1.2
@@ -5889,7 +5899,7 @@ __metadata:
     babel-loader: 8.2.5
     clsx: ^1.1.1
     del-cli: 5.0.0
-    eslint: 8.25.0
+    eslint: 8.26.0
     fs-extra: ^10.0.0
     html-webpack-plugin: 5.5.0
     jest: 29.0.3
@@ -8289,13 +8299,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.25.0":
-  version: 8.25.0
-  resolution: "eslint@npm:8.25.0"
+"eslint@npm:8.26.0":
+  version: 8.26.0
+  resolution: "eslint@npm:8.26.0"
   dependencies:
     "@eslint/eslintrc": ^1.3.3
-    "@humanwhocodes/config-array": ^0.10.5
+    "@humanwhocodes/config-array": ^0.11.6
     "@humanwhocodes/module-importer": ^1.0.1
+    "@nodelib/fs.walk": ^1.2.8
     ajv: ^6.10.0
     chalk: ^4.0.0
     cross-spawn: ^7.0.2
@@ -8311,14 +8322,14 @@ __metadata:
     fast-deep-equal: ^3.1.3
     file-entry-cache: ^6.0.1
     find-up: ^5.0.0
-    glob-parent: ^6.0.1
+    glob-parent: ^6.0.2
     globals: ^13.15.0
-    globby: ^11.1.0
     grapheme-splitter: ^1.0.4
     ignore: ^5.2.0
     import-fresh: ^3.0.0
     imurmurhash: ^0.1.4
     is-glob: ^4.0.0
+    is-path-inside: ^3.0.3
     js-sdsl: ^4.1.4
     js-yaml: ^4.1.0
     json-stable-stringify-without-jsonify: ^1.0.1
@@ -8333,7 +8344,7 @@ __metadata:
     text-table: ^0.2.0
   bin:
     eslint: bin/eslint.js
-  checksum: 7acf2693b522b573657b53d2245b5522d3a131e4224b1cbf01e2c3579632fdbf62599284f68bc483e6e4eba23ae3643c9544744e0214a86e727cc361cedcd0fa
+  checksum: a2aced939ea060f77d10dcfced5cfeb940f63f383fd7ab1decadea64170ab552582e1c5909db1db641d4283178c9bc569f19b0f8900e00314a5f783e4b3f759d
   languageName: node
   linkType: hard
 
@@ -9263,7 +9274,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob-parent@npm:^6.0.1, glob-parent@npm:^6.0.2":
+"glob-parent@npm:^6.0.2":
   version: 6.0.2
   resolution: "glob-parent@npm:6.0.2"
   dependencies:
@@ -10530,6 +10541,13 @@ __metadata:
   version: 3.0.0
   resolution: "is-path-cwd@npm:3.0.0"
   checksum: bc34d13b6a03dfca4a3ab6a8a5ba78ae4b24f4f1db4b2b031d2760c60d0913bd16a4b980dcb4e590adfc906649d5f5132684079a3972bd219da49deebb9adea8
+  languageName: node
+  linkType: hard
+
+"is-path-inside@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "is-path-inside@npm:3.0.3"
+  checksum: abd50f06186a052b349c15e55b182326f1936c89a78bf6c8f2b707412517c097ce04bc49a0ca221787bc44e1049f51f09a2ffb63d22899051988d3a618ba13e9
   languageName: node
   linkType: hard
 
