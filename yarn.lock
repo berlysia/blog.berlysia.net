@@ -109,6 +109,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@astrojs/react@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@astrojs/react@npm:1.2.1"
+  dependencies:
+    "@babel/core": ">=7.0.0-0 <8.0.0"
+    "@babel/plugin-transform-react-jsx": ^7.17.12
+  peerDependencies:
+    "@types/react": ^17.0.50 || ^18.0.21
+    "@types/react-dom": ^17.0.17 || ^18.0.6
+    react: ^17.0.2 || ^18.0.0
+    react-dom: ^17.0.2 || ^18.0.0
+  checksum: 6e5d37821c4128d26447605371c9fe466303154386303fda94b4e1011d5232db894d815cf5b9663c5a8fcb9d8ec42edf14a72610214849ac23a6c65883f1c780
+  languageName: node
+  linkType: hard
+
+"@astrojs/tailwind@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@astrojs/tailwind@npm:2.1.1"
+  dependencies:
+    "@proload/core": ^0.3.2
+    autoprefixer: ^10.4.7
+    postcss: ^8.4.14
+  peerDependencies:
+    tailwindcss: ^3.0.24
+  checksum: d6913cdaa236bb90e7effe96bd6ce0ff4d01ecdea8e1e9bf209eccb141f737adc30ef932154dff8d4ce5680872026c611344bf1d4c17cb6b5a62e94026e730ac
+  languageName: node
+  linkType: hard
+
 "@astrojs/telemetry@npm:^1.0.1":
   version: 1.0.1
   resolution: "@astrojs/telemetry@npm:1.0.1"
@@ -198,7 +226,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.1.0, @babel/core@npm:^7.11.6, @babel/core@npm:^7.12.10, @babel/core@npm:^7.12.3, @babel/core@npm:^7.18.2, @babel/core@npm:^7.7.5":
+"@babel/core@npm:>=7.0.0-0 <8.0.0, @babel/core@npm:^7.1.0, @babel/core@npm:^7.11.6, @babel/core@npm:^7.12.10, @babel/core@npm:^7.12.3, @babel/core@npm:^7.18.2, @babel/core@npm:^7.7.5":
   version: 7.19.6
   resolution: "@babel/core@npm:7.19.6"
   dependencies:
@@ -2737,7 +2765,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@proload/core@npm:^0.3.3":
+"@proload/core@npm:^0.3.2, @proload/core@npm:^0.3.3":
   version: 0.3.3
   resolution: "@proload/core@npm:0.3.3"
   dependencies:
@@ -5980,7 +6008,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:10.4.13":
+"autoprefixer@npm:10.4.13, autoprefixer@npm:^10.4.7":
   version: 10.4.13
   resolution: "autoprefixer@npm:10.4.13"
   dependencies:
@@ -6273,6 +6301,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "berlysia-net@workspace:."
   dependencies:
+    "@astrojs/react": ^1.2.1
+    "@astrojs/tailwind": ^2.1.1
     "@babel/core": 7.20.2
     "@berlysia/eslint-config": 3.4.0
     "@berlysia/tsconfig": 0.0.1
