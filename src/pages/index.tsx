@@ -6,9 +6,9 @@ import { Head } from "../components/head";
 import type { Article } from "../seeds";
 import { getByGenre } from "../seeds";
 import { ArticleLink } from "../components/ArticleLink/ArticleLink";
-import { BlogMarble } from "../components/BlogMarble/BlogMarble";
-import { SlideLink } from "../components/SlideLink/SlideLink";
 import { FullHeightContainer } from "../components/FullHeightContainer/FullHeightContainer";
+import { Talks } from "../components/Talks";
+import { ArticleLinks } from "../components/ArticleLinks";
 
 export const getStaticProps = async ({ preview = false }) => {
   return {
@@ -185,105 +185,5 @@ const ArticleArea = ({
     </div>
   );
 };
-
-const BLOGS = [
-  {
-    title: "Hatena Blog",
-    href: "https://berlysia.hatenablog.com/",
-  },
-  {
-    title: "Zenn",
-    href: "https://zenn.dev/berlysia",
-  },
-  {
-    title: "Qiita",
-    href: "https://qiita.com/berlysia",
-  },
-] as const;
-const ArticleLinks = () => (
-  <div className="tw-mt-6">
-    {BLOGS.map(({ href, title }) => (
-      <BlogMarble key={href} href={href} title={title} />
-    ))}
-  </div>
-);
-
-const talks = [
-  {
-    eventTitle: "iCARE Dev Meetup #30",
-    talkTitle: "N予備校とWebフロントエンドの新陳代謝",
-    talkLink: "https://icare.connpass.com/event/237019/",
-    slideLink: "https://speakerdeck.com/berlysia/icare-dev-meetup-number-30",
-    pubDateString: "2022/02/16",
-    talkArchiveLink: "https://youtu.be/VlE6hJme1Rc?t=1602",
-  },
-  {
-    eventTitle: "ドワンゴ EdTech Talk",
-    talkTitle: "N予備校のフロントエンド開発の取り組み",
-    talkLink: "https://dwango.connpass.com/event/230731/",
-    slideLink: undefined,
-    pubDateString: "2021/12/08",
-    talkArchiveLink: undefined,
-  },
-  {
-    eventTitle: "Front-End Lounge #2「フロントエンドエンジニアのキャリア」",
-    talkTitle: "後手から始まるフロントエンド（スポンサートーク）",
-    talkLink: "https://forkwell.connpass.com/event/230632/",
-    slideLink: undefined,
-    pubDateString: "2021/12/06",
-    talkArchiveLink: "https://www.youtube.com/watch?v=zw_bt_j2xW0",
-  },
-  {
-    eventTitle: "JSConf JP 2021",
-    talkTitle: "Webフロントエンドのリプレースを支えるテストの考え方",
-    talkLink:
-      "https://jsconf.jp/2021/talk/testing-approach-to-support-web-front-end-replacement",
-    slideLink: "https://speakerdeck.com/berlysia/jsconf-jp-2021",
-    pubDateString: "2021/11/27",
-    talkArchiveLink:
-      "https://www.youtube.com/watch?v=16ux8nTqJ7k&list=PL42hYWKFRfN7XWswj9wcC0j4191KNJuO3&index=1",
-  },
-  {
-    eventTitle: "東京Node学園 29時限目",
-    talkTitle: "rxjs v6 について",
-    talkLink: "https://nodejs.connpass.com/event/78902/",
-    slideLink: undefined,
-    pubDateString: "2018/02/22",
-    talkArchiveLink: undefined,
-  },
-] as const;
-
-const Talks = ({ withHatenaBookmark }: { withHatenaBookmark?: boolean }) => (
-  <div>
-    <h2 className="tw-text-2xl tw-font-bold tw-mb-2">Tech Talks</h2>
-    <ul className="tw-p-0">
-      {talks.map(
-        ({
-          eventTitle,
-          talkTitle,
-          talkLink,
-          slideLink,
-          pubDateString,
-          talkArchiveLink,
-        }) => (
-          <li
-            key={talkLink}
-            className="tw-text-base tw-border-0 tw-border-b tw-border-solid tw-border-gray-100"
-          >
-            <SlideLink
-              eventTitle={eventTitle}
-              talkTitle={talkTitle}
-              talkLink={talkLink}
-              slideLink={slideLink}
-              pubDateString={pubDateString}
-              talkArchiveLink={talkArchiveLink}
-              withHatenaBookmark={withHatenaBookmark}
-            />
-          </li>
-        )
-      )}
-    </ul>
-  </div>
-);
 
 export default Index;
