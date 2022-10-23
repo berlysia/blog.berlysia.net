@@ -9,6 +9,4 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: joelwmale/webhook-action@2.1.0
-        with:
-          url: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+      - run: curl --request POST --url '${{ secrets.VERCEL_DEPLOY_HOOK_URL }}'
