@@ -1,7 +1,7 @@
-import type { VFC } from "react";
+import type { FC } from "react";
 import BaseHead from "next/head";
 
-export const Head: VFC<{
+export const Head: FC<{
   title: string;
   description?: string;
 }> = ({ title, description }) => (
