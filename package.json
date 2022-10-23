@@ -33,7 +33,7 @@
     "build-storybook": "build-storybook"
   },
   "devDependencies": {
-    "@babel/core": "7.19.3",
+    "@babel/core": "7.19.6",
     "@berlysia/eslint-config": "3.4.0",
     "@berlysia/tsconfig": "0.0.1",
     "@next/eslint-plugin-next": "12.2.3",
