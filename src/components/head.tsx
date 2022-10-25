@@ -8,25 +8,25 @@ export const Head: FC<{
 }> = ({ title, description }) => (
   <BaseHead>
     <title key="title">{title}</title>
-    <meta property="og:title" content={title} key="og:title" />
+    <meta key="og:title" property="og:title" content={title} />
     {description && (
       <meta
+        key="og:description"
         property="og:description"
         content={description}
-        key="og:description"
       />
     )}
-    <meta property="og:type" content="blog" key="og:type" />
-    <meta property="og:site_name" content="berlysia.net" key="og:site_name" />
-    <meta name="twitter:card" content="summary" key="twitter:card" />
-    <meta name="twitter:title" content={title} key="twitter:title" />
+    <meta key="og:type" property="og:type" content="blog" />
+    <meta key="og:site_name" property="og:site_name" content="berlysia.net" />
+    <meta key="twitter:card" name="twitter:card" content="summary" />
+    <meta key="twitter:title" name="twitter:title" content={title} />
     {description && (
       <meta
+        key="twitter:description"
         name="twitter:description"
         content={description}
-        key="twitter:description"
       />
     )}
-    <meta name="twitter:creator" content="@berlysia" key="twitter:creator" />
+    <meta key="twitter:creator" name="twitter:creator" content="@berlysia" />
   </BaseHead>
 );
