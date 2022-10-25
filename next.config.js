@@ -3,4 +3,7 @@ module.exports = {
   images: {
     domains: ["b.hatena.ne.jp"],
   },
+  experimental: {
+    appDir: true,
+  },
 };

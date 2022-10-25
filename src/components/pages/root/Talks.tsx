@@ -28,10 +28,12 @@ const talks = [
   {
     eventTitle: "JSConf JP 2021",
     talkTitle: "Webフロントエンドのリプレースを支えるテストの考え方",
-    talkLink: "https://jsconf.jp/2021/talk/testing-approach-to-support-web-front-end-replacement",
+    talkLink:
+      "https://jsconf.jp/2021/talk/testing-approach-to-support-web-front-end-replacement",
     slideLink: "https://speakerdeck.com/berlysia/jsconf-jp-2021",
     pubDateString: "2021/11/27",
-    talkArchiveLink: "https://www.youtube.com/watch?v=16ux8nTqJ7k&list=PL42hYWKFRfN7XWswj9wcC0j4191KNJuO3&index=1",
+    talkArchiveLink:
+      "https://www.youtube.com/watch?v=16ux8nTqJ7k&list=PL42hYWKFRfN7XWswj9wcC0j4191KNJuO3&index=1",
   },
   {
     eventTitle: "東京Node学園 29時限目",
@@ -42,13 +44,22 @@ const talks = [
     talkArchiveLink: undefined,
   },
 ] as const;
-export const Talks = ({ withHatenaBookmark }: { withHatenaBookmark?: boolean; }) => (
+export const Talks = ({
+  withHatenaBookmark,
+}: {
+  withHatenaBookmark?: boolean;
+}) => (
   <div>
     <h2 className="tw-text-2xl tw-font-bold tw-mb-2">Tech Talks</h2>
     <ul className="tw-p-0">
       {talks.map(
         ({
-          eventTitle, talkTitle, talkLink, slideLink, pubDateString, talkArchiveLink,
+          eventTitle,
+          talkTitle,
+          talkLink,
+          slideLink,
+          pubDateString,
+          talkArchiveLink,
         }) => (
           <li
             key={talkLink}
@@ -61,7 +72,8 @@ export const Talks = ({ withHatenaBookmark }: { withHatenaBookmark?: boolean; })
               slideLink={slideLink}
               pubDateString={pubDateString}
               talkArchiveLink={talkArchiveLink}
-              withHatenaBookmark={withHatenaBookmark} />
+              withHatenaBookmark={withHatenaBookmark}
+            />
           </li>
         )
       )}
