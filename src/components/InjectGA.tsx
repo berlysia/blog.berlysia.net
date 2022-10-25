@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+"use client";
 import { useRouter } from "next/router";
-import { ErrorBoundary } from "../components/ErrorBoundary";
+import { useEffect } from "react";
 import { gaEnabled, sendPageView } from "../lib/gtag";
-import "../globalStyle.css";
 
-function App({ Component, pageProps }: { Component: any; pageProps: any }) {
+export function InjectGA() {
   const router = useRouter();
   useEffect(() => {
     if (!gaEnabled) {
@@ -20,13 +19,6 @@ function App({ Component, pageProps }: { Component: any; pageProps: any }) {
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
-  }, [router.events]);
-
-  return (
-    <ErrorBoundary>
-      <Component {...pageProps} />
-    </ErrorBoundary>
-  );
+  }, [router?.events]);
+  return null;
 }
-
-export default App;
