@@ -55,7 +55,7 @@
     "@types/rebass": "4.0.10",
     "@types/webpack": "5.28.0",
     "@types/webpack-dev-server": "4.7.1",
-    "autoprefixer": "10.4.12",
+    "autoprefixer": "10.4.13",
     "babel-loader": "8.2.5",
     "del-cli": "5.0.0",
     "eslint": "8.26.0",
