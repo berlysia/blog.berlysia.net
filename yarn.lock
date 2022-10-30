@@ -3814,13 +3814,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:8.4.7":
-  version: 8.4.7
-  resolution: "@types/eslint@npm:8.4.7"
+"@types/eslint@npm:8.4.9":
+  version: 8.4.9
+  resolution: "@types/eslint@npm:8.4.9"
   dependencies:
     "@types/estree": "*"
     "@types/json-schema": "*"
-  checksum: 5e1b8ed100dcb96c74098030ca00386d1661e83261c0b64a841e570a4dd74740bc15fe04363cb22d7c6e0c56cee61f8b2c1455ec7124e69226d41fb4fed2028e
+  checksum: 9eda34e000f1e09850f447d8d65b671f59153aa5b580aca5b95185cf42b047b9cfda86eea83a6295aa883931b769a79236ce439601be7ab4485be88ce77b69ad
   languageName: node
   linkType: hard
 
@@ -5883,7 +5883,7 @@ __metadata:
     "@storybook/addon-postcss": 2.0.0
     "@storybook/react": 6.5.12
     "@types/babel__core": 7.1.19
-    "@types/eslint": 8.4.7
+    "@types/eslint": 8.4.9
     "@types/fs-extra": 9.0.13
     "@types/html-webpack-plugin": 3.2.6
     "@types/jest": 29.1.2

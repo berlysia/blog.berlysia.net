@@ -43,7 +43,7 @@
     "@storybook/addon-postcss": "2.0.0",
     "@storybook/react": "6.5.12",
     "@types/babel__core": "7.1.19",
-    "@types/eslint": "8.4.7",
+    "@types/eslint": "8.4.9",
     "@types/fs-extra": "9.0.13",
     "@types/html-webpack-plugin": "3.2.6",
     "@types/jest": "29.1.2",
