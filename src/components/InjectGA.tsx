@@ -6,7 +6,7 @@ import { gaEnabled, sendPageView } from "../lib/gtag";
 export function InjectGA() {
   const router = useRouter();
   useEffect(() => {
-    if (!gaEnabled) {
+    if (!gaEnabled || !router) {
       return;
     }
 
@@ -19,6 +19,6 @@ export function InjectGA() {
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
-  }, [router?.events]);
+  }, [router, router?.events]);
   return null;
 }
