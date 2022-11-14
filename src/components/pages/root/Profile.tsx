@@ -32,19 +32,21 @@ export const Profile = () => (
         <ul className="tw-my-1">
           <li>
             PIC of{" "}
-            <span
+            <a
               className="tw-px-1 tw-inline"
+              href="https://idollist.idolmaster-official.jp/search/detail/20046"
               style={{ backgroundColor: "#fbffb9" }}
             >
               Hinako Kita
-            </span>
+            </a>
             ,{" "}
-            <span
+            <a
               className="tw-px-1 tw-inline"
+              href="https://idollist.idolmaster-official.jp/search/detail/30016"
               style={{ backgroundColor: "#7f6575", color: "white" }}
             >
               Sayoko Takayama
-            </span>
+            </a>
             .
           </li>
         </ul>
