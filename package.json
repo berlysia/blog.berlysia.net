@@ -33,7 +33,7 @@
     "build-storybook": "build-storybook"
   },
   "devDependencies": {
-    "@babel/core": "7.19.6",
+    "@babel/core": "7.20.2",
     "@berlysia/eslint-config": "3.4.0",
     "@berlysia/tsconfig": "0.0.1",
     "@next/eslint-plugin-next": "13.0.3",
@@ -56,7 +56,7 @@
     "@types/webpack": "5.28.0",
     "@types/webpack-dev-server": "4.7.1",
     "autoprefixer": "10.4.13",
-    "babel-loader": "8.2.5",
+    "babel-loader": "8.3.0",
     "del-cli": "5.0.0",
     "eslint": "8.27.0",
     "html-webpack-plugin": "5.5.0",
