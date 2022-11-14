@@ -2164,6 +2164,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/font@npm:13.0.3":
+  version: 13.0.3
+  resolution: "@next/font@npm:13.0.3"
+  checksum: 1e703a93b14129e147121589cdb3b6b19c2e473077b9fe611676d1913f5302333346cd5e7dcb1b9068aa899cb8386aa31259f58e52ee48ed5c6566ef04de0fec
+  languageName: node
+  linkType: hard
+
 "@next/swc-android-arm-eabi@npm:13.0.3":
   version: 13.0.3
   resolution: "@next/swc-android-arm-eabi@npm:13.0.3"
@@ -5698,6 +5705,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": ^6.0.0
     "@fortawesome/react-fontawesome": ^0.2.0
     "@next/eslint-plugin-next": 13.0.3
+    "@next/font": 13.0.3
     "@rebass/preset": ^4.0.5
     "@storybook/addon-actions": 6.5.13
     "@storybook/addon-essentials": 6.5.13

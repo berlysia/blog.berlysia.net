@@ -1,23 +1,35 @@
 import type { ReactNode } from "react";
+import { Lato } from "@next/font/google";
 import { gaEnabled, GA_ID } from "../lib/gtag";
 import "../globalStyle.css";
 import { InjectGA } from "../components/InjectGA";
+
+const lato = Lato({
+  subsets: ["latin"],
+  weight: "300",
+  display: "swap",
+});
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja">
       <head>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="crossOrigin"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap"
-          rel="stylesheet"
-        />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+          * {
+            font-family:
+              ${lato.style.fontFamily}, "Helvetica Neue", "Helvetica",
+              "Hiragino Kaku Gothic ProN", YuGothic, "Yu Gothic Medium", Meiryo,
+            sans-serif;
+            font-style: ${lato.style.fontStyle};
+            font-weight: ${lato.style.fontWeight};
+            color: #233;
+          }
+        `,
+          }}
+        ></style>
         {gaEnabled && (
           <>
             <script
