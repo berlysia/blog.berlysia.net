@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import type { ReactNode } from "react";
 import { gaEnabled, GA_ID } from "../lib/gtag";
 import "../globalStyle.css";
