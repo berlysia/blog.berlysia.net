@@ -1,3 +1,5 @@
+"use client";
+
 export const LinkMarbles = () => (
   <ul className="">
     <li>
@@ -25,12 +27,25 @@ export const LinkMarbles = () => (
     <li>
       <a
         className="tw-underline"
-        rel="noopener noreferrer"
+        // eslint-disable-next-line react/no-invalid-html-attribute -- rel="me" https://microformats.org/wiki/rel-me
+        rel="noopener noreferrer me"
         target="_blank"
         href="https://imastodon.net/@berlysia"
         aria-label="Imastodon / berlysia"
       >
         Im@stodon
+      </a>
+    </li>
+    <li>
+      <a
+        className="tw-underline"
+        // eslint-disable-next-line react/no-invalid-html-attribute -- rel="me" https://microformats.org/wiki/rel-me
+        rel="noopener noreferrer me"
+        target="_blank"
+        href="https://mstdn.jp/@berlysia"
+        aria-label="mstdn.jp / berlysia"
+      >
+        mstdn.jp
       </a>
     </li>
   </ul>
