@@ -20,10 +20,10 @@ const { title, description } = Astro.props;
     {gaEnabled && (
       <>
         <script
-          async
+          type="text/partytown"
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
         />
-        <script type="javascript">
+        <script type="text/partytown">
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
@@ -33,7 +33,7 @@ const { title, description } = Astro.props;
         </script>
       </>
     )}
-      <title>{title}</title>
+    <title>{title}</title>
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:type" content="blog" />

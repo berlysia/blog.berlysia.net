@@ -100,6 +100,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@astrojs/partytown@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@astrojs/partytown@npm:1.0.1"
+  dependencies:
+    "@builder.io/partytown": ^0.7.1
+    mrmime: ^1.0.0
+  checksum: 5e50b1b10c6ca5c45594ebbcfa6a41d76fdbdc3ec051583f1f86c363833d5b638128f78dc1554762a0387a950681816790862aa071bd963a0e9b5dfaff93029b
+  languageName: node
+  linkType: hard
+
 "@astrojs/prism@npm:^1.0.0":
   version: 1.0.1
   resolution: "@astrojs/prism@npm:1.0.1"
@@ -1926,6 +1936,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@builder.io/partytown@npm:^0.7.1":
+  version: 0.7.2
+  resolution: "@builder.io/partytown@npm:0.7.2"
+  bin:
+    partytown: bin/partytown.cjs
+  checksum: 1fdfb737d49f6492b38162106b47e9955f513f1a0d90e9f8287c8561cd21853fd1430ed0037f79564f9e97c2be3a1d88807bf0928cdfe925bd5fde13ec13df13
+  languageName: node
+  linkType: hard
+
 "@cnakazawa/watch@npm:^1.0.3":
   version: 1.0.4
   resolution: "@cnakazawa/watch@npm:1.0.4"
@@ -2543,13 +2562,6 @@ __metadata:
     call-me-maybe: ^1.0.1
     glob-to-regexp: ^0.3.0
   checksum: d3b82b29368821154ce8e10bef5ccdbfd070d3e9601643c99ea4607e56f3daeaa4e755dd6d2355da20762c695c1b0570543d9f84b48f70c211ec09c4aaada2e1
-  languageName: node
-  linkType: hard
-
-"@next/font@npm:13.0.3":
-  version: 13.0.3
-  resolution: "@next/font@npm:13.0.3"
-  checksum: 1e703a93b14129e147121589cdb3b6b19c2e473077b9fe611676d1913f5302333346cd5e7dcb1b9068aa899cb8386aa31259f58e52ee48ed5c6566ef04de0fec
   languageName: node
   linkType: hard
 
@@ -6541,6 +6553,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "berlysia-net@workspace:."
   dependencies:
+    "@astrojs/partytown": ^1.0.1
     "@astrojs/react": ^1.2.1
     "@astrojs/tailwind": ^2.1.1
     "@astrojs/vercel": ^2.3.1
@@ -6551,7 +6564,6 @@ __metadata:
     "@fortawesome/free-brands-svg-icons": ^6.0.0
     "@fortawesome/free-solid-svg-icons": ^6.0.0
     "@fortawesome/react-fontawesome": ^0.2.0
-    "@next/font": 13.0.3
     "@rebass/preset": ^4.0.5
     "@storybook/addon-actions": 6.5.12
     "@storybook/addon-essentials": 6.5.12

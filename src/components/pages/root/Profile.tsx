@@ -1,12 +1,9 @@
-import Image from "next/image";
 import { LinkMarbles } from "./LinkMarbles";
 
 export const Profile = () => (
   <div className="tw-flex tw-flex-wrap tw-justify-center">
     <div className="tw-flex-shrink-0 tw-flex tw-justify-center tw-items-center">
-      <Image
-        priority
-        quality={100}
+      <img
         src="/avatar.jpg"
         alt="avatar"
         width={192}

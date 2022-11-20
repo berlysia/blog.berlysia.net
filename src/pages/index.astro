@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../layouts/Layout.astro";
 import { FullHeightContainer } from "../components/FullHeightContainer/FullHeightContainer";
-import { Talks } from "../components/Talks";
-import { ArticleArea } from "../components/ArticleArea";
-import { ArticleLinks } from "../components/ArticleLinks";
-import { Profile } from "../components/Profile";
+import { ArticleArea } from "../components/pages/root/ArticleArea";
+import { ArticleLinks } from "../components/pages/root/ArticleLinks";
+import { Profile } from "../components/pages/root/Profile";
 import { getByGenre } from "../seeds";
+import { Talks } from "../components/pages/root/Talks";
 
 const props = {
   imasArticles: getByGenre("imas", 6),

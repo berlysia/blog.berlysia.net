@@ -1,4 +1,4 @@
-import { LinkMarbles } from "./LinkMarbles";
+import { LinkMarbles } from "./pages/root/LinkMarbles";
 
 export const Profile = () => (
   <div className="tw-flex tw-flex-wrap tw-justify-center">
@@ -8,7 +8,8 @@ export const Profile = () => (
         alt="avatar"
         width={192}
         height={192}
-        className="tw-rounded-full tw-border-4 tw-border-pink-100" />
+        className="tw-rounded-full tw-border-4 tw-border-pink-100"
+      />
     </div>
     <div className="tw-ml-3 tw-flex-col tw-justify-center">
       <h2 className="tw-mb-2 tw-text-2xl tw-font-bold">@berlysia</h2>
