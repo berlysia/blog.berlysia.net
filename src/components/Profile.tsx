@@ -1,4 +1,4 @@
-import { LinkMarbles } from "./LinkMarbles";
+import { LinkMarbles } from "./pages/root/LinkMarbles";
 
 export const Profile = () => (
   <div className="tw-flex tw-flex-wrap tw-justify-center">
@@ -29,21 +29,19 @@ export const Profile = () => (
         <ul className="tw-my-1">
           <li>
             PIC of{" "}
-            <a
+            <span
               className="tw-px-1 tw-inline"
-              href="https://idollist.idolmaster-official.jp/search/detail/20046"
               style={{ backgroundColor: "#fbffb9" }}
             >
               Hinako Kita
-            </a>
+            </span>
             ,{" "}
-            <a
+            <span
               className="tw-px-1 tw-inline"
-              href="https://idollist.idolmaster-official.jp/search/detail/30016"
               style={{ backgroundColor: "#7f6575", color: "white" }}
             >
               Sayoko Takayama
-            </a>
+            </span>
             .
           </li>
         </ul>

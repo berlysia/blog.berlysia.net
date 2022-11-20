@@ -1,4 +1,4 @@
-export const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+export const GA_ID = process.env.VITE_GOOGLE_ANALYTICS_ID;
 export const gaEnabled = Boolean(GA_ID);
 
 export const sendPageView = (path: string) => {

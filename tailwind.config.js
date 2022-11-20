@@ -1,7 +1,7 @@
 module.exports = {
   prefix: "tw-",
   mode: "jit",
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  content: ["./src/**/*.{js,ts,jsx,tsx,astro}"],
   darkMode: "media", // or 'media' or 'class'
   theme: {
     extend: {

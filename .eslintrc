@@ -1,17 +1,11 @@
 {
-  "extends": ["plugin:@next/next/recommended", "@berlysia/eslint-config/auto"],
+  "extends": ["@berlysia/eslint-config/auto"],
   "overrides": [
     {
       "files": ["*.config.js", "*rc.js"],
       "rules": {
         "@typescript-eslint/no-require-imports": "off",
         "@typescript-eslint/no-var-requires": "off"
-      }
-    },
-    {
-      "files": ["next-env.d.ts"],
-      "rules": {
-        "@typescript-eslint/triple-slash-reference": "off"
       }
     }
   ],

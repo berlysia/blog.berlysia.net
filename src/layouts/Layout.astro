@@ -1,0 +1,50 @@
+---
+import { gaEnabled, GA_ID } from "../lib/gtag";
+import "../styles/globalStyle.css";
+
+const { title, description } = Astro.props;
+---
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="crossOrigin"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    {gaEnabled && (
+      <>
+        <script
+          type="text/partytown"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        />
+        <script type="text/partytown">
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}', {
+            page_path: window.location.pathname,
+          });
+        </script>
+      </>
+    )}
+    <title>{title}</title>
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:type" content="blog" />
+    <meta property="og:site_name" content="berlysia.net" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:creator" content="@berlysia" />
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
