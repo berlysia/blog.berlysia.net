@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/blog/:path*",
-      "destination": "https://blog.berlysia.net/:path*"
-    }
-  ]
-}
