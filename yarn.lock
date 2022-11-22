@@ -6727,6 +6727,7 @@ __metadata:
     del-cli: 5.0.0
     eslint: 8.28.0
     fs-extra: ^10.0.0
+    gray-matter: ^4.0.3
     html-webpack-plugin: 5.5.0
     jest: 29.3.1
     lint-staged: 13.0.3
@@ -6740,14 +6741,24 @@ __metadata:
     rehype-accessible-emojis: ^0.3.2
     rehype-autolink-headings: ^6.1.1
     rehype-slug: ^5.1.0
+    rehype-stringify: ^9.0.3
+    remark: ^14.0.2
+    remark-frontmatter: ^4.0.1
+    remark-gfm: ^3.0.1
+    remark-mdx: ^2.1.5
+    remark-parse: ^10.0.1
+    remark-rehype: ^10.1.0
+    remark-smartypants: ^2.0.0
     rss-parser: ^3.12.0
     tailwindcss: 3.2.4
     ts-jest: 29.0.3
     ts-node: 10.9.1
     typescript: 4.9.3
+    unified: ^10.1.2
     webpack: 5.75.0
     webpack-cli: 4.10.0
     webpack-dev-server: 4.11.1
+    zod: ^3.19.1
   languageName: unknown
   linkType: soft
 
@@ -17534,7 +17545,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remark-mdx@npm:^2.0.0":
+"remark-mdx@npm:^2.0.0, remark-mdx@npm:^2.1.5":
   version: 2.1.5
   resolution: "remark-mdx@npm:2.1.5"
   dependencies:
@@ -17619,6 +17630,29 @@ __metadata:
   dependencies:
     mdast-squeeze-paragraphs: ^4.0.0
   checksum: 2071eb74d0ecfefb152c4932690a9fd950c3f9f798a676f1378a16db051da68fb20bf288688cc153ba5019dded35408ff45a31dfe9686eaa7a9f1df9edbb6c81
+  languageName: node
+  linkType: hard
+
+"remark-stringify@npm:^10.0.0":
+  version: 10.0.2
+  resolution: "remark-stringify@npm:10.0.2"
+  dependencies:
+    "@types/mdast": ^3.0.0
+    mdast-util-to-markdown: ^1.0.0
+    unified: ^10.0.0
+  checksum: 25424201e698353f6c0afc9ec29a8cac1dac8c06750d92214e3216bd76ac37902a0ba3702ac2a11c1040938a667b3bc22d6949af1d35e8fc81a3572643cdc263
+  languageName: node
+  linkType: hard
+
+"remark@npm:^14.0.2":
+  version: 14.0.2
+  resolution: "remark@npm:14.0.2"
+  dependencies:
+    "@types/mdast": ^3.0.0
+    remark-parse: ^10.0.0
+    remark-stringify: ^10.0.0
+    unified: ^10.0.0
+  checksum: a534b6c6bb8a0db7e22580c73d820af9c2468af24d434eb0d54c9b50577d609ec5383a90e81c921f334c1426494c5cf7460ae68b5027123f159bbf1ca8a5a85f
   languageName: node
   linkType: hard
 
@@ -21425,7 +21459,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.17.3":
+"zod@npm:^3.17.3, zod@npm:^3.19.1":
   version: 3.19.1
   resolution: "zod@npm:3.19.1"
   checksum: 56e420ea5845912324a8fc61833714a2aec84954e418b52660d76502183c6e62fef9447cbfa64349640c5ce190cf2c24267e006bb80f066183e2f3fa9fe11864
