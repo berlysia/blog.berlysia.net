@@ -2762,6 +2762,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@playwright/test@npm:^1.28.0":
+  version: 1.28.0
+  resolution: "@playwright/test@npm:1.28.0"
+  dependencies:
+    "@types/node": "*"
+    playwright-core: 1.28.0
+  bin:
+    playwright: cli.js
+  checksum: 5b90a4fd7a30e989f0b7ff97201eb3ab91d56b93ac5cd020ca6e36cd90a0f9386770214375b6c50471def75cbe0e7219f77f2c126d5d31655c5228bd16ab4f1a
+  languageName: node
+  linkType: hard
+
 "@pmmmwh/react-refresh-webpack-plugin@npm:^0.5.3":
   version: 0.5.8
   resolution: "@pmmmwh/react-refresh-webpack-plugin@npm:0.5.8"
@@ -6701,6 +6713,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": ^6.0.0
     "@fortawesome/react-fontawesome": ^0.2.0
     "@jsdevtools/rehype-toc": ^3.0.2
+    "@playwright/test": ^1.28.0
     "@rebass/preset": ^4.0.5
     "@storybook/addon-actions": 6.5.12
     "@storybook/addon-essentials": 6.5.12
@@ -6733,6 +6746,7 @@ __metadata:
     lint-staged: 13.0.3
     lodash: ^4.17.21
     npm-run-all: 4.1.5
+    playwright: ^1.28.0
     postcss: 8.4.19
     prettier: 2.7.1
     prettier-plugin-astro: ^0.7.0
@@ -16429,6 +16443,26 @@ __metadata:
   dependencies:
     find-up: ^5.0.0
   checksum: b167bb8dac7bbf22b1d5e30ec223e6b064b84b63010c9d49384619a36734caf95ed23ad23d4f9bd975e8e8082b60a83395f43a89bb192df53a7c25a38ecb57d9
+  languageName: node
+  linkType: hard
+
+"playwright-core@npm:1.28.0":
+  version: 1.28.0
+  resolution: "playwright-core@npm:1.28.0"
+  bin:
+    playwright: cli.js
+  checksum: 4bd13bf83bca37f239f1573fcad7f3b559b3b5e28925f57fa66055446b2aef90c4403f9dbb4a9c34f6bd03a2461e61c97eb7fe5faed6b88f027c0bc3727cd096
+  languageName: node
+  linkType: hard
+
+"playwright@npm:^1.28.0":
+  version: 1.28.0
+  resolution: "playwright@npm:1.28.0"
+  dependencies:
+    playwright-core: 1.28.0
+  bin:
+    playwright: cli.js
+  checksum: c6a50efe0ed3ea92a2b6fe579ef8dcf0ad3dec753e7dbc0dc3c6b3bf4638e7aebb98c3c6046ac97ee851e23d411a15915354528ef90a586296a2f0ad6ad7f780
   languageName: node
   linkType: hard
 
