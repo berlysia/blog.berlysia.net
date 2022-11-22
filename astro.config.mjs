@@ -10,8 +10,6 @@ import rehypeToc from "@jsdevtools/rehype-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 
 // https://astro.build/config
-// https://github.com/withastro/astro/issues/5172 動かない
-// import vercel from "@astrojs/vercel/static";
 import vercel from "@astrojs/vercel/edge";
 
 function renameFootnoteSectionPlugin() {
