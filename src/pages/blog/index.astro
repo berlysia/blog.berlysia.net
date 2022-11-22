@@ -2,16 +2,10 @@
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import { ArticleLink } from "../../components/pages/root/ArticleLink/ArticleLink";
+import type { Frontmatter } from "../../lib/mdx";
 
-type Frontmatter = {
-  title: string;
-  description?: string;
-  created?: string;
-  lastModified?: string;
-  tags?: string;
-  vertical?: boolean;
-};
-const entries = await Astro.glob<Frontmatter>("./entry/*.mdx");
+const rawEntries = await Astro.glob<Frontmatter>("./entry/*.mdx");
+const entries = rawEntries.filter((entry) => !entry.frontmatter.draft);
 ---
 
 <Layout title="blog - berlysia.net">
