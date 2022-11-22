@@ -8,7 +8,7 @@ export const Profile = () => (
         alt="avatar"
         width={192}
         height={192}
-        className="tw-rounded-full tw-border-4 tw-border-pink-100"
+        className="tw-rounded-full tw-border-4 tw-border-keyColor-100"
       />
     </div>
     <div className="tw-ml-3 tw-flex-col tw-justify-center">

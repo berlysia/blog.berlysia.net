@@ -1,0 +1,56 @@
+---
+import Layout from "./Layout.astro";
+import Header from "../components/Header.astro";
+import type { MDXLayoutProps } from "astro";
+type Props = MDXLayoutProps<{
+  title: string;
+  description?: string;
+  created?: string;
+  lastModified?: string;
+  tags?: string;
+  vertical?: boolean;
+}>;
+const props = Astro.props;
+---
+
+<Layout
+  title={`${props.frontmatter.title} - berlysia.net`}
+  description={props.frontmatter.description}
+>
+  <Header><a href="/blog">Blog</a></Header>
+  <div class="tw-w-full tw-flex tw-justify-center">
+    <div class="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative">
+      <article class="tw-mx-2">
+        <div>
+          <h1 class="tw-text-4xl tw-font-bold tw-mt-4">
+            {props.frontmatter.title}
+          </h1>
+          {
+            props.frontmatter.description && (
+              <aside class="tw-text-sm tw-text-gray-500 tw-mb-2">
+                {props.frontmatter.description}
+              </aside>
+            )
+          }
+          {
+            props.frontmatter.tags && (
+              <ul class="tw-flex tw-flex-row tw-gap-1 tw-mx-1">
+                {props.frontmatter.tags.split(",").map((x) => (
+                  <li class="tw-px-1 tw-border tw-border-keyColor-100 tw-rounded-md">
+                    {x}
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+        </div>
+        <div class="tw-flex tw-justify-center tw-my-6">
+          <hr class="tw-w-40 tw-border-0 slash" />
+        </div>
+        <section class="main-text-section">
+          <slot />
+        </section>
+      </article>
+    </div>
+  </div>
+</Layout>

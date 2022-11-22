@@ -1,0 +1,39 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import { ArticleLink } from "../../components/pages/root/ArticleLink/ArticleLink";
+
+type Frontmatter = {
+  title: string;
+  description?: string;
+  created?: string;
+  lastModified?: string;
+  tags?: string;
+  vertical?: boolean;
+};
+const entries = await Astro.glob<Frontmatter>("./entry/*.mdx");
+---
+
+<Layout title="blog - berlysia.net">
+  <Header>Blog</Header>
+  <div class="tw-w-full tw-flex tw-justify-center">
+    <div
+      class="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative tw-border tw-border-keyColor-200"
+    >
+      <ol>
+        {
+          entries.map((x) => (
+            <li>
+              <ArticleLink
+                href={x.url!}
+                title={x.frontmatter.title}
+                pubDateString={x.frontmatter.created!}
+                withHatenaBookmark
+              />
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,29 @@
+---
+return new Response(null, {
+  status: 404,
+  statusText: "Not found",
+});
+
+// import { readFileSync } from "fs";
+// import { dirname, resolve } from "path";
+// import BlogArticleLayout from "../../../layouts/BlogArticleLayout.astro";
+// import { parseMdx } from "../../../lib/mdx";
+
+// const file = new URL(import.meta.url).pathname;
+// const url = Astro.url.toString();
+
+// const mdx = readFileSync(resolve(dirname(file), "./test.mdx"), "utf-8");
+
+// const { frontmatter, html } = parseMdx(mdx);
+---
+
+<!-- 
+<BlogArticleLayout
+  frontmatter={{ ...frontmatter, file, url }}
+  url={url}
+  file={file}
+  headings={[]}
+>
+  <article set:html={html} />
+</BlogArticleLayout>
+-->
