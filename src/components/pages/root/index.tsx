@@ -13,7 +13,7 @@ export default function Index(props: {
 }) {
   return (
     <div className="tw-flex tw-flex-col">
-      <FullHeightContainer className="tw-bg-pink-50">
+      <FullHeightContainer className="tw-bg-keyColor-50">
         <Profile />
         <div className="tw-absolute tw-bottom-8 tw-h-8 tw-w-6 tw-text-3xl tw-animate-fade-blink">
           <FontAwesomeIcon icon={faAngleDoubleDown} />

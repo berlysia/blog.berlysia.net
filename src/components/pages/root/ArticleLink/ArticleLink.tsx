@@ -4,6 +4,7 @@ export function ArticleLink({
   site,
   pubDateString,
   withHatenaBookmark,
+  target = "_self",
 }: {
   href: string;
   title: string;
@@ -13,14 +14,16 @@ export function ArticleLink({
   };
   pubDateString: string;
   withHatenaBookmark?: boolean;
+  // eslint-disable-next-line @typescript-eslint/ban-types -- idiom
+  target?: "_blank" | "_self" | "_parent" | "_top" | (string & {});
 }) {
   return (
     <div>
       <a
         className="tw-block tw-rounded-md tw-py-2 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
         href={href}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={target}
+        rel={target === "_blank" ? "noopener noreferrer" : ""}
       >
         {title}
       </a>

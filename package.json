@@ -37,6 +37,7 @@
     "@babel/core": "7.20.2",
     "@berlysia/eslint-config": "3.4.0",
     "@berlysia/tsconfig": "0.0.1",
+    "@jsdevtools/rehype-toc": "^3.0.2",
     "@storybook/addon-actions": "6.5.12",
     "@storybook/addon-essentials": "6.5.12",
     "@storybook/addon-links": "6.5.12",
@@ -65,6 +66,10 @@
     "npm-run-all": "4.1.5",
     "postcss": "8.4.19",
     "prettier": "2.7.1",
+    "prettier-plugin-astro": "^0.7.0",
+    "rehype-accessible-emojis": "^0.3.2",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-slug": "^5.1.0",
     "tailwindcss": "3.2.4",
     "ts-jest": "29.0.3",
     "ts-node": "10.9.1",
@@ -74,6 +79,7 @@
     "webpack-dev-server": "4.11.1"
   },
   "dependencies": {
+    "@astrojs/mdx": "^0.11.6",
     "@astrojs/tailwind": "^2.1.1",
     "@astrojs/vercel": "^2.3.1",
     "@fortawesome/fontawesome-svg-core": "^6.0.0",

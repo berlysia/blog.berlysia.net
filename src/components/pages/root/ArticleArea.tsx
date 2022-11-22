@@ -24,6 +24,7 @@ export const ArticleArea = ({
               title={title}
               pubDateString={pubDateString}
               withHatenaBookmark={withHatenaBookmark}
+              target="_blank"
               site={
                 siteTitle && siteUrl
                   ? { title: siteTitle, url: siteUrl }
