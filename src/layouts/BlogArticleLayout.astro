@@ -16,7 +16,15 @@ const props = Astro.props;
   </Header>
   <div class="tw-w-full tw-flex tw-justify-center">
     <div class="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative">
-      <article class="tw-mx-2">
+      <article
+        class:list={[
+          "tw-mx-2",
+          {
+            "tw-writing-vertical-rl tw-w-full tw-columns-sm tw-gap-8 tw-my-4 tw-line-break-strict":
+              props.frontmatter.vertical,
+          },
+        ]}
+      >
         <div>
           <h1 class="tw-text-4xl tw-font-bold tw-mt-4">
             {props.frontmatter.title}

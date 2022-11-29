@@ -1,4 +1,5 @@
 const colors = require("tailwindcss/colors");
+const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   prefix: "tw-",
@@ -42,5 +43,29 @@ module.exports = {
       textColor: ["visited"],
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-logical"),
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        ".writing-vertical-rl": {
+          writingMode: "vertical-rl",
+        },
+        ".writing-horizontal-tb": {
+          writingMode: "horizontal-tb",
+        },
+        ".tcu": {
+          textCombineUpright: "all",
+        },
+        ".line-break-loose": {
+          lineBreak: "loose",
+        },
+        ".line-break-strict": {
+          lineBreak: "strict",
+        },
+        ".line-break-normal": {
+          lineBreak: "normal",
+        },
+      });
+    }),
+  ],
 };
