@@ -28,7 +28,7 @@
     "test:vrt:update": "docker run --rm --volume $(pwd):/workdir/ --workdir /workdir/ -it mcr.microsoft.com/playwright:v1.28.0-focal /bin/bash -c 'yarn test:vrt:ci -u'",
     "clean": "del dist",
     "build": "run-s build:seed build:astro",
-    "build:astro": "astro build",
+    "build:astro": "astro build --drafts",
     "build:seed": "ts-node src/seeds/build.ts",
     "typecheck": "tsc --noEmit",
     "prepare": "git config --local core.hooksPath .githooks && echo 'githooks installed' || echo 'githooks install failed'",
