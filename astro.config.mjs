@@ -1,3 +1,4 @@
+import { resolve, relative, dirname, basename, isAbsolute } from "node:path";
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
@@ -10,21 +11,6 @@ import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 
 import vercel from "@astrojs/vercel/static";
 import image from "@astrojs/image";
-import { resolve, relative, dirname, basename, isAbsolute } from "node:path";
-
-function rehypeRenameFootnoteSectionPlugin() {
-  const isEl = (x) => x.type === "element";
-  return function (tree) {
-    const footnoteHeadingEl = tree.children
-      .find((x) => isEl(x) && "dataFootnotes" in x.properties)
-      ?.children.find((x) => isEl(x) && x.tagName === "h2")
-      ?.children.find((x) => isEl(x) && x.tagName === "a")
-      ?.children.find((x) => x.type === "text");
-    if (footnoteHeadingEl) {
-      footnoteHeadingEl.value = "脚注";
-    }
-  };
-}
 
 function remarkResolveAssets() {
   return function remarkResolveAssetsImpl(tree, file) {
@@ -66,7 +52,6 @@ function remarkResolveAssets() {
 export default defineConfig({
   integrations: [
     mdx({
-      // 動かない。 https://github.com/withastro/astro/pull/5432 リリースされたら rehypeRenameFootnoteSectionPlugin を消す
       remarkRehype: {
         footnoteLabel: "脚注",
       },
@@ -81,7 +66,6 @@ export default defineConfig({
         ],
         [rehypeToc, {}],
         rehypeAccessibleEmojis,
-        rehypeRenameFootnoteSectionPlugin,
       ],
       extendDefaultPlugins: true,
     }),
