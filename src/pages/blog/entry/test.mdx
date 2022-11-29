@@ -11,6 +11,9 @@ description:
 draft: true
 ---
 
+import Image from "../../../components/mdx/Image.astro";
+export const components = { img: Image };
+
 yay
 
 # h1
@@ -24,6 +27,15 @@ yay
 ##### h5
 
 ###### h6
+
+![svg](./img.svg)
+![png](./img.png)
+
+<Image width="128" height="128" src="./img.svg" alt="svg" />
+<Image width="128" height="128" src="./img.png" alt="png" />
+
+<img width="128" height="128" src="./img.svg" alt="svg" />
+<img width="128" height="128" src="./img.png" alt="png" />
 
 **strong**
 
