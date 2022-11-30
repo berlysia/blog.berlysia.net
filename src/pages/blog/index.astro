@@ -2,38 +2,37 @@
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import { ArticleLink } from "../../components/pages/root/ArticleLink/ArticleLink";
+import type { Frontmatter } from "../../lib/mdx";
 
-type Frontmatter = {
-  title: string;
-  description?: string;
-  created?: string;
-  lastModified?: string;
-  tags?: string;
-  vertical?: boolean;
-};
-const entries = await Astro.glob<Frontmatter>("./entry/*.mdx");
+const rawEntries = await Astro.glob<Frontmatter>("./entry/*.mdx").catch(
+  () => []
+);
+
+const entries = rawEntries.filter((entry) => !entry.frontmatter.draft || true);
 ---
 
-<Layout title="blog - berlysia.net">
-  <Header>Blog</Header>
+<Layout title="berlysia.net/blog">
+  <Header><a href="/blog">berlysia.net/blog</a></Header>
   <div class="tw-w-full tw-flex tw-justify-center">
-    <div
-      class="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative tw-border tw-border-keyColor-200"
-    >
-      <ol>
-        {
-          entries.map((x) => (
-            <li>
-              <ArticleLink
-                href={x.url!}
-                title={x.frontmatter.title}
-                pubDateString={x.frontmatter.created!}
-                withHatenaBookmark
-              />
-            </li>
-          ))
-        }
-      </ol>
+    <div class="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative">
+      {
+        entries.length > 0 ? (
+          <ol>
+            {entries.map((x) => (
+              <li>
+                <ArticleLink
+                  href={x.url!}
+                  title={x.frontmatter.title}
+                  pubDateString={x.frontmatter.created!}
+                  withHatenaBookmark
+                />
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <div>no articles</div>
+        )
+      }
     </div>
   </div>
 </Layout>

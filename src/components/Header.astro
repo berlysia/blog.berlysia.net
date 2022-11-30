@@ -1,16 +1,28 @@
 ---
+type Props = {
+  title?: string;
+};
+const { title } = Astro.props;
 ---
 
 <header
   class="tw-sticky tw-z-10 tw-top-0 tw-bg-keyColor-50 tw-h-10 tw-border-b tw-border-keyColor-200 tw-w-full tw-flex tw-justify-center"
 >
   <div class="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative">
+    <span class="tw-absolute tw-left-0 tw-leading-10 tw-align-baseline">
+      <span class="tw-text-lg tw-font-semibold tw-ml-2"><slot /></span>
+      {
+        title && (
+          <>
+            <span class="tw-mx-1">-</span>
+            <span class="">{title}</span>
+          </>
+        )
+      }
+    </span>
     <div
-      class="tw-flex tw-absolute tw-left-0 tw-w-10 tw-h-full tw-items-center"
+      class="tw-flex tw-right-0 tw-top-0 tw-absolute tw-h-full tw-items-center"
     >
-      <span class="tw-text-2xl tw-font-semibold tw-mx-2"><slot /></span>
-    </div>
-    <div class="tw-flex tw-right-0 tw-absolute tw-h-full tw-items-center">
       <a href="/" class="tw-block tw-w-fit tw-h-fit tw-mx-2">
         <img
           src="/avatar.jpg"

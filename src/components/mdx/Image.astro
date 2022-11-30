@@ -1,0 +1,56 @@
+---
+import { Image } from "@astrojs/image/components";
+import { extname } from "node:path/posix";
+
+type Props = {
+  src: string;
+  alt: string;
+  className?: string;
+  loading?: HTMLImageElement["loading"];
+} & (
+  | {
+      width: number;
+      height: number;
+    }
+  | {
+      width: undefined;
+      height: undefined;
+    }
+);
+
+// TODO: build-time aspect ratio calclation
+
+const { src, alt, className, loading = "lazy", width, height } = Astro.props;
+
+const placeholder =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQYV2NgAAIAAAUAAarVyFEAAAAASUVORK5CYII=";
+---
+
+{
+  width && height && extname(src) !== ".svg" ? (
+    <Image
+      src={src}
+      alt={alt}
+      class={className}
+      format="avif"
+      fit="contain"
+      position="left top"
+      width={width}
+      height={height}
+      loading={loading}
+      background="rgba(32,0,0,0)"
+    />
+  ) : (
+    <img
+      class="tw-object-contain"
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      decoding="async"
+      class={className}
+      loading={loading}
+      onerror={`this.onerror=null; this.src="${placeholder}"`}
+    />
+  )
+}

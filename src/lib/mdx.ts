@@ -20,6 +20,7 @@ const frontmatterSchema = z.object({
   lastModified: z.string().optional(),
   tags: z.string().optional(),
   vertical: z.boolean().optional(),
+  draft: z.boolean().optional(),
 });
 
 export type Frontmatter = z.infer<typeof frontmatterSchema>;

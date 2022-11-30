@@ -1,6 +1,6 @@
 ---
 layout: ../../../layouts/BlogArticleLayout.astro
-title: これはサンプル記事です。This is sample article.
+title: これは縦書きのサンプル記事です。This is sample vertical article.
 created: 2021-07-25 03:05
 lastModified: 2021-07-25 03:05
 tags: test, sample
@@ -9,6 +9,7 @@ description:
   This is sample article. This is sample article. This is sample article. This is sample article.
   This is sample article. This is sample article. This is sample article. This is sample article.
 draft: true
+vertical: true
 ---
 
 import Image from "../../../components/mdx/Image.astro";
@@ -28,14 +29,14 @@ yay
 
 ###### h6
 
-![svg](./img.svg)
-![png](./img.png)
+![svg](../test/img.svg)
+![png](../test/img.png)
 
-<Image width="128" height="128" src="./img.svg" alt="svg" />
-<Image width="128" height="128" src="./img.png" alt="png" />
+<Image width="128" height="128" src="../test/img.svg" alt="svg" />
+<Image width="128" height="128" src="../test/img.png" alt="png" />
 
-<img width="128" height="128" src="./img.svg" alt="svg" />
-<img width="128" height="128" src="./img.png" alt="png" />
+<img width="128" height="128" src="../test/img.svg" alt="svg" />
+<img width="128" height="128" src="../test/img.png" alt="png" />
 
 **strong**
 

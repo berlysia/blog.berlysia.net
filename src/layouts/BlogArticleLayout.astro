@@ -2,25 +2,29 @@
 import Layout from "./Layout.astro";
 import Header from "../components/Header.astro";
 import type { MDXLayoutProps } from "astro";
-type Props = MDXLayoutProps<{
-  title: string;
-  description?: string;
-  created?: string;
-  lastModified?: string;
-  tags?: string;
-  vertical?: boolean;
-}>;
+import type { Frontmatter } from "../lib/mdx";
+type Props = MDXLayoutProps<Frontmatter>;
 const props = Astro.props;
 ---
 
 <Layout
-  title={`${props.frontmatter.title} - berlysia.net`}
+  title={`${props.frontmatter.title} - berlysia.net/blog`}
   description={props.frontmatter.description}
 >
-  <Header><a href="/blog">Blog</a></Header>
+  <Header title={props.frontmatter.title}
+    ><a href="/blog">berlysia.net/blog</a>
+  </Header>
   <div class="tw-w-full tw-flex tw-justify-center">
     <div class="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative">
-      <article class="tw-mx-2">
+      <article
+        class:list={[
+          "tw-mx-2",
+          {
+            "tw-writing-vertical-rl tw-w-full tw-columns-sm tw-gap-8 tw-my-4 tw-line-break-strict":
+              props.frontmatter.vertical,
+          },
+        ]}
+      >
         <div>
           <h1 class="tw-text-4xl tw-font-bold tw-mt-4">
             {props.frontmatter.title}
