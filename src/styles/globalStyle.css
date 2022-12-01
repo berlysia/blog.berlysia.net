@@ -16,8 +16,17 @@ html {
   @apply tw-text-base;
 }
 
+html.vertical {
+  @apply sm:tw-overflow-y-visible tw-overflow-y-hidden;
+  min-height: 100svh;
+}
+
 body {
   min-height: 100vh;
+}
+
+:where(.vertical) body {
+  min-height: 100svh;
 }
 
 hr.slash {
