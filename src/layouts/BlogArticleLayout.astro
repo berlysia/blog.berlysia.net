@@ -5,23 +5,35 @@ import type { MDXLayoutProps } from "astro";
 import type { Frontmatter } from "../lib/mdx";
 type Props = MDXLayoutProps<Frontmatter>;
 const props = Astro.props;
+const vertical = props.frontmatter.vertical;
 ---
 
 <Layout
   title={`${props.frontmatter.title} - berlysia.net/blog`}
   description={props.frontmatter.description}
+  vertical={vertical}
 >
-  <Header title={props.frontmatter.title}
+  <Header title={props.frontmatter.title} vertical={vertical}
     ><a href="/blog">berlysia.net/blog</a>
   </Header>
-  <div class="tw-w-full tw-flex tw-justify-center">
-    <div class="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative">
+  <div
+    class:list={[
+      "tw-w-full tw-flex tw-justify-center",
+      {
+        "sm:tw-h-auto tw-h-[calc(100vh-2.5rem)] tw-h-[calc(100svh-2.5rem)]":
+          vertical,
+      },
+    ]}
+  >
+    <div class="tw-w-full tw-relative tw-max-w-screen-lg">
       <article
         class:list={[
-          "tw-mx-2",
+          "tw-px-2",
           {
-            "tw-writing-vertical-rl tw-w-full tw-columns-sm tw-gap-8 tw-my-4 tw-line-break-strict":
-              props.frontmatter.vertical,
+            "sm:tw-writing-vertical-rl sm:tw-w-full sm:tw-overflow-x-visible sm:tw-columns-sm sm:tw-gap-8":
+              vertical,
+            "tw-writing-vertical-rl tw-w-full tw-overflow-x-scroll tw-h-full tw-py-4 tw-line-break-strict":
+              vertical,
           },
         ]}
       >

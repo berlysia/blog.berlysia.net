@@ -1,18 +1,19 @@
 ---
 type Props = {
   title?: string;
+  vertical?: boolean;
 };
-const { title } = Astro.props;
+const { title, vertical } = Astro.props;
 ---
 
 <header
-  class="tw-sticky tw-z-10 tw-top-0 tw-bg-keyColor-50 tw-h-10 tw-border-b tw-border-keyColor-200 tw-w-full tw-flex tw-justify-center"
+  class="tw-sticky tw-z-10 tw-top-0 tw-left-0 tw-right-0 tw-bg-keyColor-50 tw-h-10 tw-border-b tw-border-keyColor-200 tw-w-full tw-flex tw-justify-center"
 >
   <div class="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative">
     <span class="tw-absolute tw-left-0 tw-leading-10 tw-align-baseline">
       <span class="tw-text-lg tw-font-semibold tw-ml-2"><slot /></span>
       {
-        title && (
+        !vertical && title && (
           <>
             <span class="tw-mx-1">-</span>
             <span class="">{title}</span>
