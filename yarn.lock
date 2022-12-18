@@ -4291,10 +4291,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.18.8":
-  version: 16.18.8
-  resolution: "@types/node@npm:16.18.8"
-  checksum: 149f6a6d010a0c8842800b4b7e0e9db842d3133b9461e48224c769cfc8e1960ecb2791596ad18295a7318b3189475c88d007dee122be0b77bf54db025465cf21
+"@types/node@npm:16.18.10":
+  version: 16.18.10
+  resolution: "@types/node@npm:16.18.10"
+  checksum: 1b138616923e9a1c6d3806edf75714b605d2ec689357cdc675bc73816c508ff11b3c68df054b02a496c76654d8ed53add2e90816af39423431c73aa6eec06f29
   languageName: node
   linkType: hard
 
@@ -6048,7 +6048,7 @@ __metadata:
     "@types/fs-extra": 9.0.13
     "@types/jest": 29.2.4
     "@types/lodash": 4.14.191
-    "@types/node": 16.18.8
+    "@types/node": 16.18.10
     "@types/prettier": 2.7.1
     "@types/react": 18.0.26
     "@types/react-dom": 18.0.9
