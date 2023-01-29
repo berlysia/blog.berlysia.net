@@ -2,6 +2,15 @@ import { SlideLink } from "./SlideLink/SlideLink";
 
 const talks = [
   {
+    eventTitle: "JSConf JP 2022",
+    talkTitle:
+      "自然発生した実装パターンに、マイクロフロントエンドと名がつきました",
+    talkLink: "https://jsconf.jp/2022/talk/sponsor-talk-dwango",
+    slideLink: "https://speakerdeck.com/berlysia/jsconf-jp-2022",
+    pubDateString: "2021/11/27",
+    talkArchiveLink: "https://www.youtube.com/watch?v=IhPGvFal15E",
+  },
+  {
     eventTitle: "iCARE Dev Meetup #30",
     talkTitle: "N予備校とWebフロントエンドの新陳代謝",
     talkLink: "https://icare.connpass.com/event/237019/",
