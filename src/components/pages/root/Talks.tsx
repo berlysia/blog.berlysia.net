@@ -7,7 +7,7 @@ const talks = [
       "自然発生した実装パターンに、マイクロフロントエンドと名がつきました",
     talkLink: "https://jsconf.jp/2022/talk/sponsor-talk-dwango",
     slideLink: "https://speakerdeck.com/berlysia/jsconf-jp-2022",
-    pubDateString: "2021/11/27",
+    pubDateString: "2022/11/26",
     talkArchiveLink: "https://www.youtube.com/watch?v=IhPGvFal15E",
   },
   {
