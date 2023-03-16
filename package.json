@@ -106,5 +106,5 @@
     "unified": "^10.1.2",
     "zod": "^3.19.1"
   },
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@3.5.0"
 }
