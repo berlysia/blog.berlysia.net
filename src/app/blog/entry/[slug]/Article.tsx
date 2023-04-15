@@ -7,8 +7,8 @@ import { useWritingMode } from "./useWritingMode";
 
 export default function Article({ children }: { children: ReactNode }) {
   const writingMode = useWritingMode();
-  const articleRef = useRef<HTMLElement>(null);
-  const sentinelRef = useRef<HTMLDivElement>(null);
+  const articleReference = useRef<HTMLElement>(null);
+  const sentinelReference = useRef<HTMLDivElement>(null);
 
   /*
     # なぜこの処理が必要か
@@ -21,13 +21,14 @@ export default function Article({ children }: { children: ReactNode }) {
     コンテンツ末尾に番兵要素を配置し、番兵要素の位置を監視して、番兵要素の位置が変わったら、article要素の高さを番兵要素の位置に合わせて調整する。
   */
   const handleResize = useCallback(() => {
-    if (articleRef.current && sentinelRef.current) {
+    if (articleReference.current && sentinelReference.current) {
       if (
         writingMode.isVertical &&
         window.matchMedia("(min-width: 640px)" /* sm */).matches
       ) {
-        const box = sentinelRef.current.getBoundingClientRect();
-        const currValue = articleRef.current.getBoundingClientRect().height;
+        const box = sentinelReference.current.getBoundingClientRect();
+        const currentValue =
+          articleReference.current.getBoundingClientRect().height;
         const nextValue =
           window.scrollY +
           box.bottom -
@@ -38,13 +39,13 @@ export default function Article({ children }: { children: ReactNode }) {
           - articleのpaddingは1remで16px
           - headerのheightは40px
         */
-        const diff = nextValue - currValue;
-        console.log({ currValue, nextValue, diff });
+        const diff = nextValue - currentValue;
+        console.log({ currValue: currentValue, nextValue, diff });
         if (Math.abs(diff) > 10) {
-          articleRef.current.style.height = `${nextValue}px`;
+          articleReference.current.style.height = `${nextValue}px`;
         }
       } else {
-        articleRef.current.style.height = "auto";
+        articleReference.current.style.height = "auto";
       }
     }
   }, [writingMode.isVertical]);
@@ -52,8 +53,8 @@ export default function Article({ children }: { children: ReactNode }) {
   // articleRefのリサイズを監視して、リサイズが発生したらhandleResizeを実行する
   useEffect(() => {
     const observer = new ResizeObserver(handleResize);
-    if (articleRef.current) {
-      observer.observe(articleRef.current);
+    if (articleReference.current) {
+      observer.observe(articleReference.current);
     }
     return () => {
       observer.disconnect();
@@ -61,9 +62,9 @@ export default function Article({ children }: { children: ReactNode }) {
   }, [handleResize]);
 
   return (
-    <article ref={articleRef} className={styles.article}>
+    <article ref={articleReference} className={styles.article}>
       {children}
-      <div ref={sentinelRef}></div>
+      <div ref={sentinelReference}></div>
     </article>
   );
 }

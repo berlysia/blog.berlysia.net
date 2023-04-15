@@ -6,11 +6,14 @@ import styles from "./impl.module.css";
 import WritingModeSwitcher from "./WritingModeSwitcher";
 import Article from "./Article";
 
-type Props = {
+type Properties = {
   frontmatter: Frontmatter;
   children: ReactNode;
 };
-export default function BlogArticleLayout({ frontmatter, children }: Props) {
+export default function BlogArticleLayout({
+  frontmatter,
+  children,
+}: Properties) {
   return (
     <VerticalClassWrapper preferVertical={frontmatter.preferVertical}>
       <Header>
@@ -41,9 +44,9 @@ export default function BlogArticleLayout({ frontmatter, children }: Props) {
               )}
               {frontmatter.tags && (
                 <ul className="tw-flex tw-flex-row tw-gap-1 tw-mli-1">
-                  {frontmatter.tags.map((x, i) => (
+                  {frontmatter.tags.map((x, index) => (
                     <li
-                      key={i}
+                      key={index}
                       className="tw-pli-1 tw-border tw-border-keyColor-100 tw-rounded-md"
                     >
                       {x}

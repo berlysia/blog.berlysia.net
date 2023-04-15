@@ -47,12 +47,11 @@ function validateArticle(item: any): item is Article {
 
 export function getByGenre(genre: "imas" | "tech", count: number) {
   const sites: { items: any[] }[] = seed[genre];
-  const items = sites
+  return sites
     .flatMap((site: any) => site.items)
-    .map(ensureAuthor)
-    .map(populatePubDate)
-    .filter(validateArticle)
+    .map((element) => ensureAuthor(element))
+    .map((element) => populatePubDate(element))
+    .filter((element) => validateArticle(element))
     .sort((a, b) => b.pubDate - a.pubDate)
     .slice(0, count);
-  return items;
 }

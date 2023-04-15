@@ -10,7 +10,13 @@
     }
   ],
   "rules": {
+    "sonarjs/no-duplicate-string": "off",
+    "unicorn/no-null": "off",
+    "unicorn/text-encoding-identifier-case": "off",
+    "unicorn/consistent-function-scoping": "off",
+    "sonarjs/cognitive-complexity": "off",
     "import/no-named-as-default": "off",
+    "unicorn/prevent-abbreviations": "off",
     "class-methods-use-this": "off",
     "react/react-in-jsx-scope": "off",
     "react/destructuring-assignment": "off",

@@ -1,4 +1,4 @@
-import { isAbsolute, resolve } from "path";
+import { isAbsolute, resolve } from "node:path";
 import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -82,31 +82,31 @@ function isHastText(node: UnistNode): node is HastText {
 }
 
 const renameFootnoteSectionName: Plugin = () => {
-  return function renameFootnoteSectionImpl(tree) {
-    // tree.childrenを再帰的に走査して、 footnote-labelというidを持つ要素を探す
-    function walk(curr: UnistNode | UnistParent) {
-      if ("children" in curr) {
-        for (const x of curr.children) {
-          if (isHastElement(x) && x.properties?.id === "footnote-label") {
-            walkInner(x);
-          }
-          walk(x);
-        }
-      }
-    }
-
-    // 見つかった要素の更に子孫を再帰的に走査し、textノードの内容を「脚注」に変更する
-    function walkInner(curr: UnistNode | UnistParent) {
-      if ("children" in curr) {
-        for (const x of curr.children) {
-          if (isHastText(x)) {
-            x.value = "脚注";
-          }
+  // tree.childrenを再帰的に走査して、 footnote-labelというidを持つ要素を探す
+  function walk(curr: UnistNode | UnistParent) {
+    if ("children" in curr) {
+      for (const x of curr.children) {
+        if (isHastElement(x) && x.properties?.id === "footnote-label") {
           walkInner(x);
         }
+        walk(x);
       }
     }
+  }
 
+  // 見つかった要素の更に子孫を再帰的に走査し、textノードの内容を「脚注」に変更する
+  function walkInner(curr: UnistNode | UnistParent) {
+    if ("children" in curr) {
+      for (const x of curr.children) {
+        if (isHastText(x)) {
+          x.value = "脚注";
+        }
+        walkInner(x);
+      }
+    }
+  }
+
+  return function renameFootnoteSectionImpl(tree) {
     walk(tree);
   };
 };
