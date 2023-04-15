@@ -21,15 +21,6 @@ export default function VerticalClassWrapper({
 
 function VerticalClassImpl({ children }: { children: ReactNode }) {
   const writingMode = useWritingMode();
-  // writingMode.isVerticalの値に応じて、classList.toggleを使ってhtml要素にverticalクラスを付与する
-  useLayoutEffect(() => {
-    const html = document.documentElement;
-    html.classList.toggle("vertical", writingMode.isVertical);
-    return () => {
-      // アンマウント時には必ずremoveする
-      html.classList.remove("vertical");
-    };
-  }, [writingMode.isVertical]);
   return (
     <div className={clsx({ vertical: writingMode.isVertical })}>{children}</div>
   );
