@@ -1,25 +1,13 @@
 {
-  "extends": "@berlysia/tsconfig",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "noEmit": true,
-    "module": "NodeNext",
-    "resolveJsonModule": true,
-    "jsx": "preserve",
-    "isolatedModules": true,
-    "declaration": false,
-    "noEmitOnError": false,
-    "incremental": true,
-    "noUnusedLocals": false,
     "plugins": [
       {
         "name": "next"
       }
     ]
   },
-  "exclude": ["**/*.test.ts"],
-  "include": ["**/*.ts", "**/*.tsx", "**/*.mts", ".next/types/**/*.ts"]
+  "exclude": ["src/**/*.test.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", ".next/types/**/*.ts"]
 }

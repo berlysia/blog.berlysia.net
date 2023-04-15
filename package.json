@@ -17,7 +17,7 @@
     "dev": "next dev",
     "build": "run-s build:seed build:partytown build:next",
     "build:partytown": "partytown copylib public/~partytown",
-    "build:seed": "ts-node src/seeds/build.ts",
+    "build:seed": "ts-node-esm --project ./tsconfig.script.json src/seeds/build.mts",
     "build:next": "next build",
     "start": "next start",
     "lint": "eslint 'src/**/*.{js,ts,jsx,tsx}'",

@@ -3,10 +3,14 @@ import { resolve } from "node:path";
 import { ensureDir } from "fs-extra";
 import Parser from "rss-parser";
 // eslint-disable-next-line import/no-namespace -- for convenience
-import * as feeds from "./feeds";
-import old_tech from "./old_tech.json";
+import * as feeds from "./feeds.mjs";
+import { createRequire } from "node:module";
 
-const __dirname = new URL(".", import.meta.url).pathname;
+const require = createRequire(import.meta.url);
+
+const old_tech = require("./old_tech.json");
+
+const __dirname = resolve(process.cwd(), "src", "seeds");
 
 const parser = new Parser();
 const genresEntries = await Promise.all(
