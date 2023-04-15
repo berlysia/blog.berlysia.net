@@ -36,7 +36,7 @@
     "build-storybook": "build-storybook"
   },
   "devDependencies": {
-    "@berlysia/eslint-config": "3.5.1",
+    "@berlysia/eslint-config": "4.1.0",
     "@berlysia/tsconfig": "0.0.1",
     "@mdx-js/loader": "^2.3.0",
     "@next/mdx": "^13.3.0",
