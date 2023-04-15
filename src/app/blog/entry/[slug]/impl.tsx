@@ -14,7 +14,7 @@ export default function BlogArticleLayout({ frontmatter, children }: Props) {
   return (
     <VerticalClassWrapper preferVertical={frontmatter.preferVertical}>
       <Header>
-        <div>
+        <div className="tw-shrink tw-overflow-ellipsis tw-overflow-hidden tw-whitespace-nowrap">
           <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/blog">
             berlysia.net/blog
           </a>
