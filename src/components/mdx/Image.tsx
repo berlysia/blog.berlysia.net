@@ -1,4 +1,4 @@
-import { extname } from "path";
+import { extname } from "node:path";
 import React from "react";
 import NextImage from "next/image";
 

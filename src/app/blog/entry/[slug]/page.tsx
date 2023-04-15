@@ -1,12 +1,14 @@
-import { readFile, readdir } from "fs/promises";
-import { basename, dirname, resolve } from "path";
+import { readFile, readdir } from "node:fs/promises";
+import { basename, resolve } from "node:path";
 import type { Metadata } from "next";
 import { processMDX } from "./processMDX";
 import BlogArticleLayout from "./impl";
 
+const ARTICLE_PATH = "src/articles";
+
 export async function generateStaticParams() {
   // src/articlesディレクトリのファイル一覧を fs/promises readdir を使って取得
-  const posts = await readdir(resolve(process.cwd(), "src/articles"));
+  const posts = await readdir(resolve(process.cwd(), ARTICLE_PATH));
 
   return posts
     .filter((x) => x.endsWith(".mdx"))
@@ -25,8 +27,8 @@ export async function generateMetadata({
   const { slug } = params;
 
   const mdx = await readFile(
-    resolve(process.cwd(), "src/articles", `${slug}.mdx`),
-    "utf-8"
+    resolve(process.cwd(), ARTICLE_PATH, `${slug}.mdx`),
+    "utf8"
   );
 
   const result = await processMDX(mdx, slug);
@@ -41,8 +43,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
 
   const mdx = await readFile(
-    resolve(process.cwd(), "src/articles", `${slug}.mdx`),
-    "utf-8"
+    resolve(process.cwd(), ARTICLE_PATH, `${slug}.mdx`),
+    "utf8"
   );
 
   const result = await processMDX(mdx, slug);

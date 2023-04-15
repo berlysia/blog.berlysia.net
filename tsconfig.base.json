@@ -1,0 +1,18 @@
+{
+  "extends": "@berlysia/tsconfig",
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "module": "NodeNext",
+    "target": "esnext",
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "isolatedModules": true,
+    "declaration": false,
+    "noEmitOnError": false,
+    "incremental": true,
+    "noUnusedLocals": false
+  }
+}

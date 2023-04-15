@@ -1,5 +1,5 @@
-import { readdir, readFile } from "fs/promises";
-import { basename, resolve } from "path";
+import { readdir, readFile } from "node:fs/promises";
+import { basename, resolve } from "node:path";
 import Header from "../../components/Header";
 import { ArticleLink } from "../../components/pages/root/ArticleLink/ArticleLink";
 import { processMDX } from "./entry/[slug]/processMDX";
@@ -13,7 +13,7 @@ export default async function BlogPageIndex() {
       const slug = basename(post, ".mdx");
       const mdx = await readFile(
         resolve(process.cwd(), "src/articles", post),
-        "utf-8"
+        "utf8"
       );
       const result = await processMDX(mdx, slug);
       return {
