@@ -10,6 +10,7 @@
     }
   ],
   "rules": {
+    "import/no-named-as-default": "off",
     "class-methods-use-this": "off",
     "react/react-in-jsx-scope": "off",
     "react/destructuring-assignment": "off",

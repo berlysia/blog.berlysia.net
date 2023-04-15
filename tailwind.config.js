@@ -4,7 +4,7 @@ const plugin = require("tailwindcss/plugin");
 module.exports = {
   prefix: "tw-",
   mode: "jit",
-  content: ["./src/**/*.{js,ts,jsx,tsx,astro}"],
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "media", // or 'media' or 'class'
   theme: {
     extend: {
@@ -64,6 +64,9 @@ module.exports = {
         },
         ".line-break-normal": {
           lineBreak: "normal",
+        },
+        ".column-fill-auto": {
+          columnFill: "auto",
         },
       });
     }),

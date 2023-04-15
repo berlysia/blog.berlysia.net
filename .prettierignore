@@ -1,5 +1,2 @@
 dist
 .vercel
-
-# text/partytown の処理に失敗する
-src/layouts/Layout.astro
