@@ -1,5 +1,3 @@
----
-import Layout from "../layouts/Layout.astro";
 import Index from "../components/pages/root";
 import { getByGenre } from "../seeds";
 
@@ -7,8 +5,7 @@ const props = {
   imasArticles: getByGenre("imas", 6),
   techArticles: getByGenre("tech", 6),
 };
----
 
-<Layout title="berlysia.net">
-  <Index {...props} />
-</Layout>
+export default function Root() {
+  return <Index {...props} />;
+}

@@ -1,6 +1,6 @@
----
-import { Image } from "@astrojs/image/components";
-import { extname } from "node:path/posix";
+import { extname } from "path";
+import React from "react";
+import NextImage from "next/image";
 
 type Props = {
   src: string;
@@ -18,39 +18,42 @@ type Props = {
     }
 );
 
-// TODO: build-time aspect ratio calclation
-
-const { src, alt, className, loading = "lazy", width, height } = Astro.props;
-
 const placeholder =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQYV2NgAAIAAAUAAarVyFEAAAAASUVORK5CYII=";
----
 
-{
-  width && height && extname(src) !== ".svg" ? (
-    <Image
+const Image: React.FC<Props> = ({
+  src,
+  alt,
+  className,
+  loading = "lazy",
+  width,
+  height,
+}) => {
+  return width && height && extname(src) !== ".svg" ? (
+    <NextImage
       src={src}
       alt={alt}
-      class={className}
-      format="avif"
-      fit="contain"
-      position="left top"
+      className={className}
       width={width}
       height={height}
       loading={loading}
-      background="rgba(32,0,0,0)"
     />
   ) : (
     <img
-      class="tw-object-contain"
+      className={`tw-object-contain ${className}`}
       src={src}
       alt={alt}
       width={width}
       height={height}
       decoding="async"
-      class={className}
       loading={loading}
-      onerror={`this.onerror=null; this.src="${placeholder}"`}
+      // onError={(e) => {
+      //   const target = e.target as HTMLImageElement;
+      //   target.onerror = null;
+      //   target.src = placeholder;
+      // }}
     />
-  )
-}
+  );
+};
+
+export default Image;

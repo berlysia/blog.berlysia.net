@@ -46,7 +46,6 @@ jobs:
       - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
       - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: yarn install
-      - run: yarn check
       - run: yarn lint
       - run: yarn format:check
 

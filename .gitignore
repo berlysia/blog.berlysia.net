@@ -4,6 +4,7 @@ out
 .envrc
 .env*.local
 .now
+public/~partytown
 
 .yarn/*
 !.yarn/releases
@@ -149,3 +150,7 @@ typings/
 
 test-results
 dist
+
+.next
+public/~partytown
+src/seeds/.tmp
