@@ -30,7 +30,7 @@ const vertical = props.frontmatter.vertical;
         class:list={[
           "tw-px-2",
           {
-            "sm:tw-writing-vertical-rl sm:tw-w-full sm:tw-overflow-x-visible sm:tw-columns-sm sm:tw-gap-8":
+            "sm:tw-writing-vertical-rl sm:tw-w-full sm:tw-overflow-x-visible sm:tw-columns-md sm:tw-gap-8":
               vertical,
             "tw-writing-vertical-rl tw-w-full tw-overflow-x-scroll tw-h-full tw-py-4 tw-line-break-strict":
               vertical,
@@ -50,7 +50,7 @@ const vertical = props.frontmatter.vertical;
           }
           {
             props.frontmatter.tags && (
-              <ul class="tw-flex tw-flex-row tw-gap-1 tw-mx-1">
+              <ul class="tw-flex tw-flex-row tw-gap-1 tw-mli-1">
                 {props.frontmatter.tags.split(",").map((x) => (
                   <li class="tw-px-1 tw-border tw-border-keyColor-100 tw-rounded-md">
                     {x}

@@ -38,6 +38,31 @@ hr.slash {
   width: 65%;
 }
 
+.vertical-tooltip {
+  /* position: relative;
+  &::after {
+    text-indent: initial;
+    font-style: initial;
+    font-weight: initial;
+    content: "この要素は縦書き用のCSSを必要としています";
+    position: absolute;
+
+    top: -40px;
+    left: 100%;
+    margin-left: 15px;
+    height: 240px;
+    padding: 10px;
+    border-radius: 16px;
+    background: #222;
+    color: #eee;
+
+    display: none;
+  }
+  &:hover::after {
+    display: block;
+  } */
+}
+
 .main-text-section {
   & h1 {
     @apply tw-text-4xl tw-border-be tw-border-is-2 tw-border-keyColor-200 tw-mbs-6 tw-mbe-2;
@@ -115,9 +140,13 @@ hr.slash {
       transparent 70%,
       rgb(254 202 202) /* bg-red-200 */ 0%
     );
-    &::before,
-    &::after {
-      content: "**";
+    .vertical & {
+      @apply vertical-tooltip;
+      background: linear-gradient(
+        to left,
+        transparent 70%,
+        rgb(254 202 202) /* bg-red-200 */ 0%
+      );
     }
   }
 
@@ -126,16 +155,13 @@ hr.slash {
       transparent 70%,
       rgb(186 230 253) /* bg-sky-200 */ 0%
     );
-    &::before,
-    &::after {
-      content: "_";
-    }
-  }
-
-  & del {
-    &::before,
-    &::after {
-      content: "~~";
+    .vertical & {
+      @apply vertical-tooltip;
+      background: linear-gradient(
+        to left,
+        transparent 70%,
+        rgb(186 230 253) /* bg-sky-200 */ 0%
+      );
     }
   }
 
