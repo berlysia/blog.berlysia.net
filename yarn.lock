@@ -3937,7 +3937,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:4.14.192, @types/lodash@npm:^4.14.167":
+"@types/lodash@npm:4.14.194":
+  version: 4.14.194
+  resolution: "@types/lodash@npm:4.14.194"
+  checksum: 113f34831c461469d91feca2dde737f88487732898b4d25e9eb23b087bb193985f864d1e1e0f3b777edc5022e460443588b6000a3b2348c966f72d17eedc35ea
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:^4.14.167":
   version: 4.14.192
   resolution: "@types/lodash@npm:4.14.192"
   checksum: 31e1f0543a04158d2c429c45efd7c77882736630d0652f82eb337d6159ec0c249c5d175c0af731537b53271e665ff8d76f43221d75d03646d31cb4bd6f0056b1
@@ -4097,18 +4104,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.0.33":
-  version: 18.0.33
-  resolution: "@types/react@npm:18.0.33"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: 4fbd2b2b6a26378bdfde121081a6406ec2d39e4ba87ea5f6897ab7bb2198713165e6fd703ad4ed7ba1d4f23ef54a4c9f108f3105c7ed8e136411ee6bdebc5669
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:>=16":
+"@types/react@npm:18.0.35, @types/react@npm:>=16":
   version: 18.0.35
   resolution: "@types/react@npm:18.0.35"
   dependencies:
@@ -5769,11 +5765,11 @@ __metadata:
     "@types/fs-extra": 11.0.1
     "@types/hast": ^2.3.4
     "@types/jest": 29.5.0
-    "@types/lodash": 4.14.192
+    "@types/lodash": 4.14.194
     "@types/mdast": ^3.0.11
     "@types/node": 18.15.11
     "@types/prettier": 2.7.2
-    "@types/react": 18.0.33
+    "@types/react": 18.0.35
     "@types/react-dom": 18.0.11
     "@types/rebass": 4.0.10
     "@types/unist": ^2.0.6
