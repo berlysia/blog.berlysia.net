@@ -118,7 +118,7 @@ const frontmatterSchema = z
     created: z.string().optional(),
     lastModified: z.string().optional(),
     tags: z.string().transform((x) => x?.split(",") ?? []),
-    draft: z.boolean().default(false),
+    publishStatus: z.enum(["draft", "published", "unlisted"]).default("draft"),
     preferVertical: z.boolean().default(false),
   })
   .passthrough();

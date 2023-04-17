@@ -23,6 +23,10 @@ export default async function BlogPageIndex() {
     })
   );
 
+  const publishedEntries = entries.filter(
+    (x) => x.frontmatter.publishStatus === "published"
+  );
+
   return (
     <div>
       <Header>
@@ -34,9 +38,9 @@ export default async function BlogPageIndex() {
       </Header>
       <div className="tw-w-full tw-flex tw-justify-center">
         <div className="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative">
-          {entries.length > 0 ? (
+          {publishedEntries.length > 0 ? (
             <ol>
-              {entries.map((x, i) => (
+              {publishedEntries.map((x, i) => (
                 <li key={i}>
                   <ArticleLink
                     href={`/blog/entry/${x.slug}`}
