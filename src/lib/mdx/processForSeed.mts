@@ -32,5 +32,5 @@ export async function processMDX(mdx: string, slug: string) {
 
   const frontmatter = frontmatterSchema.parse(result.frontmatter);
 
-  return frontmatter;
+  return { ...result, frontmatter };
 }

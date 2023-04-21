@@ -97,6 +97,10 @@ export const renameFootnoteSectionName: Plugin = () => {
     walk(tree);
   };
 };
+
+const tagsTransformer = (x: string): string[] =>
+  x?.split(",").map((y) => y.trim()) ?? [];
+
 export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
   z
     .object({
@@ -105,7 +109,7 @@ export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
       created: z.string(),
       lastModified: z.string().optional(),
       publishedAt: z.string().optional(),
-      tags: z.string().transform((x) => x?.split(",") ?? []),
+      tags: z.string().transform(tagsTransformer),
       publishStatus: z.literal("draft"),
 
       preferVertical: z.boolean().default(false),
@@ -118,7 +122,7 @@ export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
       created: z.string(),
       lastModified: z.string().optional(),
       publishedAt: z.string(),
-      tags: z.string().transform((x) => x?.split(",") ?? []),
+      tags: z.string().transform(tagsTransformer),
       publishStatus: z.literal("published"),
 
       preferVertical: z.boolean().default(false),
@@ -131,7 +135,7 @@ export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
       created: z.string(),
       lastModified: z.string().optional(),
       publishedAt: z.string(),
-      tags: z.string().transform((x) => x?.split(",") ?? []),
+      tags: z.string().transform(tagsTransformer),
       publishStatus: z.literal("unlisted"),
       preferVertical: z.boolean().default(false),
     })

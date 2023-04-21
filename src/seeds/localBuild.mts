@@ -12,11 +12,15 @@ const filesInArticles = await readdir(resolve(process.cwd(), ARTICLE_PATH));
 const articleFiles = filesInArticles.filter((x) => x.endsWith(".mdx"));
 
 const articles = await Promise.all(
-  articleFiles.map((filename) =>
-    readFile(resolve(process.cwd(), ARTICLE_PATH, filename), "utf8").then(
-      (content) => processMDX(content, basename(filename))
-    )
-  )
+  articleFiles.map(async (filename) => {
+    const slug = basename(filename, ".mdx");
+    const content = await readFile(
+      resolve(process.cwd(), ARTICLE_PATH, filename),
+      "utf8"
+    );
+    const { frontmatter } = await processMDX(content, slug);
+    return { frontmatter, slug };
+  })
 );
 
 const __dirname = resolve(process.cwd(), "src", "seeds");
