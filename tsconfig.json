@@ -9,11 +9,5 @@
     ]
   },
   "exclude": ["src/**/*.test.ts"],
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/lib/mdx/processForSeed.mts",
-    "src/lib/mdx/utils.mts"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.tsx", ".next/types/**/*.ts"]
 }

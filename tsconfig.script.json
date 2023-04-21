@@ -1,7 +1,12 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "module": "es2022"
+    "module": "NodeNext",
+    "moduleResolution": "nodenext"
   },
-  "include": ["src/seeds/**/*.mts", "src/lib/mdx/processForSeed.ts"]
+  "include": [
+    "src/seeds/feeds.json",
+    "src/seeds/**/*.ts",
+    "src/lib/mdx/processForSeed.ts"
+  ]
 }

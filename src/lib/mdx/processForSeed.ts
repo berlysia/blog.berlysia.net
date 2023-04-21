@@ -1,16 +1,19 @@
-import { serialize } from "next-mdx-remote/serialize";
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import type { Frontmatter } from "./utils.js";
 import rehypeToc from "@jsdevtools/rehype-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
-import remarkGfm from "remark-gfm";
-import type { Frontmatter } from "./utils.mjs";
 import {
   remarkResolveAssets,
   renameFootnoteSectionName,
   frontmatterSchema,
-} from "./utils.mjs";
+} from "./utils.js";
 export async function processMDX(mdx: string, slug: string) {
+  // @ts-ignore -- スクリプトとしての実行時に型が合わないが実体はある
+  const { serialize } = await import("next-mdx-remote/serialize");
+  const { default: remarkGfm } = await import("remark-gfm");
+  const { default: rehypeAutolinkHeadings } = await import(
+    "rehype-autolink-headings"
+  );
+  const { default: rehypeSlug } = await import("rehype-slug");
   const result = await serialize<Frontmatter>(mdx, {
     parseFrontmatter: true,
     mdxOptions: {
