@@ -1,8 +1,17 @@
 import { SlideLink } from "./SlideLink/SlideLink";
 
-const talks = [
+const talks: readonly {
+  eventTitle: string;
+  eventLink: string;
+  talkTitle: string;
+  talkLink: string;
+  slideLink?: string;
+  pubDateString: string;
+  talkArchiveLink?: string;
+}[] = [
   {
     eventTitle: "JSConf JP 2022",
+    eventLink: "https://jsconf.jp/2022/",
     talkTitle:
       "自然発生した実装パターンに、マイクロフロントエンドと名がつきました",
     talkLink: "https://jsconf.jp/2022/talk/sponsor-talk-dwango",
@@ -12,6 +21,7 @@ const talks = [
   },
   {
     eventTitle: "iCARE Dev Meetup #30",
+    eventLink: "https://icare.connpass.com/event/237019/",
     talkTitle: "N予備校とWebフロントエンドの新陳代謝",
     talkLink: "https://icare.connpass.com/event/237019/",
     slideLink: "https://speakerdeck.com/berlysia/icare-dev-meetup-number-30",
@@ -20,6 +30,7 @@ const talks = [
   },
   {
     eventTitle: "ドワンゴ EdTech Talk",
+    eventLink: "https://dwango.connpass.com/event/230731/",
     talkTitle: "N予備校のフロントエンド開発の取り組み",
     talkLink: "https://dwango.connpass.com/event/230731/",
     slideLink: undefined,
@@ -28,6 +39,7 @@ const talks = [
   },
   {
     eventTitle: "Front-End Lounge #2「フロントエンドエンジニアのキャリア」",
+    eventLink: "https://forkwell.connpass.com/event/230632/",
     talkTitle: "後手から始まるフロントエンド（スポンサートーク）",
     talkLink: "https://forkwell.connpass.com/event/230632/",
     slideLink: undefined,
@@ -36,6 +48,7 @@ const talks = [
   },
   {
     eventTitle: "JSConf JP 2021",
+    eventLink: "https://jsconf.jp/2021/",
     talkTitle: "Webフロントエンドのリプレースを支えるテストの考え方",
     talkLink:
       "https://jsconf.jp/2021/talk/testing-approach-to-support-web-front-end-replacement",
@@ -46,6 +59,7 @@ const talks = [
   },
   {
     eventTitle: "東京Node学園 29時限目",
+    eventLink: "https://nodejs.connpass.com/event/78902/",
     talkTitle: "rxjs v6 について",
     talkLink: "https://nodejs.connpass.com/event/78902/",
     slideLink: undefined,
@@ -53,6 +67,7 @@ const talks = [
     talkArchiveLink: undefined,
   },
 ] as const;
+
 export const Talks = ({
   withHatenaBookmark,
 }: {
@@ -61,31 +76,14 @@ export const Talks = ({
   <div>
     <h2 className="tw-text-2xl tw-font-bold tw-mb-2">Tech Talks</h2>
     <ul className="tw-p-0">
-      {talks.map(
-        ({
-          eventTitle,
-          talkTitle,
-          talkLink,
-          slideLink,
-          pubDateString,
-          talkArchiveLink,
-        }) => (
-          <li
-            key={talkLink}
-            className="tw-text-base tw-border-0 tw-border-b tw-border-solid tw-border-gray-100"
-          >
-            <SlideLink
-              eventTitle={eventTitle}
-              talkTitle={talkTitle}
-              talkLink={talkLink}
-              slideLink={slideLink}
-              pubDateString={pubDateString}
-              talkArchiveLink={talkArchiveLink}
-              withHatenaBookmark={withHatenaBookmark}
-            />
-          </li>
-        )
-      )}
+      {talks.map((talk) => (
+        <li
+          key={talk.talkLink}
+          className="tw-text-base tw-border-0 tw-border-b tw-border-solid tw-border-gray-100"
+        >
+          <SlideLink {...talk} withHatenaBookmark={withHatenaBookmark} />
+        </li>
+      ))}
     </ul>
   </div>
 );

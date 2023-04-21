@@ -111,17 +111,46 @@ const renameFootnoteSectionName: Plugin = () => {
   };
 };
 
-const frontmatterSchema = z
-  .object({
-    title: z.string(),
-    description: z.string().optional(),
-    created: z.string().optional(),
-    lastModified: z.string().optional(),
-    tags: z.string().transform((x) => x?.split(",") ?? []),
-    publishStatus: z.enum(["draft", "published", "unlisted"]).default("draft"),
-    preferVertical: z.boolean().default(false),
-  })
-  .passthrough();
+const frontmatterSchema = z.discriminatedUnion("publishStatus", [
+  z
+    .object({
+      title: z.string(),
+      description: z.string().optional(),
+      created: z.string(),
+      lastModified: z.string().optional(),
+      publishedAt: z.string().optional(),
+      tags: z.string().transform((x) => x?.split(",") ?? []),
+      publishStatus: z.literal("draft"),
+
+      preferVertical: z.boolean().default(false),
+    })
+    .passthrough(),
+  z
+    .object({
+      title: z.string(),
+      description: z.string().optional(),
+      created: z.string(),
+      lastModified: z.string().optional(),
+      publishedAt: z.string(),
+      tags: z.string().transform((x) => x?.split(",") ?? []),
+      publishStatus: z.literal("published"),
+
+      preferVertical: z.boolean().default(false),
+    })
+    .passthrough(),
+  z
+    .object({
+      title: z.string(),
+      description: z.string().optional(),
+      created: z.string(),
+      lastModified: z.string().optional(),
+      publishedAt: z.string(),
+      tags: z.string().transform((x) => x?.split(",") ?? []),
+      publishStatus: z.literal("unlisted"),
+      preferVertical: z.boolean().default(false),
+    })
+    .passthrough(),
+]);
 
 export type Frontmatter = z.infer<typeof frontmatterSchema>;
 
