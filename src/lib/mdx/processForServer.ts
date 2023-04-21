@@ -5,8 +5,8 @@ import rehypeToc from "@jsdevtools/rehype-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 import remarkGfm from "remark-gfm";
 import MdxImage from "../../components/mdx/Image";
+import type { Frontmatter } from "./utils";
 import {
-  Frontmatter,
   remarkResolveAssets,
   renameFootnoteSectionName,
   frontmatterSchema,

@@ -2,12 +2,15 @@ import { writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { ensureDir } from "fs-extra";
 import Parser from "rss-parser";
+// eslint-disable-next-line import/no-namespace -- オブジェクト扱いしたい
 import * as feeds from "./feeds.js";
+// eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error -- tsconfig間で結果が異なるため
 // @ts-ignore -- import assertionがエディタ用には使えない設定だがスクリプト側には必須
 import old_tech from "./old_tech.json" assert { type: "json" };
 
 const SEEDS_DIR = resolve(process.cwd(), "src", "seeds");
 
+// eslint-disable-next-line unicorn/prefer-top-level-await -- CJSなので許せ（eslintrcをいじってもよさそうだが）
 (async function main() {
   const parser = new Parser();
   const genresEntries = await Promise.all(

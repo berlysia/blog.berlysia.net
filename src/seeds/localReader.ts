@@ -1,4 +1,4 @@
-import { Frontmatter } from "../lib/mdx/utils";
+import type { Frontmatter } from "../lib/mdx/utils";
 import seed from "./.tmp/local.json";
 
 export function getLocalArticles(): {

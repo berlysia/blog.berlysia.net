@@ -1,7 +1,8 @@
+import { readdir, readFile, writeFile } from "node:fs/promises";
+import { basename, resolve } from "node:path";
 import { ensureDir } from "fs-extra";
-import { readdir, readFile, writeFile } from "fs/promises";
-import { basename, resolve } from "path";
 
+// eslint-disable-next-line unicorn/prefer-top-level-await -- CJSなので許せ（eslintrcをいじってもよさそうだが）
 (async function main() {
   const { processMDX } = await import("../lib/mdx/processForSeed.js");
   const ARTICLE_PATH = "src/articles";

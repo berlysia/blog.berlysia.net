@@ -1,12 +1,14 @@
-import type { Frontmatter } from "./utils.js";
 import rehypeToc from "@jsdevtools/rehype-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
+import type { Frontmatter } from "./utils.js";
 import {
   remarkResolveAssets,
   renameFootnoteSectionName,
   frontmatterSchema,
 } from "./utils.js";
+
 export async function processMDX(mdx: string, slug: string) {
+  // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error -- ts-ignoreじゃないといけない事情がある
   // @ts-ignore -- スクリプトとしての実行時に型が合わないが実体はある
   const { serialize } = await import("next-mdx-remote/serialize");
   const { default: remarkGfm } = await import("remark-gfm");

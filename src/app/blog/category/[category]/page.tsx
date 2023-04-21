@@ -1,9 +1,9 @@
+import type { Metadata } from "next";
 import Header from "../../../../components/Header";
 import { ArticleLink } from "../../../../components/pages/root/ArticleLink/ArticleLink";
 import formatDate from "../../../../lib/dateFormatter";
 import { getByGenre } from "../../../../seeds/remoteReader";
 import { getLocalArticles } from "../../../../seeds/localReader";
-import { Metadata } from "next";
 import { SITE_BLOG_NAME } from "../../../../constant";
 import { Categories } from "../../Categories";
 

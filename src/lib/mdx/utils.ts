@@ -1,10 +1,10 @@
 import { isAbsolute, resolve } from "node:path";
 import z from "zod";
-import { Plugin } from "unified";
-import { Node as UnistNode, Parent as UnistParent } from "unist";
-import { Image as MdastImage } from "mdast";
-import { Element as HastElement, Text as HastText } from "hast";
-import { MdxJsxFlowElement, MdxJsxAttribute } from "mdast-util-mdx-jsx";
+import type { Plugin } from "unified";
+import type { Node as UnistNode, Parent as UnistParent } from "unist";
+import type { Image as MdastImage } from "mdast";
+import type { Element as HastElement, Text as HastText } from "hast";
+import type { MdxJsxFlowElement, MdxJsxAttribute } from "mdast-util-mdx-jsx";
 
 function assertImage(node: UnistNode): asserts node is MdastImage {
   if (node.type !== "image") {
