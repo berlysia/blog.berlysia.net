@@ -101,6 +101,10 @@ export const renameFootnoteSectionName: Plugin = () => {
 const tagsTransformer = (x: string): string[] =>
   x?.split(",").map((y) => y.trim()) ?? [];
 
+const CategorySchema = z
+  .union([z.literal("tech"), z.literal("imas")])
+  .optional();
+
 export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
   z
     .object({
@@ -111,8 +115,8 @@ export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
       publishedAt: z.string().optional(),
       tags: z.string().transform(tagsTransformer),
       publishStatus: z.literal("draft"),
-
       preferVertical: z.boolean().default(false),
+      category: CategorySchema,
     })
     .passthrough(),
   z
@@ -124,8 +128,8 @@ export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
       publishedAt: z.string(),
       tags: z.string().transform(tagsTransformer),
       publishStatus: z.literal("published"),
-
       preferVertical: z.boolean().default(false),
+      category: CategorySchema,
     })
     .passthrough(),
   z
@@ -138,6 +142,7 @@ export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
       tags: z.string().transform(tagsTransformer),
       publishStatus: z.literal("unlisted"),
       preferVertical: z.boolean().default(false),
+      category: CategorySchema,
     })
     .passthrough(),
 ]);

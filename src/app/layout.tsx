@@ -3,6 +3,11 @@ import type { ReactNode } from "react";
 import { gaEnabled, GA_ID } from "../lib/gtag";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "../styles/globalStyle.css";
+import { SITE_NAME } from "../constant";
+
+export const metadata = {
+  title: `${SITE_NAME}`,
+};
 
 type Props = {
   children: ReactNode;

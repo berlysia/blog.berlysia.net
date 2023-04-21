@@ -1,21 +1,38 @@
-import Header from "../../components/Header";
-import { ArticleLink } from "../../components/pages/root/ArticleLink/ArticleLink";
-import { SITE_BLOG_NAME } from "../../constant";
-import formatDate from "../../lib/dateFormatter";
-import { getLocalArticles } from "../../seeds/localReader";
-import { getByGenre } from "../../seeds/remoteReader";
-import { Categories } from "./Categories";
-
-export const metadata = {
-  title: `${SITE_BLOG_NAME}`,
-};
+import Header from "../../../../components/Header";
+import { ArticleLink } from "../../../../components/pages/root/ArticleLink/ArticleLink";
+import formatDate from "../../../../lib/dateFormatter";
+import { getByGenre } from "../../../../seeds/remoteReader";
+import { getLocalArticles } from "../../../../seeds/localReader";
+import { Metadata } from "next";
+import { SITE_BLOG_NAME } from "../../../../constant";
+import { Categories } from "../../Categories";
 
 const outsideArticles = {
   imas: getByGenre("imas", Number.POSITIVE_INFINITY),
   tech: getByGenre("tech", Number.POSITIVE_INFINITY),
 };
 
-export default async function BlogPageIndex() {
+export async function generateStaticParams() {
+  return [
+    ...new Set(getLocalArticles().flatMap((x) => x.frontmatter.tags)),
+  ].map((category) => ({ category }));
+}
+
+type Params = Awaited<ReturnType<typeof generateStaticParams>>[number];
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { category } = params;
+
+  return {
+    title: `[${category}] - ${SITE_BLOG_NAME}`,
+  };
+}
+
+export default async function BlogPageIndex({ params }: { params: Params }) {
   const articles = getLocalArticles();
 
   const allLocalEntries = articles.map((result) => ({
@@ -29,21 +46,13 @@ export default async function BlogPageIndex() {
   );
 
   const publishedEntries = [
-    ...publishedLocalEntries,
-    ...outsideArticles.imas,
-    ...outsideArticles.tech,
-  ].sort((a, b) => b.pubDate - a.pubDate);
-
-  const categories = [
-    ...new Set(
-      [
-        "ALL",
-        ...getLocalArticles().flatMap((x) => x.frontmatter.category),
-        "tech",
-        "imas",
-      ].filter(Boolean)
+    ...publishedLocalEntries.filter(
+      (x) => x.frontmatter.category === params.category
     ),
-  ];
+    ...(Object.keys(outsideArticles).includes(params.category)
+      ? outsideArticles[params.category as keyof typeof outsideArticles]
+      : []),
+  ].sort((a, b) => b.pubDate - a.pubDate);
 
   return (
     <div>
@@ -56,7 +65,7 @@ export default async function BlogPageIndex() {
       </Header>
       <div className="tw-w-full tw-flex tw-justify-center">
         <div className="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative">
-          <Categories currentCategory="ALL" />
+          <Categories currentCategory={params.category} />
           {publishedEntries.length > 0 ? (
             <ol>
               {publishedEntries.map((x, i) => (
