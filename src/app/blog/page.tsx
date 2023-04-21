@@ -3,7 +3,7 @@ import { basename, resolve } from "node:path";
 import Header from "../../components/Header";
 import { ArticleLink } from "../../components/pages/root/ArticleLink/ArticleLink";
 import formatDate from "../../lib/dateFormatter";
-import { processMDX } from "../../lib/processMDX";
+import { processMDX } from "../../lib/mdx/processForServer";
 
 export default async function BlogPageIndex() {
   const articles = await readdir(resolve(process.cwd(), "src/articles"));

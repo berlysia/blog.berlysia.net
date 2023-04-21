@@ -2,7 +2,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import type { Metadata } from "next";
 import BlogArticleLayout from "./impl";
-import { processMDX } from "../../../../lib/processMDX";
+import { processMDX } from "../../../../lib/mdx/processForServer";
 
 const ARTICLE_PATH = "src/articles";
 
