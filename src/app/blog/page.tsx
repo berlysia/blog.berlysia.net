@@ -2,13 +2,14 @@ import { readdir, readFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import Header from "../../components/Header";
 import { ArticleLink } from "../../components/pages/root/ArticleLink/ArticleLink";
+import formatDate from "../../lib/dateFormatter";
 import { processMDX } from "./entry/[slug]/processMDX";
 
 export default async function BlogPageIndex() {
   const articles = await readdir(resolve(process.cwd(), "src/articles"));
   const posts = articles.filter((x) => x.endsWith(".mdx"));
 
-  const entries = await Promise.all(
+  const allLocalEntries = await Promise.all(
     posts.map(async (post) => {
       const slug = basename(post, ".mdx");
       const mdx = await readFile(
@@ -17,14 +18,20 @@ export default async function BlogPageIndex() {
       );
       const result = await processMDX(mdx, slug);
       return {
+        kind: "local" as const,
+        pubDate: new Date(result.frontmatter.publishedAt!).getTime(),
         slug,
         ...result,
       };
     })
   );
 
-  const publishedEntries = entries.filter(
+  const publishedLocalEntries = allLocalEntries.filter(
     (x) => x.frontmatter.publishStatus === "published"
+  );
+
+  const publishedEntries = [...publishedLocalEntries].sort(
+    (a, b) => b.pubDate - a.pubDate
   );
 
   return (
