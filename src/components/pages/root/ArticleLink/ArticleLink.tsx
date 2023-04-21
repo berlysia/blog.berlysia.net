@@ -18,15 +18,17 @@ export function ArticleLink({
   target?: "_blank" | "_self" | "_parent" | "_top" | (string & {});
 }) {
   return (
-    <div>
+    <div className="tw-rounded-xl tw-border-pink-200 tw-border tw-p-2 tw-mlb-1">
       <a
-        className="tw-block tw-rounded-md tw-py-2 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
+        className="tw-block tw-rounded-md tw-py-4 tw-text-2xl tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-pink-100 focus:tw-bg-pink-100"
         href={href}
         target={target}
         rel={target === "_blank" ? "noopener noreferrer" : ""}
       >
         {title}
       </a>
+
+      <hr className="tw-border-pink-100 tw-border-dotted" />
 
       <div className="tw-flex tw-items-center tw-min-w-0">
         {site ? (
