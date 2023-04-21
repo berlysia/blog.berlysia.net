@@ -1,5 +1,5 @@
 import formatDate from "../../../lib/dateFormatter";
-import type { Article } from "../../../seeds";
+import type { Article } from "../../../seeds/remoteReader";
 import { ArticleLink } from "./ArticleLink/ArticleLink";
 
 export const ArticleArea = ({

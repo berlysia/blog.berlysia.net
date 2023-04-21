@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 import { FullHeightContainer } from "../../FullHeightContainer/FullHeightContainer";
-import type { Article } from "../../../seeds";
+import type { Article } from "../../../seeds/remoteReader";
 import { ArticleArea } from "./ArticleArea";
 import { ArticleLinks } from "./ArticleLinks";
 import { Profile } from "./Profile";
