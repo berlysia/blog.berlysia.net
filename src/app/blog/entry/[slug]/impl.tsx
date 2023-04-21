@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Header from "../../../../components/Header";
-import type { Frontmatter } from "./processMDX";
+import type { Frontmatter } from "../../../../lib/processMDX";
 import VerticalClassWrapper from "./VerticalClassWrapper";
 import styles from "./impl.module.css";
 import WritingModeSwitcher from "./WritingModeSwitcher";

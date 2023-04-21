@@ -11,7 +11,7 @@ import type { Node as UnistNode, Parent as UnistParent } from "unist";
 import type { Image as MdastImage } from "mdast";
 import type { Element as HastElement, Text as HastText } from "hast";
 import type { MdxJsxFlowElement, MdxJsxAttribute } from "mdast-util-mdx-jsx";
-import MdxImage from "../../../../components/mdx/Image";
+import MdxImage from "../components/mdx/Image";
 
 function assertImage(node: UnistNode): asserts node is MdastImage {
   if (node.type !== "image") {
