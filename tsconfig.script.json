@@ -3,5 +3,5 @@
   "compilerOptions": {
     "module": "es2022"
   },
-  "include": ["**/*.mts"]
+  "include": ["src/seeds/**/*.mts", "src/lib/mdx/processForSeed.ts"]
 }

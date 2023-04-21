@@ -40,3 +40,5 @@ await writeFile(
   JSON.stringify(genres, null, 2),
   "utf-8"
 );
+
+console.log("remote articles are ready");

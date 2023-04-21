@@ -10,7 +10,7 @@ import {
   remarkResolveAssets,
   renameFootnoteSectionName,
   frontmatterSchema,
-} from "./utils";
+} from "./utils.mjs";
 
 export async function processMDX(mdx: string, slug: string) {
   const result = await compileMDX<Frontmatter>({
