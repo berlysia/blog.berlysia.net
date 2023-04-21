@@ -24,6 +24,7 @@ const genresEntries = await Promise.all(
             ...itemRest,
             siteUrl: feed.siteUrl,
             siteTitle: feed.siteTitle,
+            kind: "remote",
           })),
         };
       })
@@ -35,7 +36,7 @@ const genres = Object.fromEntries(genresEntries);
 genres.tech.push(old_tech);
 await ensureDir(resolve(__dirname, ".tmp"));
 await writeFile(
-  resolve(__dirname, ".tmp", "fetched.json"),
+  resolve(__dirname, ".tmp", "remote.json"),
   JSON.stringify(genres, null, 2),
   "utf-8"
 );
