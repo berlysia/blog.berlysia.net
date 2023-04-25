@@ -6,6 +6,7 @@ import { getByGenre } from "../../../../seeds/remoteReader";
 import { getLocalArticles } from "../../../../seeds/localReader";
 import { SITE_BLOG_NAME } from "../../../../constant";
 import { Categories } from "../../Categories";
+import { Content } from "../../Content";
 
 const outsideArticles = {
   imas: getByGenre("imas", Number.POSITIVE_INFINITY),
@@ -16,8 +17,9 @@ export async function generateStaticParams() {
   return [
     ...new Set(
       getLocalArticles()
-        .flatMap((x) => x.frontmatter.tags)
+        .flatMap((x) => x.frontmatter.category)
         .concat("imas", "tech")
+        .filter((x): x is Exclude<typeof x, undefined> => Boolean(x))
     ),
   ].map((category) => ({ category }));
 }
@@ -68,8 +70,7 @@ export default async function BlogPageIndex({ params }: { params: Params }) {
         </div>
       </Header>
       <div className="tw-w-full tw-flex tw-justify-center">
-        <div className="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative">
-          <Categories currentCategory={params.category} />
+        <Content>
           {publishedEntries.length > 0 ? (
             <ol>
               {publishedEntries.map((x, i) => (
@@ -100,7 +101,7 @@ export default async function BlogPageIndex({ params }: { params: Params }) {
           ) : (
             <div>no articles</div>
           )}
-        </div>
+        </Content>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import formatDate from "../../../lib/dateFormatter";
 import { getLocalArticles } from "../../../seeds/localReader";
 import { getByGenre } from "../../../seeds/remoteReader";
 import { Categories } from "../Categories";
+import { Content } from "../Content";
 
 export const metadata = {
   title: `[ALL] - ${SITE_BLOG_NAME}`,
@@ -44,8 +45,7 @@ export default async function BlogPageIndex() {
         </div>
       </Header>
       <div className="tw-w-full tw-flex tw-justify-center">
-        <div className="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative">
-          <Categories currentCategory="ALL" />
+        <Content currentCategory="ALL">
           {publishedEntries.length > 0 ? (
             <ol>
               {publishedEntries.map((x, i) => (
@@ -76,7 +76,7 @@ export default async function BlogPageIndex() {
           ) : (
             <div>no articles</div>
           )}
-        </div>
+        </Content>
       </div>
     </div>
   );

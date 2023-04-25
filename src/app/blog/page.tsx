@@ -3,7 +3,7 @@ import { ArticleLink } from "../../components/pages/root/ArticleLink/ArticleLink
 import { SITE_BLOG_NAME } from "../../constant";
 import formatDate from "../../lib/dateFormatter";
 import { getLocalArticles } from "../../seeds/localReader";
-import { Categories } from "./Categories";
+import { Content } from "./Content";
 
 export const metadata = {
   title: SITE_BLOG_NAME,
@@ -36,8 +36,7 @@ export default async function BlogPageIndex() {
         </div>
       </Header>
       <div className="tw-w-full tw-flex tw-justify-center">
-        <div className="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative tw-pli-4">
-          <Categories />
+        <Content>
           {publishedEntries.length > 0 ? (
             <ol>
               {publishedEntries.map((x, i) => (
@@ -54,7 +53,7 @@ export default async function BlogPageIndex() {
           ) : (
             <div>no articles</div>
           )}
-        </div>
+        </Content>
       </div>
     </div>
   );
