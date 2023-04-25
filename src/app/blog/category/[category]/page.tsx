@@ -14,7 +14,11 @@ const outsideArticles = {
 
 export async function generateStaticParams() {
   return [
-    ...new Set(getLocalArticles().flatMap((x) => x.frontmatter.tags)),
+    ...new Set(
+      getLocalArticles()
+        .flatMap((x) => x.frontmatter.tags)
+        .concat("imas", "tech")
+    ),
   ].map((category) => ({ category }));
 }
 
