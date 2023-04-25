@@ -7,6 +7,9 @@ const nextConfig = {
     appDir: true,
     typedRoutes: true,
   },
+  images: {
+    unoptimized: process.env.NODE_ENV !== "production",
+  },
 };
 
 export default withMDX()(nextConfig);

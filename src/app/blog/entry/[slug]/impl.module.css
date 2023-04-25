@@ -11,5 +11,5 @@
 }
 
 :where(:global(.vertical)) .wrapper {
-  @apply sm:tw-h-auto tw-h-[calc(100vh-2.5rem)];
+  @apply sm:tw-h-auto tw-h-[calc(100vh-2.5rem)] tw-h-[calc(100svh-2.5rem)];
 }
