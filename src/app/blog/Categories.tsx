@@ -28,7 +28,7 @@ export function Categories({
           })}
         >
           {category === "ALL" ? (
-            <a className="tw-block tw-plb-2 tw-pli-4" href={`/blog`}>
+            <a className="tw-block tw-plb-2 tw-pli-4" href={`/blog/all`}>
               {category}
             </a>
           ) : (

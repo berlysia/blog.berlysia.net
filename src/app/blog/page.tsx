@@ -3,16 +3,10 @@ import { ArticleLink } from "../../components/pages/root/ArticleLink/ArticleLink
 import { SITE_BLOG_NAME } from "../../constant";
 import formatDate from "../../lib/dateFormatter";
 import { getLocalArticles } from "../../seeds/localReader";
-import { getByGenre } from "../../seeds/remoteReader";
 import { Categories } from "./Categories";
 
 export const metadata = {
-  title: `${SITE_BLOG_NAME}`,
-};
-
-const outsideArticles = {
-  imas: getByGenre("imas", Number.POSITIVE_INFINITY),
-  tech: getByGenre("tech", Number.POSITIVE_INFINITY),
+  title: SITE_BLOG_NAME,
 };
 
 export default async function BlogPageIndex() {
@@ -28,22 +22,9 @@ export default async function BlogPageIndex() {
     (x) => x.frontmatter.publishStatus === "published"
   );
 
-  const publishedEntries = [
-    ...publishedLocalEntries,
-    ...outsideArticles.imas,
-    ...outsideArticles.tech,
-  ].sort((a, b) => b.pubDate - a.pubDate);
-
-  const categories = [
-    ...new Set(
-      [
-        "ALL",
-        ...getLocalArticles().flatMap((x) => x.frontmatter.category),
-        "tech",
-        "imas",
-      ].filter(Boolean)
-    ),
-  ];
+  const publishedEntries = publishedLocalEntries.sort(
+    (a, b) => b.pubDate - a.pubDate
+  );
 
   return (
     <div>
@@ -56,31 +37,17 @@ export default async function BlogPageIndex() {
       </Header>
       <div className="tw-w-full tw-flex tw-justify-center">
         <div className="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative">
-          <Categories currentCategory="ALL" />
+          <Categories />
           {publishedEntries.length > 0 ? (
             <ol>
               {publishedEntries.map((x, i) => (
                 <li key={i}>
-                  {x.kind === "local" ? (
-                    <ArticleLink
-                      href={`/blog/entry/${x.slug}`}
-                      title={x.frontmatter.title}
-                      pubDateString={formatDate(x.pubDate)}
-                      withHatenaBookmark
-                    />
-                  ) : (
-                    <ArticleLink
-                      href={x.link}
-                      title={x.title}
-                      pubDateString={formatDate(x.pubDate)}
-                      withHatenaBookmark
-                      site={
-                        x.siteTitle && x.siteUrl
-                          ? { title: x.siteTitle, url: x.siteUrl }
-                          : undefined
-                      }
-                    />
-                  )}
+                  <ArticleLink
+                    href={`/blog/entry/${x.slug}`}
+                    title={x.frontmatter.title}
+                    pubDateString={formatDate(x.pubDate)}
+                    withHatenaBookmark
+                  />
                 </li>
               ))}
             </ol>
