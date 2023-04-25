@@ -20,9 +20,9 @@ export default function Index(props: {
         </div>
       </FullHeightContainer>
       <FullHeightContainer className="tw-bg-white">
-        <div className="tw-flex tw-flex-col tw-justify-center">
+        <div className="tw-flex tw-flex-col tw-justify-center tw-w-full">
           <div className="tw-flex tw-flex-wrap md:tw-flex-row tw-flex-col">
-            <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink-0 tw-flex-grow tw-p-6">
+            <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink tw-flex-grow tw-p-6">
               <Talks withHatenaBookmark />
               <div className="tw-h-8"></div>
               <ArticleArea
@@ -31,7 +31,7 @@ export default function Index(props: {
                 withHatenaBookmark
               />
             </div>
-            <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink-0 tw-flex-grow tw-p-6">
+            <div className="tw-w-full md:tw-w-1/2 tw-flex-shrink tw-flex-grow tw-p-6">
               <ArticleArea
                 genreTitle="IM@S Articles"
                 articles={props.imasArticles}

@@ -41,7 +41,7 @@ export function ArticleLink({
             {site.title}
           </a>
         ) : null}
-        <div className="tw-ml-auto tw-flex tw-items-center tw-gap-1">
+        <div className="tw-ml-auto tw-flex tw-items-center tw-gap-1 tw-flex-shrink-0">
           {withHatenaBookmark ? (
             <a
               href={`https://b.hatena.ne.jp/entry/${href}`}
