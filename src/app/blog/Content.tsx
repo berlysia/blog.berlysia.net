@@ -1,10 +1,11 @@
+import type { ReactNode } from "react";
 import { Categories } from "./Categories";
 
 export function Content({
   children,
   currentCategory,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   currentCategory?: string;
 }) {
   return (

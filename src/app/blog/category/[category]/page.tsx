@@ -16,10 +16,12 @@ const outsideArticles = {
 export async function generateStaticParams() {
   return [
     ...new Set(
-      getLocalArticles()
-        .flatMap((x) => x.frontmatter.category)
-        .concat("imas", "tech")
-        .filter((x): x is Exclude<typeof x, undefined> => Boolean(x))
+      [
+        "imas",
+        "tech",
+        ...getLocalArticles().flatMap((x) => x.frontmatter.category),
+        // eslint-disable-next-line unicorn/prefer-native-coercion-functions -- 型の明示をしたい
+      ].filter((x): x is Exclude<typeof x, undefined> => Boolean(x))
     ),
   ].map((category) => ({ category }));
 }
