@@ -19,8 +19,8 @@
     "build": "run-s build:seed build:partytown build:next",
     "build:partytown": "partytown copylib public/~partytown",
     "build:seed": "run-p 'build:seed:*'",
-    "build:seed:local": "ts-node-esm --project ./tsconfig.script.json src/seeds/localBuild.ts",
-    "build:seed:remote": "ts-node-esm --project ./tsconfig.script.json src/seeds/remoteBuild.ts",
+    "build:seed:local": "tsx --tsconfig ./tsconfig.script.json src/seeds/localBuild.ts",
+    "build:seed:remote": "tsx --tsconfig ./tsconfig.script.json src/seeds/remoteBuild.ts",
     "build:next": "next build",
     "start": "next start",
     "lint": "eslint 'src/**/*.{js,ts,jsx,tsx}'",
@@ -75,7 +75,7 @@
     "tailwindcss": "3.3.2",
     "tailwindcss-logical": "^3.0.0",
     "ts-jest": "29.1.1",
-    "ts-node": "10.9.1",
+    "tsx": "^3.13.0",
     "typescript": "4.9.5"
   },
   "dependencies": {
