@@ -2,6 +2,7 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
+  testDir: "test/vrt",
   fullyParallel: true,
   webServer: {
     command: "yarn dev",
