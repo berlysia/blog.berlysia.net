@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 
 type Props = {
   children: ReactNode;
@@ -13,11 +14,11 @@ export default function Header({ children }: Props) {
         </div>
         <div className="tw-flex tw-h-full tw-items-center">
           <a href="/" className="tw-block tw-w-fit tw-h-fit tw-mx-2">
-            <img
+            <Image
               src="/avatar.jpg"
               alt="avatar"
-              width="36px"
-              height="36px"
+              width={36}
+              height={36}
               className="tw-block tw-rounded-md tw-border tw-border-keyColor-100"
             />
           </a>

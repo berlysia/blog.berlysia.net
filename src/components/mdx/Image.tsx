@@ -32,6 +32,7 @@ const Image = ({
       loading={loading}
     />
   ) : (
+    // eslint-disable-next-line @next/next/no-img-element -- fallback
     <img
       className={clsx("tw-object-contain", className)}
       src={src}

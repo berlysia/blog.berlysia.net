@@ -1,3 +1,5 @@
+import HatenaBookmarkCounter from "../HatenaBookmarkCounter";
+
 export function ArticleLink({
   href,
   title,
@@ -49,10 +51,8 @@ export function ArticleLink({
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
-                className="tw-block tw-object-contain"
-                src={`https://b.hatena.ne.jp/entry/image/${href}`}
-                alt="はてなブックマーク"
+              <HatenaBookmarkCounter
+                link={`https://b.hatena.ne.jp/entry/image/${href}`}
               />
             </a>
           ) : null}
