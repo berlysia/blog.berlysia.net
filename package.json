@@ -49,6 +49,7 @@
     "@storybook/addon-links": "7.4.6",
     "@storybook/addon-postcss": "2.0.0",
     "@storybook/react": "7.4.6",
+    "@tsconfig/next": "^2.0.1",
     "@types/eslint": "8.44.3",
     "@types/fs-extra": "11.0.2",
     "@types/hast": "^2.3.4",

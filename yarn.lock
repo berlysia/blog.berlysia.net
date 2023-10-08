@@ -2839,6 +2839,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tsconfig/next@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@tsconfig/next@npm:2.0.1"
+  checksum: 6083083e669181128d29960c788cc40fb818a84c8e598d0bda6cb8798a39bb154abd21ba21488fdb3c0652b3619394e0d8df95fa9e4ed5c6603c82fc0ccc962e
+  languageName: node
+  linkType: hard
+
 "@types/acorn@npm:^4.0.0":
   version: 4.0.6
   resolution: "@types/acorn@npm:4.0.6"
@@ -4176,6 +4183,7 @@ __metadata:
     "@storybook/addon-links": 7.4.6
     "@storybook/addon-postcss": 2.0.0
     "@storybook/react": 7.4.6
+    "@tsconfig/next": ^2.0.1
     "@types/eslint": 8.44.3
     "@types/fs-extra": 11.0.2
     "@types/hast": ^2.3.4
