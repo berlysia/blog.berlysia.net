@@ -18,6 +18,8 @@ html {
 
 html:has(.vertical) {
   @apply sm:tw-overflow-y-visible tw-overflow-y-hidden;
+  font-family: "Hiragino Kaku Gothic ProN", YuGothic, "Yu Gothic Medium", Meiryo,
+    var(--font-family-notosansjp) sans-serif;
   min-height: 100svh;
   height: 100%;
 }

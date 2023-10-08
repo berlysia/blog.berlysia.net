@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-// const paths = ["/", "/blog", "/blog/entry/test"];
-const paths = ["/blog", "/blog/entry/test", "/blog/entry/vertical"];
+const paths = ["/blog", "/blog/entry/sample"];
 
 for (const pathname of paths) {
   test(`VRT: ${pathname}`, async ({ page }) => {
