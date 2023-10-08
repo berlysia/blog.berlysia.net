@@ -1,5 +1,5 @@
 {
-  "extends": ["@berlysia/eslint-config/auto"],
+  "extends": ["plugin:@next/next/recommended", "@berlysia/eslint-config/auto"],
   "overrides": [
     {
       "files": ["*.config.js", "*rc.js"],
