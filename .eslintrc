@@ -14,6 +14,7 @@
     "unicorn/no-null": "off",
     "unicorn/text-encoding-identifier-case": "off",
     "unicorn/consistent-function-scoping": "off",
+    "unicorn/expiring-todo-comments": "off",
     "sonarjs/cognitive-complexity": "off",
     "import/no-named-as-default": "off",
     "unicorn/prevent-abbreviations": "off",
