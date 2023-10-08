@@ -1,4 +1,4 @@
-import type { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { StoryFn, Meta } from "@storybook/react";
 
 import { BlogMarble } from "./BlogMarble";
 
@@ -6,16 +6,11 @@ import { BlogMarble } from "./BlogMarble";
 export default {
   title: "BlogMarble",
   component: BlogMarble,
-} as ComponentMeta<typeof BlogMarble>;
+} as Meta<typeof BlogMarble>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof BlogMarble> = (args) => (
-  <BlogMarble {...args} />
-);
-
-export const Default = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Default.args = {
-  href: "https://example.com",
-  title: "Title",
+export const Default = {
+  args: {
+    href: "https://example.com",
+    title: "Title",
+  },
 };
