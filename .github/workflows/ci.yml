@@ -11,7 +11,8 @@ on:
 jobs:
   vrt:
     runs-on: ubuntu-latest
-
+    container:
+      image: mcr.microsoft.com/playwright:v1.35.1-focal
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
