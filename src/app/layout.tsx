@@ -10,7 +10,7 @@ import { SITE_NAME } from "../constant";
 const lato = Lato({
   subsets: ["latin"],
   display: "swap",
-  weight: ["400"],
+  weight: ["300"],
   variable: "--font-family-lato",
 });
 
