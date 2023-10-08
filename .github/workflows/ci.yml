@@ -15,18 +15,20 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.38.1-focal
     steps:
       - uses: actions/checkout@v3
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
       - uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
+
       - uses: actions/cache@v3
-        id: node_modules_cache_id
-        env:
-          cache-name: cache-node-modules
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
-          path: |
-            "**/node_modules"
-            ".yarn/cache"
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - uses: actions/cache@v3
         id: nextjs_cache_id
         env:
@@ -37,8 +39,8 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}-
-      - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
-      - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
+      - run: echo '${{ toJSON(steps.yarn-cache.outputs) }}'
+      - if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
         run: yarn install
       - run: yarn build
       - run: yarn test:vrt:ci
