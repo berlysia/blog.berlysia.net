@@ -2574,19 +2574,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@playwright/test@npm:1.32.2":
-  version: 1.32.2
-  resolution: "@playwright/test@npm:1.32.2"
+"@playwright/test@npm:1.39.0":
+  version: 1.39.0
+  resolution: "@playwright/test@npm:1.39.0"
   dependencies:
-    "@types/node": "*"
-    fsevents: 2.3.2
-    playwright-core: 1.32.2
-  dependenciesMeta:
-    fsevents:
-      optional: true
+    playwright: 1.39.0
   bin:
     playwright: cli.js
-  checksum: 3e4a9286c2a63c12b55368c3b94e8817fee15146e09e5be549be21d6938b6bcd26a32b0dc295100a3b24f1f0839fdb65be680e7a11a39014f485f36551c6844a
+  checksum: e93e58fc1af4239f239b890374f066c9a758e2492d25e2c1a532f3f00782ab8e7706956a07540fd14882c74e75f5de36273621adce9b79afb8e36e6c15f1d539
   languageName: node
   linkType: hard
 
@@ -5861,7 +5856,7 @@ __metadata:
     "@jsdevtools/rehype-toc": ^3.0.2
     "@mdx-js/loader": ^2.3.0
     "@next/mdx": ^13.3.0
-    "@playwright/test": 1.32.2
+    "@playwright/test": 1.39.0
     "@rebass/preset": ^4.0.5
     "@storybook/addon-actions": 6.5.16
     "@storybook/addon-essentials": 6.5.16
@@ -5893,7 +5888,7 @@ __metadata:
     next: ^13.3.0
     next-mdx-remote: ^4.4.1
     npm-run-all: 4.1.5
-    playwright: 1.32.2
+    playwright: 1.39.0
     postcss: 8.4.24
     prettier: 2.8.7
     react: ^18.2.0
@@ -14885,23 +14880,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playwright-core@npm:1.32.2":
-  version: 1.32.2
-  resolution: "playwright-core@npm:1.32.2"
+"playwright-core@npm:1.39.0":
+  version: 1.39.0
+  resolution: "playwright-core@npm:1.39.0"
   bin:
-    playwright: cli.js
-  checksum: ff000cbf280e5d558fe70fd3edf14910a2e86ec68b04e28327176268345be7b3f88a5d22d78e8dae677dd633dce6cd493237df199773b55312f2ae1ab85d711f
+    playwright-core: cli.js
+  checksum: 556e78dee4f9890facf2af8249972e0d6e01a5ae98737b0f6b0166c660a95ffee4cb79350335b1ef96430a0ef01d3669daae9099fa46c8d403d11c623988238b
   languageName: node
   linkType: hard
 
-"playwright@npm:1.32.2":
-  version: 1.32.2
-  resolution: "playwright@npm:1.32.2"
+"playwright@npm:1.39.0":
+  version: 1.39.0
+  resolution: "playwright@npm:1.39.0"
   dependencies:
-    playwright-core: 1.32.2
+    fsevents: 2.3.2
+    playwright-core: 1.39.0
+  dependenciesMeta:
+    fsevents:
+      optional: true
   bin:
     playwright: cli.js
-  checksum: 36967299a5c4c02830bcb7fb94b96d6c6a7a2d7e749feb924509e89b1fdc34f8ee2218cfaf75e5f32572663568b468ad28fdc170bced41869d5ed69f9a7ff384
+  checksum: 96d8ca5aa25465c1c5d554d0d6071981d55e22477800ff8f5d47a53ca75193d60ece2df538a01b7165b3277dd5493c67603a5acda713029df7fbd95ce2417bc9
   languageName: node
   linkType: hard
 
