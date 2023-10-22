@@ -18,7 +18,6 @@ for (const pathname of paths) {
 }
 
 for (const pathname of paths) {
-
   test(`VRT-SP: ${pathname}`, async ({ page }) => {
     await page.setViewportSize({
       // iPhone 12 Pro
