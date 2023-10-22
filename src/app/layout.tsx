@@ -2,11 +2,11 @@ import { Partytown } from "@builder.io/partytown/react";
 import type { ReactNode } from "react";
 import { Lato, Noto_Sans_JP } from "next/font/google";
 import Script from "next/script";
+import clsx from "clsx";
 import { gaEnabled, GA_ID } from "../lib/gtag";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "../styles/globalStyle.css";
 import { SITE_NAME } from "../constant";
-import clsx from "clsx";
 
 const lato = Lato({
   subsets: ["latin"],
