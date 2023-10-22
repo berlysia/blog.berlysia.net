@@ -1,5 +1,5 @@
 // playwright.config.ts
-import { defineConfig } from '@playwright/test';
+import { defineConfig } from "@playwright/test";
 
 const config = defineConfig({
   timeout: process.env.CI ? 5 * 60 * 1000 : 10_000,
