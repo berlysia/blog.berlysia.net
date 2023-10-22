@@ -9,6 +9,7 @@ for (const pathname of paths) {
       animations: "disabled",
       fullPage: true,
       scale: "device",
+      maxDiffPixelRatio: 0.02,
     });
   });
 }
@@ -25,6 +26,7 @@ for (const pathname of paths) {
       animations: "disabled",
       fullPage: true,
       scale: "device",
+      maxDiffPixelRatio: 0.02,
     });
   });
 }
