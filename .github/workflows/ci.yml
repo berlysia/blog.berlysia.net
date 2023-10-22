@@ -11,6 +11,10 @@ on:
 env:
   NODE_VERSION: 18
 
+concurrency:
+  group: vrt-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   vrt:
     runs-on: ubuntu-latest
