@@ -13,14 +13,14 @@ export function SlideLink({
   talkArchiveLink,
   withHatenaBookmark,
 }: {
-  eventTitle: string;
-  eventLink: string;
-  talkTitle: string;
-  talkLink: string;
-  slideLink?: string;
-  pubDateString: string;
-  talkArchiveLink?: string;
-  withHatenaBookmark?: boolean;
+  readonly eventTitle: string;
+  readonly eventLink: string;
+  readonly talkTitle: string;
+  readonly talkLink: string;
+  readonly slideLink?: string;
+  readonly pubDateString: string;
+  readonly talkArchiveLink?: string;
+  readonly withHatenaBookmark?: boolean;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const handleModalOpen = useCallback(() => {

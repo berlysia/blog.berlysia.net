@@ -27,7 +27,7 @@ export const metadata = {
 };
 
 type Props = {
-  children: ReactNode;
+  readonly children: ReactNode;
 };
 export default function Layout({ children }: Props) {
   return (

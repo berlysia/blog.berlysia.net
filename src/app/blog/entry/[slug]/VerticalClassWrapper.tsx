@@ -9,8 +9,8 @@ export default function VerticalClassWrapper({
   children,
   preferVertical,
 }: {
-  children: ReactNode;
-  preferVertical: boolean;
+  readonly children: ReactNode;
+  readonly preferVertical: boolean;
 }) {
   return (
     <WritingModeProvider preferVertical={preferVertical}>
@@ -19,7 +19,7 @@ export default function VerticalClassWrapper({
   );
 }
 
-function VerticalClassImpl({ children }: { children: ReactNode }) {
+function VerticalClassImpl({ children }: { readonly children: ReactNode }) {
   const writingMode = useWritingMode();
   return (
     <div className={clsx({ vertical: writingMode.isVertical })}>{children}</div>

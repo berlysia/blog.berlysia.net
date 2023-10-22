@@ -15,7 +15,7 @@ const categories = [
 export function Categories({
   currentCategory,
 }: {
-  currentCategory?: (typeof categories)[number];
+  readonly currentCategory?: (typeof categories)[number];
 }) {
   return (
     <ul className="tw-flex tw-flex-row tw-mlb-1">

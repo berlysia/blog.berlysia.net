@@ -3,8 +3,8 @@ export default function HatenaBookmarkCounter({
   link,
   alt,
 }: {
-  link: string;
-  alt?: string;
+  readonly link: string;
+  readonly alt?: string;
 }) {
   return (
     <img

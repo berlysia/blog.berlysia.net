@@ -8,8 +8,8 @@ import { Profile } from "./Profile";
 import { Talks } from "./Talks";
 
 export default function Index(props: {
-  techArticles: Article[];
-  imasArticles: Article[];
+  readonly techArticles: Article[];
+  readonly imasArticles: Article[];
 }) {
   return (
     <div className="tw-flex tw-flex-col">

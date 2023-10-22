@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 
 type Props = {
-  children: ReactNode;
+  readonly children: ReactNode;
 };
 
 export default function Header({ children }: Props) {

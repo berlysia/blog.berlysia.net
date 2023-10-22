@@ -71,7 +71,7 @@ const talks: readonly {
 export const Talks = ({
   withHatenaBookmark,
 }: {
-  withHatenaBookmark?: boolean;
+  readonly withHatenaBookmark?: boolean;
 }) => (
   <div>
     <h2 className="tw-text-2xl tw-font-bold tw-mb-2">Tech Talks</h2>
