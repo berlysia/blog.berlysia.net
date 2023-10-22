@@ -43,7 +43,7 @@
     "@berlysia/eslint-config": "4.1.0",
     "@berlysia/tsconfig": "0.0.1",
     "@mdx-js/loader": "^2.3.0",
-    "@next/mdx": "^13.3.0",
+    "@next/mdx": "canary",
     "@playwright/test": "1.39.0",
     "@storybook/addon-actions": "7.4.6",
     "@storybook/addon-essentials": "7.4.6",

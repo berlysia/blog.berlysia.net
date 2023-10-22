@@ -1255,9 +1255,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/mdx@npm:^13.3.0":
-  version: 13.5.4
-  resolution: "@next/mdx@npm:13.5.4"
+"@next/mdx@npm:canary":
+  version: 13.5.7-canary.14
+  resolution: "@next/mdx@npm:13.5.7-canary.14"
   dependencies:
     source-map: ^0.7.0
   peerDependencies:
@@ -1268,7 +1268,7 @@ __metadata:
       optional: true
     "@mdx-js/react":
       optional: true
-  checksum: 6df2d9f4552ab2c0710d4706928d4f652d3924b430adda34c0ab8705d6f8f2647b277fd3a9a4fcc92a7e9feb8ec6162e037c0b41271a31a02057909a2bc8f0b2
+  checksum: 38c541612192fe5d6571a7bf48c485341688489d7c2a58b563205c3f3ed837409fed27188f92a02f17ab21a792bea264cfab54864e5ca516dc796e0b81e5d363
   languageName: node
   linkType: hard
 
@@ -3980,7 +3980,7 @@ __metadata:
     "@fortawesome/react-fontawesome": ^0.2.0
     "@jsdevtools/rehype-toc": ^3.0.2
     "@mdx-js/loader": ^2.3.0
-    "@next/mdx": ^13.3.0
+    "@next/mdx": canary
     "@playwright/test": 1.39.0
     "@rebass/preset": ^4.0.5
     "@storybook/addon-actions": 7.4.6
