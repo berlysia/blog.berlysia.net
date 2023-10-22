@@ -4,7 +4,6 @@ import withMDX from "@next/mdx";
 const nextConfig = {
   output: "export",
   experimental: {
-    appDir: true,
     typedRoutes: true,
   },
   images: {

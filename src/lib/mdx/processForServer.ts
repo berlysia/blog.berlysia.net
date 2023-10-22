@@ -33,7 +33,10 @@ export async function processMDX(mdx: string, slug: string) {
         ],
       },
     },
-    components: { Image: MdxImage },
+    components: {
+      img: MdxImage,
+      Image: MdxImage,
+    },
   });
 
   const frontmatter = frontmatterSchema.parse(result.frontmatter);

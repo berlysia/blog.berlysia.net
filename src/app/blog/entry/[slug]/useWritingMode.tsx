@@ -17,8 +17,8 @@ export function WritingModeProvider({
   preferVertical,
   children,
 }: {
-  preferVertical: boolean;
-  children: ReactNode;
+  readonly preferVertical: boolean;
+  readonly children: ReactNode;
 }) {
   const [isVertical, setIsVertical] = useState(preferVertical);
   const setVertical = useCallback(() => setIsVertical(true), []);

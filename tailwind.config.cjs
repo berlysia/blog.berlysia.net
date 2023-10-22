@@ -8,6 +8,9 @@ module.exports = {
   darkMode: "media", // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        Lato: ["var(--font-family-lato)"],
+      },
       keyframes: {
         "fade-blink": {
           "0%": {

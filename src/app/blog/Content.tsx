@@ -5,8 +5,8 @@ export function Content({
   children,
   currentCategory,
 }: {
-  children: ReactNode;
-  currentCategory?: string;
+  readonly children: ReactNode;
+  readonly currentCategory?: string;
 }) {
   return (
     <div className="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative tw-pli-4">

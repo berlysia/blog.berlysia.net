@@ -1,46 +1,40 @@
 import { extname } from "node:path";
+import type { ComponentProps } from "react";
 import React from "react";
 import NextImage from "next/image";
+import clsx from "clsx";
 
-type Props = {
-  src: string;
-  alt: string;
-  className?: string;
-  loading?: HTMLImageElement["loading"];
-} & (
-  | {
-      width: number;
-      height: number;
-    }
-  | {
-      width: undefined;
-      height: undefined;
-    }
-);
+type Props = ComponentProps<"img">;
 
 const placeholder =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQYV2NgAAIAAAUAAarVyFEAAAAASUVORK5CYII=";
 
-const Image: React.FC<Props> = ({
+const Image = ({
   src,
   alt,
   className,
   loading = "lazy",
   width,
   height,
-}) => {
-  return width && height && extname(src) !== ".svg" ? (
+}: Props) => {
+  return typeof width === "number" &&
+    Number.isFinite(width) &&
+    typeof height === "number" &&
+    Number.isFinite(height) &&
+    src &&
+    extname(src) !== ".svg" ? (
     <NextImage
       src={src}
-      alt={alt}
+      alt={alt ?? ""}
       className={className}
       width={width}
       height={height}
       loading={loading}
     />
   ) : (
+    // eslint-disable-next-line @next/next/no-img-element -- fallback
     <img
-      className={`tw-object-contain ${className}`}
+      className={clsx("tw-object-contain", className)}
       src={src}
       alt={alt}
       width={width}

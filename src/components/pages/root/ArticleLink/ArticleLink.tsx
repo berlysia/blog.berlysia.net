@@ -1,3 +1,5 @@
+import HatenaBookmarkCounter from "../HatenaBookmarkCounter";
+
 export function ArticleLink({
   href,
   title,
@@ -6,16 +8,16 @@ export function ArticleLink({
   withHatenaBookmark,
   target = "_self",
 }: {
-  href: string;
-  title: string;
-  site?: {
+  readonly href: string;
+  readonly title: string;
+  readonly site?: {
     url: string;
     title: string;
   };
-  pubDateString: string;
-  withHatenaBookmark?: boolean;
+  readonly pubDateString: string;
+  readonly withHatenaBookmark?: boolean;
   // eslint-disable-next-line @typescript-eslint/ban-types -- idiom
-  target?: "_blank" | "_self" | "_parent" | "_top" | (string & {});
+  readonly target?: "_blank" | "_self" | "_parent" | "_top" | (string & {});
 }) {
   return (
     <div className="tw-rounded-xl tw-border-pink-200 tw-border tw-p-2 tw-mlb-1">
@@ -49,10 +51,8 @@ export function ArticleLink({
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
-                className="tw-block tw-object-contain"
-                src={`https://b.hatena.ne.jp/entry/image/${href}`}
-                alt="はてなブックマーク"
+              <HatenaBookmarkCounter
+                link={`https://b.hatena.ne.jp/entry/image/${href}`}
               />
             </a>
           ) : null}

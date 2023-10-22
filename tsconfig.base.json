@@ -1,13 +1,13 @@
 {
-  "extends": "@berlysia/tsconfig",
+  "extends": "@tsconfig/next/tsconfig.json",
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "module": "NodeNext",
     "target": "esnext",
     "resolveJsonModule": true,
+    "moduleResolution": "bundler",
     "jsx": "preserve",
     "isolatedModules": true,
     "declaration": false,

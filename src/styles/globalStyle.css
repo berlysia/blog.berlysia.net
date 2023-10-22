@@ -1,4 +1,4 @@
-@tailwind base; /* Preflight will be injected here */
+@tailwind base;
 
 @tailwind components;
 
@@ -8,7 +8,7 @@ html {
   min-height: 100vh;
   overflow-y: scroll;
 
-  font-family: "Lato", "Helvetica Neue", "Helvetica",
+  font-family: var(--font-family-lato), "Helvetica Neue", "Helvetica",
     "Hiragino Kaku Gothic ProN", YuGothic, "Yu Gothic Medium", Meiryo,
     sans-serif;
   color: #233;
@@ -18,6 +18,8 @@ html {
 
 html:has(.vertical) {
   @apply sm:tw-overflow-y-visible tw-overflow-y-hidden;
+  font-family: "Hiragino Kaku Gothic ProN", YuGothic, "Yu Gothic Medium", Meiryo,
+    var(--font-family-notosansjp), sans-serif;
   min-height: 100svh;
   height: 100%;
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useRef } from "react";
+import HatenaBookmarkCounter from "../HatenaBookmarkCounter";
 
 export function SlideLink({
   eventTitle,
@@ -12,14 +13,14 @@ export function SlideLink({
   talkArchiveLink,
   withHatenaBookmark,
 }: {
-  eventTitle: string;
-  eventLink: string;
-  talkTitle: string;
-  talkLink: string;
-  slideLink?: string;
-  pubDateString: string;
-  talkArchiveLink?: string;
-  withHatenaBookmark?: boolean;
+  readonly eventTitle: string;
+  readonly eventLink: string;
+  readonly talkTitle: string;
+  readonly talkLink: string;
+  readonly slideLink?: string;
+  readonly pubDateString: string;
+  readonly talkArchiveLink?: string;
+  readonly withHatenaBookmark?: boolean;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const handleModalOpen = useCallback(() => {
@@ -69,11 +70,7 @@ export function SlideLink({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img
-                      className="tw-block tw-object-contain"
-                      src={`https://b.hatena.ne.jp/entry/image/${slideLink}`}
-                      alt="はてなブックマーク"
-                    />
+                    <HatenaBookmarkCounter link={slideLink} />
                   </a>
                 ) : null}
               </>
@@ -127,10 +124,8 @@ export function SlideLink({
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              <img
-                                className="tw-block tw-object-contain"
-                                src={`https://b.hatena.ne.jp/entry/image/${slideLink}`}
-                                alt="はてなブックマーク"
+                              <HatenaBookmarkCounter
+                                link={`https://b.hatena.ne.jp/entry/image/${slideLink}`}
                               />
                             </a>
                           ) : null}

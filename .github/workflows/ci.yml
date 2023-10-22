@@ -8,27 +8,44 @@ on:
     branches:
       - master
 
+env:
+  NODE_VERSION: 18
+
+concurrency:
+  group: vrt-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   vrt:
     runs-on: ubuntu-latest
-
+    container:
+      image: mcr.microsoft.com/playwright:v1.39.0-focal
     steps:
+      - id: env-key
+        run: echo "value=${{ runner.os }}-${{ env.NODE_VERSION }}" >> $GITHUB_OUTPUT
+      - id: lock-hash
+        run: echo "value=${{ hashFiles('package.json', '**/yarn.lock', '.yarn/releases/yarn-*.cjs') }}" >> $GITHUB_OUTPUT
+      - id: source-hash
+        run: echo "value=${{ hashFiles('*.[cm]js','*.js','src/**/*.[jt]s','src/**/*.[jt]sx') }}" >> $GITHUB_OUTPUT
+      - id: nextjs-cache-dir-path
+        run: echo "value=${{ github.workspace }}/.next/cache" >> $GITHUB_OUTPUT
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "lts/*"
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "yarn"
+      - run: yarn install
       - uses: actions/cache@v3
-        id: node_modules_cache_id
+        id: nextjs_cache_id
         env:
-          cache-name: cache-node-modules
+          cache-name: cache-nextjs
         with:
           path: |
-            "**/node_modules"
-            ".yarn/cache"
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
-      - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
-      - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
-        run: yarn install
+            ${{ steps.nextjs-cache-dir-path.outputs.value }}
+          key: ${{ steps.env-key.outputs.value }}-${{ env.cache-name }}-${{ steps.lock-hash.outputs.value }}-${{ steps.source-hash.outputs.value }}
+          restore-keys: |
+            ${{ steps.env-key.outputs.value }}-${{ env.cache-name }}-${{ steps.lock-hash.outputs.value }}-
+            ${{ steps.env-key.outputs.value }}-${{ env.cache-name }}-
       - run: yarn build
       - run: yarn test:vrt:ci
       - uses: actions/upload-artifact@v3

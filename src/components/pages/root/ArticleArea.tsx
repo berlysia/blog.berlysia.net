@@ -7,9 +7,9 @@ export const ArticleArea = ({
   articles,
   withHatenaBookmark,
 }: {
-  genreTitle: string;
-  articles: Article[];
-  withHatenaBookmark?: boolean;
+  readonly genreTitle: string;
+  readonly articles: Article[];
+  readonly withHatenaBookmark?: boolean;
 }) => {
   return (
     <div>

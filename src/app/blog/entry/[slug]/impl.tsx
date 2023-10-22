@@ -7,8 +7,8 @@ import WritingModeSwitcher from "./WritingModeSwitcher";
 import Article from "./Article";
 
 type Properties = {
-  frontmatter: Frontmatter;
-  children: ReactNode;
+  readonly frontmatter: Frontmatter;
+  readonly children: ReactNode;
 };
 export default function BlogArticleLayout({
   frontmatter,

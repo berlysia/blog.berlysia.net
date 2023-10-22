@@ -1,0 +1,97 @@
+diff --git a/node_modules/next/dist/compiled/@next/font/dist/google/fetch-css-from-google-fonts.js b/node_modules/next/dist/compiled/@next/font/dist/google/fetch-css-from-google-fonts.js
+index 1c0a9ba..a34318f 100644
+--- a/node_modules/next/dist/compiled/@next/font/dist/google/fetch-css-from-google-fonts.js
++++ b/node_modules/next/dist/compiled/@next/font/dist/google/fetch-css-from-google-fonts.js
+@@ -6,23 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.fetchCSSFromGoogleFonts = void 0;
+ // @ts-ignore
+ const node_fetch_1 = __importDefault(require("next/dist/compiled/node-fetch"));
++const { retry } = require("./retry");
+ const next_font_error_1 = require("../next-font-error");
+ const get_proxy_agent_1 = require("./get-proxy-agent");
+-async function retry(fn, attempts) {
+-    let cnt = attempts;
+-    while (true) {
+-        try {
+-            return await fn();
+-        }
+-        catch (err) {
+-            cnt--;
+-            if (cnt <= 0)
+-                throw err;
+-            console.error(err.message + `\n\nRetrying ${attempts - cnt}/3...`);
+-            await new Promise((resolve) => setTimeout(resolve, 100));
+-        }
+-    }
+-}
+ /**
+  * Fetches the CSS containing the @font-face declarations from Google Fonts.
+  * The fetch has a user agent header with a modern browser to ensure we'll get .woff2 files.
+diff --git a/node_modules/next/dist/compiled/@next/font/dist/google/fetch-font-file.js b/node_modules/next/dist/compiled/@next/font/dist/google/fetch-font-file.js
+index 5f71474..d8402e4 100644
+--- a/node_modules/next/dist/compiled/@next/font/dist/google/fetch-font-file.js
++++ b/node_modules/next/dist/compiled/@next/font/dist/google/fetch-font-file.js
+@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.fetchFontFile = void 0;
+ // @ts-ignore
+ const node_fetch_1 = __importDefault(require("next/dist/compiled/node-fetch"));
++const { retry } = require("./retry");
+ const get_proxy_agent_1 = require("./get-proxy-agent");
+ /**
+  * Fetch the url and return a buffer with the font file.
+@@ -20,17 +21,20 @@ async function fetchFontFile(url, isDev) {
+         // Otherwise just return a unique buffer
+         return Buffer.from(url);
+     }
+-    const controller = new AbortController();
+-    const timeoutId = setTimeout(() => controller.abort(), 3000);
+-    const arrayBuffer = await (0, node_fetch_1.default)(url, {
+-        agent: (0, get_proxy_agent_1.getProxyAgent)(),
+-        // Add a timeout in dev
+-        signal: isDev ? controller.signal : undefined,
+-    })
+-        .then((r) => r.arrayBuffer())
+-        .finally(() => {
+-        clearTimeout(timeoutId);
+-    });
+-    return Buffer.from(arrayBuffer);
++    return await retry(async () => {
++        const controller = new AbortController();
++        const timeoutId = setTimeout(() => controller.abort(), 3000);
++
++        const arrayBuffer = await (0, node_fetch_1.default)(url, {
++            agent: (0, get_proxy_agent_1.getProxyAgent)(),
++            // Add a timeout in dev
++            signal: isDev ? controller.signal : undefined,
++        })
++            .then((r) => r.arrayBuffer())
++            .finally(() => {
++            clearTimeout(timeoutId);
++        });
++        return Buffer.from(arrayBuffer);
++    }, 3);
+ }
+ exports.fetchFontFile = fetchFontFile;
+diff --git a/node_modules/next/dist/compiled/@next/font/dist/google/retry.js b/node_modules/next/dist/compiled/@next/font/dist/google/retry.js
+new file mode 100644
+index 0000000..f8e02c5
+--- /dev/null
++++ b/node_modules/next/dist/compiled/@next/font/dist/google/retry.js
+@@ -0,0 +1,17 @@
++"use strict";
++async function retry(fn, attempts) {
++    let cnt = attempts;
++    while (true) {
++        try {
++            return await fn();
++        }
++        catch (err) {
++            cnt--;
++            if (cnt <= 0)
++                throw err;
++            console.error(err.message + `\n\nRetrying ${attempts - cnt}/${attempts}...`);
++            await new Promise((resolve) => setTimeout(resolve, 100));
++        }
++    }
++}
++exports.retry = retry;

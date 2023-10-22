@@ -5,7 +5,11 @@ import { useEffect, useCallback, useRef } from "react";
 import styles from "./impl.module.css";
 import { useWritingMode } from "./useWritingMode";
 
-export default function Article({ children }: { children: ReactNode }) {
+export default function Article({
+  children,
+}: {
+  readonly children: ReactNode;
+}) {
   const writingMode = useWritingMode();
   const articleReference = useRef<HTMLElement>(null);
   const sentinelReference = useRef<HTMLDivElement>(null);

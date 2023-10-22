@@ -1,20 +1,37 @@
 import { Partytown } from "@builder.io/partytown/react";
 import type { ReactNode } from "react";
+import { Lato, Noto_Sans_JP } from "next/font/google";
+import Script from "next/script";
+import clsx from "clsx";
 import { gaEnabled, GA_ID } from "../lib/gtag";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "../styles/globalStyle.css";
 import { SITE_NAME } from "../constant";
+
+const lato = Lato({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["300"],
+  variable: "--font-family-lato",
+});
+
+const notosansjp = Noto_Sans_JP({
+  subsets: [],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-family-notosansjp",
+});
 
 export const metadata = {
   title: `${SITE_NAME}`,
 };
 
 type Props = {
-  children: ReactNode;
+  readonly children: ReactNode;
 };
 export default function Layout({ children }: Props) {
   return (
-    <html lang="ja">
+    <html lang="ja" className={clsx(lato.variable, notosansjp.variable)}>
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -24,19 +41,16 @@ export default function Layout({ children }: Props) {
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap"
-          rel="stylesheet"
-        />
         {gaEnabled && (
           <>
             <Partytown forward={["dataLayer.push"]} />
-            <script
-              type="text/partytown"
+            <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="worker"
             />
-            <script
-              type="text/partytown"
+            <Script
+              id="gtag-init"
+              strategy="worker"
               dangerouslySetInnerHTML={{
                 __html: `window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}

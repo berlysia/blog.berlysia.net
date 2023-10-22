@@ -1,4 +1,10 @@
-export function BlogMarble({ href, title }: { href: string; title: string }) {
+export function BlogMarble({
+  href,
+  title,
+}: {
+  readonly href: string;
+  readonly title: string;
+}) {
   return (
     <a
       key={href}
