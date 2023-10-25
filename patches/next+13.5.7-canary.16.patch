@@ -1,12 +1,9 @@
 diff --git a/node_modules/next/dist/compiled/@next/font/dist/google/fetch-css-from-google-fonts.js b/node_modules/next/dist/compiled/@next/font/dist/google/fetch-css-from-google-fonts.js
-index 1c0a9ba..a34318f 100644
+index 1c0a9ba..2cd6bcc 100644
 --- a/node_modules/next/dist/compiled/@next/font/dist/google/fetch-css-from-google-fonts.js
 +++ b/node_modules/next/dist/compiled/@next/font/dist/google/fetch-css-from-google-fonts.js
-@@ -6,23 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
- exports.fetchCSSFromGoogleFonts = void 0;
- // @ts-ignore
+@@ -8,21 +8,8 @@ exports.fetchCSSFromGoogleFonts = void 0;
  const node_fetch_1 = __importDefault(require("next/dist/compiled/node-fetch"));
-+const { retry } = require("./retry");
  const next_font_error_1 = require("../next-font-error");
  const get_proxy_agent_1 = require("./get-proxy-agent");
 -async function retry(fn, attempts) {
@@ -24,22 +21,24 @@ index 1c0a9ba..a34318f 100644
 -        }
 -    }
 -}
++const { retry } = require("./retry");
++
  /**
   * Fetches the CSS containing the @font-face declarations from Google Fonts.
   * The fetch has a user agent header with a modern browser to ensure we'll get .woff2 files.
 diff --git a/node_modules/next/dist/compiled/@next/font/dist/google/fetch-font-file.js b/node_modules/next/dist/compiled/@next/font/dist/google/fetch-font-file.js
-index 5f71474..d8402e4 100644
+index 5f71474..d190a75 100644
 --- a/node_modules/next/dist/compiled/@next/font/dist/google/fetch-font-file.js
 +++ b/node_modules/next/dist/compiled/@next/font/dist/google/fetch-font-file.js
-@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
- exports.fetchFontFile = void 0;
+@@ -7,6 +7,7 @@ exports.fetchFontFile = void 0;
  // @ts-ignore
  const node_fetch_1 = __importDefault(require("next/dist/compiled/node-fetch"));
-+const { retry } = require("./retry");
  const get_proxy_agent_1 = require("./get-proxy-agent");
++const { retry } = require("./retry");
  /**
   * Fetch the url and return a buffer with the font file.
-@@ -20,17 +21,20 @@ async function fetchFontFile(url, isDev) {
+  */
+@@ -20,17 +21,19 @@ async function fetchFontFile(url, isDev) {
          // Otherwise just return a unique buffer
          return Buffer.from(url);
      }
@@ -58,7 +57,6 @@ index 5f71474..d8402e4 100644
 +    return await retry(async () => {
 +        const controller = new AbortController();
 +        const timeoutId = setTimeout(() => controller.abort(), 3000);
-+
 +        const arrayBuffer = await (0, node_fetch_1.default)(url, {
 +            agent: (0, get_proxy_agent_1.getProxyAgent)(),
 +            // Add a timeout in dev
@@ -74,24 +72,26 @@ index 5f71474..d8402e4 100644
  exports.fetchFontFile = fetchFontFile;
 diff --git a/node_modules/next/dist/compiled/@next/font/dist/google/retry.js b/node_modules/next/dist/compiled/@next/font/dist/google/retry.js
 new file mode 100644
-index 0000000..f8e02c5
+index 0000000..3b762d1
 --- /dev/null
 +++ b/node_modules/next/dist/compiled/@next/font/dist/google/retry.js
-@@ -0,0 +1,17 @@
+@@ -0,0 +1,19 @@
 +"use strict";
-+async function retry(fn, attempts) {
-+    let cnt = attempts;
-+    while (true) {
-+        try {
-+            return await fn();
-+        }
-+        catch (err) {
-+            cnt--;
-+            if (cnt <= 0)
-+                throw err;
-+            console.error(err.message + `\n\nRetrying ${attempts - cnt}/${attempts}...`);
-+            await new Promise((resolve) => setTimeout(resolve, 100));
-+        }
-+    }
++var __importDefault = (this && this.__importDefault) || function (mod) {
++    return (mod && mod.__esModule) ? mod : { "default": mod };
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++const async_retry = __importDefault(require("next/dist/compiled/async-retry"));
++
++async function retry(fn, retries) {
++    return await async_retry.default(fn, {
++        retries,
++        onRetry(e, attempt) {
++          console.error(
++            e.message + `\n\nRetrying ${attempt}/${retries}...`
++          )
++        },
++        minTimeout: 100,
++    })
 +}
 +exports.retry = retry;
