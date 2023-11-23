@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import Header from "../../../../components/Header";
-import type { Frontmatter } from "../../../../lib/mdx/utils.js";
+import Header from "../../../components/Header";
+import type { Frontmatter } from "../../../lib/mdx/utils.js";
 import VerticalClassWrapper from "./VerticalClassWrapper";
 import styles from "./impl.module.css";
 import WritingModeSwitcher from "./WritingModeSwitcher";
@@ -19,7 +19,7 @@ export default function BlogArticleLayout({
       <Header>
         <div className="tw-shrink tw-overflow-ellipsis tw-overflow-hidden tw-whitespace-nowrap">
           <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/blog">
-            berlysia.net/blog
+            blog.berlysia.net
           </a>
           <span className="tw-font-normal">
             <span className="tw-mx-1">-</span>

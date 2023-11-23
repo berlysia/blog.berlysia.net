@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
 
-const paths = ["/blog", "/blog/entry/sample"];
+const paths = ["", "/entry/sample"];
 
 for (const pathname of paths) {
   // columnの動作が安定しないため、スキップ
-  if (pathname === "/blog/entry/sample") continue;
+  if (pathname === "/entry/sample") continue;
 
   test(`VRT: ${pathname}`, async ({ page }) => {
     await page.goto(`http://localhost:3000${pathname}`);

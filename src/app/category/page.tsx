@@ -1,5 +1,5 @@
-import Header from "../../../components/Header";
-import { SITE_BLOG_NAME } from "../../../constant";
+import Header from "../../components/Header";
+import { SITE_BLOG_NAME } from "../../constant";
 import { Categories } from "../Categories";
 
 export const metadata = {
@@ -12,7 +12,7 @@ export default async function BlogPageIndex() {
       <Header>
         <div>
           <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/blog">
-            berlysia.net/blog
+            blog.berlysia.net
           </a>
         </div>
       </Header>

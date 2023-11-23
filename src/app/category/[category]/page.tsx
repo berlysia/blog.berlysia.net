@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Header from "../../../../components/Header";
-import { ArticleLink } from "../../../../components/pages/root/ArticleLink/ArticleLink";
-import formatDate from "../../../../lib/dateFormatter";
-import { getByGenre } from "../../../../seeds/remoteReader";
-import { getLocalArticles } from "../../../../seeds/localReader";
-import { SITE_BLOG_NAME } from "../../../../constant";
+import Header from "../../../components/Header";
+import { ArticleLink } from "../../../components/ArticleLink/ArticleLink";
+import formatDate from "../../../lib/dateFormatter";
+import { getByGenre } from "../../../seeds/remoteReader";
+import { getLocalArticles } from "../../../seeds/localReader";
+import { SITE_BLOG_NAME } from "../../../constant";
 import { Categories } from "../../Categories";
 import { Content } from "../../Content";
 
@@ -66,8 +66,8 @@ export default async function BlogPageIndex({ params }: { params: Params }) {
     <div>
       <Header>
         <div>
-          <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/blog">
-            berlysia.net/blog
+          <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/">
+            blog.berlysia.net
           </a>
         </div>
       </Header>
@@ -79,7 +79,7 @@ export default async function BlogPageIndex({ params }: { params: Params }) {
                 <li key={i}>
                   {x.kind === "local" ? (
                     <ArticleLink
-                      href={`/blog/entry/${x.slug}`}
+                      href={`/entry/${x.slug}`}
                       title={x.frontmatter.title}
                       pubDateString={formatDate(x.pubDate)}
                       withHatenaBookmark

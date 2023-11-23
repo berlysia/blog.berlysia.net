@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { getLocalArticles } from "../../seeds/localReader";
+import { getLocalArticles } from "../seeds/localReader";
 
 const categories = [
   ...new Set(
@@ -28,13 +28,13 @@ export function Categories({
           })}
         >
           {category === "ALL" ? (
-            <a className="tw-block tw-plb-2 tw-pli-4" href={`/blog/all`}>
+            <a className="tw-block tw-plb-2 tw-pli-4" href={`/all`}>
               {category}
             </a>
           ) : (
             <a
               className="tw-block tw-plb-2 tw-pli-4"
-              href={`/blog/category/${category}`}
+              href={`/category/${category}`}
             >
               {category}
             </a>

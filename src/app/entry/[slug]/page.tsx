@@ -1,8 +1,8 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import type { Metadata } from "next";
-import { processMDX } from "../../../../lib/mdx/processForServer";
-import { getBySlug, getSlugs } from "../../../../seeds/localReader";
+import { processMDX } from "../../../lib/mdx/processForServer";
+import { getBySlug, getSlugs } from "../../../seeds/localReader";
 import BlogArticleLayout from "./impl";
 
 const ARTICLE_PATH = "src/articles";

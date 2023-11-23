@@ -1,5 +1,3 @@
-import HatenaBookmarkCounter from "../HatenaBookmarkCounter";
-
 export function ArticleLink({
   href,
   title,
@@ -44,18 +42,6 @@ export function ArticleLink({
           </a>
         ) : null}
         <div className="tw-ml-auto tw-flex tw-items-center tw-gap-1 tw-flex-shrink-0">
-          {withHatenaBookmark ? (
-            <a
-              href={`https://b.hatena.ne.jp/entry/${href}`}
-              className="tw-flex tw-items-center tw-rounded-md tw-px-1 tw-h-6 tw-flex-shrink-0 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <HatenaBookmarkCounter
-                link={`https://b.hatena.ne.jp/entry/image/${href}`}
-              />
-            </a>
-          ) : null}
           <time
             className="tw-flex-shrink-0 tw-block tw-text-right tw-text-xs tw-no-underline"
             dateTime={pubDateString}

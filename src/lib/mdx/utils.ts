@@ -21,10 +21,14 @@ function assertMdxJsxFlowElement(
 function isMdxJsxAttribute(node: UnistNode): node is MdxJsxAttribute {
   return node.type === "mdxJsxAttribute";
 }
+
+/*
+  src/articles/foo.mdx と public/blog/entry/foo が対応するようにパスを書き換える
+*/
 export const remarkResolveAssets: Plugin = (slug: string) => {
   return function remarkResolveAssetsImpl(tree) {
-    // src/pages/blog/entry/foo.mdx => /blog/entry/foo
-    const baseDir = resolve("/blog/entry/", slug);
+    // src/articles/foo.mdx => /entry/foo
+    const baseDir = resolve("/entry/", slug);
 
     function walk(curr: UnistNode | UnistParent) {
       if ("children" in curr) {
@@ -32,7 +36,7 @@ export const remarkResolveAssets: Plugin = (slug: string) => {
           switch (x.type) {
             case "image": {
               assertImage(x);
-              // `![](./image.png)` => `![](/blog/entry/foo/image.png)` in src/pages/blog/entry/foo.mdx
+              // `![](./image.png)` => `![](/entry/foo/image.png)` in src/articles/foo.mdx
               if (isAbsolute(x.url)) continue;
               const resolved = resolve(baseDir, x.url);
               x.url = resolved;
@@ -40,7 +44,7 @@ export const remarkResolveAssets: Plugin = (slug: string) => {
             }
             case "mdxJsxFlowElement": {
               assertMdxJsxFlowElement(x);
-              // `<Some src="./image.png" />` => `<Some src="/blog/entry/foo/image.png" />` in src/pages/blog/entry/foo.mdx
+              // `<Some src="./image.png" />` => `<Some src="/entry/foo/image.png" />` in src/articles/foo.mdx
               const srcAttr = x.attributes
                 ?.filter(isMdxJsxAttribute)
                 .find((at) => at.name === "src");
