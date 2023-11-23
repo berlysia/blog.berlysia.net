@@ -33,7 +33,7 @@ import { ensureDir } from "fs-extra";
       null,
       2
     ),
-    "utf-8"
+    "utf8"
   );
 
   console.log("local articles are ready");

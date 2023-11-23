@@ -68,31 +68,32 @@ function isHastElement(node: UnistNode): node is HastElement {
 function isHastText(node: UnistNode): node is HastText {
   return node.type === "text";
 }
-export const renameFootnoteSectionName: Plugin = () => {
-  // tree.childrenを再帰的に走査して、 footnote-labelというidを持つ要素を探す
-  function walk(curr: UnistNode | UnistParent) {
-    if ("children" in curr) {
-      for (const x of curr.children) {
-        if (isHastElement(x) && x.properties?.id === "footnote-label") {
-          walkInner(x);
-        }
-        walk(x);
-      }
-    }
-  }
 
-  // 見つかった要素の更に子孫を再帰的に走査し、textノードの内容を「脚注」に変更する
-  function walkInner(curr: UnistNode | UnistParent) {
-    if ("children" in curr) {
-      for (const x of curr.children) {
-        if (isHastText(x)) {
-          x.value = "脚注";
-        }
+// tree.childrenを再帰的に走査して、 footnote-labelというidを持つ要素を探す
+function walk(curr: UnistNode | UnistParent) {
+  if ("children" in curr) {
+    for (const x of curr.children) {
+      if (isHastElement(x) && x.properties?.id === "footnote-label") {
         walkInner(x);
       }
+      walk(x);
     }
   }
+}
 
+// 見つかった要素の更に子孫を再帰的に走査し、textノードの内容を「脚注」に変更する
+function walkInner(curr: UnistNode | UnistParent) {
+  if ("children" in curr) {
+    for (const x of curr.children) {
+      if (isHastText(x)) {
+        x.value = "脚注";
+      }
+      walkInner(x);
+    }
+  }
+}
+
+export const renameFootnoteSectionName: Plugin = () => {
   return function renameFootnoteSectionImpl(tree) {
     walk(tree);
   };

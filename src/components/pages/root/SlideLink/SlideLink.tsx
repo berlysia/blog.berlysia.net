@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import HatenaBookmarkCounter from "../HatenaBookmarkCounter";
 
 export function SlideLink({
@@ -28,6 +28,15 @@ export function SlideLink({
       dialogRef.current.showModal();
     }
   }, []);
+
+  const handleModalClose = useCallback(
+    (e: React.MouseEvent | React.KeyboardEvent) => {
+      if (e.target === dialogRef.current) {
+        dialogRef.current.close();
+      }
+    },
+    []
+  );
 
   return (
     <div className="tw-rounded-xl tw-border-pink-200 tw-border tw-p-2 tw-mlb-1">
@@ -96,56 +105,56 @@ export function SlideLink({
               >
                 🔗
               </button>
+              {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/932 */}
               <dialog
                 ref={dialogRef}
-                onClick={() => dialogRef.current?.close()}
+                onClick={handleModalClose}
+                onKeyDown={handleModalClose}
                 className="tw-w-2/3 tw-rounded-lg tw-shadow-lg tw-shadow-pink-50 tw-border-2 tw-border-pink-200"
               >
-                <div onClick={(e) => e.stopPropagation()}>
-                  <form method="dialog">
-                    <h2>{talkTitle}</h2>
-                    <hr className="tw-mlb-2 tw-border-pink-100 tw-border-dashed" />
+                <form method="dialog">
+                  <h2>{talkTitle}</h2>
+                  <hr className="tw-mlb-2 tw-border-pink-100 tw-border-dashed" />
 
-                    <ul>
-                      {slideLink && (
-                        <li className="tw-mlb-2 tw-flex tw-flex-row">
+                  <ul>
+                    {slideLink && (
+                      <li className="tw-mlb-2 tw-flex tw-flex-row">
+                        <a
+                          href={slideLink}
+                          className="tw-rounded-md tw-p-1 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          slide
+                        </a>
+                        {withHatenaBookmark ? (
                           <a
-                            href={slideLink}
-                            className="tw-rounded-md tw-p-1 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
+                            href={`https://b.hatena.ne.jp/entry/${slideLink}`}
+                            className="tw-flex tw-items-center tw-rounded-md tw-px-1 tw-h-6 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            slide
+                            <HatenaBookmarkCounter
+                              link={`https://b.hatena.ne.jp/entry/image/${slideLink}`}
+                            />
                           </a>
-                          {withHatenaBookmark ? (
-                            <a
-                              href={`https://b.hatena.ne.jp/entry/${slideLink}`}
-                              className="tw-flex tw-items-center tw-rounded-md tw-px-1 tw-h-6 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <HatenaBookmarkCounter
-                                link={`https://b.hatena.ne.jp/entry/image/${slideLink}`}
-                              />
-                            </a>
-                          ) : null}
-                        </li>
-                      )}
-                      {talkArchiveLink && (
-                        <li className="tw-mlb-2">
-                          <a
-                            href={talkArchiveLink}
-                            className="tw-rounded-md tw-p-1 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            talk archive
-                          </a>
-                        </li>
-                      )}
-                    </ul>
-                  </form>
-                </div>
+                        ) : null}
+                      </li>
+                    )}
+                    {talkArchiveLink && (
+                      <li className="tw-mlb-2">
+                        <a
+                          href={talkArchiveLink}
+                          className="tw-rounded-md tw-p-1 tw-text-blue-600 visited:tw-text-purple-800 hover:tw-bg-gray-200 focus:tw-bg-gray-200"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          talk archive
+                        </a>
+                      </li>
+                    )}
+                  </ul>
+                </form>
               </dialog>
             </div>
           ) : null}

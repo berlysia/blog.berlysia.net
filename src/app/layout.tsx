@@ -33,7 +33,7 @@ export default function Layout({ children }: Props) {
   return (
     <html lang="ja" className={clsx(lato.variable, notosansjp.variable)}>
       <head>
-        <meta charSet="UTF-8" />
+        <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
