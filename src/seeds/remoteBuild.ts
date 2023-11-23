@@ -38,7 +38,7 @@ const SEEDS_DIR = resolve(process.cwd(), "src", "seeds");
   await writeFile(
     resolve(SEEDS_DIR, ".tmp", "remote.json"),
     JSON.stringify(genres, null, 2),
-    "utf-8"
+    "utf8"
   );
 
   console.log("remote articles are ready");
