@@ -27,8 +27,8 @@ function isMdxJsxAttribute(node: UnistNode): node is MdxJsxAttribute {
 */
 export const remarkResolveAssets: Plugin = (slug: string) => {
   return function remarkResolveAssetsImpl(tree) {
-    // src/articles/foo.mdx => /entry/foo
-    const baseDir = resolve("/entry/", slug);
+    // src/articles/foo.mdx => /blog/entry/foo
+    const baseDir = resolve("/blog/entry/", slug);
 
     function walk(curr: UnistNode | UnistParent) {
       if ("children" in curr) {
@@ -36,7 +36,7 @@ export const remarkResolveAssets: Plugin = (slug: string) => {
           switch (x.type) {
             case "image": {
               assertImage(x);
-              // `![](./image.png)` => `![](/entry/foo/image.png)` in src/articles/foo.mdx
+              // `![](./image.png)` => `![](/blog/entry/foo/image.png)` in src/articles/foo.mdx
               if (isAbsolute(x.url)) continue;
               const resolved = resolve(baseDir, x.url);
               x.url = resolved;
@@ -44,7 +44,7 @@ export const remarkResolveAssets: Plugin = (slug: string) => {
             }
             case "mdxJsxFlowElement": {
               assertMdxJsxFlowElement(x);
-              // `<Some src="./image.png" />` => `<Some src="/entry/foo/image.png" />` in src/articles/foo.mdx
+              // `<Some src="./image.png" />` => `<Some src="/blog/entry/foo/image.png" />` in src/articles/foo.mdx
               const srcAttr = x.attributes
                 ?.filter(isMdxJsxAttribute)
                 .find((at) => at.name === "src");
