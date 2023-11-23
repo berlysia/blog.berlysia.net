@@ -11,7 +11,7 @@ export default async function BlogPageIndex() {
     <div>
       <Header>
         <div>
-          <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/blog">
+          <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/">
             blog.berlysia.net
           </a>
         </div>

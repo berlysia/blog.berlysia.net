@@ -18,7 +18,7 @@ export default function BlogArticleLayout({
     <VerticalClassWrapper preferVertical={frontmatter.preferVertical}>
       <Header>
         <div className="tw-shrink tw-overflow-ellipsis tw-overflow-hidden tw-whitespace-nowrap">
-          <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/blog">
+          <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/">
             blog.berlysia.net
           </a>
           <span className="tw-font-normal">
