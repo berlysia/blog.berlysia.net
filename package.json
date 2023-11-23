@@ -35,7 +35,6 @@
     "clean": "del dist",
     "typecheck": "tsc --noEmit",
     "prepare": "git config --local core.hooksPath .githooks && echo 'githooks installed' || echo 'githooks install failed'",
-    "postinstall": "patch-package",
     "precommit": "lint-staged",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -94,7 +93,6 @@
     "lodash": "^4.17.21",
     "next": "canary",
     "next-mdx-remote": "^4.4.1",
-    "patch-package": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rehype-accessible-emojis": "^0.3.2",
