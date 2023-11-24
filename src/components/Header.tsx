@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import Image from "next/image";
 
 type Props = {
   readonly children: ReactNode;
@@ -13,12 +12,17 @@ export default function Header({ children }: Props) {
           {children}
         </div>
         <div className="tw-flex tw-h-full tw-items-center">
-          <a href="/" className="tw-block tw-w-fit tw-h-fit tw-mx-2">
-            <Image
-              src="/avatar.jpg"
+          <a
+            href="https://berlysia.net"
+            className="tw-block tw-w-fit tw-h-fit tw-mx-2"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element -- unopt */}
+            <img
+              src="/avatar-128.webp"
               alt="avatar"
               width={36}
               height={36}
+              decoding="async"
               className="tw-block tw-rounded-md tw-border tw-border-keyColor-100"
             />
           </a>
