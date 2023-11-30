@@ -1,12 +1,7 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "outDir": "dist"
   },
   "exclude": ["src/**/*.test.ts"],
   "include": ["src/**/*.ts", "src/**/*.tsx", ".next/types/**/*.ts"]

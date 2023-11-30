@@ -7,7 +7,6 @@ import remarkGfm from "remark-gfm";
 import MdxImage from "../../components/mdx/Image";
 import type { Frontmatter } from "./utils";
 import {
-  remarkResolveAssets,
   renameFootnoteSectionName,
   frontmatterSchema,
 } from "./utils";
@@ -18,7 +17,7 @@ export async function processMDX(mdx: string, slug: string) {
     options: {
       parseFrontmatter: true,
       mdxOptions: {
-        remarkPlugins: [remarkGfm, [remarkResolveAssets, slug]],
+        remarkPlugins: [remarkGfm],
         rehypePlugins: [
           rehypeSlug,
           [

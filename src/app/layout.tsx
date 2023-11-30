@@ -1,26 +1,10 @@
 import { Partytown } from "@builder.io/partytown/react";
 import type { ReactNode } from "react";
-import { Lato, Noto_Sans_JP } from "next/font/google";
-import Script from "next/script";
 import clsx from "clsx";
 import { gaEnabled, GA_ID } from "../lib/gtag";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "../styles/globalStyle.css";
 import { SITE_NAME } from "../constant";
-
-const lato = Lato({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300"],
-  variable: "--font-family-lato",
-});
-
-const notosansjp = Noto_Sans_JP({
-  subsets: [],
-  weight: ["400", "700"],
-  display: "swap",
-  variable: "--font-family-notosansjp",
-});
 
 export const metadata = {
   title: `${SITE_NAME}`,
@@ -31,7 +15,7 @@ type Props = {
 };
 export default function Layout({ children }: Props) {
   return (
-    <html lang="ja" className={clsx(lato.variable, notosansjp.variable)}>
+    <html lang="ja" className="">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -44,13 +28,13 @@ export default function Layout({ children }: Props) {
         {gaEnabled && (
           <>
             <Partytown forward={["dataLayer.push"]} />
-            <Script
+            <script
+              type="text/partytown"
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-              strategy="worker"
             />
-            <Script
+            <script
+              type="text/partytown"
               id="gtag-init"
-              strategy="worker"
               dangerouslySetInnerHTML={{
                 __html: `window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}

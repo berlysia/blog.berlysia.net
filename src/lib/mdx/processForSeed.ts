@@ -2,7 +2,6 @@ import rehypeToc from "@jsdevtools/rehype-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 import type { Frontmatter } from "./utils.js";
 import {
-  remarkResolveAssets,
   renameFootnoteSectionName,
   frontmatterSchema,
 } from "./utils.js";
@@ -19,7 +18,7 @@ export async function processMDX(mdx: string, slug: string) {
   const result = await serialize<Frontmatter>(mdx, {
     parseFrontmatter: true,
     mdxOptions: {
-      remarkPlugins: [remarkGfm, [remarkResolveAssets, slug]],
+      remarkPlugins: [remarkGfm],
       rehypePlugins: [
         rehypeSlug,
         [
