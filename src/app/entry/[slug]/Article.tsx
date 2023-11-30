@@ -44,7 +44,6 @@ export default function Article({
           - headerのheightは40px
         */
         const diff = nextValue - currentValue;
-        console.log({ currValue: currentValue, nextValue, diff });
         if (Math.abs(diff) > 10) {
           articleReference.current.style.height = `${nextValue}px`;
         }
