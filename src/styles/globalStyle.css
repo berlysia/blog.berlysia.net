@@ -33,6 +33,16 @@ body:has(.vertical) {
   height: 100%;
 }
 
+.vertical {
+
+  /*
+  これをつけないと、Safariで横スクロールがおきてしまう
+  ページ全体のwidthが本文部分を横に伸ばしたときと同じだけの幅を持ってしまう
+  hiddenではスクロールコンテナーになってしまい、ヘッダーのstickyが効かなくなる
+  */
+  overflow-x: clip;
+}
+
 hr.slash {
   block-size: 8px;
   --color: rgb(249 168 212);
