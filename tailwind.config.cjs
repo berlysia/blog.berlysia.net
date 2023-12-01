@@ -1,5 +1,6 @@
 const colors = require("tailwindcss/colors");
 const plugin = require("tailwindcss/plugin");
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   prefix: "tw-",
@@ -48,7 +49,7 @@ module.exports = {
   },
   plugins: [
     require("tailwindcss-logical"),
-    plugin(({ addUtilities }) => {
+    plugin(({ addUtilities, theme }) => {
       addUtilities({
         ".writing-vertical-rl": {
           writingMode: "vertical-rl",
@@ -71,6 +72,20 @@ module.exports = {
         ".column-fill-auto": {
           columnFill: "auto",
         },
+        ".column-rule-size-1": {
+          columnRuleWidth: "1px",
+        },
+        ".column-rule-style-solid": {
+          columnRuleStyle: "solid",
+        },
+        ...Object.fromEntries(
+          Object.keys(theme("colors.keyColor")).map((key) => {
+            return [
+              `.column-rule-color-keyColor-${key}`,
+              { columnRuleColor: theme("colors.keyColor")[key] },
+            ];
+          })
+        ),
       });
     }),
   ],
