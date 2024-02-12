@@ -8,7 +8,7 @@ import HasIslandMark from "#islands/HasIslandMark";
 
 async function Page({ slug }: { slug: string }) {
   const [module, runtime] = await Promise.all([
-    import(`../../generated/articles/${slug}.jsx?raw`),
+    import(`../../../public/static/articles/${slug}/index.jsx?raw`),
     import("hono/jsx/jsx-runtime"),
   ]);
   const { default: Content } = await run(module.default, {
