@@ -1,9 +1,9 @@
+import { resolve } from "node:path";
 import honox from "honox/vite";
 import client from "honox/vite/client";
-import pages from "@hono/vite-cloudflare-pages";
 import { defineConfig } from "vite";
 import { viteCommonjs, esbuildCommonjs } from "@originjs/vite-plugin-commonjs";
-// import ssg from "@hono/vite-ssg";
+import ssg from "@hono/vite-ssg";
 import devServer from "@hono/vite-dev-server";
 
 const entry = "./app/server.ts";
@@ -12,7 +12,16 @@ export default defineConfig(({ mode, command }) => {
   const plugins =
     mode === "client"
       ? [client()]
-      : [honox({ entry }) /*, ssg({ entry })*/, pages()];
+      : [
+          honox({ entry }),
+          ssg({ entry }),
+          {
+            name: "foo",
+            config() {
+              return { build: { emptyOutDir: false } };
+            },
+          },
+        ];
 
   plugins.push(viteCommonjs());
 
@@ -40,7 +49,13 @@ export default defineConfig(({ mode, command }) => {
     },
     plugins,
     resolve: {
-      alias: [{ find: /#/, replacement: "/app/" }],
+      alias: [
+        { find: /#/, replacement: "/app/" },
+        {
+          find: /^\/static\/(.*?)\.js/,
+          replacement: resolve(import.meta.dirname, "dist/static/$1.js"),
+        },
+      ],
     },
   };
 });
