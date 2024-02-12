@@ -20,10 +20,12 @@ import clean from "./clean.js";
   const cwd = process.cwd();
   const ARTICLE_PATH = "articles";
   const outDir = resolve(cwd, "public/static/articles");
+  const generatedDir = resolve(cwd, "app/generated/articles");
 
   await clean();
 
   await ensureDir(outDir);
+  await ensureDir(generatedDir);
 
   // articlesディレクトリ直下のmdxファイルか、そのサブディレクトリにあるindex.mdxファイルを取得
   const filesInArticles = await readdir(resolve(cwd, ARTICLE_PATH));
@@ -74,9 +76,16 @@ import clean from "./clean.js";
         // 他のファイルを移動する
         const articleDir = resolve(cwd, ARTICLE_PATH, slug);
         const destDir = resolve(outDir, slug);
-        await ensureDir(destDir);
+        await Promise.all([
+          ensureDir(destDir),
+          ensureDir(resolve(generatedDir, slug)),
+        ]);
 
-        await writeFile(resolve(destDir, `index.jsx`), compiled.value, "utf8");
+        await writeFile(
+          resolve(generatedDir, slug, `index.jsx`),
+          compiled.value,
+          "utf8"
+        );
 
         if (isInDirectory) {
           const files = await readdir(articleDir);

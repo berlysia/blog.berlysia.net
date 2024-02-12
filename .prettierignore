@@ -3,3 +3,4 @@ dist
 .next
 public/~partytown
 app/seeds/.tmp
+app/generated/articles
