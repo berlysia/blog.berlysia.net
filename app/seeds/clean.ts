@@ -1,6 +1,6 @@
+import { readdir, rm } from "node:fs/promises";
+import { resolve } from "node:path";
 import { ensureDir } from "fs-extra";
-import { readdir, rm } from "fs/promises";
-import { resolve } from "path";
 
 export default async function clean() {
   // public/static/articlesディレクトリを空にする
@@ -18,5 +18,6 @@ export default async function clean() {
 // in esm
 
 if (process.argv[1] === import.meta.filename) {
+  // eslint-disable-next-line unicorn/prefer-top-level-await -- run as cjs
   clean();
 }

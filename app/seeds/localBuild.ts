@@ -26,20 +26,22 @@ import clean from "./clean.js";
   await ensureDir(outDir);
 
   // articlesディレクトリ直下のmdxファイルか、そのサブディレクトリにあるindex.mdxファイルを取得
-  const articleFiles = (
-    await Promise.all(
-      (await readdir(resolve(cwd, ARTICLE_PATH))).map(async (filename) => {
-        const currentDirOrFile = resolve(cwd, ARTICLE_PATH, filename);
-        const isDirectory = (await stat(currentDirOrFile)).isDirectory();
-        if (isDirectory) {
-          return (await readdir(currentDirOrFile))
-            .filter((x) => x === "index.mdx")
-            .map((x) => `${filename}/${x}`);
-        }
-        return filename;
-      })
-    )
-  )
+  const filesInArticles = await readdir(resolve(cwd, ARTICLE_PATH));
+  const articleFilesPromises = await Promise.all(
+    filesInArticles.map(async (filename) => {
+      const currentDirOrFile = resolve(cwd, ARTICLE_PATH, filename);
+      const fileStat = await stat(currentDirOrFile);
+      const isDirectory = fileStat.isDirectory();
+      if (isDirectory) {
+        const files = await readdir(currentDirOrFile);
+        return files
+          .filter((x) => x === "index.mdx")
+          .map((x) => `${filename}/${x}`);
+      }
+      return filename;
+    })
+  );
+  const articleFiles = articleFilesPromises
     .flat()
     .filter((x) => x.endsWith(".mdx"));
 

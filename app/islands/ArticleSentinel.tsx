@@ -1,7 +1,11 @@
 import { useEffect, useCallback, useRef } from "hono/jsx";
 import { useWritingMode } from "../lib/writingMode";
 
-export default function ArticleSentinel({ articleId }: { articleId: string }) {
+export default function ArticleSentinel({
+  articleId,
+}: {
+  readonly articleId: string;
+}) {
   const writingMode = useWritingMode();
   const sentinelRef = useRef<HTMLElement>(null);
 
@@ -43,7 +47,7 @@ export default function ArticleSentinel({ articleId }: { articleId: string }) {
         articleEl.style.height = "auto";
       }
     }
-  }, [writingMode.isVertical]);
+  }, [articleId, writingMode.isVertical]);
 
   // articleRefのリサイズを監視して、リサイズが発生したらhandleResizeを実行する
   useEffect(() => {
@@ -55,7 +59,7 @@ export default function ArticleSentinel({ articleId }: { articleId: string }) {
     return () => {
       observer.disconnect();
     };
-  }, [handleResize]);
+  }, [articleId, handleResize]);
 
   return <div ref={sentinelRef}></div>;
 }

@@ -1,5 +1,5 @@
 import { Categories } from "#components/Categories";
-import { PropsWithChildren } from "hono/jsx";
+import type { PropsWithChildren } from "hono/jsx";
 
 export function Content({
   children,

@@ -1,5 +1,5 @@
-import { $writingMode, useWritingMode } from "../lib/writingMode";
 import { useEffect } from "hono/jsx";
+import { $writingMode, useWritingMode } from "../lib/writingMode";
 
 function setVertical() {
   $writingMode.set("vertical");
@@ -12,12 +12,12 @@ function setHorizontal() {
 export default function WritingModeSwitcher({
   articleRootId,
 }: {
-  articleRootId: string;
+  readonly articleRootId: string;
 }) {
   const { isVertical } = useWritingMode();
 
   useEffect(() => {
-    const el = document.getElementById(articleRootId);
+    const el = document.querySelector(`#${articleRootId}`);
     if (el) {
       el.classList.toggle("vertical", isVertical);
     }

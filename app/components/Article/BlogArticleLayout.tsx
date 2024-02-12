@@ -1,8 +1,9 @@
-import Header from "../Header";
-import type { Frontmatter } from "../../lib/mdx/utils";
 import WritingModeSwitcher from "#islands/WritingModeSwitcher";
-import { PropsWithChildren, useRef } from "hono/jsx";
+import type { PropsWithChildren } from "hono/jsx";
+import { useRef } from "hono/jsx";
 import ArticleSentinel from "#islands/ArticleSentinel";
+import type { Frontmatter } from "../../lib/mdx/utils";
+import Header from "../Header";
 
 type Properties = PropsWithChildren<{
   readonly frontmatter: Frontmatter;

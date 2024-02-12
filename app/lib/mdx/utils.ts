@@ -43,6 +43,7 @@ export const renameFootnoteSectionName: Plugin = () => {
   }
 
   // 見つかった要素の更に子孫を再帰的に走査し、textノードの内容を「脚注」に変更する
+  // eslint-disable-next-line unicorn/consistent-function-scoping -- for readability
   function walkInner(curr: UnistNode | UnistParent) {
     if ("children" in curr) {
       for (const x of curr.children) {

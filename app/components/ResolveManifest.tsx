@@ -1,4 +1,4 @@
-import { Manifest } from "vite";
+import type { Manifest } from "vite";
 
 export default function ResolveManifest(options: {
   src: string;
@@ -14,8 +14,12 @@ export default function ResolveManifest(options: {
         eager: true,
       });
       for (const manifestFile of Object.values(MANIFEST)) {
-        if (manifestFile["default"]) {
-          manifest = manifestFile["default"];
+        if (
+          typeof manifestFile === "object" &&
+          "default" in manifestFile &&
+          manifestFile.default
+        ) {
+          manifest = manifestFile.default as Manifest;
           break;
         }
       }
@@ -24,22 +28,23 @@ export default function ResolveManifest(options: {
       const fileInManifest = manifest[src.replace(/^\//, "")];
       if (fileInManifest) {
         if (options.type === "style") {
-          return <link rel="stylesheet" href={"/" + fileInManifest.file} />;
+          return <link rel="stylesheet" href={`/${fileInManifest.file}`} />;
         }
         if (options.type === "script") {
-          return <script type="module" src={"/" + fileInManifest.file} />;
+          return <script type="module" src={`/${fileInManifest.file}`} />;
         }
         throw new Error("Invalid type");
       }
     }
+    // eslint-disable-next-line react/jsx-no-useless-fragment -- hono/jsx cannot return null
     return <></>;
   }
 
   if (options.type === "style") {
-    return <link rel="stylesheet" href={"/" + src} />;
+    return <link rel="stylesheet" href={`/${src}`} />;
   }
   if (options.type === "script") {
-    return <script type="module" src={"/" + src} />;
+    return <script type="module" src={`/${src}`} />;
   }
   throw new Error("Invalid type");
 }

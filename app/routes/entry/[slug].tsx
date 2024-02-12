@@ -12,9 +12,9 @@ async function Page({ slug }: { slug: string }) {
     import("hono/jsx/jsx-runtime"),
   ]);
   const { default: Content } = await run(module.default, {
-    // @ts-ignore -- fixme
+    // @ts-expect-error -- fixme
     jsx: runtime.jsx,
-    // @ts-ignore -- fixme
+    // @ts-expect-error -- fixme
     jsxs: runtime.jsxs,
     Fragment: runtime.Fragment,
     baseUrl: import.meta.url,

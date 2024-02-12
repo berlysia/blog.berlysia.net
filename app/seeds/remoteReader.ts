@@ -42,12 +42,13 @@ function injectKind<T>(item: T): T & { kind: "remote" } {
 }
 
 export function getByGenre(genre: "imas" | "tech", count: number): Article[] {
-  const sites: { items: any[] }[] = seed[genre];
+  const sites: Array<{ items: any[] }> = seed[genre];
   return sites
     .flatMap((site: any) => site.items)
     .map((element) => injectKind(populatePubDate(ensureAuthor(element))))
     .filter(
-      (element): element is Article => ArticleSchema.safeParse(element).success
+      (element: unknown): element is Article =>
+        ArticleSchema.safeParse(element).success
     )
     .sort((a, b) => b.pubDate - a.pubDate)
     .slice(0, count);

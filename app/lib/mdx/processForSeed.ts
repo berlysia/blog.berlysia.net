@@ -2,11 +2,11 @@ import remarkFrontmatter from "remark-frontmatter";
 import rehypeToc from "@jsdevtools/rehype-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 import { compile } from "@mdx-js/mdx";
+import type { RewriteImageOptions } from "./utils.js";
 import {
   renameFootnoteSectionName,
   removeFrontmatter,
   rewriteImagePaths,
-  RewriteImageOptions,
 } from "./utils.js";
 
 export async function processMDX(
@@ -18,7 +18,7 @@ export async function processMDX(
     "rehype-autolink-headings"
   );
   const { default: rehypeSlug } = await import("rehype-slug");
-  const result = await compile(mdx, {
+  return await compile(mdx, {
     outputFormat: "function-body",
     jsxImportSource: "hono/jsx",
     remarkPlugins: [
@@ -40,6 +40,4 @@ export async function processMDX(
       renameFootnoteSectionName,
     ],
   });
-
-  return result;
 }

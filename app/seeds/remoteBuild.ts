@@ -2,7 +2,6 @@ import { writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { ensureDir } from "fs-extra";
 import Parser from "rss-parser";
-// eslint-disable-next-line import/no-namespace -- オブジェクト扱いしたい
 import * as feeds from "./feeds.js";
 // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error -- tsconfig間で結果が異なるため
 // @ts-ignore -- import assertionがエディタ用には使えない設定だがスクリプト側には必須
