@@ -151,6 +151,6 @@ typings/
 test-results
 dist
 
-.next
+.hono
 public/~partytown
-src/seeds/.tmp
+app/seeds/.tmp

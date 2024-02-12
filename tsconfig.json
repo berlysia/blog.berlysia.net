@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "exclude": ["src/**/*.test.ts"],
-  "include": ["src/**/*.ts", "src/**/*.tsx", ".next/types/**/*.ts"]
+  "exclude": ["app/**/*.test.ts"],
+  "include": ["app/**/*.ts", "app/**/*.tsx"]
 }

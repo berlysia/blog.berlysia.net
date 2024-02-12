@@ -5,8 +5,8 @@
     "moduleResolution": "nodenext"
   },
   "include": [
-    "src/seeds/feeds.json",
-    "src/seeds/**/*.ts",
-    "src/lib/mdx/processForSeed.ts"
+    "app/seeds/feeds.json",
+    "app/seeds/**/*.ts",
+    "app/lib/mdx/processForSeed.ts"
   ]
 }
