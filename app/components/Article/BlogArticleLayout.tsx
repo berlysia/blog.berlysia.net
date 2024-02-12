@@ -2,6 +2,7 @@ import WritingModeSwitcher from "#islands/WritingModeSwitcher";
 import type { PropsWithChildren } from "hono/jsx";
 import { useRef } from "hono/jsx";
 import ArticleSentinel from "#islands/ArticleSentinel";
+import clsx from "clsx";
 import type { Frontmatter } from "../../lib/mdx/utils";
 import Header from "../Header";
 
@@ -17,7 +18,10 @@ export default function BlogArticleLayout({
   children,
 }: Properties) {
   return (
-    <div id="blog-article-root">
+    <div
+      id="blog-article-root"
+      className={clsx({ vertical: frontmatter.preferVertical })}
+    >
       <Header>
         <div className="tw-shrink tw-overflow-ellipsis tw-overflow-hidden tw-whitespace-nowrap">
           <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/">
@@ -25,11 +29,14 @@ export default function BlogArticleLayout({
           </a>
           <span className="tw-font-normal">
             <span className="tw-mx-1">-</span>
-            <span className="">{frontmatter.title}</span>
+            <span>{frontmatter.title}</span>
           </span>
         </div>
         <div className="tw-ml-auto tw-flex tw-justify-center tw-items-center">
-          <WritingModeSwitcher articleRootId={articleRootId} />
+          <WritingModeSwitcher
+            articleRootId={articleRootId}
+            preferVertical={frontmatter.preferVertical}
+          />
         </div>
       </Header>
       <div className="articleWrapper">

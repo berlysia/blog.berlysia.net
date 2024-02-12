@@ -11,10 +11,14 @@ function setHorizontal() {
 
 export default function WritingModeSwitcher({
   articleRootId,
+  preferVertical,
 }: {
   readonly articleRootId: string;
+  readonly preferVertical?: boolean;
 }) {
-  const { isVertical } = useWritingMode();
+  const { isVertical } = useWritingMode(
+    preferVertical ? "vertical" : "horizontal"
+  );
 
   useEffect(() => {
     const el = document.querySelector(`#${articleRootId}`);
@@ -34,8 +38,8 @@ export default function WritingModeSwitcher({
         onClick={isVertical ? setHorizontal : setVertical}
         title={
           isVertical
-            ? "switch to vertical writing mode"
-            : "switch to horizontal writing mode"
+            ? "switch to horizontal writing mode"
+            : "switch to vertical writing mode"
         }
       >
         {isVertical ? (
