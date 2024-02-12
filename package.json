@@ -105,6 +105,5 @@
     "vfile-matter": "^5.0.0",
     "vite": "^5.1.1",
     "zod": "^3.22.4"
-  },
-  "packageManager": "yarn@4.0.2"
+  }
 }
