@@ -1,10 +1,11 @@
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import berlysia from "@berlysia/eslint-config";
+import configBerlysia from "@berlysia/eslint-config";
+import pluginBerlysia from "@berlysia/eslint-plugin";
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
 
-export default berlysia(
+export default configBerlysia(
   {
     typescript: {
       parserOptions: {
@@ -13,6 +14,7 @@ export default berlysia(
       },
     },
   },
+  pluginBerlysia.configs.recommended,
   {
     ignores: ["app/generated/**/*", "**/*.d.ts"],
   }

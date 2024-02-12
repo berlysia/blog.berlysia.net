@@ -662,9 +662,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@berlysia/eslint-plugin@npm:0.0.1-beta.0":
-  version: 0.0.1-beta.0
-  resolution: "@berlysia/eslint-plugin@npm:0.0.1-beta.0"
+"@berlysia/eslint-plugin@npm:^0.0.1-beta.3":
+  version: 0.0.1-beta.3
+  resolution: "@berlysia/eslint-plugin@npm:0.0.1-beta.3"
   dependencies:
     ajv: "npm:^8.12.0"
     get-tsconfig: "npm:^4.7.2"
@@ -674,7 +674,7 @@ __metadata:
     slash: "npm:^5.1.0"
   peerDependencies:
     eslint: "*"
-  checksum: 22493b17da12d9d329ea8ebb7b04c2f3aeabe4d9fb6198d2e5a08d5ca7b0fc41814d223fda45aa0190f731a4be05d87c2ff0f06926c01262cbb45b81dbefefc2
+  checksum: 756a137740620f7bba51578c20e9902124cc4bba22a96a86e807cfcf665bef424645db55929631549a889917543beeaad532e763d637dcc4caa06d7f1602301b
   languageName: node
   linkType: hard
 
@@ -3412,7 +3412,7 @@ __metadata:
   resolution: "berlysia-net@workspace:."
   dependencies:
     "@berlysia/eslint-config": "npm:^5.0.11"
-    "@berlysia/eslint-plugin": "npm:0.0.1-beta.0"
+    "@berlysia/eslint-plugin": "npm:^0.0.1-beta.3"
     "@builder.io/partytown": "npm:^0.9.1"
     "@cloudflare/workers-types": "npm:^4.20240208.0"
     "@fortawesome/fontawesome-svg-core": "npm:^6.5.1"
