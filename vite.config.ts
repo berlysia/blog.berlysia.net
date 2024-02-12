@@ -1,4 +1,5 @@
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import honox from "honox/vite";
 import client from "honox/vite/client";
 import { defineConfig } from "vite";
@@ -53,7 +54,11 @@ export default defineConfig(({ mode, command }) => {
         { find: /#/, replacement: "/app/" },
         {
           find: /^\/static\/(.*?)\.js/,
-          replacement: resolve(import.meta.dirname, "dist/static/$1.js"),
+          replacement: resolve(
+            // Node 18 support
+            dirname(fileURLToPath(import.meta.url)),
+            "dist/static/$1.js"
+          ),
         },
       ],
     },
