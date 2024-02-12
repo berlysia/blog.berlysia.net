@@ -2,4 +2,5 @@ dist
 .vercel
 .next
 public/~partytown
-src/seeds/.tmp
+app/seeds/.tmp
+app/generated/articles

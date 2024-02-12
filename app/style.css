@@ -1,0 +1,214 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+html {
+  min-height: 100vh;
+  overflow-y: scroll;
+
+  font-family: var(--font-family-lato), "Helvetica Neue", "Helvetica",
+    "Hiragino Kaku Gothic ProN", YuGothic, "Yu Gothic Medium", Meiryo,
+    sans-serif;
+  color: #233;
+
+  @apply tw-text-base;
+}
+
+html:has(.vertical) {
+  @apply sm:tw-overflow-y-visible tw-overflow-y-hidden;
+  font-family: "Hiragino Kaku Gothic ProN", YuGothic, "Yu Gothic Medium", Meiryo,
+    var(--font-family-notosansjp), sans-serif;
+  min-height: 100svh;
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+}
+
+body:has(.vertical) {
+  min-height: 100svh;
+  height: 100%;
+}
+
+.vertical {
+  /*
+  これをつけないと、Safariで横スクロールがおきてしまう
+  ページ全体のwidthが本文部分を横に伸ばしたときと同じだけの幅を持ってしまう
+  hiddenではスクロールコンテナーになってしまい、ヘッダーのstickyが効かなくなる
+  */
+  overflow-x: clip;
+}
+
+hr.slash {
+  block-size: 8px;
+  --color: rgb(249 168 212);
+  color: --color;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="3px" height="3px" viewBox="0 0 3 3" fill="rgb(249 168 212)"><polygon points="0,0.5 0,1.5 1.5,3 2.5,3"/><polygon points="2.5,0 1.5,0 3,1.5 3,0.5"/></svg>');
+  background-size: 3px 3px;
+  inline-size: 65%;
+}
+
+/* .verticalクラスが祖先についているときだけ表示する */
+.vertical-only {
+  display: none;
+  .vertical & {
+    display: revert;
+  }
+}
+
+.vertical-tooltip {
+  /* position: relative;
+  &::after {
+    text-indent: initial;
+    font-style: initial;
+    font-weight: initial;
+    content: "この要素は縦書き用のCSSを必要としています";
+    position: absolute;
+
+    top: -40px;
+    left: 100%;
+    margin-left: 15px;
+    height: 240px;
+    padding: 10px;
+    border-radius: 16px;
+    background: #222;
+    color: #eee;
+
+    display: none;
+  }
+  &:hover::after {
+    display: block;
+  } */
+}
+
+.main-text-section {
+  & h1 {
+    @apply tw-text-4xl tw-border-be tw-border-is-2 tw-border-keyColor-200 tw-mbs-6 tw-mbe-2;
+
+    > a::before {
+      content: "# ";
+    }
+  }
+
+  & h2 {
+    @apply tw-text-3xl tw-border-be tw-border-is tw-border-keyColor-200 tw-mbs-4 tw-mbe-2;
+
+    > a::before {
+      content: "## ";
+    }
+  }
+
+  & h3 {
+    @apply tw-text-2xl tw-border-be tw-border-keyColor-200 tw-mbs-3 tw-mbe-2;
+
+    > a::before {
+      content: "### ";
+    }
+  }
+
+  & h4 {
+    @apply tw-text-xl tw-mbs-3 tw-mbe-2 tw-text-gray-800;
+
+    > a::before {
+      content: "#### ";
+    }
+  }
+
+  & h5 {
+    @apply tw-text-lg tw-mbs-2 tw-mbe-2 tw-text-gray-800;
+
+    > a::before {
+      content: "##### ";
+    }
+  }
+
+  & h6 {
+    @apply tw-text-lg tw-mbs-1 tw-mbe-1 tw-text-gray-800;
+
+    > a::before {
+      content: "###### ";
+    }
+  }
+
+  & {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      > a {
+        color: currentColor;
+        text-decoration: none;
+      }
+
+      > a:hover::after {
+        @apply tw-text-base;
+        content: " 🔗";
+      }
+    }
+  }
+
+  & blockquote {
+    @apply tw-plb-2 tw-pis-4 tw-mlb-2 tw-border-is-8 tw-border-be tw-border-keyColor-300 tw-bg-keyColor-50 tw-text-gray-600;
+  }
+
+  & strong {
+    background: linear-gradient(
+      transparent 70%,
+      rgb(254 202 202) /* bg-red-200 */ 0%
+    );
+    .vertical & {
+      @apply vertical-tooltip;
+      background: linear-gradient(
+        to left,
+        transparent 70%,
+        rgb(254 202 202) /* bg-red-200 */ 0%
+      );
+    }
+  }
+
+  & em {
+    background: linear-gradient(
+      transparent 70%,
+      rgb(186 230 253) /* bg-sky-200 */ 0%
+    );
+    .vertical & {
+      @apply vertical-tooltip;
+      background: linear-gradient(
+        to left,
+        transparent 70%,
+        rgb(186 230 253) /* bg-sky-200 */ 0%
+      );
+    }
+  }
+
+  & p {
+    /* font-sizeとindentが一致していないと禁則処理が乱れるように見える */
+    @apply tw-mlb-4 tw-indent-[1em] tw-text-lg;
+  }
+
+  & td,
+  & th {
+    @apply tw-border tw-border-collapse tw-border-gray-400;
+  }
+}
+
+.article {
+  @apply tw-px-2;
+
+  :where(.vertical) & {
+    @apply sm:tw-writing-vertical-rl sm:tw-w-full sm:tw-overflow-x-visible sm:tw-h-max sm:tw-columns-sm sm:tw-column-rule-size-1 sm:tw-column-rule-style-solid sm:tw-column-rule-color-keyColor-200 sm:tw-column-fill-auto sm:tw-gap-8 tw-writing-vertical-rl tw-w-full tw-overflow-x-scroll tw-h-full tw-py-4 tw-line-break-strict;
+  }
+}
+
+.articleWrapper {
+  @apply tw-w-full tw-flex tw-justify-center;
+
+  :where(.vertical) & {
+    @apply sm:tw-h-auto tw-h-[calc(100vh-2.5rem)] tw-h-[calc(100svh-2.5rem)];
+  }
+}

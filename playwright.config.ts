@@ -7,7 +7,7 @@ const config = defineConfig({
   fullyParallel: true,
   webServer: {
     command: "yarn dev",
-    port: 3000,
+    port: 5173,
     reuseExistingServer: true,
   },
 });
