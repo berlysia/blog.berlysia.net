@@ -26,10 +26,6 @@ export default defineConfig(({ mode, command }) => {
 
   plugins.push(viteCommonjs());
 
-  if (mode === "development" && command === "serve") {
-    plugins.push(devServer({ entry }));
-  }
-
   return {
     build: {
       rollupOptions:
