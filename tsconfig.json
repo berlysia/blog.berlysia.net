@@ -4,5 +4,5 @@
     "outDir": "dist"
   },
   "exclude": ["app/**/*.test.ts"],
-  "include": ["app/**/*.ts", "app/**/*.tsx", "vite.config.ts", "test/**/*.ts"]
+  "include": ["app/**/*.ts", "app/**/*.tsx", "*.config.ts", "test/**/*.ts"]
 }
