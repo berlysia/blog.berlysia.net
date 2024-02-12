@@ -12,29 +12,25 @@ import { toVFile } from "to-vfile";
 import { matter } from "vfile-matter";
 import PQueue from "p-queue";
 import { frontmatterSchema } from "#lib/mdx/utils.js";
+import clean from "./clean.js";
 
 // eslint-disable-next-line unicorn/prefer-top-level-await -- CJSなので許せ（eslintrcをいじってもよさそうだが）
 (async function main() {
   const { processMDX } = await import("../lib/mdx/processForSeed.js");
   const cwd = process.cwd();
   const ARTICLE_PATH = "articles";
-
-  // TODO: 別スクリプトに移動する
-  // public/static/articlesディレクトリを空にする
   const outDir = resolve(cwd, "public/static/articles");
+  const GENERATED_ARTICLES = resolve(cwd, "app/generated/articles");
+
+  await clean();
+
   await ensureDir(outDir);
-  const filesInPublic = await readdir(outDir);
-  for (const file of filesInPublic) {
-    if (file === ".gitignore") continue;
-    await rm(resolve(outDir, file), { recursive: true });
-  }
+  await ensureDir(GENERATED_ARTICLES);
 
   // articlesディレクトリ直下のmdxファイルか、そのサブディレクトリにあるindex.mdxファイルを取得
-  const filesInArticles = (
+  const articleFiles = (
     await Promise.all(
-      (
-        await readdir(resolve(cwd, ARTICLE_PATH))
-      ).map(async (filename) => {
+      (await readdir(resolve(cwd, ARTICLE_PATH))).map(async (filename) => {
         const currentDirOrFile = resolve(cwd, ARTICLE_PATH, filename);
         const isDirectory = (await stat(currentDirOrFile)).isDirectory();
         if (isDirectory) {
@@ -45,9 +41,10 @@ import { frontmatterSchema } from "#lib/mdx/utils.js";
         return filename;
       })
     )
-  ).flat();
+  )
+    .flat()
+    .filter((x) => x.endsWith(".mdx"));
 
-  const articleFiles = filesInArticles.filter((x) => x.endsWith(".mdx"));
   const queue = new PQueue({ concurrency: 4 });
 
   const compiledArticles = await Promise.all(
@@ -75,7 +72,7 @@ import { frontmatterSchema } from "#lib/mdx/utils.js";
           slug,
         });
         await writeFile(
-          resolve(cwd, "app/generated/articles", `${slug}.jsx`),
+          resolve(GENERATED_ARTICLES, `${slug}.jsx`),
           compiled.value,
           "utf8"
         );
