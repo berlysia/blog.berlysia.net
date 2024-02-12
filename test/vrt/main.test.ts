@@ -4,7 +4,7 @@ const paths = [""];
 
 for (const pathname of paths) {
   test(`VRT: ${pathname}`, async ({ page }) => {
-    await page.goto(`http://localhost:3000${pathname}`);
+    await page.goto(`http://localhost:5173${pathname}`);
     await expect(page).toHaveScreenshot({
       animations: "disabled",
       fullPage: true,
@@ -21,7 +21,7 @@ for (const pathname of paths) {
       width: 390,
       height: 844,
     });
-    await page.goto(`http://localhost:3000${pathname}`);
+    await page.goto(`http://localhost:5173${pathname}`);
     await expect(page).toHaveScreenshot({
       animations: "disabled",
       fullPage: true,

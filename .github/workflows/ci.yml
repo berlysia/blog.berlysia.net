@@ -19,7 +19,7 @@ jobs:
   vrt:
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.39.0-focal
+      image: mcr.microsoft.com/playwright:v1.41.2-focal
     steps:
       - id: env-key
         run: echo "value=${{ runner.os }}-${{ env.NODE_VERSION }}" >> $GITHUB_OUTPUT
