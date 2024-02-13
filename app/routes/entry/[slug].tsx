@@ -6,29 +6,34 @@ import { createRoute } from "honox/factory";
 import Image from "#components/mdx/Image";
 import HasIslandMark from "#islands/HasIslandMark";
 
-async function Page({ slug }: { slug: string }) {
-  const [module, runtime] = await Promise.all([
-    import(`../../generated/articles/${slug}/index.jsx?raw`),
-    import("hono/jsx/jsx-runtime"),
-  ]);
-  const { default: Content } = await run(module.default, {
-    // @ts-expect-error -- fixme
-    jsx: runtime.jsx,
-    // @ts-expect-error -- fixme
-    jsxs: runtime.jsxs,
-    Fragment: runtime.Fragment,
-    baseUrl: import.meta.url,
-  });
-
-  return (
-    <BlogArticleLayout frontmatter={getBySlug(slug as any).frontmatter}>
-      <HasIslandMark />
-      <Content components={{ Image }} />
-    </BlogArticleLayout>
-  );
-}
+async function Page({ slug }: { slug: string }) {}
 
 export default createRoute(
   ssgParams(() => getSlugs().map((slug) => ({ slug }))),
-  (c) => c.render(<Page slug={c.req.param("slug")} />)
+  async (c) => {
+    const slug = c.req.param("slug");
+
+    const [module, runtime] = await Promise.all([
+      import(`../../generated/articles/${slug}/index.jsx?raw`),
+      import("hono/jsx/jsx-runtime"),
+    ]);
+    const { default: Content } = await run(module.default, {
+      // @ts-expect-error -- fixme
+      jsx: runtime.jsx,
+      // @ts-expect-error -- fixme
+      jsxs: runtime.jsxs,
+      Fragment: runtime.Fragment,
+      baseUrl: import.meta.url,
+    });
+
+    const frontmatter = getBySlug(slug as any).frontmatter;
+
+    return c.render(
+      <BlogArticleLayout frontmatter={frontmatter}>
+        <HasIslandMark />
+        <Content components={{ Image }} />
+      </BlogArticleLayout>,
+      { title: frontmatter.title, description: frontmatter.description }
+    );
+  }
 );
