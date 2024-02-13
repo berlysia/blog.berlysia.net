@@ -1,0 +1,221 @@
+---
+title: このサイトをHonoXに書き換えた
+created: 2024-02-14 02:45
+publishedAt: 2024-02-14 02:45
+lastModified: 2024-02-14 02:45
+category: tech
+tags: meta, framework
+description: Next.jsやAstroで実装してきたブログの仕組みをalpha版がでたばかりのHonoXに書き換えました。README通りにいかない部分がたくさんあったので記録します。
+publishStatus: published
+preferVertical: false
+---
+
+[このサイト（blog.berlysia.net）](https://blog.berlysia.net/)を[HonoX](https://github.com/honojs/honox)に書き換えました。
+
+HonoXは、2024年2月10日にalpha版がリリースされたばかりの、Honoベースのメタフレームワークです。かつてはSonikという名前が付けられていました。この記事で扱っているバージョンは、 Hono v4.0.1 と HonoX v0.1.0 です。
+
+重ねて書きますが、HonoXはalpha版です。セマンティックバージョニングを無視して破壊的変更が行われる可能性があります。この記事ではこれからいろいろ「できない」ことを書きますが、総じてとても手馴染みのいいフレームワークだと思います。今後いろんな機能が増えてきたときに同じ手触りでいられるといいなと思います。
+
+この記事を読んでもHonoXの使い方はわかりません。ほかをあたってください。
+
+# なぜHonoXに書き換えたのか
+
+このサイトはこれまでNext.jsのPages Routerベースで書かれ、Astroベースへの書き換えを経て、Next.jsのApp Routerベースで動いていました。いろいろな実装を試すうち、次のような要望があることがわかってきました。
+
+- SSGができること。記事がHTMLとして事前生成されていてほしい。
+- 素朴なブラウザ側向けJS実装が挿入しやすいと望ましい。
+
+たぶん周りの道具はHonoXよりもAstroのほうが整っていますが、内部の仕組みがより単純なので御しやすいと考えたのと、Astroは他でも個人的に使っているので単に戻すよりは面白いかなと思って、HonoXにしてみることにしました。
+
+# HonoXのREADMEには書かれていないこと
+
+いくつか深々とハマったのですが、うまくいかなかった部分と対処を記録しておきます。 **まだalpha版なので、すぐに役に立たなくなるかもしれません**。
+
+## `@hono/vite-ssg` と `honox/vite/client` を同時に使うことが多分想定されていない
+
+`@hono/vite-ssg` は、Honoで書かれた実装とViteのSSR機能を組み合わせて、HTMLの事前生成をするためのViteプラグインです。
+
+`honox/vite/client` は、HonoXで実装したクライアントサイドの処理をビルドするためのプラグインです。
+
+事前生成されたHTMLとブラウザ向けJSを同時に使いたかったのですが、素朴に組み合わせただけでは動きませんでした。
+
+### ビルド生成物が消える
+
+Viteの `--mode` オプションを使ってクライアント向けとサーバー向けのビルドを別に行うような指示がREADMEに書かれていますが、この2つを素朴に組み合わせると、後から実行したビルドが先に実行したビルドの成果物を消してしまいます。
+
+```ts
+// vite.config.ts
+import honox from "honox/vite";
+import client from "honox/vite/client";
+import { defineConfig } from "vite";
+import ssg from "@hono/vite-ssg";
+
+const entry = "./app/server.ts";
+
+export default defineConfig(({ mode, command }) => {
+  if (mode === "client") {
+    return {
+      plugins: [client()],
+    };
+  }
+
+  return {
+    plugins: [honox({ entry }), ssg({ entry })],
+  };
+});
+```
+
+この設定の下で `vite build --mode client && vite build` というコマンドを実行すると、 `dist` 配下に生成されたファイルが消えてしまいます。
+
+この挙動はViteの [`build.emptyOutDir`](https://vitejs.dev/config/build-options#build-emptyoutdir) オプションの動作であると容易にわかるのですが、単純にconfigの中に書いてもうまくいきません。 `@hono/vite-ssg` プラグインが `build.emptyOutDir` を `true` にしているためです。
+
+現在のこのサイトの実装では、 `build.emptyOutDir` を `false` にするためだけのプラグインオブジェクトを与えることで回避しています。
+
+```ts
+// vite.config.ts
+import honox from "honox/vite";
+import client from "honox/vite/client";
+import { defineConfig } from "vite";
+import ssg from "@hono/vite-ssg";
+
+const entry = "./app/server.ts";
+
+export default defineConfig(({ mode, command }) => {
+  if (mode === "client") {
+    return {
+      plugins: [client()],
+    };
+  }
+
+  return {
+    plugins: [
+      honox({ entry }),
+      ssg({ entry }),
+      {
+        config() {
+          return { build: { emptyOutDir: false } };
+        },
+      },
+    ],
+  };
+});
+```
+
+### クライアント側コードがあるページで `Script` コンポーネントを使うとエラーになる
+
+`Script` コンポーネントは、HonoXのクライアント側コードを挿入するためのコンポーネントです。
+
+```tsx
+// app/routes/_renderer.tsx
+import { jsxRenderer } from "hono/jsx-renderer";
+import { Script } from "honox/server";
+
+export default jsxRenderer(({ children }) => {
+  return (
+    <html lang="ja">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <Script src="/app/client.ts" />
+      </head>
+      <body>{children}</body>
+    </html>
+  );
+});
+```
+
+`Script` コンポーネントは、routesディレクトリ配下でルートになっているファイルから `app/islands/*` 配下のファイルを参照している場合にのみ、クライアント側コードを挿入するような実装になっています。
+
+この状態でビルドをしてみると、次のようなエラーでislandsを参照しているルートでビルドが失敗します。
+
+```
+Error: [vite]: Rollup failed to resolve import "/static/client-qvhPWvF1.js" from "(repo-root)/.hono/index.html".
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+`build.rollupOptions.external`
+    at viteWarn (file://(repo-root)/node_modules/vite/dist/node/chunks/dep-94_H5fT6.js:67040:27)
+    at onRollupWarning (file://(repo-root)/node_modules/vite/dist/node/chunks/dep-94_H5fT6.js:67068:9)
+    at onwarn (file://(repo-root)/node_modules/vite/dist/node/chunks/dep-94_H5fT6.js:66777:13)
+    at file://(repo-root)/node_modules/rollup/dist/es/shared/node-entry.js:17457:13
+    at Object.logger [as onLog] (file://(repo-root)/node_modules/rollup/dist/es/shared/node-entry.js:19117:9)
+    at ModuleLoader.handleInvalidResolvedId (file://(repo-root)/node_modules/rollup/dist/es/shared/node-entry.js:18061:26)
+    at file://(repo-root)/node_modules/rollup/dist/es/shared/node-entry.js:18019:26
+error: script "build" exited with code 1
+```
+
+`dist` 配下にクライアント向けビルドで吐かれたファイルを参照するような形になっていて、Viteがこれを見つけられないのでエラーになっています。コメントの指示通りに `build.rollupOptions.external` に追加するとエラーは消えますが、出力されるHTMLからこのJSバンドルへの参照も消えてしまいます。
+
+現在のこのサイトの実装では、 `resolve.alias` の指定により、ファイルを見つけられるようにして回避しています。
+
+```ts
+// vite.config.ts
+import honox from "honox/vite";
+import client from "honox/vite/client";
+import { defineConfig } from "vite";
+import ssg from "@hono/vite-ssg";
+
+const entry = "./app/server.ts";
+
+export default defineConfig(({ mode, command }) => {
+  if (mode === "client") {
+    return {
+      plugins: [client()],
+    };
+  }
+
+  return {
+    plugins: [
+      honox({ entry }),
+      ssg({ entry }),
+      {
+        config() {
+          return { build: { emptyOutDir: false } };
+        },
+      },
+    ],
+
+    resolve: {
+      alias: [
+        {
+          find: /^\/static\/(.*?)\.js/,
+          replacement: resolve(
+            // Node 18 support, 20↑ならば import.meta.dirname でもよい
+            dirname(fileURLToPath(import.meta.url)),
+            "dist/static/$1.js"
+          ),
+        },
+      ],
+    },
+  };
+});
+```
+
+修正を試みようと思ったのですが、前者はともかく後者のほうに綺麗なアプローチが思いつきませんでした。ワークアラウンドもこんなところに自前のJSを置く人間はいない前提になっています。ひとまず[Issueをたてました](https://github.com/honojs/honox/issues/48)。
+
+## islandsとして実装したコンポーネントはクライアント側でchildrenを描画しない
+
+`app/islands/*` 配下に配置したコンポーネントは、普通のコンポーネントと同じようにchildrenを受け取るような定義ができますが、これはクライアント側で描画されません。
+
+[honojs/honox src/client/client.ts#L34-46](https://github.com/honojs/honox/blob/a186c42bfd35c05954df614078e89fcb19c1263c/src/client/client.ts#L34-L36)のあたりがまず第一の原因になっていて、 `props` から `children` を取り出す処理が書かれていません。
+
+この処理を書くだけでchildrenの描画はなされるようになりますが、islandsとして実装したコンポーネントが多重に呼び出されていると、画面が吹き飛びはしないもののコンソールにエラーが出ます。hydrate処理や、JSXをchildrenに渡している場合のシリアライズ処理をうまく整えようとするとすぐには動かなかったので、自分でなんとかしてみるのは諦めました。
+
+[ドーナツコンポーネント](https://frontendatscale.com/blog/donut-components/)パターンが使えないので、islandsが末端になるように整えたりしてかわしました。
+
+これも[Issueをたてました](https://github.com/honojs/honox/issues/47)。hydrate処理をまじめに頑張ろうとするとたぶんHonoXとhono/jsxの両方に変更が必要な気がします。
+
+# 書かれているが気づきにくいこと
+
+## islandsコンポーネントはroutesディレクトリ配下のファイルに書かれているものしかHasIslandに検知されない
+
+[<q>When you load the component in a route file, ...</q>](https://github.com/honojs/honox/tree/a186c42bfd35c05954df614078e89fcb19c1263c#:~:text=When%20you%20load%20the%20component%20in%20a%20route%20file%2C) とあるように、routesディレクトリ配下のファイルに書かれているコンポーネントだけがHasIslandの検知対象になっています。
+
+ですので、たとえば独自のコンポーネントから `app/islands/*` 配下のコンポーネントを読み込むような形になっている場合、HasIslandが動作しないので、Scriptコンポーネントで指定しているクライアント側向けのJSがロードされないという動作になります。
+
+これはHasIslandに依存しない独自のmanifest resolverコンポーネントを書くか、islandsコンポーネントを使っていることが明らかなルートでは明示的にislandsコンポーネントを読み込めば回避ができ、現在のこのサイトの実装は後者になっています。
+
+これも[Issueをたてました](https://github.com/honojs/honox/issues/46)。
+
+# まとめ
+
+冒頭にも書きましたが、大筋で手馴染みの良いフレームワークだと思います。Hono一味はこのところずっと勢いがあって見ていても楽しいですが、触ってみるともっと楽しいので、試してみると良いでしょう。
