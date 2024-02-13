@@ -349,8 +349,10 @@ hr.slash {
   }
 }
 
-.vertical .footer {
-  writing-mode: vertical-rl;
+@media (width < 640px) {
+  .vertical .footer {
+    writing-mode: vertical-rl;
+  }
 }
 
 .only-vertical,
