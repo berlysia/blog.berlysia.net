@@ -1,6 +1,7 @@
 import remarkFrontmatter from "remark-frontmatter";
 import rehypeToc from "@jsdevtools/rehype-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
+import rehypeShiki from "@shikijs/rehype";
 import { compile } from "@mdx-js/mdx";
 import type { RewriteImageOptions } from "./utils.js";
 import {
@@ -38,6 +39,7 @@ export async function processMDX(
       [rehypeToc, {}],
       rehypeAccessibleEmojis,
       renameFootnoteSectionName,
+      [rehypeShiki, { theme: "github-light" }],
     ],
   });
 }

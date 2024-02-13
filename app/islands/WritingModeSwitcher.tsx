@@ -1,12 +1,16 @@
 import { useEffect } from "hono/jsx";
-import { $writingMode, useWritingMode } from "../lib/writingMode";
+import { $viewerMode, useViewerMode } from "../lib/writingMode";
 
 function setVertical() {
-  $writingMode.set("vertical");
+  $viewerMode.set("vertical");
+}
+
+function setVerticalColumns() {
+  $viewerMode.set("vertical-columns");
 }
 
 function setHorizontal() {
-  $writingMode.set("horizontal");
+  $viewerMode.set("horizontal");
 }
 
 export default function WritingModeSwitcher({
@@ -16,7 +20,7 @@ export default function WritingModeSwitcher({
   readonly articleRootId: string;
   readonly preferVertical?: boolean;
 }) {
-  const { isVertical } = useWritingMode(
+  const { isVertical, isVerticalColumns, isHorizontal } = useViewerMode(
     preferVertical ? "vertical" : "horizontal"
   );
 
@@ -24,11 +28,15 @@ export default function WritingModeSwitcher({
     const el = document.querySelector(`#${articleRootId}`);
     if (el) {
       el.classList.toggle("vertical", isVertical);
+      // el.classList.toggle("vertical-columns", isVerticalColumns);
+      el.classList.toggle("horizontal", isHorizontal);
     }
     return () => {
       el?.classList.remove("vertical");
+      // el?.classList.remove("vertical-columns");
+      el?.classList.remove("horizontal");
     };
-  }, [isVertical, articleRootId]);
+  }, [isVertical, isHorizontal, articleRootId, isVerticalColumns]);
 
   return (
     <div className="writing-mode-switcher tw-h-8 tw-w-8 tw-flex tw-justify-center tw-items-center">

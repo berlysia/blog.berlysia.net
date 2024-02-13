@@ -1,22 +1,21 @@
 import { useEffect, useState } from "hono/jsx";
 import { atom } from "nanostores";
 
-export type WritingMode = "vertical" | "horizontal";
-export const $writingMode = atom<WritingMode>("horizontal");
+export type ViewerMode = "horizontal" | "vertical" | "vertical-columns";
+export const $viewerMode = atom<ViewerMode>("horizontal");
 
-export function useWritingMode(
-  defaultValue: "vertical" | "horizontal" = "horizontal"
-) {
-  const [writingMode, setWritingMode] = useState(defaultValue);
+export function useViewerMode(defaultValue: ViewerMode = "horizontal") {
+  const [viewerMode, setViewerMode] = useState(defaultValue);
 
   useEffect(() => {
-    $writingMode.set(defaultValue);
-    return $writingMode.subscribe(setWritingMode);
+    $viewerMode.set(defaultValue);
+    return $viewerMode.subscribe(setViewerMode);
   }, []);
 
   return {
-    writingMode,
-    isVertical: writingMode === "vertical",
-    isHorizontal: writingMode === "horizontal",
+    viewerMode,
+    isVertical: viewerMode === "vertical",
+    isHorizontal: viewerMode === "horizontal",
+    isVerticalColumns: viewerMode === "vertical-columns",
   };
 }

@@ -1,12 +1,12 @@
-import { useEffect, useCallback, useRef } from "hono/jsx";
-import { useWritingMode } from "../lib/writingMode";
+import { useLayoutEffect, useCallback, useRef } from "hono/jsx";
+import { useViewerMode } from "../lib/writingMode";
 
 export default function ArticleSentinel({
   articleId,
 }: {
   readonly articleId: string;
 }) {
-  const writingMode = useWritingMode();
+  const { isVertical, isHorizontal } = useViewerMode();
   const sentinelRef = useRef<HTMLElement>(null);
 
   /*
@@ -24,33 +24,51 @@ export default function ArticleSentinel({
     const sentinelEl = sentinelRef.current;
     if (articleEl && sentinelEl) {
       if (
-        writingMode.isVertical &&
+        isVertical &&
         window.matchMedia("(min-width: 640px)" /* sm */).matches
       ) {
         const box = sentinelEl.getBoundingClientRect();
         const currentValue = articleEl.getBoundingClientRect().height;
-        const nextValue =
-          window.scrollY +
-          box.bottom -
-          24; /* この数字の理由がわかっていないがこの値でないと振動する */
-        /*
-          - line-heightが1.5remで24pxだが影響なし
-          - gapは2remで32px
-          - articleのpaddingは1remで16px
-          - headerのheightは40px
-        */
-        const diff = nextValue - currentValue;
-        if (Math.abs(diff) > 10) {
-          articleEl.style.height = `${nextValue}px`;
+        const HEADER_HEIGHT = 40;
+        const ARTICLE_TOP_PADDING = 16;
+        // column-sizeの値と対応づける
+        const COLUMN_TARGET_SIZE = window.innerHeight * 0.5;
+        const COLUMN_GAP = 32;
+        const COLUMN_UNIT = COLUMN_TARGET_SIZE + COLUMN_GAP;
+        const targetValue =
+          window.scrollY + box.bottom - HEADER_HEIGHT - ARTICLE_TOP_PADDING;
+
+        // targetValueを割る数字を増やしていって最も商が400 + 32に近くなるものを探す
+        let idealColumns = 0;
+        let minDiff = Number.POSITIVE_INFINITY;
+        for (let i = 1; i < 200 /* 高々カラム数 */; i++) {
+          const value = Math.floor(targetValue / i);
+          const diff = Math.abs(value - COLUMN_UNIT);
+          if (diff < minDiff) {
+            minDiff = diff;
+            idealColumns = i;
+          } else if (diff > minDiff) {
+            // 大きくなり始めたらおわり
+            break;
+          }
         }
-      } else {
+
+        const idealHeight =
+          idealColumns * COLUMN_UNIT - HEADER_HEIGHT - ARTICLE_TOP_PADDING;
+        const diff = idealHeight - currentValue;
+        if (Math.abs(diff) > 10) {
+          articleEl.style.height = `${idealHeight}px`;
+        }
+      } else if (isVertical) {
+        articleEl.style.height = "calc(100dvh - 40px)";
+      } else if (isHorizontal) {
         articleEl.style.height = "auto";
       }
     }
-  }, [articleId, writingMode.isVertical]);
+  }, [articleId, isHorizontal, isVertical]);
 
   // articleRefのリサイズを監視して、リサイズが発生したらhandleResizeを実行する
-  useEffect(() => {
+  useLayoutEffect(() => {
     const articleEl = document.querySelector<HTMLElement>(`#${articleId}`);
     const observer = new ResizeObserver(handleResize);
     if (articleEl) {

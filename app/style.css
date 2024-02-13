@@ -8,18 +8,26 @@ html {
   min-height: 100vh;
   overflow-y: scroll;
 
-  font-family: var(--font-family-lato), "Helvetica Neue", "Helvetica",
-    "Hiragino Kaku Gothic ProN", YuGothic, "Yu Gothic Medium", Meiryo,
-    sans-serif;
+  font-weight: 400;
+  font-family: "Helvetica Neue", "Helvetica", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体",
+    "Zen Kaku Gothic New", "Noto Sans JP", Meiryo, sans-serif;
   color: #233;
+
+  scroll-padding-top: 48px;
+  counter-reset: h1;
 
   @apply tw-text-base;
 }
 
 html:has(.vertical) {
-  @apply sm:tw-overflow-y-visible tw-overflow-y-hidden;
-  font-family: "Hiragino Kaku Gothic ProN", YuGothic, "Yu Gothic Medium", Meiryo,
-    var(--font-family-notosansjp), sans-serif;
+  @media (width >= 640px) {
+    @apply tw-overflow-y-visible;
+  }
+  @media (width < 640px) {
+    @apply tw-overflow-y-hidden;
+  }
+
   min-height: 100svh;
   height: 100%;
 }
@@ -40,6 +48,11 @@ body:has(.vertical) {
   hiddenではスクロールコンテナーになってしまい、ヘッダーのstickyが効かなくなる
   */
   overflow-x: clip;
+  text-underline-position: under left;
+}
+
+aside {
+  @apply tw-text-sm tw-text-gray-500 tw-mb-2;
 }
 
 hr.slash {
@@ -84,83 +97,141 @@ hr.slash {
   } */
 }
 
+.toc {
+  border: 1px solid rgb(249 168 212);
+  border-radius: 1rem;
+  padding: 1rem;
+
+  ol {
+    counter-reset: toc;
+    padding-inline-start: 1.2rem;
+
+    .vertical & {
+      background: linear-gradient(
+        to bottom,
+        transparent 0.6rem,
+        rgb(249 168 212) 0.6rem,
+        transparent 1rem 100%
+      );
+    }
+    .horizontal & {
+      background: linear-gradient(
+        to right,
+        transparent 0.6rem,
+        rgb(249 168 212) 0.6rem,
+        transparent 1rem 100%
+      );
+    }
+
+    > li {
+      display: block flow;
+      list-style-type: none;
+      list-style-position: inside;
+
+      &::before {
+        counter-increment: toc;
+        content: counters(toc, ".") " ";
+      }
+    }
+  }
+
+  .toc-level {
+    /* border-block-end: */
+  }
+}
+
 .main-text-section {
-  & h1 {
+  counter-reset: h2 h3 h4 h5 h6;
+
+  h1 {
     @apply tw-text-4xl tw-border-be tw-border-is-2 tw-border-keyColor-200 tw-mbs-6 tw-mbe-2;
+    counter-reset: h2 h3 h4 h5 h6;
+    counter-increment: h1;
 
     > a::before {
-      content: "# ";
+      content: counter(h1) ". ";
     }
   }
 
-  & h2 {
+  h2 {
     @apply tw-text-3xl tw-border-be tw-border-is tw-border-keyColor-200 tw-mbs-4 tw-mbe-2;
+    counter-reset: h3 h4 h5 h6;
+    counter-increment: h2;
 
     > a::before {
-      content: "## ";
+      content: counter(h1) "." counter(h2) ". ";
     }
   }
 
-  & h3 {
+  h3 {
     @apply tw-text-2xl tw-border-be tw-border-keyColor-200 tw-mbs-3 tw-mbe-2;
+    counter-reset: h4 h5 h6;
+    counter-increment: h3;
 
     > a::before {
-      content: "### ";
+      content: counter(h1) "." counter(h2) "." counter(h3) ". ";
     }
   }
 
-  & h4 {
+  h4 {
     @apply tw-text-xl tw-mbs-3 tw-mbe-2 tw-text-gray-800;
+    counter-reset: h5 h6;
+    counter-increment: h4;
 
     > a::before {
-      content: "#### ";
+      content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". ";
     }
   }
 
-  & h5 {
+  h5 {
     @apply tw-text-lg tw-mbs-2 tw-mbe-2 tw-text-gray-800;
+    counter-reset: h6;
+    counter-increment: h5;
 
     > a::before {
-      content: "##### ";
+      content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "."
+        counter(h5) ". ";
     }
   }
 
-  & h6 {
+  h6 {
     @apply tw-text-lg tw-mbs-1 tw-mbe-1 tw-text-gray-800;
+    counter-increment: h6;
 
     > a::before {
-      content: "###### ";
+      content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "."
+        counter(h5) "." counter(h6) ". ";
     }
   }
 
-  & {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      > a {
-        color: currentColor;
-        text-decoration: none;
-      }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    > a {
+      color: currentColor;
+      text-decoration: none;
+    }
 
-      > a:hover::after {
-        @apply tw-text-base;
-        content: " 🔗";
-      }
+    > a:hover::after {
+      @apply tw-text-base;
+      content: " 🔗";
     }
   }
 
-  & blockquote {
+  blockquote {
     @apply tw-plb-2 tw-pis-4 tw-mlb-2 tw-border-is-8 tw-border-be tw-border-keyColor-300 tw-bg-keyColor-50 tw-text-gray-600;
   }
 
-  & strong {
-    background: linear-gradient(
-      transparent 70%,
-      rgb(254 202 202) /* bg-red-200 */ 0%
-    );
+  strong {
+    .horizontal & {
+      background: linear-gradient(
+        transparent 70%,
+        rgb(254 202 202) /* bg-red-200 */ 0%
+      );
+    }
     .vertical & {
       @apply vertical-tooltip;
       background: linear-gradient(
@@ -171,11 +242,13 @@ hr.slash {
     }
   }
 
-  & em {
-    background: linear-gradient(
-      transparent 70%,
-      rgb(186 230 253) /* bg-sky-200 */ 0%
-    );
+  em {
+    .horizontal & {
+      background: linear-gradient(
+        transparent 70%,
+        rgb(186 230 253) /* bg-sky-200 */ 0%
+      );
+    }
     .vertical & {
       @apply vertical-tooltip;
       background: linear-gradient(
@@ -186,22 +259,75 @@ hr.slash {
     }
   }
 
-  & p {
+  p {
     /* font-sizeとindentが一致していないと禁則処理が乱れるように見える */
-    @apply tw-mlb-4 tw-indent-[1em] tw-text-lg;
+    @apply tw-mlb-4 tw-indent-[1em] tw-text-lg tw-leading-8;
   }
 
-  & td,
-  & th {
+  td,
+  th {
     @apply tw-border tw-border-collapse tw-border-gray-400;
+  }
+
+  a {
+    @apply tw-text-keyColor-600 tw-underline;
+
+    &:visited {
+      @apply tw-text-purple-800;
+    }
+  }
+
+  pre:has(code) {
+    .horizontal & {
+      @apply tw-plb-8 tw-pli-4 tw-overflow-x-auto;
+    }
+    .vertical & {
+      /* @apply tw-w-full tw-writing-horizontal-tb tw-overflow-auto;
+      max-width: min(1008px, 100% - 2rem);*/
+
+      > code {
+        display: none;
+        /* @apply tw-w-full tw-overflow-x-auto tw-overflow-y-auto; */
+      }
+      &::before {
+        content: "（コードを見る場合は横書きにしてください）";
+      }
+    }
+  }
+
+  ul > li {
+    list-style: auto;
+    list-style-position: inside;
+  }
+
+  ol > li {
+    list-style: decimal;
+    list-style-position: inside;
+  }
+
+  li {
+    @apply tw-text-lg tw-leading-8;
   }
 }
 
-.article {
-  @apply tw-px-2;
+.articleContentWrapper {
+  .horizontal & {
+    @apply tw-pt-2 tw-px-4;
+  }
 
-  :where(.vertical) & {
-    @apply sm:tw-writing-vertical-rl sm:tw-w-full sm:tw-overflow-x-visible sm:tw-h-max sm:tw-columns-sm sm:tw-column-rule-size-1 sm:tw-column-rule-style-solid sm:tw-column-rule-color-keyColor-200 sm:tw-column-fill-auto sm:tw-gap-8 tw-writing-vertical-rl tw-w-full tw-overflow-x-scroll tw-h-full tw-py-4 tw-line-break-strict;
+  .vertical & {
+    @apply tw-py-4 tw-px-2;
+    @media (width >= 640px) {
+      @apply tw-writing-vertical-rl tw-w-full tw-overflow-x-visible tw-h-max tw-relative tw-box-border;
+
+      /* ArticleSentinelの処理と対応している */
+      @apply tw-columns-[50vh] tw-columns-[50svh];
+
+      @apply tw-column-rule-size-1 tw-column-rule-style-solid tw-column-rule-color-keyColor-200 tw-column-fill-auto tw-gap-8;
+    }
+    @media (width < 640px) {
+      @apply tw-writing-vertical-rl tw-w-full tw-overflow-x-scroll tw-h-full tw-line-break-strict;
+    }
   }
 }
 
@@ -209,6 +335,16 @@ hr.slash {
   @apply tw-w-full tw-flex tw-justify-center;
 
   :where(.vertical) & {
-    @apply sm:tw-h-auto tw-h-[calc(100vh-2.5rem)] tw-h-[calc(100svh-2.5rem)];
+    font-weight: 400;
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic Medium",
+      "游ゴシック Medium", YuGothic, "游ゴシック体", "Zen Kaku Gothic New",
+      "Noto Sans JP", Meiryo, sans-serif;
+
+    @media (width >= 640px) {
+      @apply tw-h-auto tw-w-full tw-max-w-full tw-relative tw-box-content;
+    }
+    @media (width < 640px) {
+      @apply tw-h-[calc(100vh-2.5rem)] tw-h-[calc(100svh-2.5rem)];
+    }
   }
 }
