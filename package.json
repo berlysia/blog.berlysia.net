@@ -31,8 +31,8 @@
     "format:check": "prettier --check '**/*.{json,md,js,ts,jsx,tsx}'",
     "test": "jest",
     "test:vrt:ci": "playwright test",
-    "test:vrt": "docker run --rm --volume $(pwd):/workdir/ --workdir /workdir/ -it mcr.microsoft.com/playwright:v1.41.2-focal /bin/bash -c 'yarn test:vrt:ci'",
-    "test:vrt:update": "docker run --rm --volume $(pwd):/workdir/ --workdir /workdir/ -it mcr.microsoft.com/playwright:v1.41.2-focal /bin/bash -c 'yarn test:vrt:ci -u'",
+    "test:vrt": "docker run --rm --volume $(pwd):/workdir/ --workdir /workdir/ -it mcr.microsoft.com/playwright:v1.41.2-focal /bin/bash -c 'bun run test:vrt:ci'",
+    "test:vrt:update": "docker run --rm --volume $(pwd):/workdir/ --workdir /workdir/ -it mcr.microsoft.com/playwright:v1.41.2-focal /bin/bash -c 'bun run test:vrt:ci -u'",
     "clean": "run-p 'clean:*'",
     "clean:dist": "del dist",
     "clean:seed": "tsx --tsconfig ./tsconfig.script.json app/seeds/clean.ts",
@@ -106,6 +106,5 @@
     "vfile-matter": "^5.0.0",
     "vite": "^5.1.1",
     "zod": "^3.22.4"
-  },
-  "packageManager": "yarn@4.0.2"
+  }
 }
