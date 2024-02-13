@@ -211,8 +211,25 @@ hr.slash {
   h5,
   h6 {
     > a {
-      color: currentColor;
-      text-decoration: none;
+      &:any-link {
+        color: currentColor;
+        text-decoration: none;
+      }
+
+      &:visited {
+        color: currentColor;
+      }
+
+      &,
+      &:visited {
+        &:active,
+        &:hover {
+          transition:
+            color 0.2s,
+            text-decoration 0.2s;
+          @apply tw-text-keyColor-600;
+        }
+      }
     }
 
     > a:hover::after {
@@ -270,10 +287,23 @@ hr.slash {
   }
 
   a {
-    @apply tw-text-keyColor-600 tw-underline;
+    &:any-link {
+      @apply tw-text-keyColor-600 tw-underline;
+    }
 
     &:visited {
       @apply tw-text-purple-800;
+    }
+
+    &,
+    &:visited {
+      &:active,
+      &:hover {
+        transition:
+          color 0.2s,
+          text-decoration 0.2s;
+        @apply tw-text-keyColor-600;
+      }
     }
   }
 
