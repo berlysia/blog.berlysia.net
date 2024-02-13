@@ -28,15 +28,12 @@ export default defineConfig(({ mode, command }) => {
 
   return {
     build: {
-      rollupOptions:
-        mode === "client"
-          ? {
-              input: ["./app/style.css"],
-              output: {
-                assetFileNames: "static/assets/[name].[ext]",
-              },
-            }
-          : {},
+      rollupOptions: {
+        input: ["./app/style.css"],
+        output: {
+          assetFileNames: "static/assets/[name]-[hash].[ext]",
+        },
+      },
     },
     ssr: {
       external: ["debug", "acorn-jsx"],
