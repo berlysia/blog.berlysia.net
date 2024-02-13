@@ -3,6 +3,7 @@ import type { PropsWithChildren } from "hono/jsx";
 import ArticleSentinel from "#islands/ArticleSentinel";
 import clsx from "clsx";
 import Footer from "#components/Footer";
+import { NotInVertical, OnlyVertical } from "#components/OnlyViewMode";
 import type { Frontmatter } from "../../lib/mdx/utils";
 import Header from "../Header";
 
@@ -12,6 +13,12 @@ type Properties = PropsWithChildren<{
 
 const articleId = "blog-article-content";
 const articleRootId = "blog-article-root";
+
+const footer = (
+  <Footer>
+    <aside>&copy; 2024 - berlysia</aside>
+  </Footer>
+);
 
 export default function BlogArticleLayout({
   frontmatter,
@@ -83,17 +90,23 @@ export default function BlogArticleLayout({
                 <hr className="tw-bs-40 tw-border-0 slash" />
               </div>
               <section className="main-text-section">{children}</section>
+              <OnlyVertical>
+                <div className="tw-flex tw-justify-center tw-mlb-6">
+                  <hr className="tw-bs-40 tw-border-0 slash" />
+                </div>
+                {footer}
+              </OnlyVertical>
               <ArticleSentinel articleId={articleId} />
             </div>
-            <div className="tw-flex tw-justify-center tw-mlb-6">
-              <hr className="tw-bs-40 tw-border-0 slash" />
-            </div>
+            <NotInVertical>
+              <div className="tw-flex tw-justify-center tw-mlb-6">
+                <hr className="tw-bs-40 tw-border-0 slash" />
+              </div>
+            </NotInVertical>
           </article>
         </div>
       </div>
-      <Footer>
-        <aside>&copy; 2024 - berlysia</aside>
-      </Footer>
+      <NotInVertical>{footer}</NotInVertical>
     </div>
   );
 }

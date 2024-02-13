@@ -348,3 +348,51 @@ hr.slash {
     }
   }
 }
+
+.vertical .footer {
+  writing-mode: vertical-rl;
+}
+
+.only-vertical,
+.only-horizontal,
+.only-vertical-column {
+  display: none;
+}
+
+.horizontal .only-horizontal {
+  display: revert;
+}
+
+@media (width < 640px) {
+  .vertical .only-vertical {
+    display: revert;
+  }
+}
+
+@media (width >= 640px) {
+  .vertical .only-vertical-column {
+    display: revert;
+  }
+}
+
+.horizontal .not-in-horizontal {
+  display: none;
+}
+
+@media (width < 640px) {
+  .vertical .not-in-vertical {
+    display: none;
+  }
+}
+
+@media (width >= 640px) {
+  .vertical .not-in-vertical-column {
+    display: none;
+  }
+}
+
+.not-in-vertical,
+.not-in-horizontal,
+.not-in-vertical-column {
+  display: revert;
+}
