@@ -2,6 +2,14 @@ import ResolveManifest from "#components/ResolveManifest";
 import { Style } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Script } from "honox/server";
+import type { Manifest } from "vite";
+
+const manifestFile = Object.values(
+  import.meta.glob<{ default: Manifest }>("/.hono/.vite/manifest.json", {
+    eager: true,
+  })
+)[0];
+const manifest = manifestFile.default;
 
 export default jsxRenderer(({ children, title, description }) => {
   return (
@@ -30,9 +38,9 @@ export default jsxRenderer(({ children, title, description }) => {
           rel="stylesheet"
         />
 
-        <ResolveManifest src="app/style.css" type="style" />
+        <ResolveManifest src="app/style.css" type="style" manifest={manifest} />
         {/* <ResolveManifest src="app/client.ts" type="script" /> */}
-        <Script src="app/client.ts" />
+        <Script src="app/client.ts" manifest={manifest} />
         <Style />
       </head>
       <body>{children}</body>
