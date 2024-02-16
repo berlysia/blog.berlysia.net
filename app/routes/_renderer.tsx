@@ -31,8 +31,7 @@ export default jsxRenderer(({ children, title, description }) => {
         />
 
         <ResolveManifest src="app/style.css" type="style" />
-        {/* <ResolveManifest src="app/client.ts" type="script" /> */}
-        <Script src="app/client.ts" />
+        <Script src="/app/client.ts" />
         <Style />
       </head>
       <body>{children}</body>

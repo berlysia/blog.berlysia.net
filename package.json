@@ -23,7 +23,7 @@
     "build:seed:local": "tsx --tsconfig ./tsconfig.script.json app/seeds/localBuild.ts",
     "build:seed:remote": "tsx --tsconfig ./tsconfig.script.json app/seeds/remoteBuild.ts",
     "build:client": "vite build --mode client",
-    "build:server": "vite build",
+    "build:server": "NODE_ENV=production tsx app/build.ts",
     "start": "vite start",
     "lint": "eslint 'app/**/*.{js,ts,jsx,tsx}'",
     "lint:fix": "npm-run-all 'lint -- --fix'",
