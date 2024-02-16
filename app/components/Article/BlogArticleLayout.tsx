@@ -52,7 +52,7 @@ export default function BlogArticleLayout({
       <div className="articleWrapper">
         <div className="tw-w-full tw-relative tw-max-w-screen-lg">
           <article className="article">
-            <div className="articleContentWrapper" id={articleId}>
+            <ArticleSentinel className="articleContentWrapper">
               <div>
                 <h1 className="tw-text-4xl tw-font-bold tw-mbs-4">
                   {frontmatter.title}
@@ -96,8 +96,7 @@ export default function BlogArticleLayout({
                 </div>
                 {footer}
               </OnlyVertical>
-              <ArticleSentinel articleId={articleId} />
-            </div>
+            </ArticleSentinel>
             <NotInVertical>
               <div className="tw-flex tw-justify-center tw-mlb-6">
                 <hr className="tw-bs-40 tw-border-0 slash" />

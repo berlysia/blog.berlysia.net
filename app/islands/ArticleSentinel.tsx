@@ -1,13 +1,16 @@
+import type { PropsWithChildren } from "hono/jsx";
 import { useLayoutEffect, useCallback, useRef } from "hono/jsx";
 import { useViewerMode } from "../lib/writingMode";
 
 export default function ArticleSentinel({
-  articleId,
-}: {
-  readonly articleId: string;
-}) {
+  className,
+  children,
+}: PropsWithChildren<{
+  readonly className?: string;
+}>) {
   const { isVertical, isHorizontal } = useViewerMode();
   const sentinelRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   /*
     # なぜこの処理が必要か
@@ -20,7 +23,7 @@ export default function ArticleSentinel({
     コンテンツ末尾に番兵要素を配置し、番兵要素の位置を監視して、番兵要素の位置が変わったら、article要素の高さを番兵要素の位置に合わせて調整する。
   */
   const handleResize = useCallback(() => {
-    const articleEl = document.querySelector<HTMLElement>(`#${articleId}`);
+    const articleEl = containerRef.current;
     const sentinelEl = sentinelRef.current;
     if (articleEl && sentinelEl) {
       if (
@@ -65,11 +68,12 @@ export default function ArticleSentinel({
         articleEl.style.height = "auto";
       }
     }
-  }, [articleId, isHorizontal, isVertical]);
+  }, [isHorizontal, isVertical]);
 
   // articleRefのリサイズを監視して、リサイズが発生したらhandleResizeを実行する
   useLayoutEffect(() => {
-    const articleEl = document.querySelector<HTMLElement>(`#${articleId}`);
+    const articleEl = containerRef.current;
+    if (!articleEl) return;
     const observer = new ResizeObserver(handleResize);
     if (articleEl) {
       observer.observe(articleEl);
@@ -77,7 +81,12 @@ export default function ArticleSentinel({
     return () => {
       observer.disconnect();
     };
-  }, [articleId, handleResize]);
+  }, [handleResize]);
 
-  return <div ref={sentinelRef}></div>;
+  return (
+    <div ref={containerRef} className={className}>
+      {children}
+      <div ref={sentinelRef}></div>
+    </div>
+  );
 }
