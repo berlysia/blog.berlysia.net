@@ -17,5 +17,10 @@ export default configBerlysia(
   pluginBerlysia.configs.recommended,
   {
     ignores: ["app/generated/**/*", "**/*.d.ts"],
+  },
+  {
+    rules: {
+      "react/jsx-no-useless-fragment": "off",
+    },
   }
 );

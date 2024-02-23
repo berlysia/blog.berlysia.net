@@ -4,14 +4,12 @@ import { run } from "@mdx-js/mdx";
 import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";
 import Image from "#components/mdx/Image";
-import HasIslandMark from "#islands/HasIslandMark";
-
-async function Page({ slug }: { slug: string }) {}
 
 export default createRoute(
   ssgParams(() => getSlugs().map((slug) => ({ slug }))),
   async (c) => {
     const slug = c.req.param("slug");
+    if (slug === ":slug") return c.status(404);
 
     const [module, runtime] = await Promise.all([
       import(`../../generated/articles/${slug}/index.jsx?raw`),
@@ -30,7 +28,6 @@ export default createRoute(
 
     return c.render(
       <BlogArticleLayout frontmatter={frontmatter}>
-        <HasIslandMark />
         <Content components={{ Image }} />
       </BlogArticleLayout>,
       { title: frontmatter.title, description: frontmatter.description }
