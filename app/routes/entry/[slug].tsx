@@ -4,32 +4,10 @@ import { run } from "@mdx-js/mdx";
 import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";
 import Image from "#components/mdx/Image";
-import Header from "#components/Header";
 import type { NotFoundHandler } from "hono";
+import notFound from "./404";
 
-const notFoundhandler: NotFoundHandler = (c) => {
-  c.status(404);
-  return c.render(
-    <div>
-      <Header>
-        <div className="tw-shrink tw-overflow-ellipsis tw-overflow-hidden tw-whitespace-nowrap">
-          <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/">
-            blog.berlysia.net
-          </a>
-        </div>
-      </Header>
-      <div className="articleWrapper">
-        <div className="tw-w-full tw-relative tw-max-w-screen-lg">
-          <article className="article">
-            <section className="main-text-section">
-              <h1>404 - Not Found</h1>
-            </section>
-          </article>
-        </div>
-      </div>
-    </div>
-  );
-};
+const notFoundHandler = notFound.at(-1) as NotFoundHandler;
 
 async function wrapResult<T>(
   promise: Promise<T>
@@ -46,14 +24,14 @@ export default createRoute(
   ssgParams(() => getSlugs().map((slug) => ({ slug }))),
   async (c) => {
     const slug = c.req.param("slug");
-    if (slug === ":slug") return notFoundhandler(c);
+    if (slug === ":slug") return notFoundHandler(c);
 
     const [runtime, module] = await Promise.all([
       import("hono/jsx/jsx-runtime"),
       wrapResult(import(`../../generated/articles/${slug}/index.jsx?raw`)),
     ]);
 
-    if (!module.ok) return notFoundhandler(c);
+    if (!module.ok) return notFoundHandler(c);
 
     const { default: Content } = await run(module.value.default, {
       // @ts-expect-error -- fixme
