@@ -16,6 +16,7 @@
     "incremental": true,
     "noUnusedLocals": false,
     "types": ["vite/client"],
+    "verbatimModuleSyntax": true,
     "paths": {
       "#*": ["./app/*"]
     }
