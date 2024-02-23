@@ -2,7 +2,7 @@
 title: このサイトをHonoXに書き換えた
 created: 2024-02-14 02:45
 publishedAt: 2024-02-14 02:45
-lastModified: 2024-02-14 02:45
+lastModified: 2024-02-24 01:00
 category: tech
 tags: meta, framework
 description: Next.jsやAstroで実装してきたブログの仕組みをalpha版がでたばかりのHonoXに書き換えました。README通りにいかない部分がたくさんあったので記録します。
@@ -14,7 +14,16 @@ preferVertical: false
 
 HonoXは、2024年2月10日にalpha版がリリースされたばかりの、Honoベースのメタフレームワークです。かつてはSonikという名前が付けられていました。この記事で扱っているバージョンは、 Hono v4.0.1 と HonoX v0.1.0 です。
 
+<ins>
+  <time>2024-02-24</time> Hono v4.0.5 と HonoX v0.1.5
+  のバージョンですべての内容を更新しました。
+</ins>
+
 重ねて書きますが、HonoXはalpha版です。セマンティックバージョニングを無視して破壊的変更が行われる可能性があります。この記事ではこれからいろいろ「できない」ことを書きますが、総じてとても手馴染みのいいフレームワークだと思います。今後いろんな機能が増えてきたときに同じ手触りでいられるといいなと思います。
+
+<ins>
+  <time>2024-02-24</time> 元々の記事で指摘していた問題はほとんど解消しています。
+</ins>
 
 この記事を読んでもHonoXの使い方はわかりません。ほかをあたってください。
 
@@ -32,6 +41,16 @@ HonoXは、2024年2月10日にalpha版がリリースされたばかりの、Hon
 いくつか深々とハマったのですが、うまくいかなかった部分と対処を記録しておきます。 **まだalpha版なので、すぐに役に立たなくなるかもしれません**。
 
 ## `@hono/vite-ssg` と `honox/vite/client` を同時に使うことが多分想定されていない
+
+<ins>
+  <time>2024-02-24</time> [honojs/vite-plugin
+  #80](https://github.com/honojs/vite-plugins/pull/80) と [honojs/honox
+  #70](https://github.com/honojs/honox/pull/70)
+  で対処しました。READMEを読むだけで対応できます。
+</ins>
+
+<details>
+<summary>元々の内容を記録しておきます。</summary>
 
 `@hono/vite-ssg` は、Honoで書かれた実装とViteのSSR機能を組み合わせて、HTMLの事前生成をするためのViteプラグインです。
 
@@ -101,7 +120,16 @@ export default defineConfig(({ mode, command }) => {
 });
 ```
 
+</details>
+
 ### クライアント側コードがあるページで `Script` コンポーネントを使うとエラーになる
+
+<ins>
+  <time>2024-02-24</time> HonoX v0.1.5 までにすべて解消しています。
+</ins>
+
+<details>
+<summary>元々の内容を記録しておきます。</summary>
 
 `Script` コンポーネントは、HonoXのクライアント側コードを挿入するためのコンポーネントです。
 
@@ -192,7 +220,16 @@ export default defineConfig(({ mode, command }) => {
 
 修正を試みようと思ったのですが、前者はともかく後者のほうに綺麗なアプローチが思いつきませんでした。ワークアラウンドもこんなところに自前のJSを置く人間はいない前提になっています。ひとまず[Issueをたてました](https://github.com/honojs/honox/issues/48)。
 
+</details>
+
 ## islandsとして実装したコンポーネントはクライアント側でchildrenを描画しない
+
+<ins>
+  <time>2024-02-24</time> HonoX v0.1.5 までにすべて解消しています。
+</ins>
+
+<details>
+<summary>元々の内容を記録しておきます。</summary>
 
 `app/islands/*` 配下に配置したコンポーネントは、普通のコンポーネントと同じようにchildrenを受け取るような定義ができますが、これはクライアント側で描画されません。
 
@@ -203,6 +240,8 @@ export default defineConfig(({ mode, command }) => {
 [ドーナツコンポーネント](https://frontendatscale.com/blog/donut-components/)パターンが使えないので、islandsが末端になるように整えたりしてかわしました。
 
 これも[Issueをたてました](https://github.com/honojs/honox/issues/47)。hydrate処理をまじめに頑張ろうとするとたぶんHonoXとhono/jsxの両方に変更が必要な気がします。
+
+</details>
 
 # 書かれているが気づきにくいこと
 
@@ -215,6 +254,11 @@ export default defineConfig(({ mode, command }) => {
 これはHasIslandに依存しない独自のmanifest resolverコンポーネントを書くか、islandsコンポーネントを使っていることが明らかなルートでは明示的にislandsコンポーネントを読み込めば回避ができ、現在のこのサイトの実装は後者になっています。
 
 これも[Issueをたてました](https://github.com/honojs/honox/issues/46)。
+
+<ins>
+  <time>2024-02-24</time>{" "}
+  現時点で解消していません。このサイトでアイデアを[実装してみています](https://github.com/berlysia/blog.berlysia.net/commit/6f7af84fe2ec7fa4ad94405aa83d623e602b2627)。
+</ins>
 
 # まとめ
 
