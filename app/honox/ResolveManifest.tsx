@@ -36,7 +36,7 @@ export default function ResolveManifest(options: {
         throw new Error("Invalid type");
       }
     }
-    // eslint-disable-next-line react/jsx-no-useless-fragment -- hono/jsx cannot return null
+
     return <></>;
   }
 

@@ -1,4 +1,4 @@
-import ResolveManifest from "#components/ResolveManifest";
+import ResolveManifest from "#honox/ResolveManifest";
 import { Style } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Script } from "honox/server";

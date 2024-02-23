@@ -1,7 +1,8 @@
 import Header from "#components/Header";
-import type { NotFoundHandler } from "hono";
+import { createRoute } from "honox/factory";
 
-const notFoundhandler: NotFoundHandler = (c) => {
+export default createRoute((c) => {
+  c.status(404);
   return c.render(
     <div>
       <Header>
@@ -14,6 +15,4 @@ const notFoundhandler: NotFoundHandler = (c) => {
       <h1>404 - Not Found</h1>
     </div>
   );
-};
-
-export default notFoundhandler;
+});

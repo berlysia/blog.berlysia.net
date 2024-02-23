@@ -1,5 +1,5 @@
 import { useEffect } from "hono/jsx";
-import { WrapForHasIslandDetection } from "#lib/islandBeacon";
+import { WrapForHasIslandDetection } from "#honox/islandBeacon";
 import { $viewerMode, useViewerMode } from "../lib/writingMode";
 
 function setVertical() {
