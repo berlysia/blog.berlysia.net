@@ -5,6 +5,7 @@ import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";
 import Image from "#components/mdx/Image";
 import type { NotFoundHandler } from "hono";
+import { SITE_BLOG_URL } from "#constant";
 import notFound from "./404";
 
 const notFoundHandler = notFound.at(-1) as NotFoundHandler;
@@ -48,7 +49,14 @@ export default createRoute(
       <BlogArticleLayout frontmatter={frontmatter}>
         <Content components={{ Image }} />
       </BlogArticleLayout>,
-      { title: frontmatter.title, description: frontmatter.description }
+      {
+        title: frontmatter.title,
+        description: frontmatter.description,
+        ogImagePath: new URL(
+          `/ogimage${new URL(c.req.url).pathname}.png`,
+          SITE_BLOG_URL
+        ).toString(),
+      }
     );
   }
 );
