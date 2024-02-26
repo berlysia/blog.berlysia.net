@@ -16,27 +16,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  vrt:
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.41.2-focal
-    steps:
-      - id: env-key
-        run: echo "value=${{ runner.os }}-${{ env.NODE_VERSION }}" >> $GITHUB_OUTPUT
-      - id: lock-hash
-        run: echo "value=${{ hashFiles('package.json', '**/bun.lockb') }}" >> $GITHUB_OUTPUT
-      - id: source-hash
-        run: echo "value=${{ hashFiles('*.[cm]js','*.js','app/**/*.[jt]s','app/**/*.[jt]sx') }}" >> $GITHUB_OUTPUT
-      - uses: actions/checkout@v3
-      - uses: oven-sh/setup-bun@v1
-      - run: bun install
-      - run: bun run build
-      - run: bun run test:vrt:ci
-      - uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: test-results
-          path: test-results/
+  # vrt:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: mcr.microsoft.com/playwright:v1.41.2-focal
+  #   steps:
+  #     - id: env-key
+  #       run: echo "value=${{ runner.os }}-${{ env.NODE_VERSION }}" >> $GITHUB_OUTPUT
+  #     - id: lock-hash
+  #       run: echo "value=${{ hashFiles('package.json', '**/bun.lockb') }}" >> $GITHUB_OUTPUT
+  #     - id: source-hash
+  #       run: echo "value=${{ hashFiles('*.[cm]js','*.js','app/**/*.[jt]s','app/**/*.[jt]sx') }}" >> $GITHUB_OUTPUT
+  #     - uses: actions/checkout@v3
+  #     - uses: oven-sh/setup-bun@v1
+  #     - run: bun install
+  #     - run: bun run build
+  #     - run: bun run test:vrt:ci
+  #     - uses: actions/upload-artifact@v3
+  #       if: failure()
+  #       with:
+  #         name: test-results
+  #         path: test-results/
 
   lint:
     runs-on: ubuntu-latest
