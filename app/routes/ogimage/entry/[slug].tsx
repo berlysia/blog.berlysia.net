@@ -1,10 +1,10 @@
-import { loadGoogleFont, warmUp } from "#lib/generateImage";
+import { loadGoogleFont } from "#lib/generateImage";
 import { getSlugs, getBySlug } from "#seeds/localReader";
 import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";
 import { loadDefaultJapaneseParser } from "budoux";
-import { Resvg } from "@resvg/resvg-wasm";
-import satori from "satori/wasm";
+import { Resvg } from "@resvg/resvg-js";
+import satori from "satori";
 import { SITE_BLOG_NAME } from "#constant";
 
 const parser = loadDefaultJapaneseParser();
@@ -18,8 +18,6 @@ export default createRoute(
       c.status(404);
       return c.text("Not Found");
     }
-
-    await warmUp();
 
     const frontmatter = getBySlug(slug as any).frontmatter;
 

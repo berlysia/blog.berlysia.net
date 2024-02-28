@@ -51,9 +51,8 @@
     "@hono/vite-ssg": "^0.1.0",
     "@mdx-js/loader": "^3.0.0",
     "@mdx-js/rollup": "^3.0.0",
-    "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@playwright/test": "^1.41.2",
-    "@resvg/resvg-wasm": "^2.6.0",
+    "@resvg/resvg-js": "^2.6.0",
     "@shikijs/rehype": "^1.1.2",
     "@storybook/react": "^7.6.13",
     "@types/fs-extra": "^11.0.4",
@@ -76,9 +75,7 @@
     "tailwindcss": "^3.4.1",
     "tailwindcss-logical": "^3.0.1",
     "tsx": "^4.7.1",
-    "typescript": "5.4.0-beta",
-    "vite-plugin-arraybuffer": "^0.0.4",
-    "yoga-wasm-web": "^0.3.3"
+    "typescript": "5.4.0-beta"
   },
   "dependencies": {
     "@builder.io/partytown": "^0.9.1",

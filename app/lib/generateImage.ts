@@ -1,29 +1,3 @@
-import { init as initSatori } from "satori/wasm";
-import initYoga from "yoga-wasm-web";
-import { initWasm } from "@resvg/resvg-wasm";
-import yogaWasm from "#wasm/yoga.wasm?arraybuffer";
-import resvgWasm from "#wasm/resvg.wasm?arraybuffer";
-
-const genModuleInit = () => {
-  let isInit = false;
-  return async () => {
-    if (isInit) {
-      return;
-    }
-
-    const [yoga, _resvg] = await Promise.all([
-      initYoga(yogaWasm),
-      initWasm(resvgWasm),
-    ]);
-
-    initSatori(yoga);
-
-    // eslint-disable-next-line require-atomic-updates -- ignore
-    isInit = true;
-  };
-};
-
-export const warmUp = genModuleInit();
 export async function loadGoogleFont({
   family,
   weight,
