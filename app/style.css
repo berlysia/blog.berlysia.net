@@ -325,18 +325,19 @@ hr.slash {
     }
 
     > code {
-      width: calc(100% - 4rem);
       overflow-x: auto;
 
       .horizontal & {
+        width: calc(100% - 4rem);
       }
 
       .vertical & {
         @media (width >= 640px) {
+          width: calc(100% - 4rem);
           @apply tw-max-h-[50vh] tw-max-h-[50svh];
         }
         @media (width < 640px) {
-          @apply tw-max-w-[80vw];
+          @apply tw-w-[90vw] tw-max-w-[90vw];
         }
       }
     }
@@ -373,16 +374,17 @@ hr.slash {
     }
 
     > *:not(figcaption) {
-      width: calc(100% - 4rem);
       .horizontal & {
+        width: calc(100% - 4rem);
       }
 
       .vertical & {
         @media (width >= 640px) {
+          width: calc(100% - 4rem);
           @apply tw-max-h-[50vh] tw-max-h-[50svh];
         }
         @media (width < 640px) {
-          @apply tw-max-w-[80vw];
+          @apply tw-w-[90vw] tw-max-w-[90vw];
         }
       }
     }
