@@ -308,19 +308,36 @@ hr.slash {
   }
 
   pre:has(code) {
-    .horizontal & {
-      @apply tw-plb-8 tw-pli-4 tw-overflow-x-auto;
-    }
+    @apply tw-writing-horizontal-tb tw-relative tw-flex tw-flex-col tw-justify-center tw-items-center;
     .vertical & {
-      /* @apply tw-w-full tw-writing-horizontal-tb tw-overflow-auto;
-      max-width: min(1008px, 100% - 2rem);*/
+      @apply tw-h-full;
 
-      > code {
-        display: none;
-        /* @apply tw-w-full tw-overflow-x-auto tw-overflow-y-auto; */
+      @media (width >= 640px) {
+        :not(:where(figure)) & {
+          width: min(calc(100% - 32px), 1024px);
+        }
+        break-before: always;
+        break-before: column;
+        break-after: always;
+        break-after: column;
+        break-inside: avoid;
       }
-      &::before {
-        content: "（コードを見る場合は横書きにしてください）";
+    }
+
+    > code {
+      width: calc(100% - 4rem);
+      overflow-x: auto;
+
+      .horizontal & {
+      }
+
+      .vertical & {
+        @media (width >= 640px) {
+          @apply tw-max-h-[50vh] tw-max-h-[50svh];
+        }
+        @media (width < 640px) {
+          @apply tw-max-w-[80vw];
+        }
       }
     }
   }
@@ -338,6 +355,42 @@ hr.slash {
   li {
     @apply tw-text-lg tw-leading-8;
   }
+
+  figure {
+    @apply tw-writing-horizontal-tb tw-relative tw-flex tw-flex-col tw-justify-center tw-items-center;
+    .vertical & {
+      @apply tw-h-full;
+
+      @media (width >= 640px) {
+        width: min(calc(100vw - 32px), 1024px);
+        min-width: min(calc(100vw - 32px), 1024px);
+        break-before: always;
+        break-before: column;
+        break-after: always;
+        break-after: column;
+        break-inside: avoid;
+      }
+    }
+
+    > *:not(figcaption) {
+      width: calc(100% - 4rem);
+      .horizontal & {
+      }
+
+      .vertical & {
+        @media (width >= 640px) {
+          @apply tw-max-h-[50vh] tw-max-h-[50svh];
+        }
+        @media (width < 640px) {
+          @apply tw-max-w-[80vw];
+        }
+      }
+    }
+
+    figcaption {
+      @apply tw-text-center tw-text-sm tw-text-gray-500 tw-m-2;
+    }
+  }
 }
 
 .articleContentWrapper {
@@ -346,9 +399,9 @@ hr.slash {
   }
 
   .vertical & {
-    @apply tw-py-4 tw-px-2;
     @media (width >= 640px) {
-      @apply tw-writing-vertical-rl tw-w-full tw-overflow-x-visible tw-h-max tw-relative tw-box-border;
+      @apply tw-py-4 tw-mx-auto tw-writing-vertical-rl tw-w-full tw-overflow-x-visible tw-h-max tw-relative tw-box-content;
+      max-width: calc(100vw - 32px);
 
       /* ArticleSentinelの処理と対応している */
       @apply tw-columns-[50vh] tw-columns-[50svh];
@@ -356,6 +409,7 @@ hr.slash {
       @apply tw-column-rule-size-1 tw-column-rule-style-solid tw-column-rule-color-keyColor-200 tw-column-fill-auto tw-gap-8;
     }
     @media (width < 640px) {
+      @apply tw-py-4 tw-px-2;
       @apply tw-writing-vertical-rl tw-w-full tw-overflow-x-scroll tw-h-full tw-line-break-strict;
     }
   }

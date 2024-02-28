@@ -53,49 +53,53 @@ export default function BlogArticleLayout({
         <div className="tw-w-full tw-relative tw-max-w-screen-lg">
           <article className="article">
             <ArticleSentinel className="articleContentWrapper">
-              <div>
-                <h1 className="tw-text-4xl tw-font-bold tw-mbs-4">
-                  {frontmatter.title}
-                </h1>
-                {frontmatter.publishedAt && (
-                  <aside>
-                    <span>
-                      Published at: <time>{frontmatter.publishedAt}</time>
-                    </span>
-                    {frontmatter.lastModified &&
-                      frontmatter.lastModified !== frontmatter.publishedAt && (
-                        <span className="tw-mis-2">
-                          Last modified: <time>{frontmatter.lastModified}</time>
-                        </span>
-                      )}
-                  </aside>
-                )}
-                {frontmatter.description && (
-                  <aside>{frontmatter.description}</aside>
-                )}
-                {frontmatter.tags && (
-                  <ul className="tw-flex tw-flex-row tw-gap-1 tw-mli-1">
-                    {frontmatter.tags.map((x, index) => (
-                      <li
-                        key={index}
-                        className="tw-pli-1 tw-border tw-border-keyColor-100 tw-rounded-md"
-                      >
-                        {x}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              <div className="tw-flex tw-justify-center tw-mlb-6">
-                <hr className="tw-bs-40 tw-border-0 slash" />
-              </div>
-              <section className="main-text-section">{children}</section>
-              <OnlyVertical>
+              <div className="articleContent">
+                <div>
+                  <h1 className="tw-text-4xl tw-font-bold tw-mbs-4">
+                    {frontmatter.title}
+                  </h1>
+                  {frontmatter.publishedAt && (
+                    <aside>
+                      <span>
+                        Published at: <time>{frontmatter.publishedAt}</time>
+                      </span>
+                      {frontmatter.lastModified &&
+                        frontmatter.lastModified !==
+                          frontmatter.publishedAt && (
+                          <span className="tw-mis-2">
+                            Last modified:{" "}
+                            <time>{frontmatter.lastModified}</time>
+                          </span>
+                        )}
+                    </aside>
+                  )}
+                  {frontmatter.description && (
+                    <aside>{frontmatter.description}</aside>
+                  )}
+                  {frontmatter.tags && (
+                    <ul className="tw-flex tw-flex-row tw-gap-1 tw-mli-1">
+                      {frontmatter.tags.map((x, index) => (
+                        <li
+                          key={index}
+                          className="tw-pli-1 tw-border tw-border-keyColor-100 tw-rounded-md"
+                        >
+                          {x}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
                 <div className="tw-flex tw-justify-center tw-mlb-6">
                   <hr className="tw-bs-40 tw-border-0 slash" />
                 </div>
-                {footer}
-              </OnlyVertical>
+                <section className="main-text-section">{children}</section>
+                <OnlyVertical>
+                  <div className="tw-flex tw-justify-center tw-mlb-6">
+                    <hr className="tw-bs-40 tw-border-0 slash" />
+                  </div>
+                  {footer}
+                </OnlyVertical>
+              </div>
             </ArticleSentinel>
             <NotInVertical>
               <div className="tw-flex tw-justify-center tw-mlb-6">

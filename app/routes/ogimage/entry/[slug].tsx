@@ -23,15 +23,18 @@ export default createRoute(
 
     const wakachi = parser.parse(frontmatter.title);
 
-    const notoSans = await loadGoogleFont({
-      family: "Noto Sans JP",
-      weight: 300,
-      text: SITE_BLOG_NAME + frontmatter.title,
-    });
+    const boldFontChars = [
+      ...new Set(
+        `${SITE_BLOG_NAME}${frontmatter.category}${frontmatter.title}@…`
+      ),
+    ]
+      .sort()
+      .join("");
+
     const notoSansBold = await loadGoogleFont({
       family: "Noto Sans JP",
       weight: 600,
-      text: SITE_BLOG_NAME + frontmatter.title,
+      text: boldFontChars,
     });
 
     const svg = await satori(
@@ -60,13 +63,11 @@ export default createRoute(
                   padding: "2rem",
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
                   boxSizing: "border-box",
                 },
                 children: [
                   {
-                    type: "span",
+                    type: "div",
                     props: {
                       style: {
                         flex: 1,
@@ -74,11 +75,27 @@ export default createRoute(
                         fontSize: "4rem",
                         paddingInline: "1rem",
                         boxSizing: "border-box",
+                        justifySelf: "center",
                         display: "flex",
                         justifyContent: "center",
+                        alignContent: "center",
                         alignItems: "center",
+                        flexWrap: "wrap",
+                        fontFamily: "Noto Sans JP",
+                        fontWeight: 600,
                       },
-                      children: wakachi,
+                      children: wakachi.map((word) => ({
+                        type: "span",
+                        props: {
+                          style: {
+                            display: "block",
+                            overflow: "hidden",
+                            whiteSpace: "nowrap",
+                            textOverflow: "ellipsis",
+                          },
+                          children: word,
+                        },
+                      })),
                     },
                   },
                   {
@@ -92,8 +109,13 @@ export default createRoute(
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
+                        fontFamily: "Noto Sans JP",
+                        fontWeight: 600,
                       },
-                      children: [SITE_BLOG_NAME],
+                      children: [
+                        SITE_BLOG_NAME,
+                        frontmatter.category && ` @ ${frontmatter.category}`,
+                      ].filter(Boolean),
                     },
                   },
                 ],
@@ -106,12 +128,6 @@ export default createRoute(
         width: 1200,
         height: 630,
         fonts: [
-          {
-            name: "NotoSansJP",
-            data: notoSans,
-            weight: 300,
-            style: "normal",
-          },
           {
             name: "NotoSansJP",
             data: notoSansBold,

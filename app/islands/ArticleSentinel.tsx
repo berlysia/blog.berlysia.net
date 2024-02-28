@@ -79,8 +79,15 @@ export default function ArticleSentinel({
     if (articleEl) {
       observer.observe(articleEl);
     }
+    const detailsElements = articleEl.querySelectorAll("details");
+    for (const x of detailsElements) {
+      x.addEventListener("toggle", handleResize);
+    }
     return () => {
       observer.disconnect();
+      for (const x of detailsElements) {
+        x.removeEventListener("toggle", handleResize);
+      }
     };
   }, [handleResize]);
 
