@@ -331,8 +331,9 @@ hr.slash {
     > code {
       overflow-x: auto;
 
-      .horizontal & {
-        width: calc(100% - 4rem);
+      .horizontal :not(:where(figure)) & {
+        width: fit-content;
+        max-width: min(max(calc(100% - 4rem), 85vw), calc(1024px - 4rem));
       }
 
       .vertical & {
@@ -383,7 +384,8 @@ hr.slash {
 
     > *:not(figcaption) {
       .horizontal & {
-        width: calc(100% - 4rem);
+        width: fit-content;
+        max-width: min(max(calc(100% - 4rem), 85vw), calc(1024px - 4rem));
       }
 
       .vertical & {
