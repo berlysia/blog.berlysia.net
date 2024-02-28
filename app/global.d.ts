@@ -3,6 +3,7 @@ import type {} from "hono";
 type Head = {
   title?: string;
   description?: string;
+  ogImagePath?: string;
 };
 
 declare module "hono" {
