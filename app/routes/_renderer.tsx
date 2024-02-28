@@ -26,7 +26,7 @@ export function createRenderer(
             {ogImagePath && <meta property="og:image" content={ogImagePath} />}
             <meta property="og:site_name" content="blog.berlysia.net" />
             <meta property="og:locale" content="ja_JP" />
-            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:site" content="@berlysia" />
             <meta
               name="twitter:title"
