@@ -315,6 +315,10 @@ hr.slash {
       @media (width >= 640px) {
         :not(:where(figure)) & {
           width: min(calc(100% - 32px), 1024px);
+
+          @media (width < 640px) {
+            scroll-snap-align: center;
+          }
         }
         break-before: always;
         break-before: column;
@@ -371,6 +375,10 @@ hr.slash {
         break-after: column;
         break-inside: avoid;
       }
+
+      @media (width < 640px) {
+        scroll-snap-align: center;
+      }
     }
 
     > *:not(figcaption) {
@@ -413,6 +421,8 @@ hr.slash {
     @media (width < 640px) {
       @apply tw-py-4 tw-px-2;
       @apply tw-writing-vertical-rl tw-w-full tw-overflow-x-scroll tw-h-full tw-line-break-strict;
+
+      scroll-snap-type: x proximity;
     }
   }
 }
@@ -431,6 +441,7 @@ hr.slash {
     }
     @media (width < 640px) {
       @apply tw-h-[calc(100vh-2.5rem)] tw-h-[calc(100svh-2.5rem)];
+      overflow-x: auto;
     }
   }
 }
