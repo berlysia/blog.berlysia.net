@@ -56,7 +56,7 @@ export default createRoute(
               type: "div",
               props: {
                 style: {
-                  flexGrow: 1,
+                  flex: 1,
                   alignSelf: "stretch",
                   background: "white",
                   borderRadius: "2rem",
@@ -72,7 +72,7 @@ export default createRoute(
                       style: {
                         flex: 1,
                         color: "#222",
-                        fontSize: "4rem",
+                        fontSize: "5.2rem",
                         paddingInline: "1rem",
                         boxSizing: "border-box",
                         justifySelf: "center",
@@ -83,6 +83,7 @@ export default createRoute(
                         flexWrap: "wrap",
                         fontFamily: "Noto Sans JP",
                         fontWeight: 600,
+                        fontFeatureSettings: "palt",
                       },
                       children: wakachi.map((word) => ({
                         type: "span",
@@ -102,15 +103,16 @@ export default createRoute(
                     type: "div",
                     props: {
                       style: {
-                        flexBasis: "10vh",
+                        flexBasis: "20vh",
                         color: "#444",
-                        fontSize: "1.6em",
+                        fontSize: "2.8em",
                         boxSizing: "border-box",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
                         fontFamily: "Noto Sans JP",
                         fontWeight: 600,
+                        fontFeatureSettings: "palt",
                       },
                       children: [
                         SITE_BLOG_NAME,
