@@ -9,21 +9,26 @@ export function createRenderer(
   const headMeta = given.headMeta ?? <></>;
   const headLink = given.headLink ?? <></>;
   return jsxRenderer(
-    ({ children, title, description, ogImagePath }) => {
+    ({ children, ...rest }) => {
       return (
         <html lang="ja">
           <head>
             <meta charset="utf8" />
             <title>
-              {title ? `${title} | blog.berlysia.net` : "blog.berlysia.net"}
+              {rest.title
+                ? `${rest.title} | blog.berlysia.net`
+                : "blog.berlysia.net"}
             </title>
+            {rest.canonical && <link rel="canonical" href={rest.canonical} />}
             <meta
               name="viewport"
               content="width=device-width, initial-scale=1.0"
             />
-            {title && <meta property="og:title" content={title} />}
-            <meta property="og:description" content={description ?? ""} />
-            {ogImagePath && <meta property="og:image" content={ogImagePath} />}
+            {rest.title && <meta property="og:title" content={rest.title} />}
+            <meta property="og:description" content={rest.description ?? ""} />
+            {rest.ogImagePath && (
+              <meta property="og:image" content={rest.ogImagePath} />
+            )}
             <meta property="og:site_name" content="blog.berlysia.net" />
             <meta property="og:locale" content="ja_JP" />
             <meta name="twitter:card" content="summary_large_image" />
@@ -31,10 +36,17 @@ export function createRenderer(
             <meta
               name="twitter:title"
               content={
-                title ? `${title} | blog.berlysia.net` : "blog.berlysia.net"
+                rest.title
+                  ? `${rest.title} | blog.berlysia.net`
+                  : "blog.berlysia.net"
               }
             />
-            <meta name="twitter:description" content={description ?? ""} />
+            {rest.description && (
+              <meta
+                name="twitter:description"
+                content={rest.description ?? ""}
+              />
+            )}
             {headMeta}
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link

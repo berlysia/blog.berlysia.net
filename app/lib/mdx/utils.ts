@@ -125,6 +125,7 @@ export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
       publishStatus: z.literal("draft"),
       preferVertical: z.boolean().default(false),
       category: CategorySchema,
+      canonical: z.string().optional(),
     })
     .passthrough(),
   z
@@ -138,6 +139,7 @@ export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
       publishStatus: z.literal("published"),
       preferVertical: z.boolean().default(false),
       category: CategorySchema,
+      canonical: z.string().optional(),
     })
     .passthrough(),
   z
@@ -151,6 +153,7 @@ export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
       publishStatus: z.literal("unlisted"),
       preferVertical: z.boolean().default(false),
       category: CategorySchema,
+      canonical: z.string().optional(),
     })
     .passthrough(),
 ]);

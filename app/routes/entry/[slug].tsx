@@ -52,6 +52,7 @@ export default createRoute(
       {
         title: frontmatter.title,
         description: frontmatter.description,
+        canonical: frontmatter.canonical,
         ogImagePath: new URL(
           `/ogimage${new URL(c.req.url).pathname}.png`,
           SITE_BLOG_URL
