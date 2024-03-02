@@ -1,8 +1,10 @@
 import { createApp } from "honox/server";
-import { showRoutes } from "hono/dev";
 
 const app = createApp();
 
-showRoutes(app);
+if (import.meta.env.DEV) {
+  const { showRoutes } = await import("hono/dev");
+  showRoutes(app);
+}
 
 export default app;
