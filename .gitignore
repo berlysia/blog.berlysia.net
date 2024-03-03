@@ -154,3 +154,5 @@ dist
 .hono
 public/~partytown
 app/seeds/.tmp
+.wrangler
+functions

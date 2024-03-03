@@ -6,20 +6,12 @@ import { createRoute } from "honox/factory";
 import Image from "#components/mdx/Image";
 import type { NotFoundHandler } from "hono";
 import { SITE_BLOG_URL } from "#constant";
+import EmbeddedLink from "#islands/EmbededLink";
+import ViewerModeProvider from "#islands/ViewerModeProvider";
+import { wrapResult } from "../../lib/wrapResult";
 import notFound from "./404";
 
 const notFoundHandler = notFound.at(-1) as NotFoundHandler;
-
-async function wrapResult<T>(
-  promise: Promise<T>
-): Promise<{ ok: true; value: T } | { ok: false; error: Error }> {
-  try {
-    const value = await promise;
-    return { ok: true, value };
-  } catch (error) {
-    return { ok: false, error };
-  }
-}
 
 export default createRoute(
   ssgParams(() => getSlugs().map((slug) => ({ slug }))),
@@ -46,9 +38,15 @@ export default createRoute(
     const frontmatter = getBySlug(slug as any).frontmatter;
 
     return c.render(
-      <BlogArticleLayout frontmatter={frontmatter}>
-        <Content components={{ Image }} />
-      </BlogArticleLayout>,
+      <ViewerModeProvider
+        defaultViewerMode={
+          frontmatter.preferVertical ? "vertical" : "horizontal"
+        }
+      >
+        <BlogArticleLayout frontmatter={frontmatter}>
+          <Content components={{ Image, EmbeddedLink }} />
+        </BlogArticleLayout>
+      </ViewerModeProvider>,
       {
         title: frontmatter.title,
         description: frontmatter.description,

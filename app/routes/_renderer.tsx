@@ -1,7 +1,6 @@
 import ResolveManifest from "#honox/ResolveManifest";
 import { Style } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { Script } from "honox/server";
 
 export function createRenderer(
   given: { headMeta?: JSX.Element; headLink?: JSX.Element } = {}
@@ -60,7 +59,7 @@ export function createRenderer(
             />
             {headLink}
             <ResolveManifest src="app/style.css" type="style" />
-            <Script src="/app/client.ts" />
+            <ResolveManifest src="/app/client.ts" type="script" />
             <Style />
           </head>
           <body>{children}</body>

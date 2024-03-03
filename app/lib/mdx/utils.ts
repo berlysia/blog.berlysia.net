@@ -85,7 +85,11 @@ export const rewriteImagePaths: Plugin<[RewriteImageOptions], UnistParent> = (
           const newUrl = resolve(STATIC_ARTICLES_ROOT, slug, node.url);
           console.log("Rewriting image path", node.url, newUrl);
           node.url = newUrl;
-        } else if (node.type === "mdxJsxFlowElement") {
+        } else if (
+          node.type === "mdxJsxFlowElement" &&
+          "name" in node &&
+          ["img", "Image"].includes(node.name as string)
+        ) {
           assertMdxJsxFlowElement(node);
           for (const attr of node.attributes) {
             if (

@@ -1,11 +1,13 @@
-export async function loadGoogleFont({
+export function buildGoogleFontUrl({
   family,
   weight,
   text,
+  display,
 }: {
   family: string;
   weight?: number;
   text?: string;
+  display?: string;
 }) {
   const params: Record<string, string> = {
     family: `${encodeURIComponent(family)}${weight ? `:wght@${weight}` : ""}`,
@@ -17,9 +19,25 @@ export async function loadGoogleFont({
     params.subset = "latin";
   }
 
-  const url = `https://fonts.googleapis.com/css2?${Object.keys(params)
+  if (display) {
+    params.display = display;
+  }
+
+  return `https://fonts.googleapis.com/css2?${Object.keys(params)
     .map((key) => `${key}=${params[key]}`)
     .join("&")}`;
+}
+
+export async function loadGoogleFont({
+  family,
+  weight,
+  text,
+}: {
+  family: string;
+  weight?: number;
+  text?: string;
+}) {
+  const url = buildGoogleFontUrl({ family, weight, text });
 
   const css = await fetch(`${url}`, {
     headers: {

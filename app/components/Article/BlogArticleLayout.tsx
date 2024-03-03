@@ -43,10 +43,7 @@ export default function BlogArticleLayout({
           </span>
         </div>
         <div className="tw-ml-auto tw-flex tw-justify-center tw-items-center">
-          <WritingModeSwitcher
-            articleRootId={articleRootId}
-            preferVertical={frontmatter.preferVertical}
-          />
+          <WritingModeSwitcher articleRootId={articleRootId} />
         </div>
       </Header>
       <div className="articleWrapper">
