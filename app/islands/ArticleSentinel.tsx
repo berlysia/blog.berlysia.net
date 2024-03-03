@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "hono/jsx";
 import { useLayoutEffect, useCallback, useRef } from "hono/jsx";
 import { WrapForHasIslandDetection } from "#honox/islandBeacon";
-import { useViewerMode } from "../lib/writingMode";
+import { useViewerMode } from "../lib/viewerMode";
 
 export default function ArticleSentinel({
   className,

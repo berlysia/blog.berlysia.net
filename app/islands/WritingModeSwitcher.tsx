@@ -1,18 +1,6 @@
 import { useEffect } from "hono/jsx";
 import { WrapForHasIslandDetection } from "#honox/islandBeacon";
-import { $viewerMode, useViewerMode } from "../lib/writingMode";
-
-function setVertical() {
-  $viewerMode.set("vertical");
-}
-
-function setVerticalColumns() {
-  $viewerMode.set("vertical-columns");
-}
-
-function setHorizontal() {
-  $viewerMode.set("horizontal");
-}
+import { useViewerMode } from "../lib/viewerMode";
 
 export default function WritingModeSwitcher({
   articleRootId,
@@ -21,9 +9,13 @@ export default function WritingModeSwitcher({
   readonly articleRootId: string;
   readonly preferVertical?: boolean;
 }) {
-  const { isVertical, isVerticalColumns, isHorizontal } = useViewerMode(
-    preferVertical ? "vertical" : "horizontal"
-  );
+  const {
+    isVertical,
+    isVerticalColumns,
+    isHorizontal,
+    setHorizontal,
+    setVertical,
+  } = useViewerMode(preferVertical ? "vertical" : "horizontal");
 
   useEffect(() => {
     const el = document.querySelector(`#${articleRootId}`);

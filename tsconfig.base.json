@@ -15,7 +15,7 @@
     "noEmitOnError": false,
     "incremental": true,
     "noUnusedLocals": false,
-    "types": ["vite/client"],
+    "types": ["vite/client", "@cloudflare/workers-types"],
     "verbatimModuleSyntax": true,
     "paths": {
       "#*": ["./app/*"]
