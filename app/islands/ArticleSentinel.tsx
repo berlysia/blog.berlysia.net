@@ -1,7 +1,6 @@
 import type { PropsWithChildren } from "hono/jsx";
 import { useLayoutEffect, useCallback, useRef } from "hono/jsx";
-import { WrapForHasIslandDetection } from "#honox/islandBeacon";
-import { useViewerMode } from "../lib/viewerMode";
+import { useViewerModeValue } from "../lib/viewerMode";
 
 export default function ArticleSentinel({
   className,
@@ -9,7 +8,7 @@ export default function ArticleSentinel({
 }: PropsWithChildren<{
   readonly className?: string;
 }>) {
-  const { isVertical, isHorizontal } = useViewerMode();
+  const { isVertical, isHorizontal } = useViewerModeValue();
   const sentinelRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -92,11 +91,9 @@ export default function ArticleSentinel({
   }, [handleResize]);
 
   return (
-    <WrapForHasIslandDetection>
-      <div ref={containerRef} className={className}>
-        {children}
-        <div ref={sentinelRef}></div>
-      </div>
-    </WrapForHasIslandDetection>
+    <div ref={containerRef} className={className}>
+      {children}
+      <div ref={sentinelRef}></div>
+    </div>
   );
 }

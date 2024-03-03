@@ -38,7 +38,11 @@ export default createRoute(
     const frontmatter = getBySlug(slug as any).frontmatter;
 
     return c.render(
-      <ViewerModeProvider>
+      <ViewerModeProvider
+        defaultViewerMode={
+          frontmatter.preferVertical ? "vertical" : "horizontal"
+        }
+      >
         <BlogArticleLayout frontmatter={frontmatter}>
           <Content components={{ Image, EmbeddedLink }} />
         </BlogArticleLayout>
