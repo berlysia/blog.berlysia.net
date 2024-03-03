@@ -113,6 +113,10 @@ const OgRenderer: Handler = async (c) => {
     "max-age=14400, s-maxage=84400, must-revalidate, stale-if-error=60"
   );
   c.res.headers.set(
+    "Cloudflare-CDN-Cache-Control",
+    "max-age=3600, must-revalidate, stale-if-error=600"
+  );
+  c.res.headers.set(
     "CDN-Cache-Control",
     "max-age=3600, must-revalidate, stale-if-error=600"
   );
