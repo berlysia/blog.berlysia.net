@@ -27,6 +27,8 @@
     "build:client": "vite build --mode client",
     "build:functions": "vite build --mode functions",
     "build:ssg": "vite build",
+    "build:on-deploy": "run-s build copy-functions",
+    "copy-functions": "cp -rT dist/functions functions",
     "start": "vite start",
     "lint": "eslint 'app/**/*.{js,ts,jsx,tsx}' --no-warn-ignored --max-warnings 0",
     "lint:fix": "npm-run-all 'lint -- --fix'",
