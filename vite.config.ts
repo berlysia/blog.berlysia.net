@@ -55,11 +55,11 @@ export default defineConfig(async ({ mode }) => {
         ...common.build,
         emptyOutDir: false,
         rollupOptions: {
-          input: ["app/routes/ogrenderer.tsx"],
+          input: ["app/functions/ogrenderer.tsx"],
           output: {
             entryFileNames(chunkInfo) {
               const entryPathFromRoutesRoot = chunkInfo.facadeModuleId
-                .replace(resolve("app/routes"), "")
+                .replace(resolve("app/functions"), "")
                 .replace(/\.tsx$/, ".js");
               return `functions${entryPathFromRoutesRoot}`;
             },
