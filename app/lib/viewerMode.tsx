@@ -1,14 +1,6 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-} from "hono/jsx";
-import { atom } from "nanostores";
+import { createContext, useContext, useMemo } from "hono/jsx";
 
 export type ViewerMode = "horizontal" | "vertical" | "vertical-columns";
-export const $viewerMode = atom<ViewerMode>("horizontal");
 
 export const ViewerModeContext = createContext<ViewerMode>("horizontal");
 export const SetViewerModeContext = createContext<(_: ViewerMode) => void>(
