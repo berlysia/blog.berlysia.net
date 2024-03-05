@@ -1,22 +1,24 @@
 import type { Frontmatter } from "../lib/mdx/utils";
 import seed from "./.tmp/local.json";
 
+type Slug = keyof typeof seed;
+
 export function getLocalArticles(): Array<{
-  slug: string;
+  slug: Slug;
   frontmatter: Frontmatter;
 }> {
   return Object.values(seed) as Array<{
-    slug: string;
+    slug: Slug;
     frontmatter: Frontmatter;
   }>;
 }
 
-export function getSlugs(): Array<keyof typeof seed> {
-  return Object.keys(seed) as Array<keyof typeof seed>;
+export function getSlugs(): Slug[] {
+  return Object.keys(seed) as Slug[];
 }
 
 export function getBySlug(
-  slug: keyof typeof seed
+  slug: Slug
 ): ReturnType<typeof getLocalArticles>[number] {
   return seed[slug] as ReturnType<typeof getLocalArticles>[number];
 }
