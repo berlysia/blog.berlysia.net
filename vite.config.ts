@@ -18,6 +18,7 @@ export default defineConfig(async ({ mode }) => {
         "budoux",
         "satori",
         "@resvg/resvg-js",
+        "feed",
       ],
     },
     resolve: {
