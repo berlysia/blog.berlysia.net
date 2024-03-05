@@ -1,11 +1,11 @@
 import { getLocalArticles } from "#seeds/localReader";
 import { Feed } from "feed";
-import { useRequestContext } from "hono/jsx-renderer";
 import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";
 
 const feed = new Feed({
   title: "blog.berlysia.net",
+  description: "",
   id: "https://blog.berlysia.net/",
   link: "https://blog.berlysia.net/",
   language: "ja",
@@ -49,7 +49,7 @@ export default createRoute(
 
     if (type === "json") {
       c.res.headers.set("Content-Type", "application/json");
-      return c.json(feed.json1());
+      return c.body(feed.json1());
     }
     if (type === "feed") {
       c.res.headers.set("Content-Type", "application/xml");

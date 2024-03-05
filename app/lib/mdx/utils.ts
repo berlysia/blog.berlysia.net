@@ -117,14 +117,16 @@ const CategorySchema = z
   .union([z.literal("tech"), z.literal("imas")])
   .optional();
 
+const DATETIME_REGEX = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}/;
+
 export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
   z
     .object({
       title: z.string(),
       description: z.string().optional(),
-      created: z.string(),
-      lastModified: z.string().optional(),
-      publishedAt: z.string().optional(),
+      created: z.string().regex(DATETIME_REGEX),
+      lastModified: z.string().regex(DATETIME_REGEX).optional(),
+      publishedAt: z.string().regex(DATETIME_REGEX).optional(),
       tags: z.string().transform(tagsTransformer),
       publishStatus: z.literal("draft"),
       preferVertical: z.boolean().default(false),
@@ -136,9 +138,9 @@ export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
     .object({
       title: z.string(),
       description: z.string().optional(),
-      created: z.string(),
-      lastModified: z.string().optional(),
-      publishedAt: z.string(),
+      created: z.string().regex(DATETIME_REGEX),
+      lastModified: z.string().regex(DATETIME_REGEX).optional(),
+      publishedAt: z.string().regex(DATETIME_REGEX),
       tags: z.string().transform(tagsTransformer),
       publishStatus: z.literal("published"),
       preferVertical: z.boolean().default(false),
@@ -150,9 +152,9 @@ export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
     .object({
       title: z.string(),
       description: z.string().optional(),
-      created: z.string(),
-      lastModified: z.string().optional(),
-      publishedAt: z.string(),
+      created: z.string().regex(DATETIME_REGEX),
+      lastModified: z.string().regex(DATETIME_REGEX).optional(),
+      publishedAt: z.string().regex(DATETIME_REGEX),
       tags: z.string().transform(tagsTransformer),
       publishStatus: z.literal("unlisted"),
       preferVertical: z.boolean().default(false),
