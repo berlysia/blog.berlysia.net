@@ -19,7 +19,13 @@ export default createRoute(
       return c.text("Not Found");
     }
 
-    const frontmatter = getBySlug(slug as any).frontmatter;
+    const data = getBySlug(slug as any);
+    if (!data) {
+      c.status(404);
+      return c.text("Not Found");
+    }
+
+    const frontmatter = data.frontmatter;
 
     const wakachi = parser.parse(frontmatter.title);
 

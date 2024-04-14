@@ -59,7 +59,7 @@ export function createRenderer(
             />
             {headLink}
             <ResolveManifest src="app/style.css" type="style" />
-            <ResolveManifest src="/app/client.ts" type="script" />
+            <ResolveManifest src="app/client.ts" type="script" />
             <Style />
           </head>
           <body>{children}</body>
