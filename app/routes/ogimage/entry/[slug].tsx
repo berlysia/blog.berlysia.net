@@ -2,12 +2,13 @@ import { loadGoogleFont } from "#lib/generateImage";
 import { getSlugs, getBySlug } from "#seeds/localReader";
 import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";
-import { loadDefaultJapaneseParser } from "budoux";
+import { Parser } from "budoux/module/parser.js";
+import { model as jaModel } from "budoux/module/data/models/ja.js";
 import { Resvg } from "@resvg/resvg-js";
 import satori from "satori";
 import { SITE_BLOG_NAME } from "#constant";
 
-const parser = loadDefaultJapaneseParser();
+const parser = new Parser(jaModel);
 
 export default createRoute(
   // onlySSG(),
