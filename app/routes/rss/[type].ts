@@ -40,6 +40,7 @@ for (const article of localArticles) {
     content: "",
     date: new Date(frontmatter.publishedAt),
     category: [frontmatter.category].map((name) => ({ name })),
+    author: [{ name: "berlysia" }],
   });
 }
 
