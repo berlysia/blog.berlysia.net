@@ -1,4 +1,4 @@
-import ResolveManifest from "#honox/ResolveManifest";
+import { Link, Script } from "honox/server";
 import { Style } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
 
@@ -58,8 +58,8 @@ export function createRenderer(
               rel="stylesheet"
             />
             {headLink}
-            <ResolveManifest src="app/style.css" type="style" />
-            <ResolveManifest src="app/client.ts" type="script" />
+            <Link href="/app/style.css" rel="stylesheet" />
+            <Script src="/app/client.ts" />
             <Style />
           </head>
           <body>{children}</body>

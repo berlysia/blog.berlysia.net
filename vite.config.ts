@@ -12,35 +12,12 @@ export default defineConfig(async ({ mode }) => {
       sourcemap: true,
     },
     ssr: {
-      external: [
-        "unified",
-        "@mdx-js/mdx",
-        "budoux",
-        "satori",
-        "@resvg/resvg-js",
-        "feed",
-      ],
+      external: ["unified", "@mdx-js/mdx", "satori", "@resvg/resvg-js", "feed"],
     },
     resolve: {
       alias: [{ find: /#/, replacement: "/app/" }],
     },
   };
-
-  if (mode === "client") {
-    return {
-      ...common,
-      build: {
-        ...common.build,
-        rollupOptions: {
-          input: ["./app/style.css", "./app/ogviewer.css"],
-          output: {
-            assetFileNames: "static/assets/[name]-[hash].[ext]",
-          },
-        },
-      },
-      plugins: [client()],
-    };
-  }
 
   if (mode === "functions") {
     return {
@@ -77,6 +54,16 @@ export default defineConfig(async ({ mode }) => {
       ...common.build,
       emptyOutDir: false,
     },
-    plugins: [honox(), ssgBuild({ entry })],
+    ssr: {
+      noExternal: true,
+      ...common.ssr,
+    },
+    plugins: [
+      honox(),
+      ssgBuild({ entry }),
+      client({
+        input: ["./app/style.css", "./app/ogviewer.css"],
+      }),
+    ],
   };
 });
