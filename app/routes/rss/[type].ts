@@ -39,6 +39,7 @@ for (const article of localArticles) {
     description: frontmatter.description,
     content: "",
     date: new Date(frontmatter.publishedAt),
+    category: [frontmatter.category].map((name) => ({ name })),
   });
 }
 
