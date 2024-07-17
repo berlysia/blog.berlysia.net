@@ -3,7 +3,7 @@ import { getSlugs, getBySlug } from "#seeds/localReader";
 import { run } from "@mdx-js/mdx";
 import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";
-import Image from "#components/mdx/Image";
+import Image from "#islands/Image";
 import type { NotFoundHandler } from "hono";
 import { SITE_BLOG_URL } from "#constant";
 import EmbeddedLink from "#islands/EmbededLink";
@@ -27,9 +27,7 @@ export default createRoute(
     if (!module.ok) return notFoundHandler(c);
 
     const { default: Content } = await run(module.value.default, {
-      // @ts-expect-error -- fixme
       jsx: runtime.jsx,
-      // @ts-expect-error -- fixme
       jsxs: runtime.jsxs,
       Fragment: runtime.Fragment,
       baseUrl: import.meta.url,

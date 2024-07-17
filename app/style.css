@@ -388,7 +388,7 @@ hr.slash {
       }
     }
 
-    > *:not(figcaption) {
+    > *:not(figcaption, dialog) {
       .horizontal & {
         width: fit-content;
         max-width: min(max(calc(100% - 4rem), 85vw), calc(1024px - 4rem));
@@ -407,12 +407,6 @@ hr.slash {
 
     figcaption {
       @apply tw-text-center tw-text-sm tw-text-gray-500 tw-m-2;
-    }
-  }
-
-  .tcu-digits {
-    .vertical & {
-      text-combine-upright: all;
     }
   }
 }
@@ -508,4 +502,14 @@ hr.slash {
 .not-in-horizontal,
 .not-in-vertical-column {
   display: revert;
+}
+
+.tcu-digits {
+  .vertical & {
+    text-combine-upright: all;
+  }
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
 }
