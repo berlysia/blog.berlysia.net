@@ -349,7 +349,7 @@ hr.slash {
   }
 
   ul > li {
-    list-style: auto;
+    list-style: disc;
     list-style-position: inside;
   }
 
@@ -367,14 +367,20 @@ hr.slash {
     .vertical & {
       @apply tw-h-full;
 
-      @media (width >= 640px) {
-        width: min(calc(100vw - 32px), 1024px);
-        min-width: min(calc(100vw - 32px), 1024px);
-        break-before: always;
-        break-before: column;
-        break-after: always;
-        break-after: column;
-        break-inside: avoid;
+      @media (640px <= width) {
+        &.full-width {
+          width: min(calc(100vw - 32px), 1024px);
+          min-width: min(calc(100vw - 32px), 1024px);
+          break-before: always;
+          break-before: column;
+          break-after: always;
+          break-after: column;
+          break-inside: avoid;
+        }
+        &:not(.full-width) {
+          width: min(calc(100vw - 32px), 360px);
+          min-width: min(calc(100vw - 32px), 360px);
+        }
       }
 
       @media (width < 640px) {
@@ -389,7 +395,7 @@ hr.slash {
       }
 
       .vertical & {
-        @media (width >= 640px) {
+        @media (640px <= width) {
           width: calc(100% - 4rem);
           @apply tw-max-h-[50vh] tw-max-h-[50svh];
         }
@@ -401,6 +407,12 @@ hr.slash {
 
     figcaption {
       @apply tw-text-center tw-text-sm tw-text-gray-500 tw-m-2;
+    }
+  }
+
+  .tcu-digits {
+    .vertical & {
+      text-combine-upright: all;
     }
   }
 }
