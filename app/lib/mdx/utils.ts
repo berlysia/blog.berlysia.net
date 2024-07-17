@@ -1,3 +1,4 @@
+/* eslint-disable max-depth -- unifiedのプラグインの書き味を維持 */
 import { isAbsolute, resolve } from "node:path";
 import z from "zod";
 import type { Plugin } from "unified";
