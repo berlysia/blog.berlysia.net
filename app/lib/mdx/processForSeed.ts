@@ -8,6 +8,7 @@ import {
   renameFootnoteSectionName,
   removeFrontmatter,
   rewriteImagePaths,
+  wrapThreeDigits,
 } from "./utils.js";
 
 export async function processMDX(
@@ -37,6 +38,7 @@ export async function processMDX(
         },
       ],
       [rehypeToc, {}],
+      wrapThreeDigits,
       rehypeAccessibleEmojis,
       renameFootnoteSectionName,
       [rehypeShiki, { theme: "github-light" }],

@@ -1,10 +1,15 @@
+/* eslint-disable max-depth -- unifiedのプラグインの書き味を維持 */
 import { isAbsolute, resolve } from "node:path";
 import z from "zod";
 import type { Plugin } from "unified";
 import type { Node as UnistNode, Parent as UnistParent } from "unist";
 import type { Image as MdastImage } from "mdast";
 import type { Element as HastElement, Text as HastText } from "hast";
-import type { MdxJsxFlowElement, MdxJsxAttribute } from "mdast-util-mdx-jsx";
+import type {
+  MdxJsxFlowElementHast,
+  MdxJsxAttribute,
+  MdxJsxTextElementHast,
+} from "mdast-util-mdx-jsx";
 
 function assertImage(node: UnistNode): asserts node is MdastImage {
   if (node.type !== "image") {
@@ -13,10 +18,13 @@ function assertImage(node: UnistNode): asserts node is MdastImage {
 }
 function assertMdxJsxFlowElement(
   node: UnistNode
-): asserts node is MdxJsxFlowElement {
+): asserts node is MdxJsxFlowElementHast {
   if (node.type !== "mdxJsxFlowElement") {
     throw new Error("Expected mdxJsxFlowElement node");
   }
+}
+function isMdxJsxTextElement(node: UnistNode): node is MdxJsxTextElementHast {
+  return node.type === "mdxJsxTextElement";
 }
 function isMdxJsxAttribute(node: UnistNode): node is MdxJsxAttribute {
   return node.type === "mdxJsxAttribute";
@@ -25,8 +33,20 @@ function isMdxJsxAttribute(node: UnistNode): node is MdxJsxAttribute {
 function isHastElement(node: UnistNode): node is HastElement {
   return node.type === "element";
 }
+function asHastElement<const T extends HastElement>(node: T): T {
+  if (!isHastElement(node)) {
+    throw new Error("Expected Hast Element");
+  }
+  return node;
+}
 function isHastText(node: UnistNode): node is HastText {
   return node.type === "text";
+}
+function asHastText<const T extends HastText>(node: T): T {
+  if (!isHastText(node)) {
+    throw new Error("Expected Hast Text");
+  }
+  return node;
 }
 
 export const renameFootnoteSectionName: Plugin = () => {
@@ -64,6 +84,70 @@ export const removeFrontmatter: Plugin = () => {
     if (tree.children[0].type === "yaml") {
       tree.children.shift();
     }
+  };
+};
+
+function nodeHasClass(node: UnistNode, className: string): boolean {
+  return (
+    (isHastElement(node) &&
+      [node.properties?.className].flat().includes(className)) ||
+    (isMdxJsxTextElement(node) &&
+      node.attributes
+        .filter(
+          (x) => isMdxJsxAttribute(x) && ["class", "className"].includes(x.name)
+        )
+        .some((x) => x.value === className))
+  );
+}
+
+// textContent内の3桁以下の数字の並びを span.tcu-digits で囲む
+export const wrapThreeDigits: Plugin = () => {
+  // eslint-disable-next-line unicorn/consistent-function-scoping -- for readability
+  function walk(curr: UnistNode | UnistParent) {
+    if (
+      nodeHasClass(curr, "no-tcu-digits") ||
+      (isHastElement(curr) && ["pre", "code"].includes(curr.tagName))
+    ) {
+      return;
+    }
+    if ("children" in curr) {
+      // hasttextの中に3桁以下の数字があったらspanで囲む、前後はhasttextにして、spanで囲むところはHast Elementにする
+      // ex. "abc123abc" -> "abc", <span class="tcu-digits">123</span>, "abc"
+      const newChildren = [];
+      let changed = false;
+      for (const x of curr.children) {
+        if (isHastText(x)) {
+          const text = x.value;
+          const parts = text.split(/((?<![\d,.])\b\d{1,3}\b(?![\d,.]))/);
+          for (const part of parts) {
+            if (/^\d{1,3}$/.test(part)) {
+              newChildren.push(
+                asHastElement({
+                  type: "element",
+                  tagName: "span",
+                  properties: { class: "tcu-digits" },
+                  children: [{ type: "text", value: part }],
+                })
+              );
+            } else if (part.length > 0) {
+              newChildren.push(asHastText({ type: "text", value: part }));
+            }
+          }
+          if (parts.length > 1) {
+            changed = true;
+          }
+        } else {
+          newChildren.push(x);
+          walk(x);
+        }
+      }
+      if (changed) {
+        curr.children = newChildren;
+      }
+    }
+  }
+  return function wrapThreeDigitsImpl(tree: UnistParent) {
+    walk(tree);
   };
 };
 

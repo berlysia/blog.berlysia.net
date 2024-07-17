@@ -4,6 +4,7 @@ import ArticleSentinel from "#islands/ArticleSentinel";
 import clsx from "clsx";
 import Footer from "#components/Footer";
 import { NotInVertical, OnlyVertical } from "#components/OnlyViewMode";
+import TextCombineUprightDigits from "#lib/TextCombineUprightDigits";
 import type { Frontmatter } from "../../lib/mdx/utils";
 import Header from "../Header";
 
@@ -53,7 +54,7 @@ export default function BlogArticleLayout({
               <div className="articleContent">
                 <div>
                   <h1 className="tw-text-4xl tw-font-bold tw-mbs-4">
-                    {frontmatter.title}
+                    <TextCombineUprightDigits text={frontmatter.title} />
                   </h1>
                   {frontmatter.publishedAt && (
                     <aside>
@@ -71,7 +72,11 @@ export default function BlogArticleLayout({
                     </aside>
                   )}
                   {frontmatter.description && (
-                    <aside>{frontmatter.description}</aside>
+                    <aside>
+                      <TextCombineUprightDigits
+                        text={frontmatter.description}
+                      />
+                    </aside>
                   )}
                   {frontmatter.tags && (
                     <ul className="tw-flex tw-flex-row tw-gap-1 tw-mli-1">
@@ -80,7 +85,7 @@ export default function BlogArticleLayout({
                           key={index}
                           className="tw-pli-1 tw-border tw-border-keyColor-100 tw-rounded-md"
                         >
-                          {x}
+                          <TextCombineUprightDigits text={x} />
                         </li>
                       ))}
                     </ul>
