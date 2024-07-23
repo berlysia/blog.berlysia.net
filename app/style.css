@@ -315,10 +315,6 @@ hr.slash {
       @media (width >= 640px) {
         :not(:where(figure)) & {
           width: min(calc(100% - 32px), 1024px);
-
-          @media (width < 640px) {
-            scroll-snap-align: center;
-          }
         }
         break-before: always;
         break-before: column;
@@ -382,10 +378,6 @@ hr.slash {
           min-width: min(calc(100vw - 32px), 360px);
         }
       }
-
-      @media (width < 640px) {
-        scroll-snap-align: center;
-      }
     }
 
     > *:not(figcaption, dialog) {
@@ -429,8 +421,6 @@ hr.slash {
     @media (width < 640px) {
       @apply tw-py-4 tw-px-2;
       @apply tw-writing-vertical-rl tw-w-full tw-overflow-x-scroll tw-h-full tw-line-break-strict;
-
-      scroll-snap-type: x proximity;
     }
   }
 }
