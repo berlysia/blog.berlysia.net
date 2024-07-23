@@ -17,7 +17,7 @@ export default async function BlogPageIndex() {
         </div>
       </Header>
       <div className="tw-w-full tw-flex tw-justify-center">
-        <div className="tw-max-w-screen-lg tw-w-full tw-h-full tw-relative">
+        <div className="contentAreaRestricter tw-w-full tw-h-full tw-relative">
           <Categories />
         </div>
       </div>

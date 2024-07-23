@@ -48,7 +48,7 @@ export default function BlogArticleLayout({
         </div>
       </Header>
       <div className="articleWrapper">
-        <div className="tw-w-full tw-relative tw-max-w-screen-lg">
+        <div className="contentAreaRestricter tw-w-full tw-relative">
           <article className="article">
             <ArticleSentinel className="articleContentWrapper">
               <div className="articleContent">

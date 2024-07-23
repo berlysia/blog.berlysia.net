@@ -13,7 +13,7 @@ export default createRoute((c) => {
         </div>
       </Header>
       <div className="articleWrapper">
-        <div className="tw-w-full tw-relative tw-max-w-screen-lg">
+        <div className="contentAreaRestricter tw-w-full tw-relative">
           <article className="article">
             <section className="main-text-section">
               <h1>404 - Not Found</h1>

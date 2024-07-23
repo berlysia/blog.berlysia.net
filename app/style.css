@@ -425,6 +425,15 @@ hr.slash {
   }
 }
 
+.contentAreaRestricter {
+  @apply tw-max-w-screen-lg;
+  .vertical & {
+    @media (width < 640px), (height < 600px) {
+      max-width: unset;
+    }
+  }
+}
+
 .articleWrapper {
   @apply tw-w-full tw-flex tw-justify-center;
 
