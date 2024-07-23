@@ -38,6 +38,7 @@ export default function Tweet(props: { readonly id: string }) {
 
   return (
     <div
+      ref={ref}
       style={{
         display: "flex",
         placeContent: "center",
@@ -49,26 +50,15 @@ export default function Tweet(props: { readonly id: string }) {
           : {}),
       }}
     >
-      <div
-        ref={ref}
-        style={{
-          ...(mode.viewerMode === "vertical"
-            ? {
-                inlineSize: "100%",
-              }
-            : {}),
-        }}
-      >
-        <blockquote>
-          <a
-            href={`https://twitter.com/i/status/${props.id}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            https://twitter.com/i/status/{props.id}
-          </a>
-        </blockquote>
-      </div>
+      <blockquote>
+        <a
+          href={`https://twitter.com/i/status/${props.id}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          https://twitter.com/i/status/{props.id}
+        </a>
+      </blockquote>
     </div>
   );
 }
