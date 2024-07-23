@@ -1,5 +1,6 @@
+import { useViewerModeValue } from "#lib/viewerMode";
 import clsx from "clsx";
-import { useRef } from "hono/jsx";
+import { useRef, useSyncExternalStore } from "hono/jsx";
 
 type Props = {
   readonly src: string;
@@ -13,6 +14,24 @@ type Props = {
 const placeholder =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQYV2NgAAIAAAUAAarVyFEAAAAASUVORK5CYII=";
 
+// TODO: useViewerModeValueに埋め込む
+function useMediaQuery(query: string, defaultValue = false) {
+  const mediaQuery =
+    typeof window === "undefined" ? null : window.matchMedia(query);
+
+  return useSyncExternalStore(
+    (notify) => {
+      const cb = () => notify;
+      mediaQuery?.addEventListener("change", cb);
+      return () => {
+        mediaQuery?.removeEventListener("change", cb);
+      };
+    },
+    () => mediaQuery?.matches,
+    () => defaultValue
+  );
+}
+
 const Image = ({
   src,
   alt,
@@ -22,6 +41,8 @@ const Image = ({
   height,
 }: Props) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const mode = useViewerModeValue();
+  const isNarrowViewport = useMediaQuery("(width < 640px), (height < 600px)");
   const openDialog = () => {
     if (dialogRef.current) {
       dialogRef.current.showModal();
@@ -32,11 +53,23 @@ const Image = ({
       dialogRef.current.close();
     }
   };
+  const wrapper =
+    mode.isVertical && isNarrowViewport
+      ? (inner) => (
+          <a href={src} target="_blank" rel="noreferrer">
+            {inner}
+          </a>
+        )
+      : (inner) => (
+          <button type="button" onClick={openDialog}>
+            {inner}
+          </button>
+        );
   return (
     <>
-      <button type="button" onClick={openDialog}>
+      {wrapper(
         <img
-          className={clsx("tw-object-contain", className)}
+          className={clsx("image", "tw-object-contain", className)}
           src={src}
           alt={alt}
           width={width}
@@ -49,15 +82,10 @@ const Image = ({
           //   target.src = placeholder;
           // }}
         />
-      </button>
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions -- dialog要素のバックドロップに反応したい場合のよりよい方法があれば */}
-      <dialog
-        ref={dialogRef}
-        title="image viewer"
-        onClick={closeDialog}
-        className="tw-overflow-visible"
-      >
-        <button type="button" onClick={closeDialog}>
+      )}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions -- dialog backdrop hack */}
+      <dialog ref={dialogRef} title="image viewer" onClick={closeDialog}>
+        <button type="button" className="tw-block" onClick={closeDialog}>
           <img
             title="click to close dialog"
             className=""
@@ -67,17 +95,6 @@ const Image = ({
             height={height}
             decoding="async"
             loading={loading}
-          />
-        </button>
-        <button
-          type="button"
-          className="tw-block tw-absolute tw-left-[-32px] tw-top-[-32px]"
-          onClick={closeDialog}
-        >
-          <img
-            src="/static/icons/xmark.svg"
-            alt="close"
-            className="tw-h-8 tw-w-8"
           />
         </button>
       </dialog>
