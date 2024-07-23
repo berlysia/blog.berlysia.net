@@ -416,6 +416,10 @@ hr.slash {
 }
 
 .articleContentWrapper {
+  overflow-wrap: anywhere;
+  line-break: strict;
+  text-wrap: pretty;
+
   .horizontal & {
     @apply tw-pt-2 tw-px-4;
   }
