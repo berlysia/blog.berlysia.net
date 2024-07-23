@@ -46,6 +46,9 @@ export default function Tweet(props: { readonly id: string }) {
         ...(mode.viewerMode === "vertical"
           ? {
               blockSize: "250px" /* Twitterがどうしてもこの寸法で出してくる */,
+              overflowY: "hidden",
+              overflowInline: "hidden",
+              justifyContent: "flex-start",
             }
           : {}),
       }}
