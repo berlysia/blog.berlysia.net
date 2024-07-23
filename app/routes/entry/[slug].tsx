@@ -8,6 +8,7 @@ import type { NotFoundHandler } from "hono";
 import { SITE_BLOG_URL } from "#constant";
 import EmbeddedLink from "#islands/EmbededLink";
 import ViewerModeProvider from "#islands/ViewerModeProvider";
+import Tweet from "#islands/Tweet";
 import { wrapResult } from "../../lib/wrapResult";
 import notFound from "./404";
 
@@ -42,7 +43,7 @@ export default createRoute(
         }
       >
         <BlogArticleLayout frontmatter={frontmatter}>
-          <Content components={{ Image, EmbeddedLink }} />
+          <Content components={{ Image, Tweet, EmbeddedLink }} />
         </BlogArticleLayout>
       </ViewerModeProvider>,
       {

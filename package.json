@@ -19,8 +19,7 @@
     "dev": "vite",
     "serve": "run-s build serve:pages",
     "serve:pages": "cd dist && npx wrangler pages dev .",
-    "build": "run-s build:seed build:partytown build:client build:ssg build:functions",
-    "build:partytown": "partytown copylib public/~partytown",
+    "build": "run-s build:seed build:client build:ssg build:functions",
     "build:seed": "run-p 'build:seed:*'",
     "build:seed:local": "tsx --tsconfig ./tsconfig.script.json app/seeds/localBuild.ts",
     "build:seed:remote": "tsx --tsconfig ./tsconfig.script.json app/seeds/remoteBuild.ts",
@@ -76,7 +75,7 @@
     "tailwindcss-logical": "^3.0.1",
     "tsx": "^4.7.1",
     "typescript": "5.5.3",
-    "wrangler": "^3.30.1"
+    "wrangler": "^3.65.0"
   },
   "dependencies": {
     "@builder.io/partytown": "^0.10.0",
