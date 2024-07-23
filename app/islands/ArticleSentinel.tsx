@@ -28,7 +28,8 @@ export default function ArticleSentinel({
     if (articleEl && sentinelEl) {
       if (
         isVertical &&
-        window.matchMedia("(min-width: 640px)" /* sm */).matches
+        window.matchMedia("(640px <= width) and (600px <= height)" /* sm */)
+          .matches
       ) {
         const box = sentinelEl.getBoundingClientRect();
         const currentValue = articleEl.getBoundingClientRect().height;
@@ -41,7 +42,7 @@ export default function ArticleSentinel({
         const targetValue =
           window.scrollY + box.bottom - HEADER_HEIGHT - ARTICLE_TOP_PADDING;
 
-        // targetValueを割る数字を増やしていって最も商が400 + 32に近くなるものを探す
+        // targetValueを割る数字を増やしていって最も商がCOLUMN_UNITに近くなるものを探す
         let idealColumns = 0;
         let minDiff = Number.POSITIVE_INFINITY;
         for (let i = 1; i < 200 /* 高々カラム数 */; i++) {
@@ -59,6 +60,7 @@ export default function ArticleSentinel({
         const idealHeight =
           idealColumns * COLUMN_UNIT - HEADER_HEIGHT - ARTICLE_TOP_PADDING;
         const diff = idealHeight - currentValue;
+
         if (Math.abs(diff) > 10) {
           articleEl.style.height = `${idealHeight}px`;
         }
@@ -82,11 +84,13 @@ export default function ArticleSentinel({
     for (const x of detailsElements) {
       x.addEventListener("toggle", handleResize);
     }
+    window.addEventListener("resize", handleResize);
     return () => {
       observer.disconnect();
       for (const x of detailsElements) {
         x.removeEventListener("toggle", handleResize);
       }
+      window.removeEventListener("resize", handleResize);
     };
   }, [handleResize]);
 

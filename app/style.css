@@ -21,10 +21,10 @@ html {
 }
 
 html:has(.vertical) {
-  @media (width >= 640px) {
+  @media (640px <= width) and (600px <= height) {
     @apply tw-overflow-y-visible;
   }
-  @media (width < 640px) {
+  @media (width < 640px), (height < 600px) {
     @apply tw-overflow-y-hidden;
   }
 
@@ -312,7 +312,7 @@ hr.slash {
     .vertical & {
       @apply tw-h-full;
 
-      @media (width >= 640px) {
+      @media (640px <= width) and (600px <= height) {
         :not(:where(figure)) & {
           width: min(calc(100% - 32px), 1024px);
         }
@@ -333,11 +333,11 @@ hr.slash {
       }
 
       .vertical & {
-        @media (width >= 640px) {
+        @media (640px <= width) and (600px <= height) {
           width: calc(100% - 4rem);
           @apply tw-max-h-[50vh] tw-max-h-[50svh];
         }
-        @media (width < 640px) {
+        @media (width < 640px), (height < 600px) {
           @apply tw-w-[90vw] tw-max-w-[90vw];
         }
       }
@@ -359,11 +359,14 @@ hr.slash {
   }
 
   figure {
-    @apply tw-writing-horizontal-tb tw-relative tw-flex tw-flex-col tw-justify-center tw-items-center;
+    @apply tw-writing-horizontal-tb tw-relative tw-flex tw-flex-col;
+    place-items: center;
+    place-content: center;
+
     .vertical & {
       @apply tw-h-full;
 
-      @media (640px <= width) {
+      @media (640px <= width) and (600px <= height) {
         &.full-width {
           width: min(calc(100vw - 32px), 1024px);
           min-width: min(calc(100vw - 32px), 1024px);
@@ -374,8 +377,8 @@ hr.slash {
           break-inside: avoid;
         }
         &:not(.full-width) {
-          width: min(calc(100vw - 32px), 360px);
-          min-width: min(calc(100vw - 32px), 360px);
+          width: min(calc(100vw - 32px), 600px);
+          min-width: min(calc(100vw - 32px), 600px);
         }
       }
     }
@@ -387,12 +390,21 @@ hr.slash {
       }
 
       .vertical & {
-        @media (640px <= width) {
+        @media (640px <= width) and (600px <= height) {
           width: calc(100% - 4rem);
           @apply tw-max-h-[50vh] tw-max-h-[50svh];
         }
         @media (width < 640px) {
-          @apply tw-w-[90vw] tw-max-w-[90vw];
+          @apply tw-w-[90vw] tw-max-w-[90vw] tw-max-h-[90vh];
+        }
+        @media (height < 600px) {
+          max-width: 480px;
+          max-height: calc(100% - 2rem);
+        }
+
+        > * {
+          max-width: 100%;
+          max-height: 100%;
         }
       }
     }
@@ -409,7 +421,7 @@ hr.slash {
   }
 
   .vertical & {
-    @media (width >= 640px) {
+    @media (640px <= width) and (600px <= height) {
       @apply tw-py-4 tw-mx-auto tw-writing-vertical-rl tw-w-full tw-overflow-x-visible tw-h-max tw-relative tw-box-content;
       max-width: calc(100vw - 32px);
 
@@ -418,9 +430,9 @@ hr.slash {
 
       @apply tw-column-rule-size-1 tw-column-rule-style-solid tw-column-rule-color-keyColor-200 tw-column-fill-auto tw-gap-8;
     }
-    @media (width < 640px) {
+    @media (width < 640px), (height < 600px) {
       @apply tw-py-4 tw-px-2;
-      @apply tw-writing-vertical-rl tw-w-full tw-overflow-x-scroll tw-h-full tw-line-break-strict;
+      @apply tw-writing-vertical-rl tw-w-[100vw] tw-overflow-x-scroll tw-h-full tw-line-break-strict;
     }
   }
 }
@@ -443,17 +455,17 @@ hr.slash {
       "游ゴシック Medium", YuGothic, "游ゴシック体", "Zen Kaku Gothic New",
       "Noto Sans JP", Meiryo, sans-serif;
 
-    @media (width >= 640px) {
+    @media (640px <= width) and (600px <= height) {
       @apply tw-h-auto tw-w-full tw-max-w-full tw-relative tw-box-content;
     }
-    @media (width < 640px) {
+    @media (width < 640px), (height < 600px) {
       @apply tw-h-[calc(100vh-2.5rem)] tw-h-[calc(100svh-2.5rem)];
       overflow-x: auto;
     }
   }
 }
 
-@media (width < 640px) {
+@media (width < 640px), (height < 600px) {
   .vertical .footer {
     writing-mode: vertical-rl;
   }
@@ -469,13 +481,13 @@ hr.slash {
   display: revert;
 }
 
-@media (width < 640px) {
+@media (width < 640px), (height < 600px) {
   .vertical .only-vertical {
     display: revert;
   }
 }
 
-@media (width >= 640px) {
+@media (640px <= width) and (600px <= height) {
   .vertical .only-vertical-column {
     display: revert;
   }
@@ -485,13 +497,13 @@ hr.slash {
   display: none;
 }
 
-@media (width < 640px) {
+@media (width < 640px), (height < 600px) {
   .vertical .not-in-vertical {
     display: none;
   }
 }
 
-@media (width >= 640px) {
+@media (640px <= width) and (600px <= height) {
   .vertical .not-in-vertical-column {
     display: none;
   }
