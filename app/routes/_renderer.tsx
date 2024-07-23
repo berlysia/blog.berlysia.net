@@ -57,6 +57,7 @@ export function createRenderer(
               href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Zen+Kaku+Gothic+New&display=swap"
               rel="stylesheet"
             />
+            <script src="https://platform.twitter.com/widgets.js" defer async />
             {headLink}
             <Link href="/app/style.css" rel="stylesheet" />
             <Script src="/app/client.ts" />
