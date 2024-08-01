@@ -47,7 +47,7 @@
     "build-storybook": "build-storybook"
   },
   "devDependencies": {
-    "@berlysia/eslint-config": "^5.0.11",
+    "@berlysia/eslint-config": "^6.0.0",
     "@berlysia/eslint-plugin": "^0.0.1-beta.3",
     "@cloudflare/workers-types": "^4.20240222.0",
     "@hono/vite-ssg": "^0.1.0",
