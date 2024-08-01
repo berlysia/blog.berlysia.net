@@ -430,7 +430,8 @@ hr.slash {
       max-width: calc(100vw - 32px);
 
       /* ArticleSentinelの処理と対応している */
-      @apply tw-columns-[50vh] tw-columns-[50svh];
+      columns: 50vh; // fallback
+      columns: 50svh;
 
       @apply tw-column-rule-size-1 tw-column-rule-style-solid tw-column-rule-color-keyColor-200 tw-column-fill-auto tw-gap-8;
     }
@@ -463,7 +464,8 @@ hr.slash {
       @apply tw-h-auto tw-w-full tw-max-w-full tw-relative tw-box-content;
     }
     @media (width < 640px), (height < 600px) {
-      @apply tw-h-[calc(100vh-2.5rem)] tw-h-[calc(100svh-2.5rem)];
+      height: calc(100vh - 2.5rem);
+      height: calc(100svh - 2.5rem);
       overflow-x: auto;
     }
   }
