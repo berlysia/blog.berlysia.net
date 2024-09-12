@@ -9,7 +9,7 @@ export default function Header({ children }: Props) {
         <div className="tw-left-0 tw-leading-10 tw-align-baseline tw-grow tw-h-full tw-flex tw-flex-row tw-overflow-hidden">
           {children}
         </div>
-        <div className="tw-flex tw-h-full tw-items-center">
+        <div className="tw-flex tw-h-full tw-items-center tw-flex-shrink-0">
           <a
             href="https://berlysia.net"
             className="tw-block tw-w-fit tw-h-fit tw-mx-2"
