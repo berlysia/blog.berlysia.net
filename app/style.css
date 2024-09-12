@@ -430,7 +430,7 @@ hr.slash {
       max-width: calc(100vw - 32px);
 
       /* ArticleSentinelの処理と対応している */
-      columns: 50vh; // fallback
+      columns: 50vh; /* fallback */
       columns: 50svh;
 
       @apply tw-column-rule-size-1 tw-column-rule-style-solid tw-column-rule-color-keyColor-200 tw-column-fill-auto tw-gap-8;
