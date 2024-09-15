@@ -74,7 +74,7 @@
     "tailwindcss": "^3.4.1",
     "tailwindcss-logical": "^3.0.1",
     "tsx": "^4.7.1",
-    "typescript": "5.5.4",
+    "typescript": "5.6.2",
     "wrangler": "^3.65.0"
   },
   "dependencies": {
@@ -98,7 +98,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.0",
     "rss-parser": "^3.13.0",
-    "satori": "^0.10.13",
+    "satori": "^0.11.0",
     "to-vfile": "^8.0.0",
     "unified": "^11.0.4",
     "vfile-matter": "^5.0.0",
