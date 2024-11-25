@@ -1,5 +1,5 @@
 /* eslint-disable max-depth -- unifiedのプラグインの書き味を維持 */
-import { isAbsolute, resolve } from "node:path";
+import path from "node:path";
 import z from "zod";
 import type { Plugin } from "unified";
 import type { Node as UnistNode, Parent as UnistParent } from "unist";
@@ -166,7 +166,7 @@ export const rewriteImagePaths: Plugin<[RewriteImageOptions], UnistParent> = (
       for (const node of tree.children) {
         if (node.type === "image") {
           assertImage(node);
-          const newUrl = resolve(STATIC_ARTICLES_ROOT, slug, node.url);
+          const newUrl = path.resolve(STATIC_ARTICLES_ROOT, slug, node.url);
           console.log("Rewriting image path", node.url, newUrl);
           node.url = newUrl;
         } else if (
@@ -181,7 +181,11 @@ export const rewriteImagePaths: Plugin<[RewriteImageOptions], UnistParent> = (
               attr.name === "src" &&
               typeof attr.value === "string"
             ) {
-              const newUrl = resolve(STATIC_ARTICLES_ROOT, slug, attr.value);
+              const newUrl = path.resolve(
+                STATIC_ARTICLES_ROOT,
+                slug,
+                attr.value
+              );
               console.log("Rewriting image path", attr.value, newUrl);
               attr.value = newUrl;
             }

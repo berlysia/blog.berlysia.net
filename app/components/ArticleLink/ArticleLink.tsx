@@ -14,7 +14,6 @@ export function ArticleLink({
   };
   readonly pubDateString: string;
   readonly withHatenaBookmark?: boolean;
-  // eslint-disable-next-line @typescript-eslint/ban-types -- idiom
   readonly target?: "_blank" | "_self" | "_parent" | "_top" | (string & {});
 }) {
   return (
