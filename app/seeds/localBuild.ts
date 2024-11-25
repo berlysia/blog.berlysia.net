@@ -6,7 +6,7 @@ import {
   copyFile,
   rm,
 } from "node:fs/promises";
-import { basename, resolve } from "node:path";
+import path from "node:path";
 import { ensureDir } from "fs-extra";
 import { toVFile } from "to-vfile";
 import { matter } from "vfile-matter";
@@ -19,8 +19,8 @@ import clean from "./clean.js";
   const { processMDX } = await import("../lib/mdx/processForSeed.js");
   const cwd = process.cwd();
   const ARTICLE_PATH = "articles";
-  const outDir = resolve(cwd, "public/static/articles");
-  const generatedDir = resolve(cwd, "app/generated/articles");
+  const outDir = path.resolve(cwd, "public/static/articles");
+  const generatedDir = path.resolve(cwd, "app/generated/articles");
 
   await clean();
 
@@ -28,10 +28,10 @@ import clean from "./clean.js";
   await ensureDir(generatedDir);
 
   // articlesディレクトリ直下のmdxファイルか、そのサブディレクトリにあるindex.mdxファイルを取得
-  const filesInArticles = await readdir(resolve(cwd, ARTICLE_PATH));
+  const filesInArticles = await readdir(path.resolve(cwd, ARTICLE_PATH));
   const articleFilesPromises = await Promise.all(
     filesInArticles.map(async (filename) => {
-      const currentDirOrFile = resolve(cwd, ARTICLE_PATH, filename);
+      const currentDirOrFile = path.resolve(cwd, ARTICLE_PATH, filename);
       const fileStat = await stat(currentDirOrFile);
       const isDirectory = fileStat.isDirectory();
       if (isDirectory) {
@@ -54,8 +54,8 @@ import clean from "./clean.js";
       const isInDirectory = filename.includes("/");
       const slug = isInDirectory
         ? filename.split("/")[0]
-        : basename(filename, ".mdx");
-      const contentFilePath = resolve(cwd, ARTICLE_PATH, filename);
+        : path.basename(filename, ".mdx");
+      const contentFilePath = path.resolve(cwd, ARTICLE_PATH, filename);
       const content = await readFile(contentFilePath, "utf8");
       const vfile = toVFile({ cwd, value: content });
       matter(vfile);
@@ -74,15 +74,15 @@ import clean from "./clean.js";
           slug,
         });
         // 他のファイルを移動する
-        const articleDir = resolve(cwd, ARTICLE_PATH, slug);
-        const destDir = resolve(outDir, slug);
+        const articleDir = path.resolve(cwd, ARTICLE_PATH, slug);
+        const destDir = path.resolve(outDir, slug);
         await Promise.all([
           ensureDir(destDir),
-          ensureDir(resolve(generatedDir, slug)),
+          ensureDir(path.resolve(generatedDir, slug)),
         ]);
 
         await writeFile(
-          resolve(generatedDir, slug, `index.jsx`),
+          path.resolve(generatedDir, slug, `index.jsx`),
           compiled.value,
           "utf8"
         );
@@ -91,8 +91,8 @@ import clean from "./clean.js";
           const files = await readdir(articleDir);
           for (const file of files) {
             if (file.endsWith(".mdx")) continue;
-            const src = resolve(articleDir, file);
-            const dest = resolve(destDir, file);
+            const src = path.resolve(articleDir, file);
+            const dest = path.resolve(destDir, file);
             copyFile(src, dest);
           }
         }
@@ -105,11 +105,11 @@ import clean from "./clean.js";
     })
   );
 
-  const SEEDS_DIR = resolve(cwd, "app", "seeds");
+  const SEEDS_DIR = path.resolve(cwd, "app", "seeds");
 
-  await ensureDir(resolve(SEEDS_DIR, ".tmp"));
+  await ensureDir(path.resolve(SEEDS_DIR, ".tmp"));
   await writeFile(
-    resolve(SEEDS_DIR, ".tmp", "local.json"),
+    path.resolve(SEEDS_DIR, ".tmp", "local.json"),
     JSON.stringify(
       Object.fromEntries(
         compiledArticles.map((article) => [article.slug, article])

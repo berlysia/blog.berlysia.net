@@ -1,12 +1,12 @@
 import { writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import path from "node:path";
 import { ensureDir } from "fs-extra";
 import Parser from "rss-parser";
 import * as feeds from "./feeds.js";
 
 import old_tech from "./old_tech.json" assert { type: "json" };
 
-const SEEDS_DIR = resolve(process.cwd(), "app", "seeds");
+const SEEDS_DIR = path.resolve(process.cwd(), "app", "seeds");
 
 const IGNORE_URLS = new Set(["https://blog.nnn.dev/entry/casual-mendan-info"]);
 
@@ -36,9 +36,9 @@ const IGNORE_URLS = new Set(["https://blog.nnn.dev/entry/casual-mendan-info"]);
   );
   const genres = Object.fromEntries(genresEntries);
   genres.tech.push(old_tech);
-  await ensureDir(resolve(SEEDS_DIR, ".tmp"));
+  await ensureDir(path.resolve(SEEDS_DIR, ".tmp"));
   await writeFile(
-    resolve(SEEDS_DIR, ".tmp", "remote.json"),
+    path.resolve(SEEDS_DIR, ".tmp", "remote.json"),
     JSON.stringify(genres, null, 2),
     "utf8"
   );

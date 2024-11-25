@@ -40,7 +40,7 @@ export async function generateMetadata({
   };
 }
 
-export async function BlogPageIndex({ params }: { params: Params }) {
+export async function BlogPageIndex({ params }: { readonly params: Params }) {
   const articles = getLocalArticles();
 
   const allLocalEntries = articles.map((result) => ({
