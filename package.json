@@ -35,8 +35,8 @@
     "format:check": "prettier --check '**/*.{json,md,js,ts,jsx,tsx}'",
     "test": "jest",
     "test:vrt:ci": "playwright test",
-    "test:vrt": "docker run --rm --volume $(pwd):/workdir/ --workdir /workdir/ -it mcr.microsoft.com/playwright:v1.41.2-focal /bin/bash -c 'bun run test:vrt:ci'",
-    "test:vrt:update": "docker run --rm --volume $(pwd):/workdir/ --workdir /workdir/ -it mcr.microsoft.com/playwright:v1.41.2-focal /bin/bash -c 'bun run test:vrt:ci -u'",
+    "test:vrt": "docker run --rm --volume $(pwd):/workdir/ --workdir /workdir/ -it mcr.microsoft.com/playwright:v1.41.2-focal /bin/bash -c 'pnpm run test:vrt:ci'",
+    "test:vrt:update": "docker run --rm --volume $(pwd):/workdir/ --workdir /workdir/ -it mcr.microsoft.com/playwright:v1.41.2-focal /bin/bash -c 'pnpm run test:vrt:ci -u'",
     "clean": "run-p 'clean:*'",
     "clean:dist": "del dist",
     "clean:seed": "tsx --tsconfig ./tsconfig.script.json app/seeds/clean.ts",
@@ -46,6 +46,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "packageManager": "pnpm@10.0.0",
   "devDependencies": {
     "@berlysia/eslint-config": "^7.0.1",
     "@berlysia/eslint-plugin": "^0.0.1-beta.3",
