@@ -25,7 +25,7 @@
     "build:seed:remote": "tsx --tsconfig ./tsconfig.script.json app/seeds/remoteBuild.ts",
     "build:client": "vite build --mode client",
     "build:functions": "vite build --mode functions",
-    "build:ssg": "vite build",
+    "build:ssg": "vite build --mode ssg",
     "build:on-deploy": "run-s build copy-functions",
     "copy-functions": "cp -rT dist/functions functions",
     "start": "vite start",

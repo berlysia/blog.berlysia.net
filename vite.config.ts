@@ -1,13 +1,14 @@
-import { resolve } from "node:path";
+import path from "node:path";
 import honox from "honox/vite";
 import client from "honox/vite/client";
 import { defineConfig } from "vite";
+import type { UserConfig } from "vite";
 import ssgBuild from "@hono/vite-ssg";
 
 const entry = "app/server.ts";
 
-export default defineConfig(async ({ mode }) => {
-  const common = {
+export default defineConfig(async ({ mode }): Promise<UserConfig> => {
+  const common: UserConfig = {
     build: {
       sourcemap: true,
     },
@@ -22,6 +23,7 @@ export default defineConfig(async ({ mode }) => {
   if (mode === "functions") {
     return {
       ...common,
+      // @ts-expect-error -- for rollup
       output: {
         format: "esm",
       },
@@ -37,7 +39,7 @@ export default defineConfig(async ({ mode }) => {
           output: {
             entryFileNames(chunkInfo) {
               const entryPathFromRoutesRoot = chunkInfo.facadeModuleId
-                .replace(resolve("app/functions"), "")
+                .replace(path.resolve("app/functions"), "")
                 .replace(/\.tsx$/, ".js");
               return `functions${entryPathFromRoutesRoot}`;
             },
@@ -48,11 +50,26 @@ export default defineConfig(async ({ mode }) => {
     };
   }
 
+  if (mode === "ssg") {
+    return {
+      ...common,
+      build: {
+        ...common.build,
+        emptyOutDir: false,
+      },
+      ssr: {
+        noExternal: true,
+        ...common.ssr,
+      },
+      plugins: [honox(), ssgBuild({ entry })],
+    };
+  }
+
   return {
     ...common,
     build: {
       ...common.build,
-      emptyOutDir: false,
+      emptyOutDir: mode === "client",
     },
     ssr: {
       noExternal: true,
@@ -60,7 +77,6 @@ export default defineConfig(async ({ mode }) => {
     },
     plugins: [
       honox(),
-      ssgBuild({ entry }),
       client({
         input: ["./app/style.css", "./app/ogviewer.css"],
       }),
