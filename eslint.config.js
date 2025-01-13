@@ -1,9 +1,7 @@
-import { dirname } from "node:path";
-import { fileURLToPath } from "node:url";
 import configBerlysia from "@berlysia/eslint-config";
 import pluginBerlysia from "@berlysia/eslint-plugin";
 
-const currentDir = dirname(fileURLToPath(import.meta.url));
+const currentDir = import.meta.dirname;
 
 export default configBerlysia(
   {
