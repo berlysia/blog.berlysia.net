@@ -142,8 +142,8 @@ importers:
         specifier: ^9.17.0
         version: 9.26.0(jiti@1.21.7)
       feed:
-        specifier: ^4.2.2
-        version: 4.2.2
+        specifier: ^5.0.0
+        version: 5.0.0
       lint-staged:
         specifier: ^15.3.0
         version: 15.5.1
@@ -2703,9 +2703,9 @@ packages:
       picomatch:
         optional: true
 
-  feed@4.2.2:
-    resolution: {integrity: sha512-u5/sxGfiMfZNtJ3OvQpXcvotFpYkL0n9u9mM2vkui2nGo8b4wvDkJ8gAkYqbA8QpGyFCv3RK0Z+Iv+9veCS9bQ==}
-    engines: {node: '>=0.4.0'}
+  feed@5.0.0:
+    resolution: {integrity: sha512-b+xl8kQ/bxInBKTe3GLCGDFU45kFiDSIEEdDUAUGGThN1Jqpx+7uFb95NEPjI1JAjXy2iEFPzxHsK2rIEyJibw==}
+    engines: {node: '>=20', pnpm: '>=10'}
 
   fflate@0.7.4:
     resolution: {integrity: sha512-5u2V/CDW15QM1XbbgS+0DfPxVB+jUKhWEKuuFuHncbk3tEEqzmoXL+2KyOFuKGqOnmdIy0/davWF1CkuwtibCw==}
@@ -7421,7 +7421,7 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.2
 
-  feed@4.2.2:
+  feed@5.0.0:
     dependencies:
       xml-js: 1.6.11
 
