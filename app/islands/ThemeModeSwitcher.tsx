@@ -82,7 +82,7 @@ function ClientThemeModeSwitcher() {
     <div className="theme-mode-switcher tw-h-8 tw-w-8 tw-flex tw-justify-center tw-items-center">
       <button
         type="button"
-        className="tw-h-8 tw-w-8 tw-flex tw-justify-center tw-items-center tw-text-lg hover:tw-bg-keyColor-100 dark:hover:tw-bg-gray-700 tw-rounded tw-transition-colors"
+        className="tw-h-8 tw-w-8 tw-flex tw-justify-center tw-items-center tw-text-lg hover:tw-bg-keyColor-100 dark:hover:tw-bg-dark-bg-secondary tw-rounded tw-transition-colors"
         onClick={handleClick}
         title={getTitle()}
       >

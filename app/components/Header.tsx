@@ -4,7 +4,7 @@ type Props = PropsWithChildren;
 
 export default function Header({ children }: Props) {
   return (
-    <header className="tw-sticky tw-z-10 tw-top-0 tw-left-0 tw-right-0 tw-bg-keyColor-50 dark:tw-bg-gray-800 tw-h-10 tw-border-b tw-border-keyColor-200 dark:tw-border-gray-600 tw-w-full tw-flex tw-justify-center">
+    <header className="tw-sticky tw-z-10 tw-top-0 tw-left-0 tw-right-0 tw-bg-keyColor-50 dark:tw-bg-dark-bg-tertiary tw-h-10 tw-border-b tw-border-keyColor-200 dark:tw-border-dark-border-secondary tw-w-full tw-flex tw-justify-center">
       <div className="contentAreaRestricter tw-flex tw-flex-row tw-w-full tw-h-full tw-relative">
         <div className="tw-left-0 tw-leading-10 tw-align-baseline tw-grow tw-h-full tw-flex tw-flex-row tw-overflow-hidden">
           {children}
@@ -20,7 +20,7 @@ export default function Header({ children }: Props) {
               width={36}
               height={36}
               decoding="async"
-              className="tw-block tw-rounded-md tw-border tw-border-keyColor-100 dark:tw-border-gray-600"
+              className="tw-block tw-rounded-md tw-border tw-border-keyColor-100 dark:tw-border-dark-border-primary"
             />
           </a>
         </div>
