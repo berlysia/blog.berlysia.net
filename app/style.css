@@ -20,6 +20,11 @@ html {
   @apply tw-text-base;
 }
 
+.dark html {
+  color: #ddd;
+  background-color: #111;
+}
+
 html:has(.vertical) {
   @media (640px <= width) and (600px <= height) {
     @apply tw-overflow-y-visible;
@@ -34,6 +39,10 @@ html:has(.vertical) {
 
 body {
   min-height: 100vh;
+}
+
+.dark body {
+  background-color: #111;
 }
 
 body:has(.vertical) {
@@ -52,7 +61,7 @@ body:has(.vertical) {
 }
 
 aside {
-  @apply tw-text-sm tw-text-gray-500 tw-mb-2;
+  @apply tw-text-sm tw-text-gray-500 dark:tw-text-gray-400 tw-mb-2;
 }
 
 hr.slash {
@@ -140,6 +149,11 @@ hr.slash {
   }
 }
 
+.dark .toc {
+  border-color: rgb(139 69 19); /* darker brown/orange for dark mode */
+  background-color: rgb(17 24 39); /* dark background */
+}
+
 .main-text-section {
   counter-reset: h2 h3 h4 h5 h6;
 
@@ -175,7 +189,7 @@ hr.slash {
   }
 
   h4 {
-    @apply tw-text-xl tw-mbs-3 tw-mbe-2 tw-text-gray-800;
+    @apply tw-text-xl tw-mbs-3 tw-mbe-2 tw-text-gray-800 dark:tw-text-gray-200;
     counter-reset: h5 h6;
     counter-increment: h4;
 
@@ -185,7 +199,7 @@ hr.slash {
   }
 
   h5 {
-    @apply tw-text-lg tw-mbs-2 tw-mbe-2 tw-text-gray-800;
+    @apply tw-text-lg tw-mbs-2 tw-mbe-2 tw-text-gray-800 dark:tw-text-gray-200;
     counter-reset: h6;
     counter-increment: h5;
 
@@ -196,7 +210,7 @@ hr.slash {
   }
 
   h6 {
-    @apply tw-text-lg tw-mbs-1 tw-mbe-1 tw-text-gray-800;
+    @apply tw-text-lg tw-mbs-1 tw-mbe-1 tw-text-gray-800 dark:tw-text-gray-200;
     counter-increment: h6;
 
     > a::before {
@@ -240,7 +254,7 @@ hr.slash {
   }
 
   blockquote {
-    @apply tw-plb-2 tw-pis-4 tw-mlb-2 tw-border-is-8 tw-border-be tw-border-keyColor-300 tw-bg-keyColor-50 tw-text-gray-600;
+    @apply tw-plb-2 tw-pis-4 tw-mlb-2 tw-border-is-8 tw-border-be tw-border-keyColor-300 dark:tw-border-gray-600 tw-bg-keyColor-50 dark:tw-bg-gray-800 tw-text-gray-600 dark:tw-text-gray-300;
   }
 
   strong {
@@ -285,7 +299,7 @@ hr.slash {
 
   td,
   th {
-    @apply tw-border tw-border-collapse tw-border-gray-400;
+    @apply tw-border tw-border-collapse tw-border-gray-400 dark:tw-border-gray-600;
   }
 
   a {
@@ -412,7 +426,7 @@ hr.slash {
     }
 
     figcaption {
-      @apply tw-text-center tw-text-sm tw-text-gray-500 tw-m-2;
+      @apply tw-text-center tw-text-sm tw-text-gray-500 dark:tw-text-gray-400 tw-m-2;
     }
   }
 

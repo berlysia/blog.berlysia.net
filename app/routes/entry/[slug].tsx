@@ -8,6 +8,7 @@ import type { NotFoundHandler } from "hono";
 import { SITE_BLOG_URL } from "#constant";
 import EmbeddedLink from "#islands/EmbededLink";
 import ViewerModeProvider from "#islands/ViewerModeProvider";
+import ThemeModeProvider from "#islands/ThemeModeProvider";
 import Tweet from "#islands/Tweet";
 import { wrapResult } from "../../lib/wrapResult";
 import notFound from "./404";
@@ -37,15 +38,17 @@ export default createRoute(
     const frontmatter = getBySlug(slug as any).frontmatter;
 
     return c.render(
-      <ViewerModeProvider
-        defaultViewerMode={
-          frontmatter.preferVertical ? "vertical" : "horizontal"
-        }
-      >
-        <BlogArticleLayout frontmatter={frontmatter}>
-          <Content components={{ Image, Tweet, EmbeddedLink }} />
-        </BlogArticleLayout>
-      </ViewerModeProvider>,
+      <ThemeModeProvider defaultThemeMode="system">
+        <ViewerModeProvider
+          defaultViewerMode={
+            frontmatter.preferVertical ? "vertical" : "horizontal"
+          }
+        >
+          <BlogArticleLayout frontmatter={frontmatter}>
+            <Content components={{ Image, Tweet, EmbeddedLink }} />
+          </BlogArticleLayout>
+        </ViewerModeProvider>
+      </ThemeModeProvider>,
       {
         title: frontmatter.title,
         description: frontmatter.description,

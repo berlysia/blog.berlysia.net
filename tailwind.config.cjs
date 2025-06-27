@@ -6,7 +6,7 @@ module.exports = {
   prefix: "tw-",
   mode: "jit",
   content: ["./app/**/*.{js,ts,jsx,tsx}"],
-  darkMode: "media", // or 'media' or 'class'
+  darkMode: "selector", // or 'media' or 'class' or 'selector'
   theme: {
     extend: {
       fontFamily: {

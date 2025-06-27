@@ -1,4 +1,5 @@
 import WritingModeSwitcher from "#islands/WritingModeSwitcher";
+import ThemeModeSwitcher from "#islands/ThemeModeSwitcher";
 import type { PropsWithChildren } from "hono/jsx";
 import ArticleSentinel from "#islands/ArticleSentinel";
 import clsx from "clsx";
@@ -43,7 +44,8 @@ export default function BlogArticleLayout({
             <span>{frontmatter.title}</span>
           </span>
         </div>
-        <div className="tw-ml-auto tw-flex tw-justify-center tw-items-center">
+        <div className="tw-ml-auto tw-flex tw-justify-center tw-items-center tw-gap-2">
+          <ThemeModeSwitcher />
           <WritingModeSwitcher articleRootId={articleRootId} />
         </div>
       </Header>
