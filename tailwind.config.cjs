@@ -41,6 +41,38 @@ module.exports = {
           800: "#9d174d",
           900: "#831843",
         },
+        // セマンティックトークン
+        semantic: {
+          // 背景色
+          bg: {
+            primary: "#ffffff",
+            surface: "#fdf2f8",
+            elevated: "#fce7f3",
+            overlay: "rgba(0,0,0,0.5)",
+          },
+          // テキスト色
+          text: {
+            primary: "#223333",
+            secondary: "#1f2937",
+            muted: "#4b5563",
+            accent: "#db2777",
+            inverse: "#ffffff",
+          },
+          // ボーダー色
+          border: {
+            subtle: "#e5e7eb",
+            default: "#9ca3af",
+            accent: "#f9a8d4",
+            focus: "#db2777",
+          },
+          // 状態色
+          state: {
+            hover: "#fce7f3",
+            active: "#fbcfe8",
+            focus: "#f9a8d4",
+            disabled: "#f3f4f6",
+          },
+        },
         // ダークモード専用カラーパレット
         dark: {
           bg: {
@@ -129,6 +161,97 @@ module.exports = {
           })
         ),
       });
+    }),
+    // セマンティッククラス生成プラグイン
+    plugin(({ addUtilities, theme }) => {
+      const semanticUtilities = {};
+
+      // セマンティック背景色 - ダークモードマッピング
+      const semanticToDarkBgMapping = {
+        primary: theme("colors.dark.bg.primary"),
+        surface: theme("colors.dark.bg.tertiary"),
+        elevated: theme("colors.dark.keyColor.100"),
+        overlay: "rgba(0,0,0,0.8)",
+      };
+
+      // セマンティックテキスト色 - ダークモードマッピング
+      const semanticToDarkTextMapping = {
+        primary: theme("colors.dark.text.primary"),
+        secondary: theme("colors.dark.text.secondary"),
+        muted: theme("colors.dark.text.muted"),
+        accent: theme("colors.dark.text.accent"),
+        inverse: "#000000",
+      };
+
+      // セマンティックボーダー色 - ダークモードマッピング
+      const semanticToDarkBorderMapping = {
+        subtle: theme("colors.dark.border.primary"),
+        default: theme("colors.dark.border.secondary"),
+        accent: theme("colors.dark.border.accent"),
+        focus: theme("colors.dark.text.accent"),
+      };
+
+      // 背景色クラス
+      const bgColors = theme("colors.semantic.bg");
+      for (const key of Object.keys(bgColors)) {
+        semanticUtilities[`.bg-semantic-${key}`] = {
+          backgroundColor: bgColors[key],
+        };
+        if (semanticToDarkBgMapping[key]) {
+          semanticUtilities[`.dark .bg-semantic-${key}`] = {
+            backgroundColor: semanticToDarkBgMapping[key],
+          };
+        }
+      }
+
+      // テキスト色クラス
+      const textColors = theme("colors.semantic.text");
+      for (const key of Object.keys(textColors)) {
+        semanticUtilities[`.text-semantic-${key}`] = {
+          color: textColors[key],
+        };
+        if (semanticToDarkTextMapping[key]) {
+          semanticUtilities[`.dark .text-semantic-${key}`] = {
+            color: semanticToDarkTextMapping[key],
+          };
+        }
+      }
+
+      // ボーダー色クラス
+      const borderColors = theme("colors.semantic.border");
+      for (const key of Object.keys(borderColors)) {
+        semanticUtilities[`.border-semantic-${key}`] = {
+          borderColor: borderColors[key],
+        };
+        if (semanticToDarkBorderMapping[key]) {
+          semanticUtilities[`.dark .border-semantic-${key}`] = {
+            borderColor: semanticToDarkBorderMapping[key],
+          };
+        }
+      }
+
+      // 状態色クラス
+      const stateColors = theme("colors.semantic.state");
+      const darkKeyColors = theme("colors.dark.keyColor");
+      for (const key of Object.keys(stateColors)) {
+        semanticUtilities[`.bg-state-${key}`] = {
+          backgroundColor: stateColors[key],
+        };
+        // ダークモード用状態色
+        const darkStateMapping = {
+          hover: darkKeyColors[100],
+          active: darkKeyColors[200],
+          focus: darkKeyColors[300],
+          disabled: theme("colors.dark.bg.secondary"),
+        };
+        if (darkStateMapping[key]) {
+          semanticUtilities[`.dark .bg-state-${key}`] = {
+            backgroundColor: darkStateMapping[key],
+          };
+        }
+      }
+
+      addUtilities(semanticUtilities);
     }),
   ],
 };

@@ -15,9 +15,9 @@ function ClientThemeModeSwitcher() {
         const prefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)"
         ).matches;
-        htmlElement.classList.toggle("dark", prefersDark);
+        htmlElement.classList.toggle("tw-dark", prefersDark);
       } else {
-        htmlElement.classList.toggle("dark", themeMode === "dark");
+        htmlElement.classList.toggle("tw-dark", themeMode === "dark");
       }
     };
 
@@ -82,9 +82,10 @@ function ClientThemeModeSwitcher() {
     <div className="theme-mode-switcher tw-h-8 tw-w-8 tw-flex tw-justify-center tw-items-center">
       <button
         type="button"
-        className="tw-h-8 tw-w-8 tw-flex tw-justify-center tw-items-center tw-text-lg hover:tw-bg-keyColor-100 dark:hover:tw-bg-dark-bg-secondary tw-rounded tw-transition-colors"
+        className="tw-h-8 tw-w-8 tw-flex tw-justify-center tw-items-center tw-text-lg hover:tw-bg-state-hover tw-rounded tw-transition-colors"
         onClick={handleClick}
         title={getTitle()}
+        data-testid="theme-toggle"
       >
         {getCurrentIcon()}
       </button>
