@@ -1,10 +1,9 @@
+import type { FC } from "hono/jsx";
 import { Link, Script } from "honox/server";
 import { Style } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
 
-export function createRenderer(
-  given: { headMeta?: JSX.Element; headLink?: JSX.Element } = {}
-) {
+export function createRenderer(given: { headMeta?: FC; headLink?: FC } = {}) {
   const headMeta = given.headMeta ?? <></>;
   const headLink = given.headLink ?? <></>;
   return jsxRenderer(
