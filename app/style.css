@@ -284,7 +284,8 @@ hr.slash {
     }
   }
 
-  :where(h1, h2, h3, h4, h5, h6) + p {
+  /* p以外に効いてなさそう */
+  :where(h1, h2, h3, h4, h5, h6) + :where(p, ul, ol, blockquote) {
     widows: 3;
   }
 
@@ -292,6 +293,9 @@ hr.slash {
     /* font-sizeとindentが一致していないと禁則処理が乱れるように見える */
     @apply tw-mlb-4 tw-indent-[1em] tw-text-lg tw-leading-8;
     text-wrap: pretty;
+  }
+
+  p, ul, ol, blockquote {
     /* minimum lines in column */
     orphans: 3;
   }
@@ -438,7 +442,38 @@ hr.slash {
     inline-size: 65%;
     margin-inline: auto;
   }
+
+  .embeddedLinkScope {
+    /* 打ち消したいものだけここに定義 */
+    h3 {
+      @apply tw-text-lg tw-mlb-2;
+    }
+    p {
+      @apply tw-text-base tw-mlb-2;
+    }
+
+    &:any-link {
+      color: #233;
+      text-decoration: none;
+    }
+
+    &:visited {
+      color: #233;
+    }
+
+    &,
+    &:visited {
+      &:active,
+      &:hover {
+        transition:
+          color 0.2s,
+          text-decoration 0.2s;
+        @apply tw-text-keyColor-600;
+      }
+    }
+  }
 }
+
 
 .articleContentWrapper {
   overflow-wrap: anywhere;
