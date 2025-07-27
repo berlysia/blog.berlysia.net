@@ -156,3 +156,6 @@ public/~partytown
 app/seeds/.tmp
 .wrangler
 ./functions
+
+# OG data cache
+og-cache.json
