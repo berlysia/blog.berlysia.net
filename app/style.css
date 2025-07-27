@@ -444,6 +444,8 @@ hr.slash {
   }
 
   .embeddedLinkScope {
+    break-inside: avoid;
+
     /* 打ち消したいものだけここに定義 */
     h3 {
       @apply tw-text-lg tw-mlb-2;
