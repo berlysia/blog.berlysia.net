@@ -1,3 +1,4 @@
+import path from "node:path";
 import type { PageMeta } from "#lib/ogDataFetcher";
 
 export type OGCacheEntry = {
@@ -17,8 +18,8 @@ export class OGCache {
 
   async load(): Promise<void> {
     // Only available on server-side
-    if (typeof window !== 'undefined') return;
-    
+    if (typeof window !== "undefined") return;
+
     try {
       const { readFile } = await import("node:fs/promises");
       const content = await readFile(CACHE_FILE_PATH, "utf8");
@@ -31,12 +32,11 @@ export class OGCache {
 
   async save(): Promise<void> {
     // Only available on server-side
-    if (typeof window !== 'undefined') return;
-    
+    if (typeof window !== "undefined") return;
+
     try {
       const { writeFile, mkdir } = await import("node:fs/promises");
-      const { dirname } = await import("node:path");
-      await mkdir(dirname(CACHE_FILE_PATH), { recursive: true });
+      await mkdir(path.dirname(CACHE_FILE_PATH), { recursive: true });
       await writeFile(CACHE_FILE_PATH, JSON.stringify(this.cache, null, 2));
     } catch (error) {
       console.error("Failed to save OG cache:", error);
