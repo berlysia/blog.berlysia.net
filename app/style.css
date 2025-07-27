@@ -147,7 +147,8 @@ hr.slash {
     @apply tw-text-4xl tw-border-be tw-border-is-2 tw-border-keyColor-200 tw-mbs-6 tw-mbe-2;
     counter-reset: h2 h3 h4 h5 h6;
     counter-increment: h1;
-    break-before: column;
+    break-after: avoid-column;
+    margin-block-start: 4rem;
 
     > a::before {
       content: counter(h1) ". ";
@@ -158,6 +159,8 @@ hr.slash {
     @apply tw-text-3xl tw-border-be tw-border-is tw-border-keyColor-200 tw-mbs-4 tw-mbe-2;
     counter-reset: h3 h4 h5 h6;
     counter-increment: h2;
+    break-after: avoid-column;
+    margin-block-start: 2rem;
 
     > a::before {
       content: counter(h1) "." counter(h2) ". ";
@@ -168,6 +171,7 @@ hr.slash {
     @apply tw-text-2xl tw-border-be tw-border-keyColor-200 tw-mbs-3 tw-mbe-2;
     counter-reset: h4 h5 h6;
     counter-increment: h3;
+    break-after: avoid-column;
 
     > a::before {
       content: counter(h1) "." counter(h2) "." counter(h3) ". ";
@@ -178,6 +182,7 @@ hr.slash {
     @apply tw-text-xl tw-mbs-3 tw-mbe-2 tw-text-gray-800;
     counter-reset: h5 h6;
     counter-increment: h4;
+    break-after: avoid-column;
 
     > a::before {
       content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". ";
@@ -188,6 +193,7 @@ hr.slash {
     @apply tw-text-lg tw-mbs-2 tw-mbe-2 tw-text-gray-800;
     counter-reset: h6;
     counter-increment: h5;
+    break-after: avoid-column;
 
     > a::before {
       content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "."
@@ -198,6 +204,7 @@ hr.slash {
   h6 {
     @apply tw-text-lg tw-mbs-1 tw-mbe-1 tw-text-gray-800;
     counter-increment: h6;
+    break-after: avoid-column;
 
     > a::before {
       content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "."
@@ -277,10 +284,16 @@ hr.slash {
     }
   }
 
+  :where(h1, h2, h3, h4, h5, h6) + p {
+    widows: 3;
+  }
+
   p {
     /* font-sizeとindentが一致していないと禁則処理が乱れるように見える */
     @apply tw-mlb-4 tw-indent-[1em] tw-text-lg tw-leading-8;
     text-wrap: pretty;
+    /* minimum lines in column */
+    orphans: 3;
   }
 
   td,
