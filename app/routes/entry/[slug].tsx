@@ -6,7 +6,7 @@ import { createRoute } from "honox/factory";
 import Image from "#islands/Image";
 import type { NotFoundHandler } from "hono";
 import { SITE_BLOG_URL } from "#constant";
-import EmbeddedLink from "#islands/EmbededLink";
+import EmbeddedLink from "#components/EmbededLink";
 import ViewerModeProvider from "#islands/ViewerModeProvider";
 import Tweet from "#islands/Tweet";
 import { wrapResult } from "../../lib/wrapResult";
