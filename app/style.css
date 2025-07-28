@@ -4,6 +4,10 @@
 
 @tailwind utilities;
 
+:root {
+  --marker-thickness: 0.5em;
+}
+
 html {
   min-height: 100vh;
   overflow-y: scroll;
@@ -251,37 +255,13 @@ hr.slash {
   }
 
   strong {
-    .horizontal & {
-      background: linear-gradient(
-        transparent 70%,
-        rgb(254 202 202) /* bg-red-200 */ 0%
-      );
-    }
-    .vertical & {
-      @apply vertical-tooltip;
-      background: linear-gradient(
-        to left,
-        transparent 70%,
-        rgb(254 202 202) /* bg-red-200 */ 0%
-      );
-    }
+    text-decoration: underline rgb(254 202 202) /* bg-red-200 */ var(--marker-thickness);
+    text-underline-offset: calc(-1 * var(--marker-thickness));
   }
 
   em {
-    .horizontal & {
-      background: linear-gradient(
-        transparent 70%,
-        rgb(186 230 253) /* bg-sky-200 */ 0%
-      );
-    }
-    .vertical & {
-      @apply vertical-tooltip;
-      background: linear-gradient(
-        to left,
-        transparent 70%,
-        rgb(186 230 253) /* bg-sky-200 */ 0%
-      );
-    }
+    text-decoration: underline rgb(186 230 253) /* bg-sky-200 */ var(--marker-thickness);
+    text-underline-offset: calc(-1 * var(--marker-thickness));
   }
 
   /* p以外に効いてなさそう */
