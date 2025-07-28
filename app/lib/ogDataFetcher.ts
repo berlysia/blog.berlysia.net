@@ -1,5 +1,6 @@
 import * as cheerio from "cheerio";
-import tryCatch from "#lib/tryCatch";
+import { createErr, createOk } from "./Result";
+import type { Result } from "./Result";
 
 export type PageMeta = {
   title?: string;
@@ -47,41 +48,24 @@ async function parseOGData(html: string): Promise<PageMeta> {
   return results;
 }
 
-export async function fetchOGData(url: string): Promise<
-  | {
-      ok: true;
-      data: PageMeta;
-    }
-  | {
-      ok: false;
-      error: string;
-    }
-> {
-  const urlResult = tryCatch(() => new URL(url));
-  if (urlResult.ok === false) {
-    return {
-      ok: false,
-      error: `Invalid URL: ${url}`,
-    };
+export async function fetchOGData(
+  url: string
+): Promise<Result<PageMeta, string>> {
+  if (!URL.canParse(url)) {
+    return createErr(`Invalid URL: ${url}`);
   }
 
   try {
     const resp = await fetch(url);
 
     if (!resp.ok) {
-      return {
-        ok: false,
-        error: `HTTP ${resp.status}: ${resp.statusText}`,
-      };
+      return createErr(`HTTP ${resp.status}: ${resp.statusText}`);
     }
 
     const html = await resp.text();
     const data = await parseOGData(html);
-    return { ok: true, data };
+    return createOk(data);
   } catch (error) {
-    return {
-      ok: false,
-      error: String(error),
-    };
+    return createErr(String(error));
   }
 }

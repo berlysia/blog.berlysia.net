@@ -1,16 +1,11 @@
-export default function tryCatch<T>(
-  fn: () => T
-): { ok: true; value: T } | { ok: false; error: Error } {
+import type { Result } from "./Result";
+import { createOk, createErr } from "./Result";
+
+export default function tryCatch<T>(fn: () => T): Result<T, Error> {
   try {
     const value = fn();
-    return {
-      ok: true,
-      value,
-    };
+    return createOk(value);
   } catch (error) {
-    return {
-      ok: false,
-      error,
-    };
+    return createErr(error);
   }
 }
