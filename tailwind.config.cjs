@@ -69,15 +69,6 @@ module.exports = {
         ".line-break-normal": {
           lineBreak: "normal",
         },
-        ".column-fill-auto": {
-          columnFill: "auto",
-        },
-        ".column-rule-size-1": {
-          columnRuleWidth: "1px",
-        },
-        ".column-rule-style-solid": {
-          columnRuleStyle: "solid",
-        },
         ...Object.fromEntries(
           Object.keys(theme("colors.keyColor")).map((key) => {
             return [
