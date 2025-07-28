@@ -1,4 +1,4 @@
-import * as cheerio from 'cheerio';
+import * as cheerio from "cheerio";
 import tryCatch from "#lib/tryCatch";
 
 export type PageMeta = {
@@ -13,31 +13,33 @@ async function parseOGData(html: string): Promise<PageMeta> {
   const results: PageMeta = {};
 
   // Try to get og:title
-  const ogTitle = $('meta[property="og:title"]').attr('content');
+  const ogTitle = $('meta[property="og:title"]').attr("content");
   if (ogTitle) {
     results.title = ogTitle;
   } else {
     // Fallback to regular title
-    const title = $('title').text();
+    const title = $("title").text();
     if (title) {
       results.title = title;
     }
   }
 
   // Try to get og:description
-  const ogDescription = $('meta[property="og:description"]').attr('content');
+  const ogDescription = $('meta[property="og:description"]').attr("content");
   if (ogDescription) {
     results.description = ogDescription;
   }
 
   // Try to get og:image
-  const ogImage = $('meta[property="og:image"]').attr('content');
+  const ogImage = $('meta[property="og:image"]').attr("content");
   if (ogImage) {
     results.image = ogImage;
   }
 
   // Try to get favicon
-  const favicon = $('link[rel="icon"]').attr('href') || $('link[rel="shortcut icon"]').attr('href');
+  const favicon =
+    $('link[rel="icon"]').attr("href") ||
+    $('link[rel="shortcut icon"]').attr("href");
   if (favicon) {
     results.favicon = favicon;
   }
@@ -45,13 +47,16 @@ async function parseOGData(html: string): Promise<PageMeta> {
   return results;
 }
 
-export async function fetchOGData(url: string): Promise<{
-  ok: true;
-  data: PageMeta;
-} | {
-  ok: false;
-  error: string;
-}> {
+export async function fetchOGData(url: string): Promise<
+  | {
+      ok: true;
+      data: PageMeta;
+    }
+  | {
+      ok: false;
+      error: string;
+    }
+> {
   const urlResult = tryCatch(() => new URL(url));
   if (urlResult.ok === false) {
     return {

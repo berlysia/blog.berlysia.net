@@ -7,6 +7,7 @@
   "include": [
     "app/seeds/feeds.json",
     "app/seeds/**/*.ts",
-    "app/lib/mdx/processForSeed.ts"
+    "app/lib/mdx/processForSeed.ts",
+    "scripts/**/*.ts"
   ]
 }

@@ -1,5 +1,5 @@
-import { useViewerModeValue  } from "#lib/viewerMode";
-import type {ViewerMode} from "#lib/viewerMode";
+import { useViewerModeValue } from "#lib/viewerMode";
+import type { ViewerMode } from "#lib/viewerMode";
 import { ogCache } from "#lib/ogCache";
 import type { PageMeta } from "#lib/ogDataFetcher";
 
@@ -22,11 +22,11 @@ function trimUrlForView(urlStr: string): string {
   }
 }
 
-function StaticOGCard({ 
-  src, 
-  ogData, 
-  viewerMode 
-}: { 
+function StaticOGCard({
+  src,
+  ogData,
+  viewerMode,
+}: {
   readonly src: string;
   readonly ogData: PageMeta;
   readonly viewerMode: ViewerMode;
@@ -38,8 +38,12 @@ function StaticOGCard({
       rel="noopener noreferrer"
       className="embeddedLinkScope tw-block tw-mlb-2"
     >
-      <div className={`tw-border-keyColor-400 tw-border tw-rounded-lg tw-is-full tw-p-2 ${viewerMode}`}>
-        <div className={`tw-grid tw-gap-4 ${ogData.image ? 'tw-grid-cols-[8rem_1fr]' : 'tw-grid-cols-1'}`}>
+      <div
+        className={`tw-border-keyColor-400 tw-border tw-rounded-lg tw-is-full tw-p-2 ${viewerMode}`}
+      >
+        <div
+          className={`tw-grid tw-gap-4 ${ogData.image ? "tw-grid-cols-[8rem_1fr]" : "tw-grid-cols-1"}`}
+        >
           {ogData.image && (
             <img
               src={ogData.image}
@@ -93,7 +97,7 @@ function FallbackCard({ src }: { readonly src: string }) {
 
 export default function EmbeddedLink({ src }: { readonly src: string }) {
   const ogData = ogCache.get(src);
-  
+
   if (ogData) {
     return <StaticOGCard src={src} ogData={ogData} viewerMode="horizontal" />;
   }
