@@ -1,6 +1,7 @@
 import { useViewerModeValue } from "#lib/viewerMode";
 import clsx from "clsx";
-import { useRef, useSyncExternalStore } from "hono/jsx";
+import { useRef } from "hono/jsx";
+import { useMediaQuery } from "../lib/useMediaQuery";
 
 type Props = {
   readonly src: string;
@@ -13,24 +14,6 @@ type Props = {
 
 const placeholder =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQYV2NgAAIAAAUAAarVyFEAAAAASUVORK5CYII=";
-
-// TODO: useViewerModeValueに埋め込む
-function useMediaQuery(query: string, defaultValue = false) {
-  const mediaQuery =
-    typeof window === "undefined" ? null : window.matchMedia(query);
-
-  return useSyncExternalStore(
-    (notify) => {
-      const cb = () => notify;
-      mediaQuery?.addEventListener("change", cb);
-      return () => {
-        mediaQuery?.removeEventListener("change", cb);
-      };
-    },
-    () => mediaQuery?.matches,
-    () => defaultValue
-  );
-}
 
 const Image = ({
   src,

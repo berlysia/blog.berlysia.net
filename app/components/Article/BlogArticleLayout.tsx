@@ -1,11 +1,11 @@
 import WritingModeSwitcher from "#islands/WritingModeSwitcher";
 import ViewerSettings from "#islands/ViewerSettings";
 import type { PropsWithChildren } from "hono/jsx";
-import ArticleSentinel from "#islands/ArticleSentinel";
+import ArticleWithSentinel from "#islands/ArticleWithSentinel";
 import ViewerSettingsProvider from "#islands/ViewerSettingsProvider";
 import clsx from "clsx";
 import Footer from "#components/Footer";
-import { NotInVertical, OnlyVertical } from "#components/OnlyViewMode";
+import { NotInHorizontal, OnlyHorizontal } from "#components/OnlyViewMode";
 import TextCombineUprightDigits from "#lib/TextCombineUprightDigits";
 import type { Frontmatter } from "../../lib/mdx/utils";
 import Header from "../Header";
@@ -14,7 +14,6 @@ type Properties = PropsWithChildren<{
   readonly frontmatter: Frontmatter;
 }>;
 
-const articleId = "blog-article-content";
 const articleRootId = "blog-article-root";
 
 const footer = (
@@ -32,7 +31,7 @@ export default function BlogArticleLayout({
       <div
         id="blog-article-root"
         className={clsx({
-          vertical: frontmatter.preferVertical,
+          "vertical-multicol": frontmatter.preferVertical,
           horizontal: !frontmatter.preferVertical,
         })}
       >
@@ -54,68 +53,66 @@ export default function BlogArticleLayout({
         <div className="articleWrapper">
           <div className="contentAreaRestricter tw-w-full tw-relative">
             <article className="article">
-              <ArticleSentinel className="articleContentWrapper">
-                <div className="articleContent">
-                  <div>
-                    <h1 className="tw-text-4xl tw-font-bold tw-mbs-4">
-                      <TextCombineUprightDigits text={frontmatter.title} />
-                    </h1>
-                    {frontmatter.publishedAt && (
-                      <aside>
-                        <span>
-                          Published at: <time>{frontmatter.publishedAt}</time>
-                        </span>
-                        {frontmatter.lastModified &&
-                          frontmatter.lastModified !==
-                            frontmatter.publishedAt && (
-                            <span className="tw-mis-2">
-                              Last modified:{" "}
-                              <time>{frontmatter.lastModified}</time>
-                            </span>
-                          )}
-                      </aside>
-                    )}
-                    {frontmatter.description && (
-                      <aside>
-                        <TextCombineUprightDigits
-                          text={frontmatter.description}
-                        />
-                      </aside>
-                    )}
-                    {frontmatter.tags && (
-                      <ul className="tw-flex tw-flex-row tw-gap-1 tw-mli-1">
-                        {frontmatter.tags.map((x, index) => (
-                          <li
-                            key={index}
-                            className="tw-pli-1 tw-border tw-border-keyColor-100 tw-rounded-md"
-                          >
-                            <TextCombineUprightDigits text={x} />
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                  <div className="tw-flex tw-justify-center tw-mlb-6">
-                    <hr className="tw-bs-40 tw-border-0 slash" />
-                  </div>
-                  <section className="main-text-section">{children}</section>
-                  <OnlyVertical>
-                    <div className="tw-flex tw-justify-center tw-mlb-6">
-                      <hr className="tw-bs-40 tw-border-0 slash" />
-                    </div>
-                    {footer}
-                  </OnlyVertical>
+              <ArticleWithSentinel>
+                <div>
+                  <h1 className="tw-text-4xl tw-font-bold tw-mbs-4">
+                    <TextCombineUprightDigits text={frontmatter.title} />
+                  </h1>
+                  {frontmatter.publishedAt && (
+                    <aside>
+                      <span>
+                        Published at: <time>{frontmatter.publishedAt}</time>
+                      </span>
+                      {frontmatter.lastModified &&
+                        frontmatter.lastModified !==
+                          frontmatter.publishedAt && (
+                          <span className="tw-mis-2">
+                            Last modified:{" "}
+                            <time>{frontmatter.lastModified}</time>
+                          </span>
+                        )}
+                    </aside>
+                  )}
+                  {frontmatter.description && (
+                    <aside>
+                      <TextCombineUprightDigits
+                        text={frontmatter.description}
+                      />
+                    </aside>
+                  )}
+                  {frontmatter.tags && (
+                    <ul className="tw-flex tw-flex-row tw-gap-1 tw-mli-1">
+                      {frontmatter.tags.map((x, index) => (
+                        <li
+                          key={index}
+                          className="tw-pli-1 tw-border tw-border-keyColor-100 tw-rounded-md"
+                        >
+                          <TextCombineUprightDigits text={x} />
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-              </ArticleSentinel>
-              <NotInVertical>
                 <div className="tw-flex tw-justify-center tw-mlb-6">
                   <hr className="tw-bs-40 tw-border-0 slash" />
                 </div>
-              </NotInVertical>
+                <section className="main-text-section">{children}</section>
+                <NotInHorizontal>
+                  <div className="tw-flex tw-justify-center tw-mlb-6">
+                    <hr className="tw-bs-40 tw-border-0 slash" />
+                  </div>
+                  {footer}
+                </NotInHorizontal>
+              </ArticleWithSentinel>
+              <OnlyHorizontal>
+                <div className="tw-flex tw-justify-center tw-mlb-6">
+                  <hr className="tw-bs-40 tw-border-0 slash" />
+                </div>
+              </OnlyHorizontal>
             </article>
           </div>
         </div>
-        <NotInVertical>{footer}</NotInVertical>
+        <OnlyHorizontal>{footer}</OnlyHorizontal>
       </div>
     </ViewerSettingsProvider>
   );

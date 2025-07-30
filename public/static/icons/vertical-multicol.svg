@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- 上段の縦書きブロック -->
+  <rect fill="currentColor" x="50" y="4"  width="6" height="24"/>
+  <rect fill="currentColor" x="29" y="4"  width="6" height="24"/>
+  <rect fill="currentColor" x="8"  y="4"  width="6" height="24"/>
+  <!-- 下段の縦書きブロック -->
+  <rect fill="currentColor" x="50" y="36" width="6" height="24"/>
+  <rect fill="currentColor" x="29" y="36" width="6" height="24"/>
+  <rect fill="currentColor" x="8"  y="36" width="6" height="24"/>
+</svg>

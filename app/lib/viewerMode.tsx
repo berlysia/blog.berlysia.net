@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from "hono/jsx";
 
-export type ViewerMode = "horizontal" | "vertical" | "vertical-columns";
+export type ViewerMode = "horizontal" | "vertical" | "vertical-multicol";
 
 export const ViewerModeContext = createContext<ViewerMode>("horizontal");
 export const SetViewerModeContext = createContext<(_: ViewerMode) => void>(
@@ -15,7 +15,7 @@ export function useViewerModeValue() {
       viewerMode: viewerMode ?? "horizontal",
       isVertical: viewerMode === "vertical",
       isHorizontal: viewerMode === "horizontal",
-      isVerticalColumns: viewerMode === "vertical-columns",
+      isVerticalColumns: viewerMode === "vertical-multicol",
     }),
     [viewerMode]
   );
@@ -30,7 +30,7 @@ export function useViewerMode() {
       ...viewerMode,
       setVertical: () => setViewerMode("vertical"),
       setHorizontal: () => setViewerMode("horizontal"),
-      setVerticalColumns: () => setViewerMode("vertical-columns"),
+      setVerticalColumns: () => setViewerMode("vertical-multicol"),
     }),
     [setViewerMode, viewerMode]
   );

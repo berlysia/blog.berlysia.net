@@ -2,13 +2,8 @@ import type { PropsWithChildren } from "hono/jsx";
 import { useLayoutEffect, useCallback, useRef } from "hono/jsx";
 import { useViewerModeValue } from "../lib/viewerMode";
 
-export default function ArticleSentinel({
-  className,
-  children,
-}: PropsWithChildren<{
-  readonly className?: string;
-}>) {
-  const { isVertical, isHorizontal } = useViewerModeValue();
+export default function ArticleWithSentinel({ children }: PropsWithChildren) {
+  const { isVertical, isVerticalColumns, isHorizontal } = useViewerModeValue();
   const sentinelRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -26,17 +21,19 @@ export default function ArticleSentinel({
     const articleEl = containerRef.current;
     const sentinelEl = sentinelRef.current;
     if (articleEl && sentinelEl) {
-      if (
-        isVertical &&
-        window.matchMedia("(640px <= width) and (600px <= height)" /* sm */)
-          .matches
-      ) {
+      if (isVerticalColumns) {
         const box = sentinelEl.getBoundingClientRect();
         const currentValue = articleEl.getBoundingClientRect().height;
+        console.log(
+          `sentinel position: ${box.bottom}, current article height: ${currentValue}`
+        );
         const HEADER_HEIGHT = 40;
         const ARTICLE_TOP_PADDING = 16;
         // column-sizeの値と対応づける
-        const COLUMN_TARGET_SIZE = window.innerHeight * 0.5;
+        const COLUMN_TARGET_SIZE = Math.max(
+          320,
+          Math.min(480, window.innerHeight * 0.5)
+        );
         const COLUMN_GAP = 32;
         const COLUMN_UNIT = COLUMN_TARGET_SIZE + COLUMN_GAP;
         const targetValue =
@@ -65,12 +62,12 @@ export default function ArticleSentinel({
           articleEl.style.height = `${idealHeight}px`;
         }
       } else if (isVertical) {
-        articleEl.style.height = "calc(100dvh - 40px)";
+        articleEl.style.height = "100%";
       } else if (isHorizontal) {
         articleEl.style.height = "auto";
       }
     }
-  }, [isHorizontal, isVertical]);
+  }, [isHorizontal, isVertical, isVerticalColumns]);
 
   // articleRefのリサイズを監視して、リサイズが発生したらhandleResizeを実行する
   useLayoutEffect(() => {
@@ -95,9 +92,11 @@ export default function ArticleSentinel({
   }, [handleResize]);
 
   return (
-    <div ref={containerRef} className={className}>
-      {children}
-      <div ref={sentinelRef}></div>
+    <div ref={containerRef} className="articleContentWrapper">
+      <div className="articleContent">
+        {children}
+        <div ref={sentinelRef}></div>
+      </div>
     </div>
   );
 }

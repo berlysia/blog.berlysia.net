@@ -39,7 +39,7 @@ export default createRoute(
     return c.render(
       <ViewerModeProvider
         defaultViewerMode={
-          frontmatter.preferVertical ? "vertical" : "horizontal"
+          frontmatter.preferVertical ? "vertical-multicol" : "horizontal"
         }
       >
         <BlogArticleLayout frontmatter={frontmatter}>

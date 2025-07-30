@@ -30,12 +30,14 @@ html {
 }
 
 html:has(.vertical) {
-  @media (640px <= width) and (600px <= height) {
-    @apply tw-overflow-y-visible;
-  }
-  @media (width < 640px), (height < 600px) {
-    @apply tw-overflow-y-hidden;
-  }
+  @apply tw-overflow-y-hidden;
+
+  min-height: 100svh;
+  height: 100%;
+}
+
+html:has(.vertical-multicol) {
+  @apply tw-overflow-y-visible;
 
   min-height: 100svh;
   height: 100%;
@@ -45,12 +47,12 @@ body {
   min-height: 100vh;
 }
 
-body:has(.vertical) {
+body:has(.vertical), body:has(.vertical-multicol) {
   min-height: 100svh;
   height: 100%;
 }
 
-.vertical {
+.vertical, .vertical-multicol {
   /*
   これをつけないと、Safariで横スクロールがおきてしまう
   ページ全体のwidthが本文部分を横に伸ばしたときと同じだけの幅を持ってしまう
@@ -71,14 +73,6 @@ hr.slash {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="3px" height="3px" viewBox="0 0 3 3" fill="rgb(249 168 212)"><polygon points="0,0.5 0,1.5 1.5,3 2.5,3"/><polygon points="2.5,0 1.5,0 3,1.5 3,0.5"/></svg>');
   background-size: 3px 3px;
   inline-size: 65%;
-}
-
-/* .verticalクラスが祖先についているときだけ表示する */
-.vertical-only {
-  display: none;
-  .vertical & {
-    display: revert;
-  }
 }
 
 .vertical-tooltip {
@@ -252,20 +246,21 @@ hr.slash {
   }
 
   blockquote {
-    @apply tw-plb-2 tw-pis-4 tw-mlb-2 tw-border-is-8 tw-border-be tw-border-keyColor-300 tw-bg-keyColor-50 tw-text-gray-600;
+    @apply tw-plb-2 tw-pis-4 tw-pie-2 tw-mlb-2 tw-border-is-8 tw-border-be tw-border-keyColor-300 tw-bg-keyColor-50 tw-text-gray-600;
   }
 
   strong {
     text-decoration: underline solid rgb(254 202 202) /* bg-red-200 */;
     text-decoration-thickness: var(--marker-thickness); /* Safari does not support this props including in shorthand */
+    text-decoration-skip-ink: none;
     text-underline-offset: calc(-1 * var(--marker-thickness));
   }
 
   em {
     text-decoration: underline solid rgb(186 230 253) /* bg-sky-200 */;
     text-decoration-thickness: var(--marker-thickness); /* Safari does not support this props including in shorthand */
-    text-underline-offset: calc(-1 * var(--marker-thickness));
     text-decoration-skip-ink: none;
+    text-underline-offset: calc(-1 * var(--marker-thickness));
   }
 
   p {
@@ -302,38 +297,36 @@ hr.slash {
 
   pre:has(code) {
     @apply tw-writing-horizontal-tb tw-relative tw-flex tw-flex-col tw-justify-center tw-items-center;
-    .vertical & {
-      @apply tw-h-full;
 
-      @media (640px <= width) and (600px <= height) {
-        :not(:where(figure)) & {
-          width: min(calc(100% - 32px), 1024px);
-        }
-        break-before: always;
-        break-before: column;
-        break-after: always;
-        break-after: column;
-        break-inside: avoid;
+    .horizontal :not(figure) & > code {
+      max-width: min(max(calc(100% - 4rem), 85vw), calc(1024px - 4rem));
+    }
+
+    .vertical & {
+      @apply tw-h-full tw-max-h-full;
+
+      & > code {
+        word-break: break-all;
+        @apply tw-max-w-[90vw];
       }
     }
 
-    > code {
-      overflow-x: auto;
+    .vertical-multicol & {
+      @apply tw-h-full;
 
-      .horizontal :not(:where(figure)) & {
-        width: fit-content;
-        max-width: min(max(calc(100% - 4rem), 85vw), calc(1024px - 4rem));
-      }
+      overflow: auto;
+      break-inside: avoid;
 
-      .vertical & {
-        @media (640px <= width) and (600px <= height) {
-          width: calc(100% - 4rem);
-          @apply tw-max-h-[50vh] tw-max-h-[50svh];
-        }
-        @media (width < 640px), (height < 600px) {
-          @apply tw-w-[90vw] tw-max-w-[90vw];
-        }
+      & > code {
+        word-break: break-all;
+        max-height: 50vh;
+        max-height: 50svh;
+        max-width: 90vw;
       }
+    }
+
+    .vertical-multicol :not(figure) & {
+      width: min(calc(100% - 32px), 1024px);
     }
   }
 
@@ -358,21 +351,23 @@ hr.slash {
 
     .vertical & {
       @apply tw-h-full;
+    }
 
-      @media (640px <= width) and (600px <= height) {
-        &.full-width {
-          width: min(calc(100vw - 32px), 1024px);
-          min-width: min(calc(100vw - 32px), 1024px);
-          break-before: always;
-          break-before: column;
-          break-after: always;
-          break-after: column;
-          break-inside: avoid;
-        }
-        &:not(.full-width) {
-          width: min(calc(100vw - 32px), 600px);
-          min-width: min(calc(100vw - 32px), 600px);
-        }
+    .vertical-multicol & {
+      @apply tw-h-full;
+
+      &.full-width {
+        width: min(calc(100vw - 32px), 1024px);
+        min-width: min(calc(100vw - 32px), 1024px);
+        break-before: always;
+        break-before: column;
+        break-after: always;
+        break-after: column;
+        break-inside: avoid;
+      }
+      &:not(.full-width) {
+        width: min(calc(100vw - 32px), 600px);
+        min-width: min(calc(100vw - 32px), 600px);
       }
     }
 
@@ -382,11 +377,13 @@ hr.slash {
         max-width: min(max(calc(100% - 4rem), 85vw), calc(1024px - 4rem));
       }
 
+      .vertical-multicol & {
+        width: calc(100% - 4rem);
+        max-height: 50vh;
+        max-height: 50svh;
+      }
+
       .vertical & {
-        @media (640px <= width) and (600px <= height) {
-          width: calc(100% - 4rem);
-          @apply tw-max-h-[50vh] tw-max-h-[50svh];
-        }
         @media (width < 640px) {
           @apply tw-w-[90vw] tw-max-w-[90vw] tw-max-h-[90vh];
         }
@@ -461,55 +458,58 @@ hr.slash {
   }
 
   .vertical & {
-    @media (640px <= width) and (600px <= height) {
-      @apply tw-py-4 tw-mx-auto tw-writing-vertical-rl tw-w-full tw-overflow-x-visible tw-h-max tw-relative tw-box-content;
-      @apply tw-column-rule-color-keyColor-200 tw-gap-8;
-      max-width: calc(100vw - 32px);
-
-      /* ArticleSentinelの処理と対応している */
-      columns: 50vh; /* fallback */
-      columns: 50svh;
-      column-fill: auto;
-      column-rule-width: 1px;
-      column-rule-style: solid;
-
-      orphans: 4;
-      widows: 4;
-    }
-    @media (width < 640px), (height < 600px) {
-      @apply tw-py-4 tw-px-2;
-      @apply tw-writing-vertical-rl tw-w-[100vw] tw-overflow-x-scroll tw-h-full tw-line-break-strict;
-    }
+    @apply tw-py-4 tw-px-2;
+    @apply tw-writing-vertical-rl tw-h-full tw-line-break-strict;
   }
-}
 
-.contentAreaRestricter {
-  @apply tw-max-w-screen-lg;
-  .vertical & {
-    @media (width < 640px), (height < 600px) {
-      max-width: unset;
-    }
+  .vertical-multicol & {
+    @apply tw-pt-4 tw-pb-12 tw-mx-auto tw-writing-vertical-rl tw-w-full tw-overflow-x-visible tw-h-max tw-relative tw-box-content;
+    @apply tw-column-rule-color-keyColor-200 tw-gap-8;
+    max-width: calc(100vw - 32px);
+
+    column-width: max(320px, min(480px, 50vh));
+    column-fill: auto;
+    column-rule-width: 1px;
+    column-rule-style: solid;
+
+    orphans: 4;
+    widows: 4;
   }
 }
 
 .articleWrapper {
   @apply tw-w-full tw-flex tw-justify-center;
 
-  :where(.vertical) & {
+  .vertical &, .vertical-multicol & {
     font-weight: 400;
     font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic Medium",
       "游ゴシック Medium", YuGothic, "游ゴシック体", "Zen Kaku Gothic New",
       "Noto Sans JP", Meiryo, sans-serif;
-
-    @media (640px <= width) and (600px <= height) {
-      @apply tw-h-auto tw-w-full tw-max-w-full tw-relative tw-box-content;
-    }
-    @media (width < 640px), (height < 600px) {
-      height: calc(100vh - 2.5rem);
-      height: calc(100svh - 2.5rem);
-      overflow-x: auto;
-    }
   }
+
+  .vertical-multicol & {
+    @apply tw-h-auto tw-w-full tw-max-w-full tw-relative tw-box-content;
+  }
+
+  .vertical & {
+    writing-mode: vertical-rl;
+    height: calc(100vh - 2.5rem);
+    height: calc(100svh - 2.5rem);
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}
+
+.contentAreaRestricter {
+  @apply tw-max-w-screen-lg;
+  .vertical & {
+    @apply tw-h-full;
+    max-width: unset;
+  }
+}
+
+.vertical .article {
+  @apply tw-h-full;
 }
 
 @media (width < 640px), (height < 600px) {
@@ -520,40 +520,20 @@ hr.slash {
 
 .only-vertical,
 .only-horizontal,
-.only-vertical-column {
+.only-vertical-multicol {
   display: none;
 }
 
-.horizontal .only-horizontal {
+.horizontal .only-horizontal,
+.vertical .only-vertical,
+.vertical-multicol .only-vertical-multicol {
   display: revert;
 }
 
-@media (width < 640px), (height < 600px) {
-  .vertical .only-vertical {
-    display: revert;
-  }
-}
-
-@media (640px <= width) and (600px <= height) {
-  .vertical .only-vertical-column {
-    display: revert;
-  }
-}
-
-.horizontal .not-in-horizontal {
+.horizontal .not-in-horizontal,
+.vertical .not-in-vertical,
+.vertical-multicol .not-in-vertical-column {
   display: none;
-}
-
-@media (width < 640px), (height < 600px) {
-  .vertical .not-in-vertical {
-    display: none;
-  }
-}
-
-@media (640px <= width) and (600px <= height) {
-  .vertical .not-in-vertical-column {
-    display: none;
-  }
 }
 
 .not-in-vertical,
@@ -563,7 +543,7 @@ hr.slash {
 }
 
 .tcu-digits {
-  .vertical & {
+  .vertical &, .vertical-multicol & {
     text-combine-upright: all;
   }
 }
@@ -613,7 +593,7 @@ body.use-text-decoration-workaround .horizontal .main-text-section strong {
 }
 
 /* 縦書き時のマーカー表現（strong要素） */
-body.use-text-decoration-workaround .vertical .main-text-section strong {
+body.use-text-decoration-workaround :is(.vertical, .vertical-multicol) .main-text-section strong {
   background-image: linear-gradient(
     to left,
     transparent 0%,
@@ -640,7 +620,7 @@ body.use-text-decoration-workaround .horizontal .main-text-section em {
 }
 
 /* 縦書き時のマーカー表現（em要素） */
-body.use-text-decoration-workaround .vertical .main-text-section em {
+body.use-text-decoration-workaround :is(.vertical, .vertical-multicol) .main-text-section em {
   background-image: linear-gradient(
     to left,
     transparent 0%,

@@ -9,7 +9,7 @@ export function OnlyHorizontal({ children }: PropsWithChildren) {
 }
 
 export function OnlyVerticalColumn({ children }: PropsWithChildren) {
-  return <div className="only-vertical-column">{children}</div>;
+  return <div className="only-vertical-multicol">{children}</div>;
 }
 
 export function NotInVertical({ children }: PropsWithChildren) {
@@ -21,5 +21,5 @@ export function NotInHorizontal({ children }: PropsWithChildren) {
 }
 
 export function NotInVerticalColumn({ children }: PropsWithChildren) {
-  return <div className="not-in-vertical-column">{children}</div>;
+  return <div className="not-in-vertical-multicol">{children}</div>;
 }

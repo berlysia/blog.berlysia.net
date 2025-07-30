@@ -27,14 +27,14 @@ function renderEmbeddedTweet(
 
 export default function Tweet(props: { readonly id: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const mode = useViewerModeValue();
+  const { isVertical, isVerticalColumns, viewerMode } = useViewerModeValue();
 
   useEffect(() => {
     if (ref.current) {
       // refに直接渡したいがhono/jsxがうまく動かないようだ
       renderEmbeddedTweet(ref.current, props.id, {});
     }
-  }, [props.id, mode.viewerMode]);
+  }, [props.id, viewerMode]);
 
   return (
     <div
@@ -43,7 +43,7 @@ export default function Tweet(props: { readonly id: string }) {
         display: "flex",
         placeContent: "center",
         placeItems: "stretch",
-        ...(mode.viewerMode === "vertical"
+        ...(isVertical || isVerticalColumns
           ? {
               blockSize: "250px" /* Twitterがどうしてもこの寸法で出してくる */,
               overflowY: "hidden",
