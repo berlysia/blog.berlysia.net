@@ -251,12 +251,14 @@ hr.slash {
   }
 
   strong {
-    text-decoration: underline rgb(254 202 202) /* bg-red-200 */ var(--marker-thickness);
+    text-decoration: underline solid rgb(254 202 202) /* bg-red-200 */;
+    text-decoration-thickness: var(--marker-thickness); /* Safari does not support this props including in shorthand */
     text-underline-offset: calc(-1 * var(--marker-thickness));
   }
 
   em {
-    text-decoration: underline rgb(186 230 253) /* bg-sky-200 */ var(--marker-thickness);
+    text-decoration: underline solid rgb(186 230 253) /* bg-sky-200 */;
+    text-decoration-thickness: var(--marker-thickness); /* Safari does not support this props including in shorthand */
     text-underline-offset: calc(-1 * var(--marker-thickness));
   }
 
