@@ -4,6 +4,11 @@
 
 @tailwind utilities;
 
+/* Dialog backdrop styling */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 :root {
   --marker-thickness: 0.5em;
 }
@@ -586,5 +591,78 @@ dialog::backdrop {
     position: static;
   }
   .line-clamp::after{ content: unset; }
+}
+
+/* マーカー表現にtext-decoration-thicknessを使用しない場合の代替実装 */
+body.use-text-decoration-workaround .main-text-section strong {
+  text-decoration: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+/* 横書き時のマーカー表現（strong要素） */
+body.use-text-decoration-workaround .horizontal .main-text-section strong {
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 50%,
+    rgb(254 202 202) 50%
+  );
+}
+
+/* 縦書き時のマーカー表現（strong要素） */
+body.use-text-decoration-workaround .vertical .main-text-section strong {
+  background-image: linear-gradient(
+    to left,
+    transparent 0%,
+    transparent 50%,
+    rgb(254 202 202) 50%
+  );
+}
+
+body.use-text-decoration-workaround .main-text-section em {
+  text-decoration: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+/* 横書き時のマーカー表現（em要素） */
+body.use-text-decoration-workaround .horizontal .main-text-section em {
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 50%,
+    rgb(186 230 253) 50%
+  );
+}
+
+/* 縦書き時のマーカー表現（em要素） */
+body.use-text-decoration-workaround .vertical .main-text-section em {
+  background-image: linear-gradient(
+    to left,
+    transparent 0%,
+    transparent 50%,
+    rgb(186 230 253) 50%
+  );
+}
+
+/* Webkit line-clamp toggle (legacy implementation) */
+body.use-webkit-line-clamp .line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: var(--lines);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  
+  /* Reset custom implementation */
+  line-clamp: unset;
+  line-height: normal;
+  max-block-size: unset;
+  position: static;
+}
+
+body.use-webkit-line-clamp .line-clamp::after {
+  content: unset;
 }
 
