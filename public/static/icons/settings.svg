@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- 中心円（ストローク幅8） -->
+  <circle cx="32" cy="32" r="10" fill="none" stroke="currentColor" stroke-width="8"/>
+  <!-- 歯（8本）、中心から放射状に配置 -->
+  <g fill="currentColor" transform="translate(32 32)">
+    <rect x="-3" y="-26" width="6" height="12"/>
+    <rect x="-3" y="-26" width="6" height="12" transform="rotate(45)"/>
+    <rect x="-3" y="-26" width="6" height="12" transform="rotate(90)"/>
+    <rect x="-3" y="-26" width="6" height="12" transform="rotate(135)"/>
+    <rect x="-3" y="-26" width="6" height="12" transform="rotate(180)"/>
+    <rect x="-3" y="-26" width="6" height="12" transform="rotate(225)"/>
+    <rect x="-3" y="-26" width="6" height="12" transform="rotate(270)"/>
+    <rect x="-3" y="-26" width="6" height="12" transform="rotate(315)"/>
+  </g>
+</svg>
