@@ -563,3 +563,26 @@ hr.slash {
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.75);
 }
+
+.line-clamp{
+  --lines: 2;
+  --lh: 1lh;
+  overflow: hidden;
+
+  /* フォールバック動作 */
+  line-height: var(--lh);
+  max-block-size: calc(var(--lh) * var(--lines));
+  position: relative;
+}
+
+@supports (line-clamp: 2){
+  .line-clamp{
+    line-clamp: var(--lines);
+
+    line-height: normal;
+    max-block-size: none;
+    position: static;
+  }
+  .line-clamp::after{ content: unset; }
+}
+

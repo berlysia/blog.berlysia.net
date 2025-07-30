@@ -52,11 +52,17 @@ function StaticOGCard({
             />
           )}
           <div>
-            <h3 className="tw-font-bold tw-text-xs tw-line-clamp-2 tw-mb-1">
+            <h3
+              className="tw-font-bold tw-text-xs tw-mb-1 line-clamp"
+              style={{ "--lines": "2" }}
+            >
               {ogData.title || "No title"}
             </h3>
             {ogData.description && (
-              <p className="tw-text-gray-600 tw-line-clamp-2 tw-mb-2">
+              <p
+                className="tw-text-gray-600 tw-mb-2 line-clamp"
+                style={{ "--lines": "2" }}
+              >
                 {ogData.description}
               </p>
             )}
