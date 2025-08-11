@@ -472,8 +472,8 @@ hr.slash {
     column-rule-width: 1px;
     column-rule-style: solid;
 
-    orphans: 4;
-    widows: 4;
+    orphans: 3;
+    widows: 2;
   }
 }
 
