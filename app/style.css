@@ -467,7 +467,7 @@ hr.slash {
     @apply tw-column-rule-color-keyColor-200 tw-gap-8;
     max-width: calc(100vw - 32px);
 
-    column-width: max(320px, min(480px, 50vh));
+    column-width: max(320px, min(50vh, 480px));
     column-fill: auto;
     column-rule-width: 1px;
     column-rule-style: solid;
