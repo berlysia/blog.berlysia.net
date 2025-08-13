@@ -16,12 +16,6 @@ type Properties = PropsWithChildren<{
 
 const articleRootId = "blog-article-root";
 
-const footer = (
-  <Footer>
-    <aside>&copy; 2024 - berlysia</aside>
-  </Footer>
-);
-
 export default function BlogArticleLayout({
   frontmatter,
   children,
@@ -101,7 +95,7 @@ export default function BlogArticleLayout({
                   <div className="tw-flex tw-justify-center tw-mlb-6">
                     <hr className="tw-bs-40 tw-border-0 slash" />
                   </div>
-                  {footer}
+                  <Footer />
                 </NotInHorizontal>
               </ArticleWithSentinel>
               <OnlyHorizontal>
@@ -112,7 +106,9 @@ export default function BlogArticleLayout({
             </article>
           </div>
         </div>
-        <OnlyHorizontal>{footer}</OnlyHorizontal>
+        <OnlyHorizontal>
+          <Footer />
+        </OnlyHorizontal>
       </div>
     </ViewerSettingsProvider>
   );
