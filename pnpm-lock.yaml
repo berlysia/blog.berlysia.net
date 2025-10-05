@@ -118,19 +118,19 @@ importers:
         specifier: ^1.26.1
         version: 1.29.2
       '@types/fs-extra':
-        specifier: ^11.0.4
+        specifier: 11.0.4
         version: 11.0.4
       '@types/hast':
-        specifier: ^3.0.4
+        specifier: 3.0.4
         version: 3.0.4
       '@types/mdast':
-        specifier: ^4.0.4
+        specifier: 4.0.4
         version: 4.0.4
       '@types/node':
-        specifier: ^22.10.5
+        specifier: 22.18.6
         version: 22.18.6
       '@types/unist':
-        specifier: ^3.0.3
+        specifier: 3.0.3
         version: 3.0.3
       autoprefixer:
         specifier: ^10.4.20
