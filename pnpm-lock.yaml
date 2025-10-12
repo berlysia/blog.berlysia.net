@@ -142,7 +142,7 @@ importers:
         specifier: ^0.25.0
         version: 0.25.10
       eslint:
-        specifier: ^9.17.0
+        specifier: 9.36.0
         version: 9.36.0(jiti@1.21.7)
       feed:
         specifier: ^4.2.2
@@ -163,7 +163,7 @@ importers:
         specifier: ^8.4.49
         version: 8.5.6
       prettier:
-        specifier: ^3.4.2
+        specifier: 3.6.2
         version: 3.6.2
       tailwindcss:
         specifier: ^3.4.17
