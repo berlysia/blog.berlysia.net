@@ -78,7 +78,7 @@
     "tailwindcss-logical": "^3.0.1",
     "tsx": "^4.19.2",
     "typescript": "5.7.3",
-    "wrangler": "^3.100.0"
+    "wrangler": "^4.0.0"
   },
   "dependencies": {
     "@builder.io/partytown": "^0.10.3",
