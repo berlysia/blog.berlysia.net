@@ -1,7 +1,7 @@
-import { useViewerModeValue } from "#lib/viewerMode";
-import type { ViewerMode } from "#lib/viewerMode";
-import { ogCache } from "#lib/ogCache";
-import type { PageMeta } from "#lib/ogDataFetcher";
+import { useViewerModeValue } from "../lib/viewerMode";
+import type { ViewerMode } from "../lib/viewerMode";
+import { ogCache } from "../lib/ogCache";
+import type { PageMeta } from "../lib/ogDataFetcher";
 
 // Initialize cache on server-side
 if (import.meta.env.SSR) {

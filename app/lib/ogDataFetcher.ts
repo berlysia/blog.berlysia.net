@@ -1,6 +1,6 @@
 import * as cheerio from "cheerio";
-import { createErr, createOk } from "./Result";
-import type { Result } from "./Result";
+import { createErr, createOk } from "./Result.ts";
+import type { Result } from "./Result.ts";
 
 export type PageMeta = {
   title?: string;

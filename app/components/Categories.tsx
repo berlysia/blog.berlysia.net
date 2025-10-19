@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { getLocalArticles } from "#seeds/localReader";
+import { getLocalArticles } from "../seeds/localReader";
 
 const categories = [
   ...new Set(

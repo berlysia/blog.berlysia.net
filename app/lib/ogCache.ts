@@ -1,5 +1,5 @@
 import path from "node:path";
-import type { PageMeta } from "#lib/ogDataFetcher";
+import type { PageMeta } from "./ogDataFetcher.ts";
 
 export type OGCacheEntry = {
   url: string;

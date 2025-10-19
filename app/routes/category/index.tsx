@@ -1,6 +1,6 @@
-import Header from "#components/Header";
-import { SITE_BLOG_NAME } from "#constant";
-import { Categories } from "#components/Categories";
+import Header from "../../components/Header";
+import { SITE_BLOG_NAME } from "../../constant";
+import { Categories } from "../../components/Categories";
 
 export const metadata = {
   title: `categories - ${SITE_BLOG_NAME}`,

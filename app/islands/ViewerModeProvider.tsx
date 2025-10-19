@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "hono/jsx";
 import { useEffect, useLayoutEffect, useState } from "hono/jsx";
-import { useMediaQuery } from "#lib/useMediaQuery";
+import { useMediaQuery } from "../lib/useMediaQuery";
 import type { ViewerMode } from "../lib/viewerMode";
 import { SetViewerModeContext, ViewerModeContext } from "../lib/viewerMode";
 

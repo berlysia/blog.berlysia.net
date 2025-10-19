@@ -15,9 +15,6 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
     ssr: {
       external: ["unified", "@mdx-js/mdx", "satori", "@resvg/resvg-js", "feed"],
     },
-    resolve: {
-      alias: [{ find: /#/, replacement: "/app/" }],
-    },
   };
 
   if (mode === "functions") {
@@ -35,7 +32,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
         ...common.build,
         emptyOutDir: false,
         rollupOptions: {
-          input: ["app/functions/ogrenderer.tsx"],
+          input: [],
           output: {
             entryFileNames(chunkInfo) {
               const entryPathFromRoutesRoot = chunkInfo.facadeModuleId
@@ -78,7 +75,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
     plugins: [
       honox(),
       client({
-        input: ["./app/style.css", "./app/ogviewer.css"],
+        input: ["./app/style.css"],
       }),
     ],
   };

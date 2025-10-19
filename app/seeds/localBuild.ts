@@ -11,12 +11,12 @@ import { ensureDir } from "fs-extra";
 import { toVFile } from "to-vfile";
 import { matter } from "vfile-matter";
 import PQueue from "p-queue";
-import { frontmatterSchema } from "#lib/mdx/utils.js";
-import clean from "./clean.js";
+import { frontmatterSchema } from "../lib/mdx/utils.ts";
+import clean from "./clean.ts";
 
 // eslint-disable-next-line unicorn/prefer-top-level-await -- CJSなので許せ（eslintrcをいじってもよさそうだが）
 (async function main() {
-  const { processMDX } = await import("../lib/mdx/processForSeed.js");
+  const { processMDX } = await import("../lib/mdx/processForSeed.ts");
   const cwd = process.cwd();
   const ARTICLE_PATH = "articles";
   const outDir = path.resolve(cwd, "public/static/articles");

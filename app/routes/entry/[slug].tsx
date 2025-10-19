@@ -1,14 +1,14 @@
-import BlogArticleLayout from "#components/Article/BlogArticleLayout";
-import { getSlugs, getBySlug } from "#seeds/localReader";
 import { run } from "@mdx-js/mdx";
 import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";
-import Image from "#islands/Image";
 import type { NotFoundHandler } from "hono";
-import { SITE_BLOG_URL } from "#constant";
-import EmbeddedLink from "#components/EmbededLink";
-import ViewerModeProvider from "#islands/ViewerModeProvider";
-import Tweet from "#islands/Tweet";
+import Image from "../../islands/Image";
+import { getSlugs, getBySlug } from "../../seeds/localReader";
+import BlogArticleLayout from "../../components/Article/BlogArticleLayout";
+import { SITE_BLOG_URL } from "../../constant";
+import EmbeddedLink from "../../components/EmbededLink";
+import ViewerModeProvider from "../../islands/ViewerModeProvider";
+import Tweet from "../../islands/Tweet";
 import { wrapResult } from "../../lib/wrapResult";
 import notFound from "./404";
 

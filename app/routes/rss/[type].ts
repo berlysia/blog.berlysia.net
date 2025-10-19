@@ -1,7 +1,7 @@
-import { getLocalArticles } from "#seeds/localReader";
 import { Feed } from "feed";
 import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";
+import { getLocalArticles } from "../../seeds/localReader";
 
 const feed = new Feed({
   title: "blog.berlysia.net",
