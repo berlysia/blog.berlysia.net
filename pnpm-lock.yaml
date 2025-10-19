@@ -12,13 +12,13 @@ importers:
         specifier: 0.10.3
         version: 0.10.3
       '@fortawesome/fontawesome-svg-core':
-        specifier: ^6.7.2
+        specifier: 6.7.2
         version: 6.7.2
       '@fortawesome/free-solid-svg-icons':
-        specifier: ^6.7.2
+        specifier: 6.7.2
         version: 6.7.2
       '@fortawesome/react-fontawesome':
-        specifier: ^0.2.2
+        specifier: 0.2.2
         version: 0.2.2(@fortawesome/fontawesome-svg-core@6.7.2)(react@19.1.1)
       '@jsdevtools/rehype-toc':
         specifier: 3.0.2
