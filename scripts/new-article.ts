@@ -1,5 +1,5 @@
 import * as prompts from "@inquirer/prompts";
-import type { Frontmatter } from "../lib/mdx/utils";
+import type { Frontmatter } from "../app/lib/mdx/utils";
 
 function pad(n: number): string {
   return n.toString().padStart(2, "0");

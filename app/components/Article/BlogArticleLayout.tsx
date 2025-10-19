@@ -9,6 +9,7 @@ import { NotInHorizontal, OnlyHorizontal } from "../OnlyViewMode";
 import TextCombineUprightDigits from "../../lib/TextCombineUprightDigits";
 import type { Frontmatter } from "../../lib/mdx/utils";
 import Header from "../Header";
+import { useViewerMode } from "../../lib/viewerMode";
 
 type Properties = PropsWithChildren<{
   readonly frontmatter: Frontmatter;
@@ -20,6 +21,13 @@ export default function BlogArticleLayout({
   frontmatter,
   children,
 }: Properties) {
+  const viewerMode = useViewerMode();
+  if (frontmatter.preferVertical) {
+    viewerMode.setVerticalColumns();
+  } else {
+    viewerMode.setHorizontal();
+  }
+
   return (
     <ViewerSettingsProvider>
       <div

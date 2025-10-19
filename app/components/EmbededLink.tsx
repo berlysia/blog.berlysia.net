@@ -6,6 +6,7 @@ import type { PageMeta } from "../lib/ogDataFetcher";
 // Initialize cache on server-side
 if (import.meta.env.SSR) {
   try {
+    // eslint-disable-next-line node/no-top-level-await -- we want to load the cache before handling requests
     await ogCache.load();
   } catch (error) {
     console.warn("Failed to load OG cache:", error);
@@ -25,11 +26,9 @@ function trimUrlForView(urlStr: string): string {
 function StaticOGCard({
   src,
   ogData,
-  viewerMode,
 }: {
   readonly src: string;
   readonly ogData: PageMeta;
-  readonly viewerMode: ViewerMode;
 }) {
   return (
     <a
@@ -38,9 +37,7 @@ function StaticOGCard({
       rel="noopener noreferrer"
       className="embeddedLinkScope tw-block tw-mlb-2"
     >
-      <div
-        className={`tw-border-keyColor-400 tw-border tw-rounded-lg tw-is-full tw-p-2 ${viewerMode}`}
-      >
+      <div className="tw-border-keyColor-400 tw-border tw-rounded-lg tw-is-full tw-p-2">
         <div
           className={`tw-grid tw-gap-4 ${ogData.image ? "tw-grid-cols-[8rem_1fr]" : "tw-grid-cols-1"}`}
         >
@@ -102,10 +99,11 @@ function FallbackCard({ src }: { readonly src: string }) {
 }
 
 export default function EmbeddedLink({ src }: { readonly src: string }) {
+  // We can write this component as an async component but it breaks prerendering
   const ogData = ogCache.get(src);
 
   if (ogData) {
-    return <StaticOGCard src={src} ogData={ogData} viewerMode="horizontal" />;
+    return <StaticOGCard src={src} ogData={ogData} />;
   }
 
   return <FallbackCard src={src} />;

@@ -13,7 +13,14 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
       sourcemap: true,
     },
     ssr: {
-      external: ["unified", "@mdx-js/mdx", "satori", "@resvg/resvg-js", "feed"],
+      external: [
+        "unified",
+        "@mdx-js/mdx",
+        "satori",
+        "@resvg/resvg-js",
+        "feed",
+        "budoux",
+      ],
     },
   };
 

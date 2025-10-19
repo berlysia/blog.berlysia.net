@@ -1,7 +1,6 @@
 import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";
-import { Parser } from "budoux/module/parser.js";
-import { model as jaModel } from "budoux/module/data/models/ja.js";
+import { Parser, jaModel } from "budoux";
 import { Resvg } from "@resvg/resvg-js";
 import satori from "satori";
 import { getSlugs, getBySlug } from "../../../seeds/localReader";
@@ -149,7 +148,7 @@ export default createRoute(
 
     const body = new Resvg(svg).render().asPng();
 
-    return new Response(body, {
+    return new Response(body as unknown as ArrayBuffer, {
       headers: {
         "Content-Type": "image/png",
       },
