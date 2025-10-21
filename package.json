@@ -68,7 +68,7 @@
     "esbuild": "0.25.10",
     "eslint": "9.36.0",
     "feed": "4.2.2",
-    "lint-staged": "15.5.2",
+    "lint-staged": "16.2.4",
     "mdast-util-mdx-jsx": "3.2.0",
     "npm-run-all2": "7.0.2",
     "playwright": "1.55.1",
