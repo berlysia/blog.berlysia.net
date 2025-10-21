@@ -82,7 +82,7 @@ importers:
         version: 5.0.1
       vite:
         specifier: 7.1.10
-        version: 7.1.10(@types/node@24.8.1)(jiti@1.21.7)(tsx@4.20.3)(yaml@2.8.1)
+        version: 7.1.10(@types/node@24.8.1)(jiti@1.21.7)(tsx@4.20.6)(yaml@2.8.1)
       zod:
         specifier: 4.1.12
         version: 4.1.12
@@ -168,6 +168,9 @@ importers:
       tailwindcss-logical:
         specifier: 3.0.1
         version: 3.0.1(postcss@8.5.6)
+      tsx:
+        specifier: 4.20.6
+        version: 4.20.6
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -4069,8 +4072,8 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
-  tsx@4.20.3:
-    resolution: {integrity: sha512-qjbnuR9Tr+FJOMBqJCW5ehvIo/buZq7vH7qD7JziU98h6l3qGy0a/yPFjwO+y0/T7GFpNgNAvEcPPVfyT8rrPQ==}
+  tsx@4.20.6:
+    resolution: {integrity: sha512-ytQKuwgmrrkDTFP4LjR0ToE2nqgy886GpvRSpU0JAnrdBYppuY5rLkRUYPU1yCryb24SsKBTL/hlDQAEFVwtZg==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -8897,13 +8900,12 @@ snapshots:
   tslib@2.8.1:
     optional: true
 
-  tsx@4.20.3:
+  tsx@4.20.6:
     dependencies:
       esbuild: 0.25.11
       get-tsconfig: 4.12.0
     optionalDependencies:
       fsevents: 2.3.3
-    optional: true
 
   type-check@0.4.0:
     dependencies:
@@ -9068,7 +9070,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite@7.1.10(@types/node@24.8.1)(jiti@1.21.7)(tsx@4.20.3)(yaml@2.8.1):
+  vite@7.1.10(@types/node@24.8.1)(jiti@1.21.7)(tsx@4.20.6)(yaml@2.8.1):
     dependencies:
       esbuild: 0.25.11
       fdir: 6.5.0(picomatch@4.0.3)
@@ -9080,7 +9082,7 @@ snapshots:
       '@types/node': 24.8.1
       fsevents: 2.3.3
       jiti: 1.21.7
-      tsx: 4.20.3
+      tsx: 4.20.6
       yaml: 2.8.1
 
   whatwg-encoding@3.1.1:
