@@ -28,7 +28,7 @@
     "build:functions": "vite build --mode functions",
     "build:ssg": "vite build --mode ssg",
     "build:on-deploy": "run-s build copy-functions",
-    "copy-functions": "cp -rT dist/functions functions",
+    "copy-functions": "cp -rT dist/functions functions || true",
     "start": "vite start",
     "lint": "eslint --no-warn-ignored --max-warnings 0",
     "lint:fix": "npm-run-all 'lint -- --fix'",
