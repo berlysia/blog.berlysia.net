@@ -1,5 +1,5 @@
-import Header from "#components/Header";
 import { createRoute } from "honox/factory";
+import Header from "../../components/Header";
 
 export default createRoute((c) => {
   c.status(404);

@@ -1,11 +1,11 @@
-import Header from "#components/Header";
-import { ArticleLink } from "#components/ArticleLink/ArticleLink";
-import { SITE_BLOG_NAME } from "#constant";
-import formatDate from "#lib/dateFormatter";
-import { getLocalArticles } from "#seeds/localReader";
-import { getByGenre } from "#seeds/remoteReader";
-import { Categories } from "#components/Categories";
-import { Content } from "#components/Content";
+import Header from "../../components/Header";
+import { ArticleLink } from "../../components/ArticleLink/ArticleLink";
+import { SITE_BLOG_NAME } from "../../constant";
+import formatDate from "../../lib/dateFormatter";
+import { getLocalArticles } from "../../seeds/localReader";
+import { getByGenre } from "../../seeds/remoteReader";
+import { Categories } from "../../components/Categories";
+import { Content } from "../../components/Content";
 
 export const metadata = {
   title: `[ALL] - ${SITE_BLOG_NAME}`,

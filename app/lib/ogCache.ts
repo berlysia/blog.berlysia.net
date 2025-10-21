@@ -1,5 +1,5 @@
 import path from "node:path";
-import type { PageMeta } from "#lib/ogDataFetcher";
+import type { PageMeta } from "./ogDataFetcher.ts";
 
 export type OGCacheEntry = {
   url: string;
@@ -14,7 +14,7 @@ const CACHE_FILE_PATH = "og-cache.json";
 const DEFAULT_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
 
 export class OGCache {
-  private cache: OGCacheData = {};
+  private cache: OGCacheData | null = null;
 
   async load(): Promise<void> {
     // Only available on server-side
@@ -33,9 +33,11 @@ export class OGCache {
   async save(): Promise<void> {
     // Only available on server-side
     if (typeof window !== "undefined") return;
+    if (this.cache === null) throw new Error("OGCache not loaded before save.");
+
+    const { writeFile, mkdir } = await import("node:fs/promises");
 
     try {
-      const { writeFile, mkdir } = await import("node:fs/promises");
       await mkdir(path.dirname(CACHE_FILE_PATH), { recursive: true });
       await writeFile(CACHE_FILE_PATH, JSON.stringify(this.cache, null, 2));
     } catch (error) {
@@ -44,6 +46,8 @@ export class OGCache {
   }
 
   get(url: string): PageMeta | null {
+    if (this.cache === null) throw new Error("OGCache not loaded before get.");
+
     const entry = this.cache[url];
     if (!entry) return null;
 
@@ -57,7 +61,20 @@ export class OGCache {
     return entry.data;
   }
 
+  async getWithLoad(url: string): Promise<PageMeta> {
+    if (this.cache === null) {
+      await this.load();
+    }
+    const data = this.get(url);
+    if (data) {
+      return data;
+    }
+    throw new Error("Data not found in cache.");
+  }
+
   set(url: string, data: PageMeta, ttl: number = DEFAULT_TTL): void {
+    if (this.cache === null) throw new Error("OGCache not loaded before set.");
+
     this.cache[url] = {
       url,
       data,

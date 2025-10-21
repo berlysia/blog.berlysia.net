@@ -14,6 +14,13 @@ export default configBerlysia(
   },
   pluginBerlysia.configs.recommended,
   {
+    files: ["app/seeds/**/*.ts", "scripts/**/*.ts"],
+    rules: {
+      "node/no-top-level-await": "off",
+      "@berlysia/prefer-closest-import-path": "off",
+    },
+  },
+  {
     ignores: ["app/generated/**/*", "**/*.d.ts"],
   },
   {

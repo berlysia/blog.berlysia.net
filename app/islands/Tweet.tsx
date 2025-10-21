@@ -1,5 +1,5 @@
-import { useViewerModeValue } from "#lib/viewerMode";
 import { useEffect, useRef } from "hono/jsx";
+import { useViewerModeValue } from "../lib/viewerMode";
 
 function renderEmbeddedTweet(
   el: HTMLDivElement | null,

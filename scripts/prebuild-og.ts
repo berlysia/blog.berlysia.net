@@ -1,8 +1,8 @@
 import fsp from "node:fs/promises";
 import path from "node:path";
-import { isOk } from "#lib/Result.js";
-import { fetchOGData } from "../app/lib/ogDataFetcher.js";
-import { ogCache } from "../app/lib/ogCache.js";
+import { isOk } from "../app/lib/Result.ts";
+import { fetchOGData } from "../app/lib/ogDataFetcher.ts";
+import { ogCache } from "../app/lib/ogCache.ts";
 
 // Extract EmbeddedLink URLs from JSX content
 function extractEmbeddedLinkUrls(content: string): string[] {

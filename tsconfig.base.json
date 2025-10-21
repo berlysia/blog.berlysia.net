@@ -17,8 +17,7 @@
     "noUnusedLocals": false,
     "types": ["vite/client", "@cloudflare/workers-types"],
     "verbatimModuleSyntax": true,
-    "paths": {
-      "#*": ["./app/*"]
-    }
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true
   }
 }

@@ -1,14 +1,15 @@
-import WritingModeSwitcher from "#islands/WritingModeSwitcher";
-import ViewerSettings from "#islands/ViewerSettings";
 import type { PropsWithChildren } from "hono/jsx";
-import ArticleWithSentinel from "#islands/ArticleWithSentinel";
-import ViewerSettingsProvider from "#islands/ViewerSettingsProvider";
 import clsx from "clsx";
-import Footer from "#components/Footer";
-import { NotInHorizontal, OnlyHorizontal } from "#components/OnlyViewMode";
-import TextCombineUprightDigits from "#lib/TextCombineUprightDigits";
+import WritingModeSwitcher from "../../islands/WritingModeSwitcher";
+import ViewerSettings from "../../islands/ViewerSettings";
+import ArticleWithSentinel from "../../islands/ArticleWithSentinel";
+import ViewerSettingsProvider from "../../islands/ViewerSettingsProvider";
+import Footer from "../Footer";
+import { NotInHorizontal, OnlyHorizontal } from "../OnlyViewMode";
+import TextCombineUprightDigits from "../../lib/TextCombineUprightDigits";
 import type { Frontmatter } from "../../lib/mdx/utils";
 import Header from "../Header";
+import { useViewerMode } from "../../lib/viewerMode";
 
 type Properties = PropsWithChildren<{
   readonly frontmatter: Frontmatter;
@@ -20,6 +21,13 @@ export default function BlogArticleLayout({
   frontmatter,
   children,
 }: Properties) {
+  const viewerMode = useViewerMode();
+  if (frontmatter.preferVertical) {
+    viewerMode.setVerticalColumns();
+  } else {
+    viewerMode.setHorizontal();
+  }
+
   return (
     <ViewerSettingsProvider>
       <div

@@ -3,13 +3,13 @@ import rehypeToc from "@jsdevtools/rehype-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 import rehypeShiki from "@shikijs/rehype";
 import { compile } from "@mdx-js/mdx";
-import type { RewriteImageOptions } from "./utils.js";
+import type { RewriteImageOptions } from "./utils.ts";
 import {
   renameFootnoteSectionName,
   removeFrontmatter,
   rewriteImagePaths,
   wrapThreeDigits,
-} from "./utils.js";
+} from "./utils.ts";
 
 export async function processMDX(
   mdx: Parameters<typeof compile>[0],

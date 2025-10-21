@@ -4,7 +4,6 @@ out
 .envrc
 .env*.local
 .now
-public/~partytown
 
 .yarn/*
 !.yarn/releases
@@ -152,7 +151,6 @@ test-results
 dist
 
 .hono
-public/~partytown
 app/seeds/.tmp
 .wrangler
 ./functions

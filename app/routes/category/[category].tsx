@@ -1,12 +1,12 @@
 import { createRoute } from "honox/factory";
-import Header from "#components/Header";
-import { ArticleLink } from "#components/ArticleLink/ArticleLink";
-import formatDate from "#lib/dateFormatter";
-import { getByGenre } from "#seeds/remoteReader";
-import { getLocalArticles } from "#seeds/localReader";
-import { SITE_BLOG_NAME } from "#constant";
-import { Content } from "#components/Content";
 import { ssgParams } from "hono/ssg";
+import Header from "../../components/Header";
+import { ArticleLink } from "../../components/ArticleLink/ArticleLink";
+import formatDate from "../../lib/dateFormatter";
+import { getByGenre } from "../../seeds/remoteReader";
+import { getLocalArticles } from "../../seeds/localReader";
+import { SITE_BLOG_NAME } from "../../constant";
+import { Content } from "../../components/Content";
 
 const outsideArticles = {
   imas: getByGenre("imas", Number.POSITIVE_INFINITY),
