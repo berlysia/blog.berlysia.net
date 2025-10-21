@@ -67,7 +67,7 @@
     "del-cli": "6.0.0",
     "esbuild": "0.25.10",
     "eslint": "9.36.0",
-    "feed": "4.2.2",
+    "feed": "5.1.0",
     "lint-staged": "15.5.2",
     "mdast-util-mdx-jsx": "3.2.0",
     "npm-run-all2": "7.0.2",
