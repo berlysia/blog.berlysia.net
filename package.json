@@ -47,7 +47,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@10.18.3",
   "devDependencies": {
     "@berlysia/eslint-config": "7.2.0",
     "@berlysia/eslint-plugin": "0.0.1-beta.3",
@@ -99,7 +99,7 @@
     "rehype-autolink-headings": "7.1.0",
     "rehype-slug": "6.0.0",
     "remark-frontmatter": "5.0.0",
-    "remark-gfm": "4.0.0",
+    "remark-gfm": "4.0.1",
     "rss-parser": "3.13.0",
     "satori": "0.18.3",
     "to-vfile": "8.0.0",
