@@ -54,7 +54,7 @@
     "@cloudflare/workers-types": "4.20251011.0",
     "@hono/vite-ssg": "0.2.1",
     "@inquirer/prompts": "7.9.0",
-    "@mdx-js/loader": "3.1.0",
+    "@mdx-js/loader": "3.1.1",
     "@playwright/test": "1.56.1",
     "@resvg/resvg-js": "2.6.2",
     "@shikijs/rehype": "3.13.0",
