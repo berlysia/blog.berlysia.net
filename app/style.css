@@ -266,7 +266,6 @@ hr.slash {
   p {
     /* font-sizeとindentが一致していないと禁則処理が乱れるように見える */
     @apply tw-mlb-4 tw-indent-[1em] tw-text-lg tw-leading-8;
-    text-wrap: pretty;
   }
 
   td,
@@ -451,7 +450,6 @@ hr.slash {
 .articleContentWrapper {
   overflow-wrap: anywhere;
   line-break: strict;
-  text-wrap: pretty;
 
   .horizontal & {
     @apply tw-pt-2 tw-px-4;
@@ -463,11 +461,11 @@ hr.slash {
   }
 
   .vertical-multicol & {
-    @apply tw-pt-4 tw-pb-12 tw-mx-auto tw-writing-vertical-rl tw-w-full tw-overflow-x-visible tw-h-max tw-relative tw-box-content;
+    @apply tw-pt-4 tw-pb-12 tw-mx-auto tw-writing-vertical-rl tw-w-full tw-overflow-x-visible tw-relative tw-box-content;
     @apply tw-column-rule-color-keyColor-200 tw-gap-8;
     max-width: calc(100vw - 32px);
 
-    column-width: max(320px, min(50vh, 480px));
+    column-width: 480px;
     column-fill: auto;
     column-rule-width: 1px;
     column-rule-style: solid;
