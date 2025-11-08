@@ -147,10 +147,11 @@ hr.slash {
   counter-reset: h2 h3 h4 h5 h6;
 
   h1 {
-    @apply tw-text-4xl tw-border-be tw-border-is-2 tw-border-keyColor-200 tw-mbs-6 tw-mbe-2;
+    @apply tw-text-4xl tw-border-be tw-border-is-2 tw-border-keyColor-200 tw-mlb-2;
     counter-reset: h2 h3 h4 h5 h6;
     counter-increment: h1;
-    margin-block-start: 4rem;
+
+    break-before: column;
 
     > a::before {
       content: counter(h1) ". ";
@@ -465,12 +466,12 @@ hr.slash {
     @apply tw-column-rule-color-keyColor-200 tw-gap-8;
     max-width: calc(100vw - 32px);
 
-    column-width: 480px;
+    column-width: min(max(300px, 40svh), 360px);
     column-fill: auto;
     column-rule-width: 1px;
     column-rule-style: solid;
 
-    orphans: 3;
+    orphans: 2;
     widows: 2;
   }
 }
