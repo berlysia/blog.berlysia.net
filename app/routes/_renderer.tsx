@@ -46,6 +46,8 @@ export function createRenderer(given: { headMeta?: FC; headLink?: FC } = {}) {
               />
             )}
             {headMeta}
+            <meta name="Hatena::Bookmark" content="nocomment" />
+            <link rel="author" href="https://www.hatena.ne.jp/berlysia/" />
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link
               rel="preconnect"
