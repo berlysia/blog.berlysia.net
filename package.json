@@ -47,7 +47,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "packageManager": "pnpm@10.18.3",
+  "packageManager": "pnpm@10.27.0",
   "devDependencies": {
     "@berlysia/eslint-config": "7.2.0",
     "@berlysia/eslint-plugin": "0.0.1-beta.3",
