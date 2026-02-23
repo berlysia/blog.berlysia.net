@@ -8,6 +8,7 @@ import { NotInHorizontal, OnlyHorizontal } from "../OnlyViewMode";
 import TextCombineUprightDigits from "../../lib/TextCombineUprightDigits";
 import type { Frontmatter } from "../../lib/mdx/utils";
 import Header from "../Header";
+import TranslationDetector from "../../islands/TranslationDetector";
 import { useViewerMode } from "../../lib/viewerMode";
 
 type Properties = PropsWithChildren<{
@@ -118,6 +119,7 @@ export default function BlogArticleLayout({
         <OnlyHorizontal>
           <Footer />
         </OnlyHorizontal>
+        <TranslationDetector />
       </div>
     </ViewerSettingsProvider>
   );
