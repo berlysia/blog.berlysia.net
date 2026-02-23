@@ -646,8 +646,8 @@ body.use-webkit-line-clamp .line-clamp::after {
   content: unset;
 }
 
-/* 自動翻訳検出バナー */
-.translation-detector-banner {
+/* テキスト方向案内バナー */
+.text-orientation-guide-banner {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -669,7 +669,7 @@ body.use-webkit-line-clamp .line-clamp::after {
   }
 }
 
-.translation-detector-message {
+.text-orientation-guide-message {
   margin: 0;
   font-size: 0.875rem;
   color: rgb(146 64 14); /* amber-800 */
@@ -677,14 +677,14 @@ body.use-webkit-line-clamp .line-clamp::after {
   line-height: 1.5;
 }
 
-.translation-detector-actions {
+.text-orientation-guide-actions {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   flex-shrink: 0;
 }
 
-.translation-detector-switch {
+.text-orientation-guide-switch {
   padding: 0.375rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
@@ -701,7 +701,7 @@ body.use-webkit-line-clamp .line-clamp::after {
   }
 }
 
-.translation-detector-dismiss {
+.text-orientation-guide-dismiss {
   display: flex;
   align-items: center;
   justify-content: center;

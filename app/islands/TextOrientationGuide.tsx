@@ -1,10 +1,17 @@
 import { useEffect, useState, useCallback } from "hono/jsx";
 import { useViewerMode } from "../lib/viewerMode";
+import { isBrowserCJK } from "../lib/isCJKLocale";
 
-function ClientTranslationDetector() {
+function ClientTextOrientationGuide() {
   const { isHorizontal, setHorizontal } = useViewerMode();
   const [translationDetected, setTranslationDetected] = useState(false);
+  const [isNonCJK, setIsNonCJK] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+
+  // Detect non-CJK locale (runs once)
+  useEffect(() => {
+    setIsNonCJK(!isBrowserCJK());
+  }, []);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -67,27 +74,60 @@ function ClientTranslationDetector() {
     setDismissed(true);
   }, []);
 
-  // Only show when: translation detected + currently in vertical mode + not dismissed
-  if (!translationDetected || isHorizontal || dismissed) {
+  // Only show when in vertical mode and not dismissed
+  if (isHorizontal || dismissed) {
+    return null;
+  }
+
+  // Non-CJK locale banner takes priority (shown regardless of translation)
+  if (isNonCJK) {
+    return (
+      <div className="text-orientation-guide-banner" role="alert">
+        <p className="text-orientation-guide-message">
+          このページは縦書きで表示されています。横書きに切り替えることもできます。
+        </p>
+        <div className="text-orientation-guide-actions">
+          <button
+            type="button"
+            className="text-orientation-guide-switch"
+            onClick={handleSwitchToHorizontal}
+          >
+            横書きに切り替える
+          </button>
+          <button
+            type="button"
+            className="text-orientation-guide-dismiss"
+            onClick={handleDismiss}
+            title="閉じる"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Translation detected banner for CJK users
+  if (!translationDetected) {
     return null;
   }
 
   return (
-    <div className="translation-detector-banner" role="alert">
-      <p className="translation-detector-message">
+    <div className="text-orientation-guide-banner" role="alert">
+      <p className="text-orientation-guide-message">
         自動翻訳が検出されました。翻訳先の言語では縦書きが読みにくい場合があります。
       </p>
-      <div className="translation-detector-actions">
+      <div className="text-orientation-guide-actions">
         <button
           type="button"
-          className="translation-detector-switch"
+          className="text-orientation-guide-switch"
           onClick={handleSwitchToHorizontal}
         >
           横書きに切り替える
         </button>
         <button
           type="button"
-          className="translation-detector-dismiss"
+          className="text-orientation-guide-dismiss"
           onClick={handleDismiss}
           title="閉じる"
         >
@@ -98,10 +138,10 @@ function ClientTranslationDetector() {
   );
 }
 
-export default function TranslationDetector() {
+export default function TextOrientationGuide() {
   if (import.meta.env.SSR) {
     return null;
   }
 
-  return <ClientTranslationDetector />;
+  return <ClientTextOrientationGuide />;
 }
