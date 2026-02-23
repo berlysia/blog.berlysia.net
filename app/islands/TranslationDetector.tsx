@@ -75,7 +75,7 @@ function ClientTranslationDetector() {
   return (
     <div className="translation-detector-banner" role="alert">
       <p className="translation-detector-message">
-        自動翻訳が検出されました。縦書きでは翻訳が正しく表示されない場合があります。
+        自動翻訳が検出されました。翻訳先の言語では縦書きが読みにくい場合があります。
       </p>
       <div className="translation-detector-actions">
         <button
