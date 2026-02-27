@@ -307,6 +307,7 @@ hr.slash {
 
     .horizontal :not(figure) & > code {
       max-width: min(max(calc(100% - 4rem), 85vw), calc(1024px - 4rem));
+      overflow-wrap: anywhere;
     }
 
     .vertical & {
