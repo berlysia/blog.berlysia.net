@@ -355,6 +355,7 @@ hr.slash {
   figure {
     @apply tw-writing-horizontal-tb tw-relative tw-flex tw-flex-col;
     place-items: center;
+    place-content: center;
 
     .vertical &,
     .vertical-multicol & {
