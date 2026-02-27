@@ -66,13 +66,3 @@ function isCJKScript(script: string): boolean {
     script === "Kore"
   );
 }
-
-/**
- * Returns true if any of the browser's preferred languages is a CJK locale.
- */
-export function isBrowserCJK(): boolean {
-  if (typeof navigator === "undefined") return false;
-  const langs = navigator.languages;
-  if (!langs || langs.length === 0) return false;
-  return langs.some((lang) => isCJKLocale(lang));
-}

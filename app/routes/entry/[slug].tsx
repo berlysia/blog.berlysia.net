@@ -34,7 +34,10 @@ export default createRoute(
       baseUrl: import.meta.url,
     });
 
-    const frontmatter = getBySlug(slug as any).frontmatter;
+    const article = getBySlug(slug as any);
+    if (!article) return notFoundHandler(c);
+
+    const { frontmatter } = article;
 
     return c.render(
       <ViewerModeProvider
