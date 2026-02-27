@@ -18,7 +18,8 @@ html {
   overflow-y: scroll;
 
   font-weight: 400;
-  font-family: "Helvetica Neue", "Helvetica", "Hiragino Kaku Gothic ProN",
+  font-family:
+    "Helvetica Neue", "Helvetica", "Hiragino Kaku Gothic ProN",
     "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体",
     "Zen Kaku Gothic New", "Noto Sans JP", Meiryo, sans-serif;
   color: #233;
@@ -47,19 +48,21 @@ body {
   min-height: 100vh;
 }
 
-body:has(.vertical), body:has(.vertical-multicol) {
+body:has(.vertical),
+body:has(.vertical-multicol) {
   min-height: 100svh;
   height: 100%;
 }
 
-.vertical, .vertical-multicol {
+.vertical,
+.vertical-multicol {
   /*
   これをつけないと、Safariで横スクロールがおきてしまう
   ページ全体のwidthが本文部分を横に伸ばしたときと同じだけの幅を持ってしまう
   hiddenではスクロールコンテナーになってしまい、ヘッダーのstickyが効かなくなる
   */
   overflow-x: clip;
-  text-underline-position: under left;
+  text-underline-position: under right;
 }
 
 aside {
@@ -252,14 +255,18 @@ hr.slash {
 
   strong {
     text-decoration: underline solid rgb(254 202 202) /* bg-red-200 */;
-    text-decoration-thickness: var(--marker-thickness); /* Safari does not support this props including in shorthand */
+    text-decoration-thickness: var(
+      --marker-thickness
+    ); /* Safari does not support this props including in shorthand */
     text-decoration-skip-ink: none;
     text-underline-offset: calc(-1 * var(--marker-thickness));
   }
 
   em {
     text-decoration: underline solid rgb(186 230 253) /* bg-sky-200 */;
-    text-decoration-thickness: var(--marker-thickness); /* Safari does not support this props including in shorthand */
+    text-decoration-thickness: var(
+      --marker-thickness
+    ); /* Safari does not support this props including in shorthand */
     text-decoration-skip-ink: none;
     text-underline-offset: calc(-1 * var(--marker-thickness));
   }
@@ -347,12 +354,8 @@ hr.slash {
   figure {
     @apply tw-writing-horizontal-tb tw-relative tw-flex tw-flex-col;
     place-items: center;
-    place-content: center;
 
-    .vertical & {
-      @apply tw-h-full;
-    }
-
+    .vertical &,
     .vertical-multicol & {
       @apply tw-h-full;
 
@@ -366,21 +369,33 @@ hr.slash {
         break-inside: avoid;
       }
       &:not(.full-width) {
-        width: min(calc(100vw - 32px), 600px);
-        min-width: min(calc(100vw - 32px), 600px);
+        width: min(calc(100vw - 32px), 480px);
+        min-width: min(calc(100vw - 32px), 480px);
       }
     }
 
     > *:not(figcaption, dialog) {
       .horizontal & {
         width: fit-content;
-        max-width: min(max(calc(100% - 4rem), 85vw), calc(1024px - 4rem));
+        max-width: min(max(100%, 85vw), 1024px);
       }
 
       .vertical-multicol & {
-        width: calc(100% - 4rem);
+        width: fit-content;
         max-height: 50vh;
         max-height: 50svh;
+
+        /* ラッパーが残り空間を使い切り、imgはその中に収まる */
+        flex: 1;
+        min-height: 0;
+        align-self: center;
+
+        & img {
+          max-width: 100%;
+          max-height: 100%;
+          width: auto;
+          height: auto;
+        }
       }
 
       .vertical & {
@@ -400,7 +415,14 @@ hr.slash {
     }
 
     figcaption {
-      @apply tw-text-center tw-text-sm tw-text-gray-500 tw-m-2;
+      @apply tw-text-center tw-text-sm tw-text-gray-500;
+
+      .vertical &,
+      .vertical-multicol & {
+        > p {
+          margin: 0;
+        }
+      }
     }
   }
 
@@ -445,8 +467,12 @@ hr.slash {
       }
     }
   }
-}
 
+  .image {
+    outline: 4px solid oklch(0 0 0 / 0.1);
+    outline-offset: -4px;
+  }
+}
 
 .articleContentWrapper {
   overflow-wrap: anywhere;
@@ -479,11 +505,13 @@ hr.slash {
 .articleWrapper {
   @apply tw-w-full tw-flex tw-justify-center;
 
-  .vertical &, .vertical-multicol & {
+  .vertical &,
+  .vertical-multicol & {
     font-weight: 400;
-    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic Medium",
-      "游ゴシック Medium", YuGothic, "游ゴシック体", "Zen Kaku Gothic New",
-      "Noto Sans JP", Meiryo, sans-serif;
+    font-family:
+      "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "游ゴシック Medium",
+      YuGothic, "游ゴシック体", "Zen Kaku Gothic New", "Noto Sans JP", Meiryo,
+      sans-serif;
   }
 
   .vertical-multicol & {
@@ -542,7 +570,8 @@ hr.slash {
 }
 
 .tcu-digits {
-  .vertical &, .vertical-multicol & {
+  .vertical &,
+  .vertical-multicol & {
     text-combine-upright: all;
   }
 }
@@ -551,7 +580,7 @@ dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.75);
 }
 
-.line-clamp{
+.line-clamp {
   --lines: 2;
   --lh: 1lh;
   overflow: hidden;
@@ -562,15 +591,17 @@ dialog::backdrop {
   position: relative;
 }
 
-@supports (line-clamp: 2){
-  .line-clamp{
+@supports (line-clamp: 2) {
+  .line-clamp {
     line-clamp: var(--lines);
 
     line-height: normal;
     max-block-size: none;
     position: static;
   }
-  .line-clamp::after{ content: unset; }
+  .line-clamp::after {
+    content: unset;
+  }
 }
 
 /* マーカー表現にtext-decoration-thicknessを使用しない場合の代替実装 */
@@ -592,7 +623,10 @@ body.use-text-decoration-workaround .horizontal .main-text-section strong {
 }
 
 /* 縦書き時のマーカー表現（strong要素） */
-body.use-text-decoration-workaround :is(.vertical, .vertical-multicol) .main-text-section strong {
+body.use-text-decoration-workaround
+  :is(.vertical, .vertical-multicol)
+  .main-text-section
+  strong {
   background-image: linear-gradient(
     to left,
     transparent 0%,
@@ -619,7 +653,10 @@ body.use-text-decoration-workaround .horizontal .main-text-section em {
 }
 
 /* 縦書き時のマーカー表現（em要素） */
-body.use-text-decoration-workaround :is(.vertical, .vertical-multicol) .main-text-section em {
+body.use-text-decoration-workaround
+  :is(.vertical, .vertical-multicol)
+  .main-text-section
+  em {
   background-image: linear-gradient(
     to left,
     transparent 0%,
@@ -634,7 +671,7 @@ body.use-webkit-line-clamp .line-clamp {
   -webkit-line-clamp: var(--lines);
   -webkit-box-orient: vertical;
   overflow: hidden;
-  
+
   /* Reset custom implementation */
   line-clamp: unset;
   line-height: normal;
@@ -720,4 +757,3 @@ body.use-webkit-line-clamp .line-clamp::after {
     background-color: rgb(252 211 77); /* amber-300 */
   }
 }
-
