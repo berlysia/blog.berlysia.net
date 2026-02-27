@@ -1,0 +1,148 @@
+---
+title: 縦書き対応のコンポーネントを作る - React Tokyo フェス2026
+created: 2026-02-28 03:00
+publishedAt: 2026-02-28 03:00
+lastModified: 2026-02-28 03:00
+category: tech
+tags: vertical-writing, css
+description: 縦書き対応のコンポーネント、国際化対応のコンポーネントを作るときに便利な論理プロパティと値について
+publishStatus: draft
+preferVertical: false
+---
+
+_この記事は、2026年2月28日に開催されたReact Tokyo フェス2026での発表からリンクする形で公開されています。_
+
+# ポスターの内容
+
+## テキスト基準のレイアウトを実現する、CSSの「論理プロパティと値」
+
+世界には右から左に横書きする文字がありますが、縦に書くことがある文字や、縦にしか書けない文字も存在します。
+
+日本語は、みなさんご存じのように、縦書きも横書きも同じ文字を使って表現することが、当たり前に行われています。
+
+言語や文字非依存のスタイル記述をするとき、上下左右といった物理的方向に対して、インライン（＝行が伸びる）方向、ブロック（＝段落が並ぶ）方向といった論理的方向を使うことで、テキストにまつわるレイアウト実装を、さまざまな条件分岐テクニックによらず、実現できます。
+
+<figure class="full-width">
+  <div class="tw-flex tw-gap-1">
+    <Image src="./text-ja-horizontal.png" alt="" />
+    <Image src="./text-ja-vertical.png" alt="" />
+    <Image src="./text-ar-horizontal.png" alt="" />
+  </div>
+  <figcaption>
+    縦書きと横書き、rtlでの一貫したレイアウトの例。「行の始まる側」にボーダーを指定している。
+  </figcaption>
+</figure>
+
+## DOM APIには論理的方向の表現が不足している
+
+CSSには論理的方向を扱うプロパティや値が広く導入され、今後も論理的方向を重要視していく方針になっています。
+
+一方で、DOM APIの世界における論理的方向のサポートは断片的です。既存実装のしがらみが少ない領域では利用可能な場合もありますが、様々な理由で対応が進みません。
+
+このため、縦書き対応コンポーネントのJS実装には、自分自身がどの writing-mode でレイアウトされているかを知る方法が必要になります。 getComputedStyle 関数を使って判定するアプローチが第一の選択肢になるでしょう。
+
+import Extend from "./Extend.tsx";
+
+<figure class="full-width">
+  <div class="tw-flex tw-gap-1">
+    <Extend writingMode="horizontal" />
+    <Extend writingMode="vertical" />
+  </div>
+  <figcaption>操作できる例</figcaption>
+</figure>
+
+<figure class="full-width">
+  ```typescript
+  const computedWritingMode = getComputedStyle(content).writingMode;
+  const isHorizontal = computedWritingMode === "horizontal-tb";
+  const scrollBlockSize = isHorizontal ? content.scrollHeight : content.scrollWidth;
+  const clientBlockSize = isHorizontal ? content.clientHeight : content.clientWidth;
+  setIsOverflowing(scrollBlockSize > clientBlockSize);
+  ```
+
+  <figcaption>物理的値しかないので、呼び分けているコード片</figcaption>
+</figure>
+
+## 論理と物理の適切な使い分け
+
+論理的方向を表すプロパティと値があるならば、すべてを論理的方向でかけばよい……わけでもありません。コンテンツ自体や画面の物理的方向に依存しているならば、それは今後も変わりなく物理的方向でスタイルするべきです。
+
+たとえば画像や動画は、コンテンツ自体に物理的寸法が存在しています。素朴に論理的方向でスタイルしてしまうと、縦書き横書きの前提が変わった瞬間に、崩れてしまいます。
+
+あなたがこれまで実装してきたコンポーネントを、縦書きに対応させることを想像してみてください。ひとつ観点が増えただけで、ぐっと奥深く見えてきませんか？
+
+<figure>
+  <Image src="./image.jpg" alt="" width="1024" height="576" />
+  <figcaption>
+    画像自体に意味はない。画像を示すとき、その周辺のテキストが縦書きであろうと横書きであろうと、画像の寸法は物理的方向で表現すべきだろう。
+  </figcaption>
+</figure>
+
+# 論理プロパティと値を結局いつ使えば良いのか？
+
+## あなたがエンドユーザーなら
+
+常に左から右への横書きだけ、あるいは常に右から左への縦書きだけしかしないのであれば、**実は常に物理プロパティを使っていてもよい**のです。苦しみが生じてくるのは、これらが混在したり、切り替えられるような場合です。
+
+rtlを含む国際化対応が求められる場合は、少なくともインライン方向の論理プロパティには、一定の理解が必要です。
+
+縦書きと横書きの両対応が必要になる場合は、ブロック方向の論理プロパティも理解しておく必要があります。
+
+## あなたがUIライブラリやフレームワークの開発者なら
+
+論理プロパティ対応を真剣に考えるべきです。
+
+UIライブラリやフレームワークのレベルで `*-x` の内部実装に `*-inline` を使うようなことが行われると、場合によっては縦書きのコンテンツにとって **使い物にならない** ものになってしまいます。こんなことをするくらいなら、完全に物理だけで実装されていた方がマシです。
+
+ユーティリティクラス系フレームワークであれば、エンドユーザーはまだ `*-left` `*-right` を使って回避する選択肢がとれますが、UIライブラリの内部でこの実装をされると、指定を変えられず完全に利用不可能なものになってしまいます。
+
+せっかく作り込むのであれば、クローズドな実装で国際化の可能性がないような場合でもなければ、最初から論理プロパティを使うべきです。
+
+### 実際に存在する困った事例
+
+実際に存在する事例として、Tailwind CSS v4 は、 `*-x` を内部的に `*-inline` 系プロパティで実現しています。これは、最終的に生成されるCSSのサイズに影響があることを理由にしています。縦書きの利用当事者である私も、この判断を責めることはしません。 `margin-x` のような2方向物理ショートハンドをCSSが持たないことが、根本的な原因だからです。
+
+# こんなことを聞かれそうだなと思うこと
+
+## でも、縦書きなんてすることないでしょう
+
+いまのところWeb上での縦書きの利用者は少ないですが、だからといって日本語から縦書きが消えたわけではありません。Webの世界や技術書だけで文字を読んでいると忘れそうになりますが、日本語では書籍も雑誌も新聞も縦書きが主流です。電子書籍の縦書きも、Webの縦書き仕様を利用して構築されています。
+
+およそ10年前からWeb上では縦書きが利用できていて、それを実際に高度に活用する電子書籍やWebサービスは現に存在しています。いま現在の縦書きの利用者が少ないのは、単にWeb上で縦書きが利用できることを知られていなかったり、そのノウハウを持たなかったり、それを発案して突っ張るだけの経済合理性がある環境が少ないからである、と考えています。
+
+## このテキストは縦書きにしないのですか
+
+屋名池誠 著『[横書き登場](https://www.iwanami.co.jp/book/b268682.html)』（岩波文庫）によれば、日本語の左から右へ書く横書きは、科学技術分野での欧文との交ぜ書きがきっかけで普及しました。具体的なプロパティ名や技術名を扱うことを思うと、このテキストのデフォルト書字方向は横書きが適切だといえます。
+
+## 縦書きのコンテンツを翻訳すると読みにくくなりませんか
+
+このWebサイトでは、縦書きの状態でiOSの機能やGoogle翻訳による翻訳をした場合や、CJKではない言語の要求が最上位だった場合に、横書きレイアウトに変更する案内を表示しています。
+
+# 関連リンク
+
+<dl>
+  <dt>
+    [CSS 論理的プロパティと値 - CSS | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/Guides/Logical_properties_and_values)
+  </dt>
+  <dd className="tw-ml-4">
+    <p>MDN の論理的プロパティと値に関するガイド</p>
+  </dd>
+  <dt>
+    [Webサイトで縦書きを使う、縦書きのWebサイトを作る](https://slides.berlysia.net/burikaigi2026-use-vertical-writing-on-a-site-or-create-a-vertical-writing-site/)
+  </dt>
+  <dd className="tw-ml-4">
+    BuriKaigi 2026で発表。Web技術における縦書きの現状と課題、そして未来への展望
+  </dd>
+  <dt>
+    [縦書きWebの実用を支えるJavaScript](https://slides.berlysia.net/jsconfjp2025-javascript-for-vertical-writing-on-the-web/)
+  </dt>
+  <dd className="tw-ml-4">
+    JSConf JP 2025で発表。CSSだけでは足りない縦書き対応時のスクロールに関する考慮事項、縦書きマルチカラムへの期待
+  </dd>
+  <dt>
+    [縦書きHTMLにおける文字の向きはどのように定まるか](https://blog.nnn.dev/entry/2022/07/01/180000)
+  </dt>
+  <dd className="tw-ml-4">
+    縦書きを指定する `writing-mode` と、文字の向きを指定する `text-orientation` は強く連携しているが、実際に各文字がどの向きで表示されるかはフォントにもブラウザにも依存する極めて難しい状態にあることを解説
+  </dd>
+</dl>
