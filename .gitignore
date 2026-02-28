@@ -152,6 +152,7 @@ dist
 
 .hono
 app/seeds/.tmp
+app/islands/articles
 .wrangler
 ./functions
 

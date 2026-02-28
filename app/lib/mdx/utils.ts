@@ -198,6 +198,82 @@ export const rewriteImagePaths: Plugin<[RewriteImageOptions], UnistParent> = (
   };
 };
 
+// remarkプラグイン: mdxjsEsmノード内の相対importを処理
+// .tsx import → 削除（islandコンポーネントは [slug].tsx から components prop で渡す）
+// .ts import → 拡張子を .js に変更（esbuildでトランスパイル済みのため）
+// recmaではなくremarkで処理する理由: function-bodyモードでは、recmaプラグイン実行時には
+// ImportDeclarationが既に動的import()に変換済みのため
+export const rewriteComponentImportExtensions: Plugin = () => {
+  return function rewriteComponentImportExtensionsImpl(tree: UnistParent) {
+    const newChildren: Array<(typeof tree.children)[number]> = [];
+
+    for (const node of tree.children) {
+      if (
+        node.type !== "mdxjsEsm" ||
+        !("data" in node) ||
+        !(node.data as Record<string, unknown>)?.estree
+      ) {
+        newChildren.push(node);
+        continue;
+      }
+
+      const estree = (
+        node.data as {
+          estree: {
+            body: Array<{
+              type: string;
+              source?: { value?: string; raw?: string };
+            }>;
+          };
+        }
+      ).estree;
+
+      // .tsx 相対importを削除（islandとして別ルートで提供される）
+      estree.body = estree.body.filter((estreeNode) => {
+        if (
+          estreeNode.type === "ImportDeclaration" &&
+          typeof estreeNode.source?.value === "string" &&
+          (estreeNode.source.value.startsWith("./") ||
+            estreeNode.source.value.startsWith("../")) &&
+          /\.tsx$/.test(estreeNode.source.value)
+        ) {
+          return false;
+        }
+        return true;
+      });
+
+      // .ts 相対importの拡張子を .js に変更
+      for (const estreeNode of estree.body) {
+        if (
+          estreeNode.type === "ImportDeclaration" &&
+          typeof estreeNode.source?.value === "string" &&
+          (estreeNode.source.value.startsWith("./") ||
+            estreeNode.source.value.startsWith("../")) &&
+          /\.ts$/.test(estreeNode.source.value)
+        ) {
+          estreeNode.source.value = estreeNode.source.value.replace(
+            /\.ts$/,
+            ".js"
+          );
+          if (estreeNode.source.raw) {
+            estreeNode.source.raw = estreeNode.source.raw.replace(
+              /\.ts/,
+              ".js"
+            );
+          }
+        }
+      }
+
+      // 宣言が残っていればノードを維持
+      if (estree.body.length > 0) {
+        newChildren.push(node);
+      }
+    }
+
+    tree.children = newChildren;
+  };
+};
+
 const tagsTransformer = (x: string): string[] =>
   x?.split(",").map((y) => y.trim()) ?? [];
 

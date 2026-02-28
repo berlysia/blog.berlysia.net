@@ -7,6 +7,7 @@ import type { RewriteImageOptions } from "./utils.ts";
 import {
   renameFootnoteSectionName,
   removeFrontmatter,
+  rewriteComponentImportExtensions,
   rewriteImagePaths,
   wrapThreeDigits,
 } from "./utils.ts";
@@ -28,6 +29,7 @@ export async function processMDX(
       remarkGfm,
       removeFrontmatter,
       [rewriteImagePaths, options],
+      rewriteComponentImportExtensions,
     ],
     rehypePlugins: [
       rehypeSlug,

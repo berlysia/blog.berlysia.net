@@ -7,6 +7,7 @@ import {
   rm,
 } from "node:fs/promises";
 import path from "node:path";
+import { transform } from "esbuild";
 import { ensureDir } from "fs-extra";
 import { toVFile } from "to-vfile";
 import { matter } from "vfile-matter";
@@ -21,8 +22,12 @@ import clean from "./clean.ts";
   const ARTICLE_PATH = "articles";
   const outDir = path.resolve(cwd, "public/static/articles");
   const generatedDir = path.resolve(cwd, "app/generated/articles");
+  const islandsArticlesDir = path.resolve(cwd, "app/islands/articles");
 
   await clean();
+
+  // 記事固有islandコンポーネントの出力先をクリーンアップ
+  await rm(islandsArticlesDir, { recursive: true, force: true });
 
   await ensureDir(outDir);
   await ensureDir(generatedDir);
@@ -92,8 +97,29 @@ import clean from "./clean.ts";
           for (const file of files) {
             if (file.endsWith(".mdx")) continue;
             const src = path.resolve(articleDir, file);
-            const dest = path.resolve(destDir, file);
-            copyFile(src, dest);
+            if (file.endsWith(".tsx")) {
+              // .tsx: islandコンポーネントとして app/islands/articles/{slug}/ に配置
+              // Viteのisland検出が自動で <honox-island> ラッピングとクライアントバンドルを処理
+              const islandDir = path.resolve(islandsArticlesDir, slug);
+              await ensureDir(islandDir);
+              await copyFile(src, path.resolve(islandDir, file));
+            } else if (file.endsWith(".ts")) {
+              // .ts: トランスパイルして生成ディレクトリに出力
+              const source = await readFile(src, "utf8");
+              const result = await transform(source, {
+                loader: "ts",
+                format: "esm",
+              });
+              const outName = file.replace(/\.ts$/, ".js");
+              await writeFile(
+                path.resolve(generatedDir, slug, outName),
+                result.code,
+                "utf8"
+              );
+            } else {
+              const dest = path.resolve(destDir, file);
+              copyFile(src, dest);
+            }
           }
         }
       });
