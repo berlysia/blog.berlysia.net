@@ -303,18 +303,21 @@ hr.slash {
   }
 
   pre:has(code) {
-    @apply tw-writing-horizontal-tb tw-relative tw-flex tw-flex-col tw-justify-center tw-items-center;
+    @apply tw-writing-horizontal-tb tw-relative tw-flex tw-flex-col tw-justify-center tw-items-center tw-max-w-full;
+
+    & > code {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
 
     .horizontal :not(figure) & > code {
       max-width: min(max(calc(100% - 4rem), 85vw), calc(1024px - 4rem));
-      overflow-wrap: anywhere;
     }
 
     .vertical & {
       @apply tw-h-full tw-max-h-full;
 
       & > code {
-        word-break: break-all;
         @apply tw-max-w-[90vw];
       }
     }
@@ -326,7 +329,6 @@ hr.slash {
       break-inside: avoid;
 
       & > code {
-        word-break: break-all;
         max-height: 50vh;
         max-height: 50svh;
         max-width: 90vw;
