@@ -9,6 +9,7 @@ import TextCombineUprightDigits from "../../lib/TextCombineUprightDigits";
 import type { Frontmatter } from "../../lib/mdx/utils";
 import Header from "../Header";
 import TextOrientationGuide from "../../islands/TextOrientationGuide";
+import ArticleHeightSentinel from "../../islands/ArticleHeightSentinel";
 import { useViewerMode } from "../../lib/viewerMode";
 
 type Properties = PropsWithChildren<{
@@ -101,24 +102,17 @@ export default function BlogArticleLayout({
                   </div>
                   <section className="main-text-section">{children}</section>
                   <NotInHorizontal>
-                    <div className="tw-flex tw-justify-center tw-mlb-6">
-                      <hr className="tw-bs-40 tw-border-0 slash" />
-                    </div>
-                    <Footer />
+                    <ArticleHeightSentinel />
                   </NotInHorizontal>
                 </div>
               </div>
-              <OnlyHorizontal>
-                <div className="tw-flex tw-justify-center tw-mlb-6">
-                  <hr className="tw-bs-40 tw-border-0 slash" />
-                </div>
-              </OnlyHorizontal>
             </article>
+            <div className="tw-flex tw-justify-center tw-mlb-6">
+              <hr className="tw-bs-40 tw-border-0 slash" />
+            </div>
           </div>
         </div>
-        <OnlyHorizontal>
-          <Footer />
-        </OnlyHorizontal>
+        <Footer />
         <TextOrientationGuide />
       </div>
     </ViewerSettingsProvider>
