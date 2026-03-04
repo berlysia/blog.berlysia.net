@@ -42,6 +42,8 @@ html:has(.vertical-multicol) {
 
   min-height: 100svh;
   height: 100%;
+
+  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -492,17 +494,23 @@ hr.slash {
   }
 
   .vertical-multicol & {
-    @apply tw-pt-4 tw-pb-12 tw-mx-auto tw-writing-vertical-rl tw-w-full tw-overflow-x-visible tw-relative tw-box-content;
+    @apply tw-mx-auto tw-writing-vertical-rl tw-w-full tw-overflow-x-visible tw-relative tw-box-content;
     @apply tw-column-rule-color-keyColor-200 tw-gap-8;
     max-width: calc(100vw - 32px);
 
-    column-width: min(max(300px, 40svh), 360px);
+    height: min(32rem, 80svh);
+    column-width: 40rem;
     column-fill: auto;
     column-rule-width: 1px;
     column-rule-style: solid;
+    column-gap: 4rem;
 
     orphans: 2;
     widows: 2;
+
+    &::column {
+      scroll-snap-align: center;
+    }
   }
 }
 
@@ -541,6 +549,10 @@ hr.slash {
 
 .vertical .article {
   @apply tw-h-full;
+}
+
+.vertical-multicol .article {
+  @apply tw-py-4;
 }
 
 @media (width < 640px), (height < 600px) {
