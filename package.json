@@ -51,7 +51,7 @@
   "devDependencies": {
     "@berlysia/eslint-config": "7.2.0",
     "@berlysia/eslint-plugin": "0.0.1-beta.3",
-    "@cloudflare/workers-types": "4.20260313.1",
+    "@cloudflare/workers-types": "4.20260317.1",
     "@hono/vite-ssg": "0.3.3",
     "@inquirer/prompts": "7.10.1",
     "@mdx-js/loader": "3.1.1",
@@ -78,12 +78,12 @@
     "tailwindcss-logical": "3.0.1",
     "tsx": "4.21.0",
     "typescript": "5.9.3",
-    "wrangler": "4.73.0"
+    "wrangler": "4.76.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "7.2.0",
     "@fortawesome/free-solid-svg-icons": "7.2.0",
-    "@fortawesome/react-fontawesome": "3.2.0",
+    "@fortawesome/react-fontawesome": "3.3.0",
     "@jsdevtools/rehype-toc": "3.0.2",
     "@mdx-js/mdx": "3.1.1",
     "budoux": "0.8.0",
@@ -101,7 +101,7 @@
     "remark-frontmatter": "5.0.0",
     "remark-gfm": "4.0.1",
     "rss-parser": "3.13.0",
-    "satori": "0.25.0",
+    "satori": "0.26.0",
     "to-vfile": "8.0.0",
     "unified": "11.0.5",
     "vfile-matter": "5.0.1",
