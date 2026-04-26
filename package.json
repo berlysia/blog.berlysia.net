@@ -51,7 +51,7 @@
   "devDependencies": {
     "@berlysia/eslint-config": "7.2.0",
     "@berlysia/eslint-plugin": "0.0.1-beta.3",
-    "@cloudflare/workers-types": "4.20260412.1",
+    "@cloudflare/workers-types": "4.20260418.1",
     "@hono/vite-ssg": "0.3.3",
     "@inquirer/prompts": "7.10.1",
     "@mdx-js/loader": "3.1.1",
@@ -63,7 +63,7 @@
     "@types/mdast": "4.0.4",
     "@types/node": "24.12.2",
     "@types/unist": "3.0.3",
-    "autoprefixer": "10.4.27",
+    "autoprefixer": "10.5.0",
     "del-cli": "7.0.0",
     "esbuild": "0.28.0",
     "eslint": "9.39.4",
@@ -72,13 +72,13 @@
     "mdast-util-mdx-jsx": "3.2.0",
     "npm-run-all2": "8.0.4",
     "playwright": "1.59.1",
-    "postcss": "8.5.9",
+    "postcss": "8.5.10",
     "prettier": "3.6.2",
     "tailwindcss": "3.4.19",
     "tailwindcss-logical": "3.0.1",
     "tsx": "4.21.0",
     "typescript": "5.9.3",
-    "wrangler": "4.81.1"
+    "wrangler": "4.83.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "7.2.0",
@@ -90,7 +90,7 @@
     "cheerio": "1.2.0",
     "clsx": "2.1.1",
     "fs-extra": "11.3.4",
-    "hono": "4.12.12",
+    "hono": "4.12.14",
     "honox": "0.1.55",
     "p-queue": "9.1.2",
     "react": "19.2.5",
