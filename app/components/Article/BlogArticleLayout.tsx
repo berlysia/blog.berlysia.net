@@ -111,10 +111,10 @@ export default function BlogArticleLayout({
             <div className="tw-flex tw-justify-center tw-mlb-6">
               <hr className="tw-bs-40 tw-border-0 slash" />
             </div>
+            <Footer />
           </div>
         </div>
         <VerticalScrollHandler />
-        <Footer />
         <TextOrientationGuide />
       </div>
     </ViewerSettingsProvider>

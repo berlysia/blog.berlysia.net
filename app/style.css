@@ -515,7 +515,7 @@ hr.slash {
 }
 
 .articleWrapper {
-  @apply tw-w-full tw-flex tw-justify-center;
+  @apply tw-w-full tw-flex tw-flex-col tw-items-center;
 
   .vertical &,
   .vertical-multicol & {
