@@ -592,6 +592,13 @@ hr.slash {
   }
 }
 
+.underline-pos-left {
+  .vertical &,
+  .vertical-multicol & {
+    text-underline-position: under left;
+  }
+}
+
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.75);
 }

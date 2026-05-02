@@ -329,3 +329,75 @@ export const frontmatterSchema = z.discriminatedUnion("publishStatus", [
 ]);
 
 export type Frontmatter = z.infer<typeof frontmatterSchema>;
+
+function getTextContent(node: UnistNode): string {
+  if (isHastText(node)) return node.value;
+  if ("children" in node) {
+    return (node as UnistParent).children.map(getTextContent).join("");
+  }
+  return "";
+}
+
+function isAsciiOnly(text: string): boolean {
+  return /^[ -~]*$/.test(text);
+}
+
+function addClassToHastElement(el: HastElement, className: string) {
+  const existing = el.properties?.className;
+  if (Array.isArray(existing)) {
+    existing.push(className);
+  } else {
+    el.properties = { ...el.properties, className: [className] };
+  }
+}
+
+function addClassToMdxJsxElement(el: MdxJsxTextElementHast, className: string) {
+  const classAttr = el.attributes.find(
+    (a) =>
+      isMdxJsxAttribute(a) && (a.name === "class" || a.name === "className")
+  );
+  if (
+    classAttr &&
+    isMdxJsxAttribute(classAttr) &&
+    typeof classAttr.value === "string"
+  ) {
+    classAttr.value = `${classAttr.value} ${className}`;
+  } else {
+    el.attributes.push({
+      type: "mdxJsxAttribute",
+      name: "class",
+      value: className,
+    });
+  }
+}
+
+// 縦書き時、英数字のみの <a> / <u> はアンダーラインを左側に配置するためクラスを付与
+export const adjustUnderlinePosition: Plugin = () => {
+  // eslint-disable-next-line unicorn/consistent-function-scoping -- unifiedのプラグインの書き味を維持
+  function walk(curr: UnistNode | UnistParent) {
+    if ("children" in curr) {
+      for (const child of curr.children) {
+        const isTarget =
+          (isHastElement(child) &&
+            (child.tagName === "a" || child.tagName === "u")) ||
+          (isMdxJsxTextElement(child) &&
+            (child.name === "a" || child.name === "u"));
+
+        if (isTarget) {
+          const text = getTextContent(child);
+          if (text.length > 0 && isAsciiOnly(text)) {
+            if (isHastElement(child)) {
+              addClassToHastElement(child, "underline-pos-left");
+            } else if (isMdxJsxTextElement(child)) {
+              addClassToMdxJsxElement(child, "underline-pos-left");
+            }
+          }
+        }
+        walk(child);
+      }
+    }
+  }
+  return function adjustUnderlinePositionImpl(tree: UnistParent) {
+    walk(tree);
+  };
+};

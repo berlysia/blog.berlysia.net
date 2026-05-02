@@ -10,6 +10,7 @@ import {
   rewriteComponentImportExtensions,
   rewriteImagePaths,
   wrapThreeDigits,
+  adjustUnderlinePosition,
 } from "./utils.ts";
 
 export async function processMDX(
@@ -40,6 +41,7 @@ export async function processMDX(
         },
       ],
       [rehypeToc, {}],
+      adjustUnderlinePosition,
       wrapThreeDigits,
       rehypeAccessibleEmojis,
       renameFootnoteSectionName,
