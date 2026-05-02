@@ -10,6 +10,7 @@ import type { Frontmatter } from "../../lib/mdx/utils";
 import Header from "../Header";
 import TextOrientationGuide from "../../islands/TextOrientationGuide";
 import ArticleHeightSentinel from "../../islands/ArticleHeightSentinel";
+import VerticalScrollHandler from "../../islands/VerticalScrollHandler";
 import { useViewerMode } from "../../lib/viewerMode";
 
 type Properties = PropsWithChildren<{
@@ -112,6 +113,7 @@ export default function BlogArticleLayout({
             </div>
           </div>
         </div>
+        <VerticalScrollHandler />
         <Footer />
         <TextOrientationGuide />
       </div>
