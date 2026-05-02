@@ -4,6 +4,7 @@ import { useInputDeviceDetector } from "../lib/useInputDeviceDetector";
 import {
   handleVerticalWheel,
   handleVerticalKeydown,
+  resetScrollTarget,
 } from "../lib/verticalScrollTransform";
 
 function ClientVerticalScrollHandler() {
@@ -26,11 +27,12 @@ function ClientVerticalScrollHandler() {
     };
 
     container.addEventListener("wheel", onWheel, { passive: false });
-    container.addEventListener("keydown", onKeydown);
+    document.addEventListener("keydown", onKeydown);
 
     return () => {
       container.removeEventListener("wheel", onWheel);
-      container.removeEventListener("keydown", onKeydown);
+      document.removeEventListener("keydown", onKeydown);
+      resetScrollTarget();
     };
   }, [isVertical, processWheelEvent, getDevice]);
 
