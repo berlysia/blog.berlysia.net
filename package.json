@@ -53,7 +53,7 @@
     "@berlysia/eslint-plugin": "0.0.1-beta.3",
     "@cloudflare/workers-types": "4.20260503.1",
     "@hono/vite-ssg": "0.3.3",
-    "@inquirer/prompts": "7.10.1",
+    "@inquirer/prompts": "8.4.2",
     "@mdx-js/loader": "3.1.1",
     "@playwright/test": "1.59.1",
     "@resvg/resvg-js": "2.6.2",
