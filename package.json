@@ -34,7 +34,7 @@
     "lint:fix": "npm-run-all 'lint -- --fix'",
     "format": "prettier --write '**/*.{json,md,js,ts,jsx,tsx}'",
     "format:check": "prettier --check '**/*.{json,md,js,ts,jsx,tsx}'",
-    "test": "jest",
+    "test": "echo 'No unit tests. VRT is available via `pnpm test:vrt` (heavy: needs dev server + docker). For quick checks use `pnpm typecheck` and `pnpm lint`.'",
     "test:vrt:ci": "playwright test",
     "test:vrt": "docker run --rm --volume $(pwd):/workdir/ --workdir /workdir/ -it mcr.microsoft.com/playwright:v1.41.2-focal /bin/bash -c 'pnpm run test:vrt:ci'",
     "test:vrt:update": "docker run --rm --volume $(pwd):/workdir/ --workdir /workdir/ -it mcr.microsoft.com/playwright:v1.41.2-focal /bin/bash -c 'pnpm run test:vrt:ci -u'",
@@ -43,9 +43,7 @@
     "clean:seed": "node app/seeds/clean.ts",
     "typecheck": "tsc --noEmit",
     "prepare": "git config --local core.hooksPath .githooks && echo 'githooks installed' || echo 'githooks install failed'",
-    "precommit": "lint-staged",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "precommit": "lint-staged"
   },
   "packageManager": "pnpm@10.34.4",
   "devDependencies": {
