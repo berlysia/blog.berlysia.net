@@ -142,8 +142,8 @@ importers:
         specifier: 9.39.5
         version: 9.39.5(jiti@1.21.7)
       feed:
-        specifier: 5.2.1
-        version: 5.2.1
+        specifier: 6.0.0
+        version: 6.0.0
       lint-staged:
         specifier: 16.4.0
         version: 16.4.0
@@ -2361,6 +2361,7 @@ packages:
   eslint@9.39.5:
     resolution: {integrity: sha512-DgZS62aPLXKlnxILS/AYCoRvHaZeXceIzlXPkkGGzJWSow1aEk0lbTlxUSlyjC8jcaKxAdOnTDz+o1JFSBsyjw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -2461,8 +2462,8 @@ packages:
       picomatch:
         optional: true
 
-  feed@5.2.1:
-    resolution: {integrity: sha512-jTynzYPWs9ALjro0GW8j7sv9y7cJBeOdD4Y88kVqYy/eyusIX3g+499JiTDIlD9Ge/unebx57T4Uzo6vpYvMtA==}
+  feed@6.0.0:
+    resolution: {integrity: sha512-rvFOF1POce0ijAKy3tZN5T8PuprgIit/VbMyXJWcoYwcMOTSIJ7NqZb8DTLPJr77yiEO27kidm/fw0kcSIV+ww==}
     engines: {node: '>=20', pnpm: '>=10'}
 
   fflate@0.7.5:
@@ -6769,7 +6770,7 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.5
 
-  feed@5.2.1:
+  feed@6.0.0:
     dependencies:
       xml-js: 1.6.11
 
