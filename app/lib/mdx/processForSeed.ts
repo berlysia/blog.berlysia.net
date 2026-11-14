@@ -18,9 +18,8 @@ export async function processMDX(
   options: RewriteImageOptions
 ) {
   const { default: remarkGfm } = await import("remark-gfm");
-  const { default: rehypeAutolinkHeadings } = await import(
-    "rehype-autolink-headings"
-  );
+  const { default: rehypeAutolinkHeadings } =
+    await import("rehype-autolink-headings");
   const { default: rehypeSlug } = await import("rehype-slug");
   return await compile(mdx, {
     outputFormat: "function-body",

@@ -143,7 +143,7 @@ if (process.argv[1] === new URL(import.meta.url).pathname) {
     await main();
   } catch (error) {
     console.error("💥 Script failed:", error);
-    // eslint-disable-next-line unicorn/no-process-exit -- this is cli script
+    // oxlint-disable-next-line unicorn/no-process-exit -- this is cli script
     process.exit(1);
   }
 }

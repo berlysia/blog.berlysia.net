@@ -10,7 +10,7 @@ const SEEDS_DIR = path.resolve(process.cwd(), "app", "seeds");
 
 const IGNORE_URLS = new Set(["https://blog.nnn.dev/entry/casual-mendan-info"]);
 
-// eslint-disable-next-line unicorn/prefer-top-level-await -- CJSなので許せ（eslintrcをいじってもよさそうだが）
+// oxlint-disable-next-line unicorn/prefer-top-level-await -- CJSなので許せ（eslintrcをいじってもよさそうだが）
 (async function main() {
   const parser = new Parser();
   const genresEntries = await Promise.all(

@@ -15,7 +15,7 @@ import PQueue from "p-queue";
 import { frontmatterSchema } from "../lib/mdx/utils.ts";
 import clean from "./clean.ts";
 
-// eslint-disable-next-line unicorn/prefer-top-level-await -- CJSなので許せ（eslintrcをいじってもよさそうだが）
+// oxlint-disable-next-line unicorn/prefer-top-level-await -- CJSなので許せ（eslintrcをいじってもよさそうだが）
 (async function main() {
   const { processMDX } = await import("../lib/mdx/processForSeed.ts");
   const cwd = process.cwd();

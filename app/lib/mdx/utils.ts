@@ -1,4 +1,4 @@
-/* eslint-disable max-depth -- unifiedのプラグインの書き味を維持 */
+/* oxlint-disable max-depth -- unifiedのプラグインの書き味を維持 */
 import path from "node:path";
 import z from "zod";
 import type { Plugin } from "unified";
@@ -63,7 +63,7 @@ export const renameFootnoteSectionName: Plugin = () => {
   }
 
   // 見つかった要素の更に子孫を再帰的に走査し、textノードの内容を「脚注」に変更する
-  // eslint-disable-next-line unicorn/consistent-function-scoping -- for readability
+  // oxlint-disable-next-line unicorn/consistent-function-scoping -- for readability
   function walkInner(curr: UnistNode | UnistParent) {
     if ("children" in curr) {
       for (const x of curr.children) {
@@ -102,7 +102,7 @@ function nodeHasClass(node: UnistNode, className: string): boolean {
 
 // textContent内の3桁以下の数字の並びを span.tcu-digits で囲む
 export const wrapThreeDigits: Plugin = () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping -- for readability
+  // oxlint-disable-next-line unicorn/consistent-function-scoping -- for readability
   function walk(curr: UnistNode | UnistParent) {
     if (
       nodeHasClass(curr, "no-tcu-digits") ||
@@ -373,7 +373,7 @@ function addClassToMdxJsxElement(el: MdxJsxTextElementHast, className: string) {
 
 // 縦書き時、英数字のみの <a> / <u> はアンダーラインを左側に配置するためクラスを付与
 export const adjustUnderlinePosition: Plugin = () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping -- unifiedのプラグインの書き味を維持
+  // oxlint-disable-next-line unicorn/consistent-function-scoping -- unifiedのプラグインの書き味を維持
   function walk(curr: UnistNode | UnistParent) {
     if ("children" in curr) {
       for (const child of curr.children) {

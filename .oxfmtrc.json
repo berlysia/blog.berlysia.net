@@ -1,0 +1,18 @@
+{
+  "semi": true,
+  "singleQuote": false,
+  "trailingComma": "es5",
+  "printWidth": 80,
+  "sortPackageJson": false,
+  "ignorePatterns": [
+    "dist",
+    ".vercel",
+    ".next",
+    "app/seeds/.tmp",
+    "app/generated/articles",
+    ".tmp",
+    "**/*.mdx",
+    "**/*.css",
+    "**/*.html"
+  ]
+}

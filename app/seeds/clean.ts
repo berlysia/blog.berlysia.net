@@ -18,6 +18,6 @@ export default async function clean() {
 // in esm
 
 if (process.argv[1] === import.meta.filename) {
-  // eslint-disable-next-line unicorn/prefer-top-level-await -- run as cjs
+  // oxlint-disable-next-line unicorn/prefer-top-level-await -- run as cjs
   clean();
 }

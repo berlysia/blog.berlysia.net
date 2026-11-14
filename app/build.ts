@@ -24,5 +24,5 @@ async function main() {
   await toSSG(app, fs, { dir: outDir });
 }
 
-// eslint-disable-next-line unicorn/prefer-top-level-await -- run in cjs
+// oxlint-disable-next-line unicorn/prefer-top-level-await -- run in cjs
 main().catch(console.error);

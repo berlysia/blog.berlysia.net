@@ -6,7 +6,7 @@ import type { PageMeta } from "../lib/ogDataFetcher";
 // Initialize cache on server-side
 if (import.meta.env.SSR) {
   try {
-    // eslint-disable-next-line node/no-top-level-await -- we want to load the cache before handling requests
+    // oxlint-disable-next-line node/no-top-level-await -- we want to load the cache before handling requests
     await ogCache.load();
   } catch (error) {
     console.warn("Failed to load OG cache:", error);

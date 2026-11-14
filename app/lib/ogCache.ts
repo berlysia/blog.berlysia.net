@@ -53,7 +53,7 @@ export class OGCache {
 
     // Check if cache entry is expired
     if (Date.now() > entry.timestamp + entry.ttl) {
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete -- URL-based cache key requires dynamic deletion
+      // oxlint-disable-next-line @typescript-eslint/no-dynamic-delete -- URL-based cache key requires dynamic deletion
       delete this.cache[url];
       return null;
     }
@@ -99,7 +99,7 @@ export class OGCache {
     const now = Date.now();
     for (const [url, entry] of Object.entries(this.cache)) {
       if (now > entry.timestamp + entry.ttl) {
-        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete -- URL-based cache key requires dynamic deletion
+        // oxlint-disable-next-line @typescript-eslint/no-dynamic-delete -- URL-based cache key requires dynamic deletion
         delete this.cache[url];
       }
     }
