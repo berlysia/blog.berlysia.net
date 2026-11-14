@@ -55,7 +55,7 @@ export function createRenderer(given: { headMeta?: FC; headLink?: FC } = {}) {
               crossOrigin
             />
             <link
-              href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Zen+Kaku+Gothic+New&display=swap"
+              href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100..900&family=Noto+Sans+JP:wght@100..900&family=Zen+Kaku+Gothic+New&display=swap"
               rel="stylesheet"
             />
             <script src="https://platform.twitter.com/widgets.js" defer async />
