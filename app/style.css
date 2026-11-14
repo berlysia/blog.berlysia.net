@@ -1,236 +1,390 @@
-@tailwind base;
+@import "tailwindcss" prefix(tw) source(none);
 
-@tailwind components;
+/* v3 scanned ./app/**; keep that scope, including gitignored generated articles */
+@source "./**/*.{js,ts,jsx,tsx}";
+@source "./generated/articles";
+@source "./islands/articles";
 
-@tailwind utilities;
+@theme {
+  --font-Lato: var(--font-family-lato);
 
-/* Dialog backdrop styling */
-dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
-}
+  /* keyColor is an alias of pink */
+  --color-keyColor-50: oklch(97.1% 0.014 343.198);
+  --color-keyColor-100: oklch(94.8% 0.028 342.258);
+  --color-keyColor-200: oklch(89.9% 0.061 343.231);
+  --color-keyColor-300: oklch(82.3% 0.12 346.018);
+  --color-keyColor-400: oklch(71.8% 0.202 349.761);
+  --color-keyColor-500: oklch(65.6% 0.241 354.308);
+  --color-keyColor-600: oklch(59.2% 0.249 0.584);
+  --color-keyColor-700: oklch(52.5% 0.223 3.958);
+  --color-keyColor-800: oklch(45.9% 0.187 3.815);
+  --color-keyColor-900: oklch(40.8% 0.153 2.432);
+  --color-keyColor-950: oklch(28.4% 0.109 3.907);
 
-:root {
-  --marker-thickness: 0.5em;
-}
+  --animate-fade-blink: fade-blink 3s ease-in-out infinite;
 
-html {
-  min-height: 100vh;
-  overflow-y: scroll;
-
-  font-weight: 400;
-  font-family:
-    "Helvetica Neue", "Helvetica", "Hiragino Kaku Gothic ProN",
-    "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体",
-    "Zen Kaku Gothic New", "Noto Sans", "Noto Sans JP", Meiryo, sans-serif;
-  color: #233;
-
-  scroll-padding-top: 48px;
-  counter-reset: h1;
-
-  @apply tw-text-base;
-}
-
-html:has(.vertical) {
-  @apply tw-overflow-y-hidden;
-
-  min-height: 100svh;
-  height: 100%;
-}
-
-html:has(.vertical-multicol) {
-  @apply tw-overflow-y-visible;
-
-  min-height: 100svh;
-  height: 100%;
-
-  scroll-snap-type: y mandatory;
-}
-
-body {
-  min-height: 100vh;
-}
-
-body:has(.vertical),
-body:has(.vertical-multicol) {
-  min-height: 100svh;
-  height: 100%;
-}
-
-.vertical,
-.vertical-multicol {
-  /*
-  これをつけないと、Safariで横スクロールがおきてしまう
-  ページ全体のwidthが本文部分を横に伸ばしたときと同じだけの幅を持ってしまう
-  hiddenではスクロールコンテナーになってしまい、ヘッダーのstickyが効かなくなる
-  */
-  overflow-x: clip;
-  text-underline-position: under right;
-}
-
-aside {
-  @apply tw-text-sm tw-text-gray-500 tw-mb-2;
-}
-
-hr.slash {
-  block-size: 8px;
-  --color: rgb(249 168 212);
-  color: --color;
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="3px" height="3px" viewBox="0 0 3 3" fill="rgb(249 168 212)"><polygon points="0,0.5 0,1.5 1.5,3 2.5,3"/><polygon points="2.5,0 1.5,0 3,1.5 3,0.5"/></svg>');
-  background-size: 3px 3px;
-  inline-size: 65%;
-}
-
-.vertical-tooltip {
-  /* position: relative;
-  &::after {
-    text-indent: initial;
-    font-style: initial;
-    font-weight: initial;
-    content: "この要素は縦書き用のCSSを必要としています";
-    position: absolute;
-
-    top: -40px;
-    left: 100%;
-    margin-left: 15px;
-    height: 240px;
-    padding: 10px;
-    border-radius: 16px;
-    background: #222;
-    color: #eee;
-
-    display: none;
+  @keyframes fade-blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
   }
-  &:hover::after {
-    display: block;
-  } */
 }
 
-.toc {
-  border: 1px solid rgb(249 168 212);
-  border-radius: 1rem;
-  padding: 1rem;
+/* Tailwind v4 preflight changed these defaults from v3; keep the v3 look. */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--tw-color-gray-200, currentcolor);
+  }
 
-  ol {
-    counter-reset: toc;
-    padding-inline-start: 1.2rem;
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
 
-    .vertical & {
-      background: linear-gradient(
-        to bottom,
-        transparent 0.6rem,
-        rgb(249 168 212) 0.6rem,
-        transparent 1rem 100%
-      );
+  /* v4 preflight zeroes margin/padding on every element; v3 left these to the UA */
+  dialog {
+    margin: auto;
+  }
+  th,
+  td {
+    padding: 1px;
+  }
+}
+
+/*
+  v4 emits space-y-* with margin-block-*, which turns sideways under vertical
+  writing-mode. v3 used margin-top, so keep a physical version.
+*/
+@utility space-y-physical-* {
+  & > :not([hidden]) ~ :not([hidden]) {
+    margin-top: --spacing(--value(number));
+  }
+}
+
+@utility writing-vertical-rl {
+  writing-mode: vertical-rl;
+}
+@utility writing-horizontal-tb {
+  writing-mode: horizontal-tb;
+}
+@utility tcu {
+  text-combine-upright: all;
+}
+@utility line-break-loose {
+  line-break: loose;
+}
+@utility line-break-strict {
+  line-break: strict;
+}
+@utility line-break-normal {
+  line-break: normal;
+}
+@utility column-rule-color-keyColor-* {
+  column-rule-color: --value(--color-keyColor-*);
+}
+
+/*
+  Tailwind v3 emitted utilities unlayered, so these rules competed with utility
+  classes by specificity and then source order. v4 puts utilities in
+  @layer utilities; keep the v3 cascade by appending these rules to that layer.
+*/
+@layer utilities {
+  /* Dialog backdrop styling */
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  :root {
+    --marker-thickness: 0.5em;
+  }
+
+  html {
+    min-height: 100vh;
+    overflow-y: scroll;
+
+    font-weight: 400;
+    font-family:
+      "Helvetica Neue", "Helvetica", "Hiragino Kaku Gothic ProN",
+      "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体",
+      "Zen Kaku Gothic New", "Noto Sans", "Noto Sans JP", Meiryo, sans-serif;
+    color: #233;
+
+    scroll-padding-top: 48px;
+    counter-reset: h1;
+
+    @apply tw:text-base;
+  }
+
+  html:has(.vertical) {
+    @apply tw:overflow-y-hidden;
+
+    min-height: 100svh;
+    height: 100%;
+  }
+
+  html:has(.vertical-multicol) {
+    @apply tw:overflow-y-visible;
+
+    min-height: 100svh;
+    height: 100%;
+
+    scroll-snap-type: y mandatory;
+  }
+
+  body {
+    min-height: 100vh;
+  }
+
+  body:has(.vertical),
+  body:has(.vertical-multicol) {
+    min-height: 100svh;
+    height: 100%;
+  }
+
+  .vertical,
+  .vertical-multicol {
+    /*
+    これをつけないと、Safariで横スクロールがおきてしまう
+    ページ全体のwidthが本文部分を横に伸ばしたときと同じだけの幅を持ってしまう
+    hiddenではスクロールコンテナーになってしまい、ヘッダーのstickyが効かなくなる
+    */
+    overflow-x: clip;
+    text-underline-position: under right;
+  }
+
+  aside {
+    @apply tw:text-sm tw:text-gray-500 tw:mb-2;
+  }
+
+  hr.slash {
+    block-size: 8px;
+    --color: rgb(249 168 212);
+    color: --color;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="3px" height="3px" viewBox="0 0 3 3" fill="rgb(249 168 212)"><polygon points="0,0.5 0,1.5 1.5,3 2.5,3"/><polygon points="2.5,0 1.5,0 3,1.5 3,0.5"/></svg>');
+    background-size: 3px 3px;
+    inline-size: 65%;
+  }
+
+  .vertical-tooltip {
+    /* position: relative;
+    &::after {
+      text-indent: initial;
+      font-style: initial;
+      font-weight: initial;
+      content: "この要素は縦書き用のCSSを必要としています";
+      position: absolute;
+
+      top: -40px;
+      left: 100%;
+      margin-left: 15px;
+      height: 240px;
+      padding: 10px;
+      border-radius: 16px;
+      background: #222;
+      color: #eee;
+
+      display: none;
     }
-    .horizontal & {
-      background: linear-gradient(
-        to right,
-        transparent 0.6rem,
-        rgb(249 168 212) 0.6rem,
-        transparent 1rem 100%
-      );
-    }
+    &:hover::after {
+      display: block;
+    } */
+  }
 
-    > li {
-      display: block flow;
-      list-style-type: none;
-      list-style-position: inside;
+  .toc {
+    border: 1px solid rgb(249 168 212);
+    border-radius: 1rem;
+    padding: 1rem;
 
-      &::before {
-        counter-increment: toc;
-        content: counters(toc, ".") " ";
+    ol {
+      counter-reset: toc;
+      padding-inline-start: 1.2rem;
+
+      .vertical & {
+        background: linear-gradient(
+          to bottom,
+          transparent 0.6rem,
+          rgb(249 168 212) 0.6rem,
+          transparent 1rem 100%
+        );
+      }
+      .horizontal & {
+        background: linear-gradient(
+          to right,
+          transparent 0.6rem,
+          rgb(249 168 212) 0.6rem,
+          transparent 1rem 100%
+        );
+      }
+
+      > li {
+        display: block flow;
+        list-style-type: none;
+        list-style-position: inside;
+
+        &::before {
+          counter-increment: toc;
+          content: counters(toc, ".") " ";
+        }
       }
     }
+
+    .toc-level {
+      /* border-block-end: */
+    }
   }
 
-  .toc-level {
-    /* border-block-end: */
-  }
-}
-
-.main-text-section {
-  counter-reset: h2 h3 h4 h5 h6;
-
-  h1 {
-    @apply tw-text-4xl tw-border-be tw-border-is-2 tw-border-keyColor-200 tw-mlb-2;
+  .main-text-section {
     counter-reset: h2 h3 h4 h5 h6;
-    counter-increment: h1;
 
-    break-before: column;
+    h1 {
+      @apply tw:text-4xl tw:border-be tw:border-s-2 tw:border-keyColor-200 tw:my-2;
+      counter-reset: h2 h3 h4 h5 h6;
+      counter-increment: h1;
 
-    > a::before {
-      content: counter(h1) ". ";
+      break-before: column;
+
+      > a::before {
+        content: counter(h1) ". ";
+      }
     }
-  }
 
-  h2 {
-    @apply tw-text-3xl tw-border-be tw-border-is tw-border-keyColor-200 tw-mbs-4 tw-mbe-2;
-    counter-reset: h3 h4 h5 h6;
-    counter-increment: h2;
-    margin-block-start: 2rem;
+    h2 {
+      @apply tw:text-3xl tw:border-be tw:border-s tw:border-keyColor-200 tw:mbs-4 tw:mbe-2;
+      counter-reset: h3 h4 h5 h6;
+      counter-increment: h2;
+      margin-block-start: 2rem;
 
-    > a::before {
-      content: counter(h1) "." counter(h2) ". ";
+      > a::before {
+        content: counter(h1) "." counter(h2) ". ";
+      }
     }
-  }
 
-  h3 {
-    @apply tw-text-2xl tw-border-be tw-border-keyColor-200 tw-mbs-3 tw-mbe-2;
-    counter-reset: h4 h5 h6;
-    counter-increment: h3;
+    h3 {
+      @apply tw:text-2xl tw:border-be tw:border-keyColor-200 tw:mbs-3 tw:mbe-2;
+      counter-reset: h4 h5 h6;
+      counter-increment: h3;
 
-    > a::before {
-      content: counter(h1) "." counter(h2) "." counter(h3) ". ";
+      > a::before {
+        content: counter(h1) "." counter(h2) "." counter(h3) ". ";
+      }
     }
-  }
 
-  h4 {
-    @apply tw-text-xl tw-mbs-3 tw-mbe-2 tw-text-gray-800;
-    counter-reset: h5 h6;
-    counter-increment: h4;
+    h4 {
+      @apply tw:text-xl tw:mbs-3 tw:mbe-2 tw:text-gray-800;
+      counter-reset: h5 h6;
+      counter-increment: h4;
 
-    > a::before {
-      content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". ";
+      > a::before {
+        content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". ";
+      }
     }
-  }
 
-  h5 {
-    @apply tw-text-lg tw-mbs-2 tw-mbe-2 tw-text-gray-800;
-    counter-reset: h6;
-    counter-increment: h5;
+    h5 {
+      @apply tw:text-lg tw:mbs-2 tw:mbe-2 tw:text-gray-800;
+      counter-reset: h6;
+      counter-increment: h5;
 
-    > a::before {
-      content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "."
-        counter(h5) ". ";
+      > a::before {
+        content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "."
+          counter(h5) ". ";
+      }
     }
-  }
 
-  h6 {
-    @apply tw-text-lg tw-mbs-1 tw-mbe-1 tw-text-gray-800;
-    counter-increment: h6;
+    h6 {
+      @apply tw:text-lg tw:mbs-1 tw:mbe-1 tw:text-gray-800;
+      counter-increment: h6;
 
-    > a::before {
-      content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "."
-        counter(h5) "." counter(h6) ". ";
+      > a::before {
+        content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "."
+          counter(h5) "." counter(h6) ". ";
+      }
     }
-  }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    break-after: avoid;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      break-after: avoid;
 
-    > a {
+      > a {
+        &:any-link {
+          color: currentColor;
+          text-decoration: none;
+        }
+
+        &:visited {
+          color: currentColor;
+        }
+
+        &,
+        &:visited {
+          &:active,
+          &:hover {
+            transition:
+              color 0.2s,
+              text-decoration 0.2s;
+            @apply tw:text-keyColor-600;
+          }
+        }
+      }
+
+      > a:hover::after {
+        @apply tw:text-base;
+        content: " 🔗";
+      }
+    }
+
+    blockquote {
+      @apply tw:py-2 tw:ps-4 tw:pe-2 tw:my-2 tw:border-s-8 tw:border-be tw:border-keyColor-300 tw:bg-keyColor-50 tw:text-gray-600;
+    }
+
+    strong {
+      text-decoration: underline solid rgb(254 202 202) /* bg-red-200 */;
+      text-decoration-thickness: var(
+        --marker-thickness
+      ); /* Safari does not support this props including in shorthand */
+      text-decoration-skip-ink: none;
+      text-underline-offset: calc(-1 * var(--marker-thickness));
+    }
+
+    em {
+      text-decoration: underline solid rgb(186 230 253) /* bg-sky-200 */;
+      text-decoration-thickness: var(
+        --marker-thickness
+      ); /* Safari does not support this props including in shorthand */
+      text-decoration-skip-ink: none;
+      text-underline-offset: calc(-1 * var(--marker-thickness));
+    }
+
+    p {
+      /* font-sizeとindentが一致していないと禁則処理が乱れるように見える */
+      @apply tw:my-4 tw:indent-[1em] tw:text-lg tw:leading-8;
+    }
+
+    td,
+    th {
+      @apply tw:border tw:border-collapse tw:border-gray-400;
+    }
+
+    a {
       &:any-link {
-        color: currentColor;
-        text-decoration: none;
+        @apply tw:text-keyColor-600 tw:underline;
       }
 
       &:visited {
-        color: currentColor;
+        @apply tw:text-purple-800;
       }
 
       &,
@@ -240,543 +394,486 @@ hr.slash {
           transition:
             color 0.2s,
             text-decoration 0.2s;
-          @apply tw-text-keyColor-600;
+          @apply tw:text-keyColor-600;
         }
       }
     }
 
-    > a:hover::after {
-      @apply tw-text-base;
-      content: " 🔗";
-    }
-  }
-
-  blockquote {
-    @apply tw-plb-2 tw-pis-4 tw-pie-2 tw-mlb-2 tw-border-is-8 tw-border-be tw-border-keyColor-300 tw-bg-keyColor-50 tw-text-gray-600;
-  }
-
-  strong {
-    text-decoration: underline solid rgb(254 202 202) /* bg-red-200 */;
-    text-decoration-thickness: var(
-      --marker-thickness
-    ); /* Safari does not support this props including in shorthand */
-    text-decoration-skip-ink: none;
-    text-underline-offset: calc(-1 * var(--marker-thickness));
-  }
-
-  em {
-    text-decoration: underline solid rgb(186 230 253) /* bg-sky-200 */;
-    text-decoration-thickness: var(
-      --marker-thickness
-    ); /* Safari does not support this props including in shorthand */
-    text-decoration-skip-ink: none;
-    text-underline-offset: calc(-1 * var(--marker-thickness));
-  }
-
-  p {
-    /* font-sizeとindentが一致していないと禁則処理が乱れるように見える */
-    @apply tw-mlb-4 tw-indent-[1em] tw-text-lg tw-leading-8;
-  }
-
-  td,
-  th {
-    @apply tw-border tw-border-collapse tw-border-gray-400;
-  }
-
-  a {
-    &:any-link {
-      @apply tw-text-keyColor-600 tw-underline;
-    }
-
-    &:visited {
-      @apply tw-text-purple-800;
-    }
-
-    &,
-    &:visited {
-      &:active,
-      &:hover {
-        transition:
-          color 0.2s,
-          text-decoration 0.2s;
-        @apply tw-text-keyColor-600;
-      }
-    }
-  }
-
-  pre:has(code) {
-    @apply tw-writing-horizontal-tb tw-relative tw-flex tw-flex-col tw-justify-center tw-items-center tw-max-w-full;
-
-    & > code {
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-    }
-
-    .horizontal :not(figure) & > code {
-      max-width: min(max(calc(100% - 4rem), 85vw), calc(1024px - 4rem));
-    }
-
-    .vertical & {
-      @apply tw-h-full tw-max-h-full;
+    pre:has(code) {
+      @apply tw:writing-horizontal-tb tw:relative tw:flex tw:flex-col tw:justify-center tw:items-center tw:max-w-full;
 
       & > code {
-        @apply tw-max-w-[90vw];
-      }
-    }
-
-    .vertical-multicol & {
-      @apply tw-h-full;
-
-      overflow: auto;
-      break-inside: avoid;
-
-      & > code {
-        max-height: 50vh;
-        max-height: 50svh;
-        max-width: 90vw;
-      }
-    }
-
-    .vertical-multicol :not(figure) & {
-      width: min(calc(100% - 32px), 1024px);
-    }
-  }
-
-  ul > li {
-    list-style: disc;
-    list-style-position: inside;
-  }
-
-  ol > li {
-    list-style: decimal;
-    list-style-position: inside;
-  }
-
-  li {
-    @apply tw-text-lg tw-leading-8;
-  }
-
-  figure {
-    @apply tw-writing-horizontal-tb tw-relative tw-flex tw-flex-col;
-    place-items: center;
-    place-content: center;
-
-    .vertical &,
-    .vertical-multicol & {
-      @apply tw-h-full;
-
-      &.full-width {
-        width: min(calc(100vw - 32px), 1024px);
-        min-width: min(calc(100vw - 32px), 1024px);
-        break-before: always;
-        break-before: column;
-        break-after: always;
-        break-after: column;
-        break-inside: avoid;
-      }
-      &:not(.full-width) {
-        width: min(calc(100vw - 32px), 480px);
-        min-width: min(calc(100vw - 32px), 480px);
-      }
-    }
-
-    > *:not(figcaption, dialog) {
-      .horizontal & {
-        width: fit-content;
-        max-width: min(max(100%, 85vw), 1024px);
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
       }
 
-      .vertical-multicol & {
-        width: fit-content;
-        max-height: 50vh;
-        max-height: 50svh;
-
-        /* ラッパーが残り空間を使い切り、imgはその中に収まる */
-        flex: 1;
-        min-height: 0;
-        align-self: center;
-
-        & img {
-          max-width: 100%;
-          max-height: 100%;
-          width: auto;
-          height: auto;
-        }
+      .horizontal :not(figure) & > code {
+        max-width: min(max(calc(100% - 4rem), 85vw), calc(1024px - 4rem));
       }
 
       .vertical & {
-        @media (width < 640px) {
-          @apply tw-w-[90vw] tw-max-w-[90vw] tw-max-h-[90vh];
-        }
-        @media (height < 600px) {
-          max-width: 480px;
-          max-height: calc(100% - 2rem);
-        }
+        @apply tw:h-full tw:max-h-full;
 
-        > * {
-          max-width: 100%;
-          max-height: 100%;
+        & > code {
+          @apply tw:max-w-[90vw];
         }
+      }
+
+      .vertical-multicol & {
+        @apply tw:h-full;
+
+        overflow: auto;
+        break-inside: avoid;
+
+        & > code {
+          max-height: 50vh;
+          max-height: 50svh;
+          max-width: 90vw;
+        }
+      }
+
+      .vertical-multicol :not(figure) & {
+        width: min(calc(100% - 32px), 1024px);
       }
     }
 
-    figcaption {
-      @apply tw-text-center tw-text-sm tw-text-gray-500;
+    ul > li {
+      list-style: disc;
+      list-style-position: inside;
+    }
+
+    ol > li {
+      list-style: decimal;
+      list-style-position: inside;
+    }
+
+    li {
+      @apply tw:text-lg tw:leading-8;
+    }
+
+    figure {
+      @apply tw:writing-horizontal-tb tw:relative tw:flex tw:flex-col;
+      place-items: center;
+      place-content: center;
 
       .vertical &,
       .vertical-multicol & {
-        > p {
-          margin: 0;
+        @apply tw:h-full;
+
+        &.full-width {
+          width: min(calc(100vw - 32px), 1024px);
+          min-width: min(calc(100vw - 32px), 1024px);
+          break-before: always;
+          break-before: column;
+          break-after: always;
+          break-after: column;
+          break-inside: avoid;
+        }
+        &:not(.full-width) {
+          width: min(calc(100vw - 32px), 480px);
+          min-width: min(calc(100vw - 32px), 480px);
+        }
+      }
+
+      > *:not(figcaption, dialog) {
+        .horizontal & {
+          width: fit-content;
+          max-width: min(max(100%, 85vw), 1024px);
+        }
+
+        .vertical-multicol & {
+          width: fit-content;
+          max-height: 50vh;
+          max-height: 50svh;
+
+          /* ラッパーが残り空間を使い切り、imgはその中に収まる */
+          flex: 1;
+          min-height: 0;
+          align-self: center;
+
+          & img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+          }
+        }
+
+        .vertical & {
+          @media (width < 640px) {
+            @apply tw:w-[90vw] tw:max-w-[90vw] tw:max-h-[90vh];
+          }
+          @media (height < 600px) {
+            max-width: 480px;
+            max-height: calc(100% - 2rem);
+          }
+
+          > * {
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+      }
+
+      figcaption {
+        @apply tw:text-center tw:text-sm tw:text-gray-500;
+
+        .vertical &,
+        .vertical-multicol & {
+          > p {
+            margin: 0;
+          }
         }
       }
     }
+
+    hr {
+      block-size: 4px;
+      --color: rgb(249 168 212);
+      color: --color;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="3px" height="3px" viewBox="0 0 3 3" fill="rgb(249 168 212)"><polygon points="0,0.5 0,1.5 1.5,3 2.5,3"/><polygon points="2.5,0 1.5,0 3,1.5 3,0.5"/></svg>');
+      background-size: 3px 3px;
+      inline-size: 65%;
+      margin-inline: auto;
+    }
+
+    .embeddedLinkScope {
+      break-inside: avoid;
+
+      /* 打ち消したいものだけここに定義 */
+      h3 {
+        @apply tw:text-lg tw:my-2;
+      }
+      p {
+        /* v4 text-* keeps --tw-leading from `.main-text-section p`; reset it explicitly */
+        @apply tw:text-base tw:leading-6 tw:my-2;
+      }
+
+      &:any-link {
+        color: #233;
+        text-decoration: none;
+      }
+
+      &:visited {
+        color: #233;
+      }
+
+      &,
+      &:visited {
+        &:active,
+        &:hover {
+          transition:
+            color 0.2s,
+            text-decoration 0.2s;
+          @apply tw:text-keyColor-600;
+        }
+      }
+    }
+
+    .image {
+      outline: 4px solid oklch(0 0 0 / 0.1);
+      outline-offset: -4px;
+    }
   }
 
-  hr {
-    block-size: 4px;
-    --color: rgb(249 168 212);
-    color: --color;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="3px" height="3px" viewBox="0 0 3 3" fill="rgb(249 168 212)"><polygon points="0,0.5 0,1.5 1.5,3 2.5,3"/><polygon points="2.5,0 1.5,0 3,1.5 3,0.5"/></svg>');
-    background-size: 3px 3px;
-    inline-size: 65%;
-    margin-inline: auto;
-  }
+  .articleContentWrapper {
+    overflow-wrap: anywhere;
+    line-break: strict;
 
-  .embeddedLinkScope {
-    break-inside: avoid;
-
-    /* 打ち消したいものだけここに定義 */
-    h3 {
-      @apply tw-text-lg tw-mlb-2;
-    }
-    p {
-      @apply tw-text-base tw-mlb-2;
+    .horizontal & {
+      @apply tw:pt-2 tw:pl-4 tw:pr-4;
     }
 
-    &:any-link {
-      color: #233;
-      text-decoration: none;
+    .vertical & {
+      @apply tw:pt-4 tw:pb-4 tw:pl-2 tw:pr-2;
+      @apply tw:writing-vertical-rl tw:h-full tw:line-break-strict;
     }
 
-    &:visited {
-      color: #233;
-    }
+    .vertical-multicol & {
+      @apply tw:ml-auto tw:mr-auto tw:writing-vertical-rl tw:w-full tw:overflow-x-visible tw:relative tw:box-content;
+      @apply tw:column-rule-color-keyColor-200 tw:gap-8;
+      max-width: calc(100vw - 32px);
 
-    &,
-    &:visited {
-      &:active,
-      &:hover {
-        transition:
-          color 0.2s,
-          text-decoration 0.2s;
-        @apply tw-text-keyColor-600;
+      height: min(32rem, 80svh);
+      column-width: 40rem;
+      column-fill: auto;
+      column-rule-width: 1px;
+      column-rule-style: solid;
+      column-gap: 4rem;
+
+      orphans: 2;
+      widows: 2;
+
+      &::column {
+        scroll-snap-align: center;
       }
     }
   }
 
-  .image {
-    outline: 4px solid oklch(0 0 0 / 0.1);
-    outline-offset: -4px;
-  }
-}
+  .articleWrapper {
+    @apply tw:w-full tw:flex tw:flex-col tw:items-center;
 
-.articleContentWrapper {
-  overflow-wrap: anywhere;
-  line-break: strict;
+    .vertical &,
+    .vertical-multicol & {
+      font-weight: 400;
+      font-family:
+        "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "游ゴシック Medium",
+        YuGothic, "游ゴシック体", "Zen Kaku Gothic New", "Noto Sans JP", Meiryo,
+        sans-serif;
+    }
 
-  .horizontal & {
-    @apply tw-pt-2 tw-px-4;
-  }
+    .vertical-multicol & {
+      @apply tw:h-auto tw:w-full tw:max-w-full tw:relative tw:box-content;
+    }
 
-  .vertical & {
-    @apply tw-py-4 tw-px-2;
-    @apply tw-writing-vertical-rl tw-h-full tw-line-break-strict;
-  }
-
-  .vertical-multicol & {
-    @apply tw-mx-auto tw-writing-vertical-rl tw-w-full tw-overflow-x-visible tw-relative tw-box-content;
-    @apply tw-column-rule-color-keyColor-200 tw-gap-8;
-    max-width: calc(100vw - 32px);
-
-    height: min(32rem, 80svh);
-    column-width: 40rem;
-    column-fill: auto;
-    column-rule-width: 1px;
-    column-rule-style: solid;
-    column-gap: 4rem;
-
-    orphans: 2;
-    widows: 2;
-
-    &::column {
-      scroll-snap-align: center;
+    .vertical & {
+      writing-mode: vertical-rl;
+      height: calc(100vh - 2.5rem);
+      height: calc(100svh - 2.5rem);
+      overflow-x: auto;
+      overflow-y: hidden;
     }
   }
-}
 
-.articleWrapper {
-  @apply tw-w-full tw-flex tw-flex-col tw-items-center;
-
-  .vertical &,
-  .vertical-multicol & {
-    font-weight: 400;
-    font-family:
-      "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "游ゴシック Medium",
-      YuGothic, "游ゴシック体", "Zen Kaku Gothic New", "Noto Sans JP", Meiryo,
-      sans-serif;
+  .contentAreaRestricter {
+    @apply tw:max-w-screen-lg;
+    .vertical & {
+      @apply tw:h-full;
+      max-width: unset;
+    }
   }
 
-  .vertical-multicol & {
-    @apply tw-h-auto tw-w-full tw-max-w-full tw-relative tw-box-content;
+  .vertical .article {
+    @apply tw:h-full;
   }
 
-  .vertical & {
-    writing-mode: vertical-rl;
-    height: calc(100vh - 2.5rem);
-    height: calc(100svh - 2.5rem);
-    overflow-x: auto;
-    overflow-y: hidden;
+  .vertical-multicol .article {
+    @apply tw:pt-4 tw:pb-4;
   }
-}
 
-.contentAreaRestricter {
-  @apply tw-max-w-screen-lg;
-  .vertical & {
-    @apply tw-h-full;
-    max-width: unset;
+  @media (width < 640px), (height < 600px) {
+    .vertical .footer {
+      writing-mode: vertical-rl;
+    }
   }
-}
 
-.vertical .article {
-  @apply tw-h-full;
-}
-
-.vertical-multicol .article {
-  @apply tw-py-4;
-}
-
-@media (width < 640px), (height < 600px) {
-  .vertical .footer {
-    writing-mode: vertical-rl;
+  .only-vertical,
+  .only-horizontal,
+  .only-vertical-multicol {
+    display: none;
   }
-}
 
-.only-vertical,
-.only-horizontal,
-.only-vertical-multicol {
-  display: none;
-}
-
-.horizontal .only-horizontal,
-.vertical .only-vertical,
-.vertical-multicol .only-vertical-multicol {
-  display: revert;
-}
-
-.horizontal .not-in-horizontal,
-.vertical .not-in-vertical,
-.vertical-multicol .not-in-vertical-column {
-  display: none;
-}
-
-.not-in-vertical,
-.not-in-horizontal,
-.not-in-vertical-column {
-  display: revert;
-}
-
-.tcu-digits {
-  .vertical &,
-  .vertical-multicol & {
-    text-combine-upright: all;
+  .horizontal .only-horizontal,
+  .vertical .only-vertical,
+  .vertical-multicol .only-vertical-multicol {
+    display: revert;
   }
-}
 
-.underline-pos-left {
-  .vertical &,
-  .vertical-multicol & {
-    text-underline-position: under left;
+  .horizontal .not-in-horizontal,
+  .vertical .not-in-vertical,
+  .vertical-multicol .not-in-vertical-column {
+    display: none;
   }
-}
 
-dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.75);
-}
+  .not-in-vertical,
+  .not-in-horizontal,
+  .not-in-vertical-column {
+    display: revert;
+  }
 
-.line-clamp {
-  --lines: 2;
-  --lh: 1lh;
-  overflow: hidden;
+  .tcu-digits {
+    .vertical &,
+    .vertical-multicol & {
+      text-combine-upright: all;
+    }
+  }
 
-  /* フォールバック動作 */
-  line-height: var(--lh);
-  max-block-size: calc(var(--lh) * var(--lines));
-  position: relative;
-}
+  .underline-pos-left {
+    .vertical &,
+    .vertical-multicol & {
+      text-underline-position: under left;
+    }
+  }
 
-@supports (line-clamp: 2) {
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+
   .line-clamp {
-    line-clamp: var(--lines);
+    --lines: 2;
+    --lh: 1lh;
+    overflow: hidden;
 
+    /* フォールバック動作 */
+    line-height: var(--lh);
+    max-block-size: calc(var(--lh) * var(--lines));
+    position: relative;
+  }
+
+  @supports (line-clamp: 2) {
+    .line-clamp {
+      line-clamp: var(--lines);
+
+      line-height: normal;
+      max-block-size: none;
+      position: static;
+    }
+    .line-clamp::after {
+      content: unset;
+    }
+  }
+
+  /* マーカー表現にtext-decoration-thicknessを使用しない場合の代替実装 */
+  body.use-text-decoration-workaround .main-text-section strong {
+    text-decoration: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+  }
+
+  /* 横書き時のマーカー表現（strong要素） */
+  body.use-text-decoration-workaround .horizontal .main-text-section strong {
+    background-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 50%,
+      rgb(254 202 202) 50%
+    );
+  }
+
+  /* 縦書き時のマーカー表現（strong要素） */
+  body.use-text-decoration-workaround
+    :is(.vertical, .vertical-multicol)
+    .main-text-section
+    strong {
+    background-image: linear-gradient(
+      to left,
+      transparent 0%,
+      transparent 50%,
+      rgb(254 202 202) 50%
+    );
+  }
+
+  body.use-text-decoration-workaround .main-text-section em {
+    text-decoration: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+  }
+
+  /* 横書き時のマーカー表現（em要素） */
+  body.use-text-decoration-workaround .horizontal .main-text-section em {
+    background-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 50%,
+      rgb(186 230 253) 50%
+    );
+  }
+
+  /* 縦書き時のマーカー表現（em要素） */
+  body.use-text-decoration-workaround
+    :is(.vertical, .vertical-multicol)
+    .main-text-section
+    em {
+    background-image: linear-gradient(
+      to left,
+      transparent 0%,
+      transparent 50%,
+      rgb(186 230 253) 50%
+    );
+  }
+
+  /* Webkit line-clamp toggle (legacy implementation) */
+  body.use-webkit-line-clamp .line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: var(--lines);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    /* Reset custom implementation */
+    line-clamp: unset;
     line-height: normal;
-    max-block-size: none;
+    max-block-size: unset;
     position: static;
   }
-  .line-clamp::after {
+
+  body.use-webkit-line-clamp .line-clamp::after {
     content: unset;
   }
-}
 
-/* マーカー表現にtext-decoration-thicknessを使用しない場合の代替実装 */
-body.use-text-decoration-workaround .main-text-section strong {
-  text-decoration: none;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
-}
+  /* テキスト方向案内バナー */
+  .text-orientation-guide-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background-color: rgb(254 243 199); /* amber-100 */
+    border-top: 1px solid rgb(252 211 77); /* amber-300 */
+    writing-mode: horizontal-tb;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 
-/* 横書き時のマーカー表現（strong要素） */
-body.use-text-decoration-workaround .horizontal .main-text-section strong {
-  background-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 50%,
-    rgb(254 202 202) 50%
-  );
-}
+    @media (width < 640px) {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
 
-/* 縦書き時のマーカー表現（strong要素） */
-body.use-text-decoration-workaround
-  :is(.vertical, .vertical-multicol)
-  .main-text-section
-  strong {
-  background-image: linear-gradient(
-    to left,
-    transparent 0%,
-    transparent 50%,
-    rgb(254 202 202) 50%
-  );
-}
+  .text-orientation-guide-message {
+    margin: 0;
+    font-size: 0.875rem;
+    color: rgb(146 64 14); /* amber-800 */
+    text-indent: 0;
+    line-height: 1.5;
+  }
 
-body.use-text-decoration-workaround .main-text-section em {
-  text-decoration: none;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
-}
-
-/* 横書き時のマーカー表現（em要素） */
-body.use-text-decoration-workaround .horizontal .main-text-section em {
-  background-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 50%,
-    rgb(186 230 253) 50%
-  );
-}
-
-/* 縦書き時のマーカー表現（em要素） */
-body.use-text-decoration-workaround
-  :is(.vertical, .vertical-multicol)
-  .main-text-section
-  em {
-  background-image: linear-gradient(
-    to left,
-    transparent 0%,
-    transparent 50%,
-    rgb(186 230 253) 50%
-  );
-}
-
-/* Webkit line-clamp toggle (legacy implementation) */
-body.use-webkit-line-clamp .line-clamp {
-  display: -webkit-box;
-  -webkit-line-clamp: var(--lines);
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-
-  /* Reset custom implementation */
-  line-clamp: unset;
-  line-height: normal;
-  max-block-size: unset;
-  position: static;
-}
-
-body.use-webkit-line-clamp .line-clamp::after {
-  content: unset;
-}
-
-/* テキスト方向案内バナー */
-.text-orientation-guide-banner {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 0.75rem 1rem;
-  background-color: rgb(254 243 199); /* amber-100 */
-  border-top: 1px solid rgb(252 211 77); /* amber-300 */
-  writing-mode: horizontal-tb;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-
-  @media (width < 640px) {
-    flex-direction: column;
+  .text-orientation-guide-actions {
+    display: flex;
+    align-items: center;
     gap: 0.5rem;
+    flex-shrink: 0;
   }
-}
 
-.text-orientation-guide-message {
-  margin: 0;
-  font-size: 0.875rem;
-  color: rgb(146 64 14); /* amber-800 */
-  text-indent: 0;
-  line-height: 1.5;
-}
+  .text-orientation-guide-switch {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+    background-color: rgb(217 119 6); /* amber-600 */
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s;
 
-.text-orientation-guide-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-}
-
-.text-orientation-guide-switch {
-  padding: 0.375rem 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: white;
-  background-color: rgb(217 119 6); /* amber-600 */
-  border: none;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: rgb(180 83 9); /* amber-700 */
+    &:hover {
+      background-color: rgb(180 83 9); /* amber-700 */
+    }
   }
-}
 
-.text-orientation-guide-dismiss {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  padding: 0;
-  font-size: 0.875rem;
-  color: rgb(146 64 14); /* amber-800 */
-  background: transparent;
-  border: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  .text-orientation-guide-dismiss {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    font-size: 0.875rem;
+    color: rgb(146 64 14); /* amber-800 */
+    background: transparent;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
 
-  &:hover {
-    background-color: rgb(252 211 77); /* amber-300 */
+    &:hover {
+      background-color: rgb(252 211 77); /* amber-300 */
+    }
   }
 }

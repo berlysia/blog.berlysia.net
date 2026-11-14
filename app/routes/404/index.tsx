@@ -6,8 +6,8 @@ export default createRoute((c) => {
   return c.render(
     <div>
       <Header>
-        <div className="tw-shrink tw-overflow-ellipsis tw-overflow-hidden tw-whitespace-nowrap">
-          <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/">
+        <div className="tw:shrink tw:text-ellipsis tw:overflow-hidden tw:whitespace-nowrap">
+          <a className="tw:text-lg tw:font-semibold tw:ml-2" href="/">
             blog.berlysia.net
           </a>
         </div>

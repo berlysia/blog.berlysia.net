@@ -23,7 +23,7 @@ _この記事は、2026年2月28日に開催されたReact Tokyo フェス2026�
 言語や文字非依存のスタイル記述をするとき、上下左右といった物理的方向に対して、インライン（＝行が伸びる）方向、ブロック（＝段落が並ぶ）方向といった論理的方向を使うことで、テキストにまつわるレイアウト実装を、さまざまな条件分岐テクニックによらず、実現できます。
 
 <figure class="full-width">
-  <div class="tw-flex tw-gap-1">
+  <div class="tw:flex tw:gap-1">
     <Image src="./text-ja-horizontal.png" alt="" />
     <Image src="./text-ja-vertical.png" alt="" />
     <Image src="./text-ar-horizontal.png" alt="" />
@@ -44,7 +44,7 @@ CSSには論理的方向を扱うプロパティや値が広く導入され、�
 import Extend from "./Extend.tsx";
 
 <figure class="full-width">
-  <div class="tw-flex tw-gap-1">
+  <div class="tw:flex tw:gap-1">
     <Extend writingMode="horizontal" />
     <Extend writingMode="vertical" />
   </div>
@@ -124,25 +124,25 @@ UIライブラリやフレームワークのレベルで `*-x` の内部実装�
   <dt>
     [CSS 論理的プロパティと値 - CSS | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/Guides/Logical_properties_and_values)
   </dt>
-  <dd className="tw-ml-4">
+  <dd className="tw:ml-4">
     <p>MDN の論理的プロパティと値に関するガイド</p>
   </dd>
   <dt>
     [Webサイトで縦書きを使う、縦書きのWebサイトを作る](https://slides.berlysia.net/burikaigi2026-use-vertical-writing-on-a-site-or-create-a-vertical-writing-site/)
   </dt>
-  <dd className="tw-ml-4">
+  <dd className="tw:ml-4">
     BuriKaigi 2026で発表。Web技術における縦書きの現状と課題、そして未来への展望
   </dd>
   <dt>
     [縦書きWebの実用を支えるJavaScript](https://slides.berlysia.net/jsconfjp2025-javascript-for-vertical-writing-on-the-web/)
   </dt>
-  <dd className="tw-ml-4">
+  <dd className="tw:ml-4">
     JSConf JP 2025で発表。CSSだけでは足りない縦書き対応時のスクロールに関する考慮事項、縦書きマルチカラムへの期待
   </dd>
   <dt>
     [縦書きHTMLにおける文字の向きはどのように定まるか](https://blog.nnn.dev/entry/2022/07/01/180000)
   </dt>
-  <dd className="tw-ml-4">
+  <dd className="tw:ml-4">
     縦書きを指定する `writing-mode` と、文字の向きを指定する `text-orientation` は強く連携しているが、実際に各文字がどの向きで表示されるかはフォントにもブラウザにも依存する極めて難しい状態にあることを解説
   </dd>
 </dl>

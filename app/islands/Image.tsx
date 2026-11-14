@@ -52,7 +52,7 @@ const Image = ({
     <>
       {wrapper(
         <img
-          className={clsx("image", "tw-object-contain", className)}
+          className={clsx("image", "tw:object-contain", className)}
           src={src}
           alt={alt}
           width={width}
@@ -68,7 +68,7 @@ const Image = ({
       )}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions -- dialog backdrop hack */}
       <dialog ref={dialogRef} title="image viewer" onClick={closeDialog}>
-        <button type="button" className="tw-block" onClick={closeDialog}>
+        <button type="button" className="tw:block" onClick={closeDialog}>
           <img
             title="click to close dialog"
             className=""

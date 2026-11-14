@@ -35,43 +35,43 @@ function StaticOGCard({
       href={src}
       target="_blank"
       rel="noopener noreferrer"
-      className="embeddedLinkScope tw-block tw-mlb-2"
+      className="embeddedLinkScope tw:block tw:my-2"
     >
-      <div className="tw-border-keyColor-400 tw-border tw-rounded-lg tw-is-full tw-p-2">
+      <div className="tw:border-keyColor-400 tw:border tw:rounded-lg tw:inline-full tw:p-2">
         <div
-          className={`tw-grid tw-gap-4 ${ogData.image ? "tw-grid-cols-[8rem_1fr]" : "tw-grid-cols-1"}`}
+          className={`tw:grid tw:gap-4 ${ogData.image ? "tw:grid-cols-[8rem_1fr]" : "tw:grid-cols-1"}`}
         >
           {ogData.image && (
             <img
               src={ogData.image}
               alt=""
-              className="tw-w-32 tw-h-32 tw-object-contain tw-rounded tw-justify-self-center tw-self-center"
+              className="tw:w-32 tw:h-32 tw:object-contain tw:rounded tw:justify-self-center tw:self-center"
             />
           )}
           <div>
             <h3
-              className="tw-font-bold tw-text-xs tw-mb-1 line-clamp"
+              className="tw:font-bold tw:text-xs tw:mb-1 line-clamp"
               style={{ "--lines": "2" }}
             >
               {ogData.title || "No title"}
             </h3>
             {ogData.description && (
               <p
-                className="tw-text-gray-600 tw-mb-2 line-clamp"
+                className="tw:text-gray-600 tw:mb-2 line-clamp"
                 style={{ "--lines": "2" }}
               >
                 {ogData.description}
               </p>
             )}
-            <div className="tw-grid tw-grid-cols-[auto_1fr] tw-items-center tw-gap-1 tw-text-xs tw-text-gray-500">
+            <div className="tw:grid tw:grid-cols-[auto_1fr] tw:items-center tw:gap-1 tw:text-xs tw:text-gray-500">
               {ogData.favicon && (
                 <img
                   src={new URL(ogData.favicon, src).toString()}
                   alt=""
-                  className="tw-w-4 tw-h-4"
+                  className="tw:w-4 tw:h-4"
                 />
               )}
-              <span className="tw-truncate">{trimUrlForView(src)}</span>
+              <span className="tw:truncate">{trimUrlForView(src)}</span>
             </div>
           </div>
         </div>
@@ -86,12 +86,12 @@ function FallbackCard({ src }: { readonly src: string }) {
       href={src}
       target="_blank"
       rel="noopener noreferrer"
-      className="tw-block tw-mlb-2"
+      className="tw:block tw:my-2"
     >
-      <div className="tw-border-keyColor-400 tw-border tw-rounded-lg tw-is-full tw-p-4">
-        <div className="tw-flex tw-items-center tw-gap-2">
-          <span className="tw-text-sm tw-font-medium">🔗</span>
-          <span className="tw-text-sm tw-truncate">{trimUrlForView(src)}</span>
+      <div className="tw:border-keyColor-400 tw:border tw:rounded-lg tw:inline-full tw:p-4">
+        <div className="tw:flex tw:items-center tw:gap-2">
+          <span className="tw:text-sm tw:font-medium">🔗</span>
+          <span className="tw:text-sm tw:truncate">{trimUrlForView(src)}</span>
         </div>
       </div>
     </a>

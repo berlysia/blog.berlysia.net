@@ -4,15 +4,15 @@ type Props = PropsWithChildren;
 
 export default function Header({ children }: Props) {
   return (
-    <header className="tw-sticky tw-z-10 tw-top-0 tw-left-0 tw-right-0 tw-bg-keyColor-50 tw-h-10 tw-border-b tw-border-keyColor-200 tw-w-full tw-flex tw-justify-center">
-      <div className="contentAreaRestricter tw-flex tw-flex-row tw-w-full tw-h-full tw-relative">
-        <div className="tw-left-0 tw-leading-10 tw-align-baseline tw-grow tw-h-full tw-flex tw-flex-row tw-overflow-hidden">
+    <header className="tw:sticky tw:z-10 tw:top-0 tw:left-0 tw:right-0 tw:bg-keyColor-50 tw:h-10 tw:border-b tw:border-keyColor-200 tw:w-full tw:flex tw:justify-center">
+      <div className="contentAreaRestricter tw:flex tw:flex-row tw:w-full tw:h-full tw:relative">
+        <div className="tw:left-0 tw:leading-10 tw:align-baseline tw:grow tw:h-full tw:flex tw:flex-row tw:overflow-hidden">
           {children}
         </div>
-        <div className="tw-flex tw-h-full tw-items-center tw-flex-shrink-0">
+        <div className="tw:flex tw:h-full tw:items-center tw:shrink-0">
           <a
             href="https://berlysia.net"
-            className="tw-block tw-w-fit tw-h-fit tw-mx-2"
+            className="tw:block tw:w-fit tw:h-fit tw:ml-2 tw:mr-2"
           >
             <img
               src="/static/avatar/avatar-128.webp"
@@ -20,7 +20,7 @@ export default function Header({ children }: Props) {
               width={36}
               height={36}
               decoding="async"
-              className="tw-block tw-rounded-md tw-border tw-border-keyColor-100"
+              className="tw:block tw:rounded-md tw:border tw:border-keyColor-100"
             />
           </a>
         </div>

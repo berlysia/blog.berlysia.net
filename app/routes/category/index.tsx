@@ -11,13 +11,13 @@ export default async function BlogPageIndex() {
     <div>
       <Header>
         <div>
-          <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/">
+          <a className="tw:text-lg tw:font-semibold tw:ml-2" href="/">
             blog.berlysia.net
           </a>
         </div>
       </Header>
-      <div className="tw-w-full tw-flex tw-justify-center">
-        <div className="contentAreaRestricter tw-w-full tw-h-full tw-relative">
+      <div className="tw:w-full tw:flex tw:justify-center">
+        <div className="contentAreaRestricter tw:w-full tw:h-full tw:relative">
           <Categories />
         </div>
       </div>

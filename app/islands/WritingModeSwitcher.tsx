@@ -62,17 +62,17 @@ function ClientWritingModeSwitcher({
   }, [isVertical, isHorizontal, articleRootId, isVerticalColumns]);
 
   return (
-    <div className="writing-mode-switcher tw-h-8 tw-w-8 tw-flex tw-justify-center tw-items-center">
+    <div className="writing-mode-switcher tw:h-8 tw:w-8 tw:flex tw:justify-center tw:items-center">
       <button
         type="button"
-        className="tw-h-8 tw-w-8"
+        className="tw:h-8 tw:w-8"
         onClick={toggleWritingMode}
         title={`${messageMap[viewerMode]?.title} - ${messageMap[viewerMode]?.switchMessage}`}
       >
         <img
           src={`/static/icons/${viewerMode}.svg`}
           alt={messageMap[viewerMode]?.title}
-          className="tw-h-8 tw-w-8"
+          className="tw:h-8 tw:w-8"
         />
       </button>
     </div>

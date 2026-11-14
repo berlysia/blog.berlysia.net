@@ -8,7 +8,7 @@ export function Content({
   readonly currentCategory?: string;
 }>) {
   return (
-    <div className="contentAreaRestricter tw-w-full tw-h-full tw-relative tw-pli-4">
+    <div className="contentAreaRestricter tw:w-full tw:h-full tw:relative tw:px-4">
       <Categories currentCategory={currentCategory} />
       {children}
     </div>

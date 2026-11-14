@@ -66,12 +66,12 @@ export async function BlogPageIndex({ params }: { readonly params: Params }) {
     <div>
       <Header>
         <div>
-          <a className="tw-text-lg tw-font-semibold tw-ml-2" href="/">
+          <a className="tw:text-lg tw:font-semibold tw:ml-2" href="/">
             blog.berlysia.net
           </a>
         </div>
       </Header>
-      <div className="tw-w-full tw-flex tw-justify-center">
+      <div className="tw:w-full tw:flex tw:justify-center">
         <Content>
           {publishedEntries.length > 0 ? (
             <ol>
