@@ -250,8 +250,7 @@
       @apply tw:text-4xl tw:border-be tw:border-s-2 tw:border-keyColor-200 tw:my-2;
       counter-reset: h2 h3 h4 h5 h6;
       counter-increment: h1;
-
-      break-before: column;
+      margin-block-start: 4rem;
 
       > a::before {
         content: counter(h1) ". ";
