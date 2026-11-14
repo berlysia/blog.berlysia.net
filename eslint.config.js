@@ -21,7 +21,7 @@ export default configBerlysia(
     },
   },
   {
-    ignores: ["app/generated/**/*", "**/*.d.ts"],
+    ignores: ["app/generated/**/*", "**/*.d.ts", ".tmp/**"],
   },
   {
     rules: {
