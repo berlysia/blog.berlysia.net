@@ -47,7 +47,7 @@
   },
   "packageManager": "pnpm@10.34.9",
   "devDependencies": {
-    "@cloudflare/workers-types": "5.20261107.1",
+    "@cloudflare/workers-types": "5.20261109.1",
     "@hono/vite-ssg": "0.3.3",
     "@inquirer/prompts": "8.7.5",
     "@mdx-js/loader": "3.1.1",
